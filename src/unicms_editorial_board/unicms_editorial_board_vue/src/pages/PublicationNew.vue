@@ -15,7 +15,9 @@
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
-                                :files="files" />
+                                :files="files"
+                                :rich_text_fields="rich_text_fields"
+                                :tag_fields="tag_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -31,7 +33,9 @@ export default {
             alerts: [],
             form: {},
             form_source: '/api/editorial-board/publications/form/',
-            files: {}
+            files: {},
+            rich_text_fields: ['content'],
+            tag_fields: ['tags']
         }
     },
     methods: {
