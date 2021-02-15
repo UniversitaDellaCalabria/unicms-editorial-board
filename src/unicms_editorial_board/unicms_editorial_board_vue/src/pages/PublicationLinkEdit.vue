@@ -38,7 +38,7 @@ export default {
     data() {
         return {
             alerts: [],
-            publication_id: this.$route.params.carousel_id,
+            publication_id: this.$route.params.publication_id,
             item_id: this.$route.params.item_id,
             form: {},
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/form/',
