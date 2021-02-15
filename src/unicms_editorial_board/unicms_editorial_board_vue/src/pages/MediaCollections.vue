@@ -53,7 +53,7 @@
                                         v-else></b-icon>
                                 </template>
 
-                                <template #cell(actions)="data">
+                                <template #cell(related)="data">
                                     <router-link :to="{ name: 'MediaCollectionItems',
                                                     params: { collection_id: data.item.id }}"
                                         class="mr-3 btn btn-sm btn-outline-secondary">
@@ -61,14 +61,18 @@
                                             variant="secondary"></b-icon>
                                         Items
                                     </router-link>
+                                </template>
+
+                                <template #cell(actions)="data">
                                     <router-link :to="{ name: 'MediaCollectionEdit',
                                                     params: { collection_id: data.item.id }}"
-                                        class="mr-3 btn btn-sm btn-info">
+                                        class="mr-3 btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
                                         Edit
                                     </router-link>
                                     <b-button
+                                        class="btn-block"
                                         size="sm"
                                         @click="deleteModal(data.item)"
                                         variant="danger">
@@ -112,6 +116,7 @@ export default {
                 'description',
                 'tags',
                 { key: 'is_active', label: 'Active'},
+                'related',
                 'actions'
             ],
             isBusy: true,

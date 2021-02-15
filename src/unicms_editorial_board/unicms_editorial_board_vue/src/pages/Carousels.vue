@@ -49,7 +49,7 @@
                                         v-else></b-icon>
                                 </template>
 
-                                <template #cell(actions)="data">
+                                <template #cell(related)="data">
                                     <router-link :to="{ name: 'CarouselItems',
                                                     params: { carousel_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-outline-secondary">
@@ -57,6 +57,9 @@
                                             variant="secondary"></b-icon>
                                         Items
                                     </router-link>
+                                </template>
+
+                                <template #cell(actions)="data">
                                     <router-link :to="{ name: 'CarouselEdit',
                                                         params: { carousel_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-info">
@@ -108,6 +111,7 @@ export default {
                 {key: 'name', sortable: true},
                 'description',
                 { key: 'is_active', label: 'Active'},
+                'related',
                 'actions'
             ],
             isBusy: true,
