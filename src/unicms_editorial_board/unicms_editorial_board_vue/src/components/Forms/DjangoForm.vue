@@ -157,7 +157,7 @@ export default {
                 })
         },
         is_image(url) {
-            return url.match(/\.(jpeg|jpg|gif|png)$/) != null
+            return url.match(/\.(jpeg|jpg|gif|png|webp)$/) != null
         }
     },
     mounted() {

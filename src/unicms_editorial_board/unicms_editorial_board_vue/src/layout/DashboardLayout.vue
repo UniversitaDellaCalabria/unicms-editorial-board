@@ -12,6 +12,11 @@
         <p>Websites</p>
       </sidebar-link>
 
+      <sidebar-link to="#">
+        <i class="nc-icon nc-bullet-list-67"></i>
+        <p>Menus</p>
+      </sidebar-link>
+
       <sidebar-link to="/admin/medias">
         <i class="nc-icon nc-album-2"></i>
         <p>Medias</p>
