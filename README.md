@@ -1,2 +1,5 @@
-# unical-repository-template
-Template repository
+# unicms-editorial-board
+
+pip install unicms-editorial-board
+
+python3 manage.py install_board

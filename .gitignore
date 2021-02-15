@@ -128,6 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-*/node_modules/
-*/package-lock.json
-*/yarn.lock
+*.lock
+src/unicms_editorial_board/static/*
+src/unicms_editorial_board/templates/board.html
+src/unicms_editorial_board/unicms_editorial_board_vue/node_modules/
+src/unicms_editorial_board/unicms_editorial_board_vue/package-lock.json
