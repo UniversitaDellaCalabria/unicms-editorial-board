@@ -66,10 +66,17 @@
                 <div class="mt-3" v-if="field.id in files && files[field.id]">
                     <p>Selected file</p>
                     <b-img
+                        v-if="is_image(files[field.id])"
                         :src="files[field.id]"
                         fluid
                         :alt="field.label"
-                        class="w-25"></b-img>
+                        class="w-25">
+                    </b-img>
+                    <p v-else>
+                        <a :href="files[field.id]">
+                            {{ files[field.id] }}
+                        </a>
+                    </p>
                 </div>
             </div>
 
@@ -149,6 +156,9 @@ export default {
                     this.fields = response.data;
                 })
         },
+        is_image(url) {
+            return url.match(/\.(jpeg|jpg|gif|png)$/) != null
+        }
     },
     mounted() {
         this.getForm()

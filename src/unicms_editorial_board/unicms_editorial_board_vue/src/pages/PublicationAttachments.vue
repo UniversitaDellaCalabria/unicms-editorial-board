@@ -11,7 +11,8 @@
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link to="#"
+                                <router-link :to="{ name: 'PublicationAttachmentNew',
+                                                    params: { publication_id: publication_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -61,7 +62,9 @@
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link to="#"
+                                    <router-link :to="{ name: 'PublicationAttachmentEdit',
+                                                    params: { publication_id: publication_id,
+                                                              attachment_id: data.item.id}}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>

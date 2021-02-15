@@ -27,32 +27,28 @@ export default {
     data() {
         return {
             alerts: [],
-            carousel_id: this.$route.params.carousel_id,
+            publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/form/',
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/attachments/form/',
             files: {}
         }
     },
     methods: {
-        updateMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.$set(this.files, 'image', response.data.file);
-                })
-        },
         onSubmit(event) {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/';
             event.preventDefault();
+            const formData = new FormData();
+            for ( var key in this.form ) {
+                formData.append(key, this.form[key]);
+            };
             this.axios
-                .post(source, this.form,
+                .post(source, formData,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item added successfully',
+                          message: 'publication attachment added successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -69,10 +65,5 @@ export default {
                 })
         },
     },
-    watch: {
-        'form.image': function(newVal, oldVal){
-            this.updateMedia(newVal)
-        }
-    }
 }
 </script>
