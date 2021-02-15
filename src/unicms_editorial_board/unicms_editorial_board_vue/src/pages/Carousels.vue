@@ -107,7 +107,6 @@ export default {
         return {
             alerts: [],
             fields: [
-                'id',
                 {key: 'name', sortable: true},
                 'description',
                 { key: 'is_active', label: 'Active'},

@@ -111,7 +111,6 @@ export default {
         return {
             alerts: [],
             fields: [
-                'id',
                 {key: 'name', sortable: true},
                 'description',
                 'tags',

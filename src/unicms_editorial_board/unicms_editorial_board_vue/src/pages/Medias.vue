@@ -100,7 +100,6 @@ export default {
         return {
             alerts: [],
             fields: [
-                'id',
                 {key: 'title', sortable: true},
                 { key: 'file', sortable: true, thClass: 'w-25'},
                 'description',
