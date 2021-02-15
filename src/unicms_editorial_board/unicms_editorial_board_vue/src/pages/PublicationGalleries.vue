@@ -11,7 +11,8 @@
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link to="#"
+                                <router-link :to="{ name: 'PublicationGalleryNew',
+                                                    params: { publication_id: publication_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -56,7 +57,9 @@
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link to="#"
+                                    <router-link :to="{ name: 'PublicationGalleryEdit',
+                                                    params: { publication_id: publication_id,
+                                                              gallery_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -145,7 +148,7 @@ export default {
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: response.data.name + ' status changed successfully',
+                          message: 'publication gallery status changed successfully',
                           dismissable: true }
                     )}
                 )

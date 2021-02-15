@@ -35,6 +35,8 @@ import PublicationAttachments from 'src/pages/PublicationAttachments.vue'
 import PublicationAttachmentNew from 'src/pages/PublicationAttachmentNew.vue'
 import PublicationAttachmentEdit from 'src/pages/PublicationAttachmentEdit.vue'
 import PublicationGalleries from 'src/pages/PublicationGalleries.vue'
+import PublicationGalleryNew from 'src/pages/PublicationGalleryNew.vue'
+import PublicationGalleryEdit from 'src/pages/PublicationGalleryEdit.vue'
 import PublicationLinks from 'src/pages/PublicationLinks.vue'
 import PublicationLinkNew from 'src/pages/PublicationLinkNew.vue'
 import PublicationLinkEdit from 'src/pages/PublicationLinkEdit.vue'
@@ -512,6 +514,28 @@ const routes = [
             breadcrumb: {
               label: 'PublicationGalleries',
               parent: 'Publications'
+            }
+        }
+      },
+      {
+        path: 'publications/:publication_id/galleries/new',
+        name: 'PublicationGalleryNew',
+        component: PublicationGalleryNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'PublicationGalleries'
+            }
+        }
+      },
+      {
+        path: 'publications/:publication_id/galleries/:gallery_id/edit',
+        name: 'PublicationGalleryEdit',
+        component: PublicationGalleryEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'PublicationGalleries'
             }
         }
       },

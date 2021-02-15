@@ -61,7 +61,7 @@ export default {
                             this.$set(this.form, key, categories)
                         }
                         else if(key=='presentation_image')
-                            this.$set(this.form, 'presentation_image', response.data.presentation_image.id)
+                            this.$set(this.form, 'presentation_image', value.id)
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'presentation_image', response.data.presentation_image.file);

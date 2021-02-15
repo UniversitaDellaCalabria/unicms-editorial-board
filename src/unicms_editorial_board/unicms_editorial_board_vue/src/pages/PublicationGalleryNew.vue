@@ -7,14 +7,12 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="New Media collection">
+                    <b-card title="New">
                         <b-card-text>
                             <django-form
-                                :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :tag_fields="tag_fields" />
+                                :form_source="form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -28,23 +26,23 @@ export default {
     data() {
         return {
             alerts: [],
+            publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/media-collections/form/',
-            tag_fields: ['tags']
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/form/',
         }
     },
     methods: {
         onSubmit(event) {
-            let source = '/api/editorial-board/media-collections/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/';
             event.preventDefault();
             this.axios
                 .post(source, this.form,
-                      {headers: {'X-CSRFToken': this.$csrftoken}}
+                      {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'item added successfully',
+                          message: 'publication gallery added successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})

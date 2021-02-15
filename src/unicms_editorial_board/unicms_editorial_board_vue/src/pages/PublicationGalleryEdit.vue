@@ -24,8 +24,7 @@
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :files="files" />
+                                :form_source="form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -40,39 +39,36 @@ export default {
         return {
             alerts: [],
             publication_id: this.$route.params.publication_id,
-            attachment_id: this.$route.params.attachment_id,
+            gallery_id: this.$route.params.gallery_id,
             form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/attachments/form/',
-            files: {}
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/form/',
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/'+this.gallery_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        this.$set(this.form, key, value)
+                        if(key=='collection') {
+                            this.$set(this.form, key, value.id)
+                        }
+                        else this.$set(this.form, key, value)
                     }
-                    this.$set(this.files, 'file', response.data.file);
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/'+this.gallery_id+'/';
             event.preventDefault();
-            const formData = new FormData();
-            for ( var key in this.form ) {
-                formData.append(key, this.form[key]);
-            };
             this.axios
-                .patch(source, formData,
+                .patch(source, this.form,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication attachment edited successfully',
+                          message: 'publication gallery edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -90,13 +86,13 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/',
+                .delete('/api/editorial-board/publications/'+this.publication_id+'/galleries/'+this.gallery_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication attachment removed successfully',
+                          message: 'publication gallery removed successfully',
                           dismissable: true }
                     )}
                 )

@@ -30,7 +30,8 @@
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :tag_fields="tag_fields"/>
                         </b-card-text>
                     </b-card>
                 </div>
@@ -46,7 +47,8 @@ export default {
             alerts: [],
             item_id: this.$route.params.collection_id,
             form: {},
-            form_source: '/api/editorial-board/media-collections/form/'
+            form_source: '/api/editorial-board/media-collections/form/',
+            tag_fields: ['tags']
         }
     },
     methods: {
