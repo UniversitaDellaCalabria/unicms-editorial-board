@@ -11,8 +11,9 @@
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'PublicationGalleryNew',
-                                                    params: { publication_id: publication_id }}"
+                                <router-link :to="{ name: 'WebpathPublicationNew',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -53,9 +54,17 @@
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'PublicationGalleryEdit',
-                                                    params: { publication_id: publication_id,
-                                                              gallery_id: data.item.id }}"
+                                    <router-link :to="{ name: 'PublicationEdit',
+                                                    params: { publication_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="eye"
+                                            variant="secondary"></b-icon>
+                                        View
+                                    </router-link>
+                                    <router-link :to="{ name: 'WebpathPublicationEdit',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              publication_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -100,9 +109,14 @@ export default {
     data () {
         return {
             alerts: [],
-            publication_id: this.$route.params.publication_id,
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
             fields: [
-                {key: 'collection.name', label: 'Gallery', sortable: true},
+                {key: 'publication.title', label: 'Publication', sortable: true},
+                {key: 'date_start', sortable: true},
+                {key: 'date_end', sortable: true},
+                {key: 'in_evidence_start', sortable: true},
+                {key: 'in_evidence_end', sortable: true},
                 {key: 'order', sortable: true},
                 { key: 'is_active', label: 'Active'},
                 'actions'
@@ -121,7 +135,7 @@ export default {
             this.isBusy = !this.isBusy
         },
         callApi(url) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/?page=' + this.page + '&search=' + this.search;
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/?page=' + this.page + '&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
@@ -135,7 +149,7 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/publications/'+this.publication_id+'/galleries/'+item.id+'/',
+                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/'+item.id+'/',
                        {is_active: !item.is_active},
                        {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
@@ -144,7 +158,7 @@ export default {
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication gallery status changed successfully',
+                          message: 'webpath publication status changed successfully',
                           dismissable: true }
                     )}
                 )
@@ -158,14 +172,14 @@ export default {
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/galleries/'+id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication gallery removed successfully',
+                          message: 'webpath publication removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -178,7 +192,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete gallery?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete webpath publication?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

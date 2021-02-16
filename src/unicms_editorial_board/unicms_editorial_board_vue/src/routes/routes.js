@@ -50,6 +50,9 @@ import Websites from 'src/pages/Websites.vue'
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
 import WebpathEdit from 'src/pages/WebpathEdit.vue'
+import WebpathPublications from 'src/pages/WebpathPublications.vue'
+import WebpathPublicationNew from 'src/pages/WebpathPublicationNew.vue'
+import WebpathPublicationEdit from 'src/pages/WebpathPublicationEdit.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -126,6 +129,43 @@ const routes = [
             }
           },
       },
+    // webpath publications
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/publications',
+        name: 'WebpathPublications',
+        component: WebpathPublications,
+        meta: {
+            breadcrumb: {
+              label: 'Publications',
+              parent: 'Webpaths'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/publications/new',
+        name: 'WebpathPublicationNew',
+        component: WebpathPublicationNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPublications'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/publications/:publication_id/edit',
+        name: 'WebpathPublicationEdit',
+        component: WebpathPublicationEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPublications'
+            }
+          },
+      },
+
+
+
 
     // medias
       {
@@ -554,7 +594,7 @@ const routes = [
         meta: {
             breadcrumb: {
               label: 'Localizations',
-              parent: 'Publications'
+              parent: 'PublicationEdit'
             }
         }
       },

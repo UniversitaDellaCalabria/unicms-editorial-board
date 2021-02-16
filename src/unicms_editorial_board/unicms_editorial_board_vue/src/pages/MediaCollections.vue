@@ -53,7 +53,7 @@
                                         v-else></b-icon>
                                 </template>
 
-                                <template #cell(related)="data">
+                                <template #cell(childs)="data">
                                     <router-link :to="{ name: 'MediaCollectionItems',
                                                     params: { collection_id: data.item.id }}"
                                         class="mr-3 btn btn-sm btn-outline-secondary">
@@ -115,7 +115,7 @@ export default {
                 'description',
                 'tags',
                 { key: 'is_active', label: 'Active'},
-                'related',
+                { key: 'childs', label: 'Related'},
                 'actions'
             ],
             isBusy: true,

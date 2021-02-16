@@ -49,6 +49,17 @@
                                         v-else></b-icon>
                                 </template>
 
+                                <template #cell(childs)="data">
+                                    <router-link :to="{ name: 'WebpathPublications',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="file-text"
+                                            variant="secondary"></b-icon>
+                                        Publications
+                                    </router-link>
+                                </template>
+
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'WebpathEdit',
                                                     params: { site_id: data.item.site,
@@ -101,6 +112,7 @@ export default {
                 {key: 'name', sortable: true},
                 { key: 'get_full_path', label: 'Path', sortable: true},
                 { key: 'is_active', label: 'Active'},
+                { key: 'childs', label: 'Related'},
                 'actions'
             ],
             isBusy: true,

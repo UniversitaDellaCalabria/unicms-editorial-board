@@ -49,7 +49,7 @@
                                         v-else></b-icon>
                                 </template>
 
-                                <template #cell(related)="data">
+                                <template #cell(childs)="data">
                                     <router-link :to="{ name: 'CarouselItems',
                                                     params: { carousel_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-outline-secondary">
@@ -110,7 +110,7 @@ export default {
                 {key: 'name', sortable: true},
                 'description',
                 { key: 'is_active', label: 'Active'},
-                'related',
+                { key: 'childs', label: 'Related'},
                 'actions'
             ],
             isBusy: true,
