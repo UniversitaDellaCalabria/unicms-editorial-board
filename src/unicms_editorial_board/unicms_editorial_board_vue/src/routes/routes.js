@@ -43,6 +43,9 @@ import PublicationLinkEdit from 'src/pages/PublicationLinkEdit.vue'
 import PublicationLocalizations from 'src/pages/PublicationLocalizations.vue'
 import PublicationLocalizationNew from 'src/pages/PublicationLocalizationNew.vue'
 import PublicationLocalizationEdit from 'src/pages/PublicationLocalizationEdit.vue'
+import PublicationRelated from 'src/pages/PublicationRelated.vue'
+import PublicationRelatedNew from 'src/pages/PublicationRelatedNew.vue'
+import PublicationRelatedEdit from 'src/pages/PublicationRelatedEdit.vue'
 import Websites from 'src/pages/Websites.vue'
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
@@ -479,7 +482,7 @@ const routes = [
         component: PublicationLinks,
         meta: {
             breadcrumb: {
-              label: 'PublicationLinks',
+              label: 'Links',
               parent: 'Publications'
             }
         }
@@ -515,7 +518,7 @@ const routes = [
         component: PublicationGalleries,
         meta: {
             breadcrumb: {
-              label: 'PublicationGalleries',
+              label: 'Galleries',
               parent: 'Publications'
             }
         }
@@ -550,7 +553,7 @@ const routes = [
         component: PublicationLocalizations,
         meta: {
             breadcrumb: {
-              label: 'PublicationLocalizations',
+              label: 'Localizations',
               parent: 'Publications'
             }
         }
@@ -577,8 +580,40 @@ const routes = [
             }
         }
       },
-
-
+    // publication related
+      {
+        path: 'publications/:publication_id/related',
+        name: 'PublicationRelated',
+        component: PublicationRelated,
+        meta: {
+            breadcrumb: {
+              label: 'Related',
+              parent: 'Publications'
+            }
+        }
+      },
+      {
+        path: 'publications/:publication_id/related/new',
+        name: 'PublicationRelatedNew',
+        component: PublicationRelatedNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'PublicationRelated'
+            }
+        }
+      },
+      {
+        path: 'publications/:publication_id/related/:related_id/edit',
+        name: 'PublicationRelatedEdit',
+        component: PublicationRelatedEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'PublicationRelated'
+            }
+        }
+      },
 
 
 
