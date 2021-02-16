@@ -24,7 +24,8 @@
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :rich_text_fields="rich_text_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -39,14 +40,15 @@ export default {
         return {
             alerts: [],
             publication_id: this.$route.params.publication_id,
-            gallery_id: this.$route.params.gallery_id,
+            localization_id: this.$route.params.localization_id,
             form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/form/',
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/localizations/form/',
+            rich_text_fields: ['content']
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/'+this.gallery_id+'/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/localizations/'+this.localization_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -59,7 +61,7 @@ export default {
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/'+this.gallery_id+'/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/localizations/'+this.localization_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -68,7 +70,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication gallery edited successfully',
+                          message: 'publication localization edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -86,13 +88,13 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/galleries/'+this.gallery_id+'/',
+                .delete('/api/editorial-board/publications/'+this.publication_id+'/localizations/'+this.localization_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication gallery removed successfully',
+                          message: 'publication localization removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -105,7 +107,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete publication gallery?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete publication localization?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

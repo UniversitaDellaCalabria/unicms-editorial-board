@@ -169,7 +169,7 @@ export default {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication removed successfully',
+                          message: 'publication gallery removed successfully',
                           dismissable: true }
                     )}
                 )

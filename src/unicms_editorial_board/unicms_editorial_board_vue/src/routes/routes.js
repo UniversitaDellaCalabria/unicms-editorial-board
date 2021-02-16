@@ -40,6 +40,9 @@ import PublicationGalleryEdit from 'src/pages/PublicationGalleryEdit.vue'
 import PublicationLinks from 'src/pages/PublicationLinks.vue'
 import PublicationLinkNew from 'src/pages/PublicationLinkNew.vue'
 import PublicationLinkEdit from 'src/pages/PublicationLinkEdit.vue'
+import PublicationLocalizations from 'src/pages/PublicationLocalizations.vue'
+import PublicationLocalizationNew from 'src/pages/PublicationLocalizationNew.vue'
+import PublicationLocalizationEdit from 'src/pages/PublicationLocalizationEdit.vue'
 import Websites from 'src/pages/Websites.vue'
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
@@ -540,8 +543,40 @@ const routes = [
         }
       },
 
-
-
+    // publication localizations
+      {
+        path: 'publications/:publication_id/localizations',
+        name: 'PublicationLocalizations',
+        component: PublicationLocalizations,
+        meta: {
+            breadcrumb: {
+              label: 'PublicationLocalizations',
+              parent: 'Publications'
+            }
+        }
+      },
+    {
+        path: 'publications/:publication_id/localizations/new',
+        name: 'PublicationLocalizationNew',
+        component: PublicationLocalizationNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'PublicationLocalizations'
+            }
+        }
+      },
+    {
+        path: 'publications/:publication_id/localizations/:localization_id/edit',
+        name: 'PublicationLocalizationEdit',
+        component: PublicationLocalizationEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'PublicationLocalizations'
+            }
+        }
+      },
 
 
 

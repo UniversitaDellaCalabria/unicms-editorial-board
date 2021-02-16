@@ -37,15 +37,6 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
-                                <template #cell(file)="data">
-                                    <a :href="data.item.file">
-                                        <b-icon
-                                            icon="file-text"
-                                            style="cursor: pointer">
-                                        </b-icon>
-                                    </a>
-                                </template>
-
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'PublicationLinkEdit',
                                                     params: { publication_id: publication_id,
@@ -134,7 +125,7 @@ export default {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication removed successfully',
+                          message: 'publication link removed successfully',
                           dismissable: true }
                     )}
                 )

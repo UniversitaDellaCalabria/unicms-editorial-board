@@ -7,11 +7,12 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Publications">
+                    <b-card title="Publication localizations">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'PublicationNew'}"
+                                <router-link :to="{ name: 'PublicationLocalizationNew',
+                                                    params: { publication_id: publication_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -29,70 +30,32 @@
                             <b-table
                                 ref="table"
                                 id="my-table"
-                                striped hover responsive
+                                striped hover
                                 :busy="isBusy"
                                 :fields="fields"
                                 :items="items"
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
-                                <template #cell(presentation_image)="data">
-                                    <b-img :src="data.item.presentation_image.file" fluid alt="Responsive image"></b-img>
-                                </template>
-
-                                <template #cell(category)="data">
-                                    <div v-for="cat in data.item.category">
-                                        {{ cat.name }}
-                                    </div>
-                                </template>
-
                                 <template #cell(is_active)="data">
-                                    <b-icon icon="check-circle-fill"
+                                    <b-icon
+                                        icon="check-circle-fill"
                                         variant="success"
                                         v-if="data.item.is_active"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
-                                    <b-icon icon="dash-circle-fill"
+                                    <b-icon
+                                        icon="dash-circle-fill"
                                         variant="danger"
                                         style="cursor: pointer"
                                         v-on:click="changeStatus(data.item.id)"
                                         v-else></b-icon>
                                 </template>
 
-                                <template #cell(childs)="data">
-                                    <router-link :to="{ name: 'PublicationAttachments',
-                                                        params: { publication_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="file-text"
-                                            variant="secondary"></b-icon>
-                                        Attachments
-                                    </router-link>
-                                    <router-link :to="{ name: 'PublicationGalleries',
-                                                        params: { publication_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="card-image"
-                                            variant="secondary"></b-icon>
-                                        Galleries
-                                    </router-link>
-                                    <router-link :to="{ name: 'PublicationLinks',
-                                                        params: { publication_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="link45deg"
-                                            variant="secondary"></b-icon>
-                                        Links
-                                    </router-link>
-                                    <router-link :to="{ name: 'PublicationLocalizations',
-                                                        params: { publication_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="flag"
-                                            variant="secondary"></b-icon>
-                                        Localizations
-                                    </router-link>
-                                </template>
-
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'PublicationEdit',
-                                                        params: { publication_id: data.item.id }}"
+                                    <router-link :to="{ name: 'PublicationLocalizationEdit',
+                                                    params: { publication_id: publication_id,
+                                                              localization_id: data.item.id}}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -137,13 +100,11 @@ export default {
     data () {
         return {
             alerts: [],
-            collection_id: this.$route.params.collection_id,
+            publication_id: this.$route.params.publication_id,
             fields: [
+                {key: 'language', sortable: true},
                 {key: 'title', sortable: true},
-                {key: 'category', sortable: true},
-                {key: 'relevance', sortable: true},
-                { key: 'is_active', label: 'Active'},
-                { key: 'childs', label: 'Related'},
+                {key: 'is_active', sortable: true},
                 'actions'
             ],
             isBusy: true,
@@ -160,7 +121,7 @@ export default {
             this.isBusy = !this.isBusy
         },
         callApi(url) {
-            let source = '/api/editorial-board/publications/?page=' + this.page + '&search=' + this.search;
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/localizations/?page=' + this.page + '&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
@@ -174,13 +135,16 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .get('/api/editorial-board/publications/'+item.id+'/change-status/')
+                .patch('/api/editorial-board/publications/'+this.publication_id+'/localizations/'+item.id+'/',
+                       {is_active: !item.is_active},
+                       {headers: {"X-CSRFToken": this.$csrftoken }}
+                       )
                 .then(response => {
                     console.log(response.data);
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: response.data.title + ' status changed successfully',
+                          message: 'publication localization status changed successfully',
                           dismissable: true }
                     )}
                 )
@@ -194,14 +158,14 @@ export default {
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/publications/'+id+'/',
+                .delete('/api/editorial-board/publications/'+this.publication_id+'/localizations/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication removed successfully',
+                          message: 'publication localization removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -214,7 +178,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete publication?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete link?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
