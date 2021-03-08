@@ -59,6 +59,9 @@ import WebpathPageEdit from 'src/pages/WebpathPageEdit.vue'
 import WebpathPageCarousels from 'src/pages/WebpathPageCarousels.vue'
 import WebpathPageCarouselNew from 'src/pages/WebpathPageCarouselNew.vue'
 import WebpathPageCarouselEdit from 'src/pages/WebpathPageCarouselEdit.vue'
+import WebpathPageBlocks from 'src/pages/WebpathPageBlocks.vue'
+import WebpathPageBlockNew from 'src/pages/WebpathPageBlockNew.vue'
+import WebpathPageBlockEdit from 'src/pages/WebpathPageBlockEdit.vue'
 import WebpathPageLinks from 'src/pages/WebpathPageLinks.vue'
 import WebpathPageLinkNew from 'src/pages/WebpathPageLinkNew.vue'
 import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
@@ -216,6 +219,40 @@ const routes = [
           },
       },
 
+    // webpath page blocks
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/blocks',
+        name: 'WebpathPageBlocks',
+        component: WebpathPageBlocks,
+        meta: {
+            breadcrumb: {
+              label: 'Page blocks',
+              parent: 'WebpathPageEdit'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/blocks/new',
+        name: 'WebpathPageBlockNew',
+        component: WebpathPageBlockNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPageBlocks'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/blocks/:block_id/edit',
+        name: 'WebpathPageBlockEdit',
+        component: WebpathPageBlockEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPageBlocks'
+            }
+          },
+      },
     // webpath page carousels
      {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels',

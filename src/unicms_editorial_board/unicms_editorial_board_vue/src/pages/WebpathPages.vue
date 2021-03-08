@@ -81,6 +81,15 @@
                                 </template>
 
                                 <template #cell(childs)="data">
+                                    <router-link :to="{ name: 'WebpathPageBlocks',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: webpath_id,
+                                                                  page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="box-seam"
+                                            variant="secondary"></b-icon>
+                                        Blocks
+                                    </router-link>
                                     <router-link :to="{ name: 'WebpathPageCarousels',
                                                         params: { site_id: site_id,
                                                                   webpath_id: webpath_id,
