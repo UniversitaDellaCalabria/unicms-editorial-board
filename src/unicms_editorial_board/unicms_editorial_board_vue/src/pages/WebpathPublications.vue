@@ -55,7 +55,7 @@
 
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'PublicationEdit',
-                                                    params: { publication_id: data.item.id }}"
+                                                    params: { publication_id: data.item.publication.id }}"
                                         class="btn btn-block btn-sm btn-outline-secondary">
                                         <b-icon icon="arrow-right-circle"
                                             variant="secondary"></b-icon>

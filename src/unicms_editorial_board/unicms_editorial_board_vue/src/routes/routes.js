@@ -56,12 +56,15 @@ import WebpathPublicationEdit from 'src/pages/WebpathPublicationEdit.vue'
 import WebpathPages from 'src/pages/WebpathPages.vue'
 import WebpathPageNew from 'src/pages/WebpathPageNew.vue'
 import WebpathPageEdit from 'src/pages/WebpathPageEdit.vue'
-import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
-import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
-import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
+import WebpathPageCarousels from 'src/pages/WebpathPageCarousels.vue'
+import WebpathPageCarouselNew from 'src/pages/WebpathPageCarouselNew.vue'
+import WebpathPageCarouselEdit from 'src/pages/WebpathPageCarouselEdit.vue'
 import WebpathPageLinks from 'src/pages/WebpathPageLinks.vue'
 import WebpathPageLinkNew from 'src/pages/WebpathPageLinkNew.vue'
 import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
+import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
+import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
+import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -206,6 +209,42 @@ const routes = [
             }
           },
       },
+
+    // webpath page carousels
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels',
+        name: 'WebpathPageCarousels',
+        component: WebpathPageCarousels,
+        meta: {
+            breadcrumb: {
+              label: 'Page carousels',
+              parent: 'WebpathPageEdit'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels/new',
+        name: 'WebpathPageCarouselNew',
+        component: WebpathPageCarouselNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPageCarousels'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels/:carousel_id/edit',
+        name: 'WebpathPageCarouselEdit',
+        component: WebpathPageCarouselEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPageCarousels'
+            }
+          },
+      },
+
     // webpath page localizations
      {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/localizations',
