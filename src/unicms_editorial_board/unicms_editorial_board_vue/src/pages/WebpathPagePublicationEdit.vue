@@ -41,26 +41,26 @@ export default {
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
-            carousel_id: this.$route.params.carousel_id,
+            publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/carousels/form/',
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/form/',
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+this.publication_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='carousel')
-                            this.$set(this.form, 'carousel', value.id)
+                        if(key=='publication')
+                            this.$set(this.form, 'publication', value.id)
                         else this.$set(this.form, key, value)
                     }
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+this.publication_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -69,7 +69,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'page carousel edited successfully',
+                          message: 'page publication edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -87,13 +87,13 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+this.publication_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'page carousel removed successfully',
+                          message: 'page publication removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -106,7 +106,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete page carousel?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete page publication?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

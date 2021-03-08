@@ -65,6 +65,12 @@ import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
 import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
 import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
 import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
+import WebpathPageMedias from 'src/pages/WebpathPageMedias.vue'
+import WebpathPageMediaNew from 'src/pages/WebpathPageMediaNew.vue'
+import WebpathPageMediaEdit from 'src/pages/WebpathPageMediaEdit.vue'
+import WebpathPagePublications from 'src/pages/WebpathPagePublications.vue'
+import WebpathPagePublicationNew from 'src/pages/WebpathPagePublicationNew.vue'
+import WebpathPagePublicationEdit from 'src/pages/WebpathPagePublicationEdit.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -313,6 +319,77 @@ const routes = [
             }
           },
       },
+    // webpath page medias
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/medias',
+        name: 'WebpathPageMedias',
+        component: WebpathPageMedias,
+        meta: {
+            breadcrumb: {
+              label: 'Page medias',
+              parent: 'WebpathPageEdit'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/medias/new',
+        name: 'WebpathPageMediaNew',
+        component: WebpathPageMediaNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPageMedias'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/medias/:media_id/edit',
+        name: 'WebpathPageMediaEdit',
+        component: WebpathPageMediaEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPageMedias'
+            }
+          },
+      },
+    // webpath page publications
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/publications',
+        name: 'WebpathPagePublications',
+        component: WebpathPagePublications,
+        meta: {
+            breadcrumb: {
+              label: 'Page publications',
+              parent: 'WebpathPageEdit'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/publications/new',
+        name: 'WebpathPagePublicationNew',
+        component: WebpathPagePublicationNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPagePublications'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/publications/:publication_id/edit',
+        name: 'WebpathPagePublicationEdit',
+        component: WebpathPagePublicationEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPagePublications'
+            }
+          },
+      },
+
+
+
 
 
     // medias

@@ -108,6 +108,24 @@
                                             variant="secondary"></b-icon>
                                         Localizations
                                     </router-link>
+                                    <router-link :to="{ name: 'WebpathPageMedias',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="card-image"
+                                            variant="secondary"></b-icon>
+                                        Medias
+                                    </router-link>
+                                    <router-link :to="{ name: 'WebpathPagePublications',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: webpath_id,
+                                                                  page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="file-text"
+                                            variant="secondary"></b-icon>
+                                        Publications
+                                    </router-link>
                                 </template>
 
                                 <template #cell(actions)="data">

@@ -24,7 +24,8 @@
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :files="files" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -41,26 +42,36 @@ export default {
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
-            carousel_id: this.$route.params.carousel_id,
+            media_id: this.$route.params.media_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/carousels/form/',
+            files: {},
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/medias/form/',
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/medias/'+this.media_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='carousel')
-                            this.$set(this.form, 'carousel', value.id)
+                        if(key=='media')
+                            this.$set(this.form, 'media', value.id)
                         else this.$set(this.form, key, value)
                     }
+                    this.$set(this.files, 'media', response.data.media.file);
+                })
+        },
+        updateMedia(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.files.media = response.data.file
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/medias/'+this.media_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -69,7 +80,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'page carousel edited successfully',
+                          message: 'page media edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -87,13 +98,13 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/medias/'+this.media_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'page carousel removed successfully',
+                          message: 'page media removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -106,7 +117,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete page carousel?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete page media?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
@@ -124,5 +135,11 @@ export default {
     mounted() {
         this.getItem()
     },
+    watch: {
+        'form.media': function(newVal, oldVal){
+            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
+            if (!newVal) this.files.media = ''
+        }
+    }
 }
 </script>
