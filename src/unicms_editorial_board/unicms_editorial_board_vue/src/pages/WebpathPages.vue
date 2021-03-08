@@ -7,13 +7,13 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Carousel item localizations">
+                    <b-card title="Pages">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'CarouselItemLocalizationNew',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id }}"
+                                <router-link :to="{ name: 'WebpathPageNew',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -38,24 +38,65 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #cell(base_template.template_file)="data">
+                                    <b-img
+                                        v-if="data.item.base_template.image"
+                                        :src="data.item.base_template.image"
+                                        fluid alt="Responsive image"
+                                        style="max-width: 150px">
+                                    </b-img>
+                                    <p v-else>{{ data.item.base_template.template_file }}</p>
+                                </template>
+
+                                <template #cell(state)="data">
+                                    <b-icon
+                                        icon="check-circle-fill"
+                                        variant="success"
+                                        v-on:click="publishUnpublish(data.item.id)"
+                                        v-if="data.item.state == 'published'"
+                                        style="cursor: pointer">
+                                    </b-icon>
+                                    <b-icon
+                                        icon="exclamation-triangle-fill"
+                                        variant="warning"
+                                        v-on:click="publishUnpublish(data.item.id)"
+                                        style="cursor: pointer"
+                                        v-else>
+                                    </b-icon>
+                                </template>
+
                                 <template #cell(is_active)="data">
-                                    <b-icon icon="check-circle-fill"
+                                    <b-icon
+                                        icon="check-circle-fill"
                                         variant="success"
                                         v-if="data.item.is_active"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
-                                    <b-icon icon="dash-circle-fill"
+                                    <b-icon
+                                        icon="dash-circle-fill"
                                         variant="danger"
                                         style="cursor: pointer"
                                         v-on:click="changeStatus(data.item.id)"
                                         v-else></b-icon>
                                 </template>
 
+                                <template #cell(childs)="data">
+                                    <router-link :to="{ name: 'WebpathPageLocalizations',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="flag"
+                                            variant="secondary"></b-icon>
+                                        Localizations
+                                    </router-link>
+                                </template>
+
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'CarouselItemLocalizationEdit',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id,
-                                                              item_id: data.item.id}}"
+                                    <router-link :to="{ name: 'WebpathPageEdit',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -100,15 +141,18 @@ export default {
     data () {
         return {
             alerts: [],
-            carousel_id: this.$route.params.carousel_id,
-            carousel_item_id: this.$route.params.carousel_item_id,
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
             fields: [
-                {key: 'language', sortable: true},
-                {key: 'pre_heading', sortable: true},
-                {key: 'heading', sortable: true},
-                'description',
-                {key: 'order', sortable: true},
-                { key: 'is_active', label: 'Active'},
+                {key: 'name', label: 'Page name', sortable: true},
+                {key: 'title', label: 'Page title', sortable: true},
+                {key: 'base_template.template_file', label: 'Template', sortable: true},
+                {key: 'date_start', sortable: true},
+                {key: 'date_end', sortable: true},
+                {key: 'type', sortable: true},
+                {key: 'state', label: 'Published', sortable: true},
+                {key: 'is_active', label: 'Active'},
+                {key: 'childs', label: 'Related'},
                 'actions'
             ],
             isBusy: true,
@@ -125,7 +169,7 @@ export default {
             this.isBusy = !this.isBusy
         },
         callApi(url) {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/?page=' + this.page + '&search=' + this.search;
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/?page=' + this.page + '&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
@@ -139,15 +183,40 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/'+item.id+'/',
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-status/',
                        {is_active: !item.is_active},
                        {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
+                    console.log(response.data);
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: response.data.name + ' status changed successfully',
+                          message: 'webpath page status changed successfully',
+                          dismissable: true }
+                    )}
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
+        publishUnpublish(id) {
+            let item = this.items.find(item => item.id === id);
+            this.axios
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-publication-status/',
+                       {state: !item.state},
+                       {headers: {"X-CSRFToken": this.$csrftoken }}
+                       )
+                .then(response => {
+                    console.log(response.data);
+                    item.state = response.data.state;
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'webpath page status changed successfully',
                           dismissable: true }
                     )}
                 )
@@ -161,14 +230,14 @@ export default {
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/'+id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item link removed successfully',
+                          message: 'webpath page removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -181,7 +250,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete carousel item localization?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete webpath page?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

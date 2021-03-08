@@ -149,8 +149,8 @@ export default {
                 {key: 'title', sortable: true},
                 {key: 'category', sortable: true},
                 {key: 'relevance', sortable: true},
-                { key: 'is_active', label: 'Active'},
-                { key: 'childs', label: 'Related'},
+                {key: 'is_active', label: 'Active'},
+                {key: 'childs', label: 'Related'},
                 'actions'
             ],
             isBusy: true,

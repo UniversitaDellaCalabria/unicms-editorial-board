@@ -31,7 +31,7 @@
                             <b-table
                                 ref="table"
                                 id="my-table"
-                                striped hover
+                                striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
                                 :items="items"
@@ -57,9 +57,9 @@
                                     <router-link :to="{ name: 'PublicationEdit',
                                                     params: { publication_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="eye"
+                                        <b-icon icon="arrow-right-circle"
                                             variant="secondary"></b-icon>
-                                        View
+                                        Go to publication
                                     </router-link>
                                     <router-link :to="{ name: 'WebpathPublicationEdit',
                                                     params: { site_id: site_id,
@@ -118,7 +118,7 @@ export default {
                 {key: 'in_evidence_start', sortable: true},
                 {key: 'in_evidence_end', sortable: true},
                 {key: 'order', sortable: true},
-                { key: 'is_active', label: 'Active'},
+                {key: 'is_active', label: 'Active'},
                 'actions'
             ],
             isBusy: true,

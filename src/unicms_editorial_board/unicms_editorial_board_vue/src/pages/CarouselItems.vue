@@ -30,7 +30,7 @@
                             <b-table
                                 ref="table"
                                 id="my-table"
-                                striped hover
+                                striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
                                 :items="items"
@@ -54,7 +54,7 @@
                                         v-else></b-icon>
                                 </template>
 
-                                <template #cell(actions)="data">
+                                <template #cell(childs)="data">
                                     <router-link :to="{ name: 'CarouselItemLinks',
                                                     params: { carousel_id: carousel_id,
                                                               carousel_item_id: data.item.id}}"
@@ -71,6 +71,9 @@
                                             variant="secondary"></b-icon>
                                         Localizations
                                     </router-link>
+                                </template>
+
+                                <template #cell(actions)="data">
                                     <router-link :to="{ name: 'CarouselItemEdit',
                                                     params: { carousel_id: carousel_id,
                                                               item_id: data.item.id}}"
@@ -124,7 +127,8 @@ export default {
                 {key: 'pre_heading', sortable: true},
                 {key: 'heading', sortable: true},
                 {key: 'order', sortable: true},
-                { key: 'is_active', label: 'Active'},
+                {key: 'is_active', label: 'Active'},
+                {key: 'childs', label: 'Related'},
                 'actions'
             ],
             isBusy: true,

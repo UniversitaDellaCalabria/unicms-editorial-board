@@ -7,13 +7,14 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Carousel item localizations">
+                    <b-card title="Publication localizations">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'CarouselItemLocalizationNew',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id }}"
+                                <router-link :to="{ name: 'WebpathPageLocalizationNew',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: page_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -39,12 +40,14 @@
                                 :sort-desc.sync="sortDesc">
 
                                 <template #cell(is_active)="data">
-                                    <b-icon icon="check-circle-fill"
+                                    <b-icon
+                                        icon="check-circle-fill"
                                         variant="success"
                                         v-if="data.item.is_active"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
-                                    <b-icon icon="dash-circle-fill"
+                                    <b-icon
+                                        icon="dash-circle-fill"
                                         variant="danger"
                                         style="cursor: pointer"
                                         v-on:click="changeStatus(data.item.id)"
@@ -52,10 +55,11 @@
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'CarouselItemLocalizationEdit',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id,
-                                                              item_id: data.item.id}}"
+                                    <router-link :to="{ name: 'WebpathPageLocalizationEdit',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: webpath_id,
+                                                                  page_id: page_id,
+                                                                  localization_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -100,15 +104,13 @@ export default {
     data () {
         return {
             alerts: [],
-            carousel_id: this.$route.params.carousel_id,
-            carousel_item_id: this.$route.params.carousel_item_id,
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
+            page_id: this.$route.params.page_id,
             fields: [
                 {key: 'language', sortable: true},
-                {key: 'pre_heading', sortable: true},
-                {key: 'heading', sortable: true},
-                'description',
-                {key: 'order', sortable: true},
-                { key: 'is_active', label: 'Active'},
+                {key: 'title', sortable: true},
+                {key: 'is_active', sortable: true},
                 'actions'
             ],
             isBusy: true,
@@ -125,7 +127,7 @@ export default {
             this.isBusy = !this.isBusy
         },
         callApi(url) {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/?page=' + this.page + '&search=' + this.search;
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/localizations/?page=' + this.page + '&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
@@ -139,15 +141,16 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/'+item.id+'/',
+                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/localizations/'+item.id+'/',
                        {is_active: !item.is_active},
                        {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
+                    console.log(response.data);
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: response.data.name + ' status changed successfully',
+                          message: 'page localization status changed successfully',
                           dismissable: true }
                     )}
                 )
@@ -161,14 +164,14 @@ export default {
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/'+id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/localizations/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item link removed successfully',
+                          message: 'page localization removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -181,7 +184,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete carousel item localization?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete localization?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

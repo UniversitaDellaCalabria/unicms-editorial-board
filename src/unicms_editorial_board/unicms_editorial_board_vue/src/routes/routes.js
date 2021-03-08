@@ -53,6 +53,12 @@ import WebpathEdit from 'src/pages/WebpathEdit.vue'
 import WebpathPublications from 'src/pages/WebpathPublications.vue'
 import WebpathPublicationNew from 'src/pages/WebpathPublicationNew.vue'
 import WebpathPublicationEdit from 'src/pages/WebpathPublicationEdit.vue'
+import WebpathPages from 'src/pages/WebpathPages.vue'
+import WebpathPageNew from 'src/pages/WebpathPageNew.vue'
+import WebpathPageEdit from 'src/pages/WebpathPageEdit.vue'
+import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
+import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
+import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -163,8 +169,74 @@ const routes = [
             }
           },
       },
-
-
+    // webpath pages
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages',
+        name: 'WebpathPages',
+        component: WebpathPages,
+        meta: {
+            breadcrumb: {
+              label: 'Pages',
+              parent: 'Webpaths'
+            }
+          },
+      },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/edit',
+        name: 'WebpathPageEdit',
+        component: WebpathPageEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPages'
+            }
+          },
+      },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/new',
+        name: 'WebpathPageNew',
+        component: WebpathPageNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPages'
+            }
+          },
+      },
+    // webpath page localizations
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/localizations',
+        name: 'WebpathPageLocalizations',
+        component: WebpathPageLocalizations,
+        meta: {
+            breadcrumb: {
+              label: 'Page localizations',
+              parent: 'WebpathPageEdit'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/localizations/new',
+        name: 'WebpathPageLocalizationNew',
+        component: WebpathPageLocalizationNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPageLocalizations'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/localizations/:localization_id/edit',
+        name: 'WebpathPageLocalizationEdit',
+        component: WebpathPageLocalizationEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPageLocalizations'
+            }
+          },
+      },
 
 
     // medias

@@ -31,7 +31,7 @@
                             <b-table
                                 ref="table"
                                 id="my-table"
-                                striped hover
+                                striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
                                 :items="items"

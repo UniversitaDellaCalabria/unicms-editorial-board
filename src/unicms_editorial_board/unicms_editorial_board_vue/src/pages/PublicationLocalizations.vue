@@ -30,7 +30,7 @@
                             <b-table
                                 ref="table"
                                 id="my-table"
-                                striped hover
+                                striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
                                 :items="items"
@@ -178,7 +178,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete link?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete localization?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

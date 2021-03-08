@@ -29,7 +29,7 @@
                             <b-table
                                 ref="table"
                                 id="my-table"
-                                striped hover
+                                striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
                                 :items="items"
@@ -58,19 +58,28 @@
                                             variant="secondary"></b-icon>
                                         Publications
                                     </router-link>
+                                    <router-link :to="{ name: 'WebpathPages',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="display"
+                                            variant="secondary"></b-icon>
+                                        Pages
+                                    </router-link>
                                 </template>
 
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'WebpathEdit',
                                                     params: { site_id: data.item.site,
                                                               webpath_id: data.item.id}}"
-                                        class="mr-3 btn btn-sm btn-info">
+                                        class="mr-3 btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
                                         Edit
                                     </router-link>
                                     <b-button
                                         size="sm"
+                                        class="btn-block"
                                         @click="deleteModal(data.item)"
                                         variant="danger">
                                         <b-icon icon="trash"
