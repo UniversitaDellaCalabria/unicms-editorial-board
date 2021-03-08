@@ -59,6 +59,9 @@ import WebpathPageEdit from 'src/pages/WebpathPageEdit.vue'
 import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
 import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
 import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
+import WebpathPageLinks from 'src/pages/WebpathPageLinks.vue'
+import WebpathPageLinkNew from 'src/pages/WebpathPageLinkNew.vue'
+import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -234,6 +237,40 @@ const routes = [
             breadcrumb: {
               label: 'Edit',
               parent: 'WebpathPageLocalizations'
+            }
+          },
+      },
+    // webpath page links
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/links',
+        name: 'WebpathPageLinks',
+        component: WebpathPageLinks,
+        meta: {
+            breadcrumb: {
+              label: 'Page links',
+              parent: 'WebpathPageEdit'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/links/new',
+        name: 'WebpathPageLinkNew',
+        component: WebpathPageLinkNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'WebpathPageLinks'
+            }
+          },
+      },
+     {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/links/:link_id/edit',
+        name: 'WebpathPageLinkEdit',
+        component: WebpathPageLinkEdit,
+        meta: {
+            breadcrumb: {
+              label: 'Edit',
+              parent: 'WebpathPageLinks'
             }
           },
       },

@@ -81,6 +81,15 @@
                                 </template>
 
                                 <template #cell(childs)="data">
+                                    <router-link :to="{ name: 'WebpathPageLinks',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: webpath_id,
+                                                                  page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="link45deg"
+                                            variant="secondary"></b-icon>
+                                        Links
+                                    </router-link>
                                     <router-link :to="{ name: 'WebpathPageLocalizations',
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id,
