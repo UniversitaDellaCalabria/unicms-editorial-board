@@ -56,7 +56,7 @@ export default {
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         if(key=='media')
-                            this.$set(this.form, 'media', value.id)
+                            this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'media', response.data.media.file);

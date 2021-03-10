@@ -38,7 +38,7 @@
                                 :sort-desc.sync="sortDesc">
 
                                 <template #cell(file)="data">
-                                    <a :href="data.item.file">
+                                    <a :href="data.value">
                                         <b-icon
                                             icon="file-text"
                                             style="cursor: pointer">
@@ -50,7 +50,7 @@
                                     <b-icon
                                         icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon

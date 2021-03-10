@@ -39,7 +39,7 @@
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon icon="dash-circle-fill"
@@ -50,14 +50,6 @@
                                 </template>
 
                                 <template #cell(childs)="data">
-                                    <router-link :to="{ name: 'WebpathPublications',
-                                                        params: { site_id: site_id,
-                                                                  webpath_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="file-text"
-                                            variant="secondary"></b-icon>
-                                        Publications
-                                    </router-link>
                                     <router-link :to="{ name: 'WebpathPages',
                                                         params: { site_id: site_id,
                                                                   webpath_id: data.item.id }}"
@@ -65,6 +57,14 @@
                                         <b-icon icon="display"
                                             variant="secondary"></b-icon>
                                         Pages
+                                    </router-link>
+                                    <router-link :to="{ name: 'WebpathPublications',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="file-text"
+                                            variant="secondary"></b-icon>
+                                        Publications
                                     </router-link>
                                 </template>
 

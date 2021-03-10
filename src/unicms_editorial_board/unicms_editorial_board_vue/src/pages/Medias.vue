@@ -37,13 +37,13 @@
                                 :sort-desc.sync="sortDesc">
 
                                 <template #cell(file)="data">
-                                    <b-img :src="data.item.file" fluid alt="Responsive image"></b-img>
+                                    <b-img :src="data.value" fluid alt="Responsive image"></b-img>
                                 </template>
 
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon icon="dash-circle-fill"
@@ -101,9 +101,9 @@ export default {
             alerts: [],
             fields: [
                 {key: 'title', sortable: true},
-                { key: 'file', sortable: true, thClass: 'w-25'},
+                {key: 'file', sortable: true, thClass: 'w-25'},
                 'description',
-                { key: 'is_active', label: 'Active'},
+                {key: 'is_active', label: 'Active'},
                 'actions'
             ],
             isBusy: true,
@@ -142,7 +142,7 @@ export default {
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: response.data.name + ' status changed successfully',
+                          message: response.data.title + ' status changed successfully',
                           dismissable: true }
                     )}
                 )

@@ -38,13 +38,13 @@
                                 :sort-desc.sync="sortDesc">
 
                                 <template #cell(media)="data">
-                                    <b-img :src="data.item.media.file" fluid alt="Responsive image"></b-img>
+                                    <b-img :src="data.value.file" fluid alt="Responsive image"></b-img>
                                 </template>
 
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon icon="dash-circle-fill"

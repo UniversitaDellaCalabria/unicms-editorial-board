@@ -41,7 +41,7 @@
                                     <b-icon
                                         icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon
@@ -53,6 +53,13 @@
                                 </template>
 
                                 <template #cell(actions)="data">
+                                    <router-link :to="{ name: 'MediaCollectionEdit',
+                                                        params: { collection_id: data.item.collection.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="arrow-right-circle"
+                                            variant="secondary"></b-icon>
+                                        Go to gallery
+                                    </router-link>
                                     <router-link :to="{ name: 'PublicationGalleryEdit',
                                                     params: { publication_id: publication_id,
                                                               gallery_id: data.item.id }}"

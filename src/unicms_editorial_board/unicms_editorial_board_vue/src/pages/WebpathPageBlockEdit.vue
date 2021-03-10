@@ -56,7 +56,7 @@ export default {
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         if(key=='block')
-                            this.$set(this.form, 'block', value.id)
+                            this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'block', response.data.block.image);

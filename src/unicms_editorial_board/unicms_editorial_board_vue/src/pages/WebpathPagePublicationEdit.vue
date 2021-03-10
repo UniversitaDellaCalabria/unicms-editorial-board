@@ -54,7 +54,7 @@ export default {
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         if(key=='publication')
-                            this.$set(this.form, 'publication', value.id)
+                            this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
                 })

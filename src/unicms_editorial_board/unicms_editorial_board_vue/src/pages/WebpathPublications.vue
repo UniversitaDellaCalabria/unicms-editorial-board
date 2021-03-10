@@ -38,11 +38,27 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #cell(date_start)="data">
+                                    {{ $date_formatter(data.value) }}
+                                </template>
+
+                                <template #cell(date_end)="data">
+                                    {{ $date_formatter(data.value) }}
+                                </template>
+
+                                <template #cell(in_evidence_start)="data">
+                                    {{ $date_formatter(data.value) }}
+                                </template>
+
+                                <template #cell(in_evidence_end)="data">
+                                    {{ $date_formatter(data.value) }}
+                                </template>
+
                                 <template #cell(is_active)="data">
                                     <b-icon
                                         icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon

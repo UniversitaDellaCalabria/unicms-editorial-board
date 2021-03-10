@@ -27,9 +27,8 @@ export default {
         return {
             alerts: [],
             publication_id: this.$route.params.publication_id,
-            form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/related/form/',
-            rich_text_fields: ['content']
+            form: {'publication': this.$route.params.publication_id},
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/related/form/'
         }
     },
     methods: {

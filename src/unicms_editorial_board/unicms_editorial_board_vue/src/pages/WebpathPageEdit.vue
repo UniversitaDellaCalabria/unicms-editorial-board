@@ -8,6 +8,80 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
+
+                        <router-link :to="{ name: 'WebpathPageBlocks',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="box-seam"
+                                variant="secondary"></b-icon>
+                            Blocks
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageCarousels',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="collection-play"
+                                variant="secondary"></b-icon>
+                            Carousels
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageLinks',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="link45deg"
+                                variant="secondary"></b-icon>
+                            Links
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageLocalizations',
+                                        params: { site_id: site_id,
+                                                  webpath_id: webpath_id,
+                                                  page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="flag"
+                                variant="secondary"></b-icon>
+                            Localizations
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageMedias',
+                                        params: { site_id: site_id,
+                                                  webpath_id: webpath_id,
+                                                  page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="card-image"
+                                variant="secondary"></b-icon>
+                            Medias
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageMedias',
+                                        params: { site_id: site_id,
+                                                  webpath_id: webpath_id,
+                                                  page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="menu-button-wide-fill"
+                                variant="secondary"></b-icon>
+                            Menu
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageRelated',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="share"
+                                variant="secondary"></b-icon>
+                            Related pages
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPagePublications',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="file-text"
+                                variant="secondary"></b-icon>
+                            Publications
+                        </router-link>
+
                         <b-button
                             @click="deleteModal()"
                             variant="outline-danger"
@@ -54,7 +128,7 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='base_template') {
+                        if(key=='base_template' || key=='webpath') {
                             this.$set(this.form, key, value.id)
                         }
                         else this.$set(this.form, key, value)

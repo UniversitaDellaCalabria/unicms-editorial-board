@@ -38,6 +38,14 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #cell(date_start)="data">
+                                    {{ $date_formatter(data.value) }}
+                                </template>
+
+                                <template #cell(date_end)="data">
+                                    {{ $date_formatter(data.value) }}
+                                </template>
+
                                 <template #cell(base_template.template_file)="data">
                                     <b-img
                                         v-if="data.item.base_template.image"
@@ -45,7 +53,7 @@
                                         fluid alt="Responsive image"
                                         style="max-width: 150px">
                                     </b-img>
-                                    <p v-else>{{ data.item.base_template.template_file }}</p>
+                                    <p v-else>{{ data.value }}</p>
                                 </template>
 
                                 <template #cell(state)="data">
@@ -53,7 +61,7 @@
                                         icon="check-circle-fill"
                                         variant="success"
                                         v-on:click="publishUnpublish(data.item.id)"
-                                        v-if="data.item.state == 'published'"
+                                        v-if="data.value == 'published'"
                                         style="cursor: pointer">
                                     </b-icon>
                                     <b-icon
@@ -125,6 +133,24 @@
                                         <b-icon icon="card-image"
                                             variant="secondary"></b-icon>
                                         Medias
+                                    </router-link>
+                                    <router-link :to="{ name: 'WebpathPageMenus',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="menu-button-wide-fill"
+                                            variant="secondary"></b-icon>
+                                        Menu
+                                    </router-link>
+                                    <router-link :to="{ name: 'WebpathPageRelated',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: webpath_id,
+                                                                  page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="share"
+                                            variant="secondary"></b-icon>
+                                        Related pages
                                     </router-link>
                                     <router-link :to="{ name: 'WebpathPagePublications',
                                                         params: { site_id: site_id,

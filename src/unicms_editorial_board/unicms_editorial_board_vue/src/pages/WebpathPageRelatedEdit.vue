@@ -8,7 +8,6 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-
                         <b-button
                             @click="deleteModal()"
                             variant="outline-danger"
@@ -17,16 +16,15 @@
                                 variant="danger"></b-icon>
                             Delete
                         </b-button>
+
                         <b-card-title>Edit</b-card-title>
+
                         <b-card-text>
                             <django-form
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :files="files"
-                                :rich_text_fields="rich_text_fields"
-                                :tag_fields="tag_fields" />
+                                :form_source="form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -40,43 +38,29 @@ export default {
     data() {
         return {
             alerts: [],
-            item_id: this.$route.params.publication_id,
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
+            page_id: this.$route.params.page_id,
+            related_id: this.$route.params.related_id,
             form: {},
-            form_source: '/api/editorial-board/publications/form/',
-            files: {},
-            rich_text_fields: ['content'],
-            tag_fields: ['tags']
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/related/form/',
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.item_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/'+this.related_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='category') {
-                            let categories = [];
-                            value.forEach(v => {categories.push(v.id)});
-                            this.$set(this.form, key, categories)
-                        }
-                        else if(key=='presentation_image')
+                        if(key=='related_page')
                             this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
-                    this.$set(this.files, 'presentation_image', response.data.presentation_image.file);
-                })
-        },
-        updateMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.files.presentation_image = response.data.file
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.item_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/'+this.related_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -85,7 +69,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication edited successfully',
+                          message: 'page related edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -103,13 +87,13 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.item+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/'+this.related_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication removed successfully',
+                          message: 'page related removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -122,7 +106,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete publication?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete page related?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
@@ -140,11 +124,5 @@ export default {
     mounted() {
         this.getItem()
     },
-    watch: {
-        'form.presentation_image': function(newVal, oldVal){
-            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
-            if (!newVal) this.files.presentation_image = ''
-        }
-    }
 }
 </script>

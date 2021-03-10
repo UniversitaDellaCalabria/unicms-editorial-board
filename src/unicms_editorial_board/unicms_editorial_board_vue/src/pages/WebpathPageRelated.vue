@@ -7,11 +7,11 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Page carousels">
+                    <b-card title="Page related">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'WebpathPagePublicationNew',
+                                <router-link :to="{ name: 'WebpathPageRelatedNew',
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id,
                                                               page_id: page_id }}"
@@ -53,18 +53,20 @@
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'PublicationEdit',
-                                                        params: { publication_id: data.item.publication.id }}"
+                                    <router-link :to="{ name: 'WebpathPageEdit',
+                                                        params: { site_id: data.item.related_page.webpath.site,
+                                                                  webpath_id: data.item.related_page.webpath.id,
+                                                                  page_id: data.item.related_page.id }}"
                                         class="btn btn-block btn-sm btn-outline-secondary">
                                         <b-icon icon="arrow-right-circle"
                                             variant="secondary"></b-icon>
-                                        Go to publication
+                                        Go to page
                                     </router-link>
-                                    <router-link :to="{ name: 'WebpathPagePublicationEdit',
+                                    <router-link :to="{ name: 'WebpathPageRelatedEdit',
                                                         params: { site_id: site_id,
                                                                   webpath_id: webpath_id,
                                                                   page_id: page_id,
-                                                                  publication_id: data.item.id }}"
+                                                                  related_id: data.item.id }}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -113,7 +115,7 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
             fields: [
-                {key: 'publication.title', label: 'Publication', sortable: true},
+                {key: 'related_page.title', label: 'Related', sortable: true},
                 {key: 'order', sortable: true},
                 {key: 'is_active', label: 'Active'},
                 'actions'
@@ -132,7 +134,7 @@ export default {
             this.isBusy = !this.isBusy
         },
         callApi(url) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/?page=' + this.page + '&search=' + this.search;
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/?page=' + this.page + '&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
@@ -146,7 +148,7 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+item.id+'/',
+                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/'+item.id+'/',
                        {is_active: !item.is_active},
                        {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
@@ -155,7 +157,7 @@ export default {
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'page publication status changed successfully',
+                          message: 'page related status changed successfully',
                           dismissable: true }
                     )}
                 )
@@ -169,14 +171,14 @@ export default {
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'page publication removed successfully',
+                          message: 'page related removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -189,7 +191,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete publication?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete related page?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

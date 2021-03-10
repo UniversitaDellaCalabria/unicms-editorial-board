@@ -28,7 +28,7 @@ export default {
         return {
             alerts: [],
             carousel_id: this.$route.params.carousel_id,
-            form: {},
+            form: {'carousel': this.$route.params.carousel_id},
             form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/form/',
             files: {}
         }

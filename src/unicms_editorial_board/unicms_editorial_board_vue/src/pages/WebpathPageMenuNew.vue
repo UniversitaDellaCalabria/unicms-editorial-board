@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Edit">
+                    <b-card title="New">
                         <b-card-text>
                             <django-form
                                 :form="form"
@@ -26,15 +26,16 @@ export default {
     data() {
         return {
             alerts: [],
-            carousel_id: this.$route.params.carousel_id,
-            carousel_item_id: this.$route.params.carousel_item_id,
-            form: {'carousel_item': this.$route.params.carousel_item_id},
-            form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/'+this.$route.params.carousel_item_id+'/localizations/form/',
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
+            page_id: this.$route.params.page_id,
+            form: {'page': this.$route.params.page_id},
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/menus/form/',
         }
     },
     methods: {
         onSubmit(event) {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/localizations/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/menus/';
             event.preventDefault();
             this.axios
                 .post(source, this.form,
@@ -43,7 +44,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item localization added successfully',
+                          message: 'page menu added successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -59,6 +60,6 @@ export default {
                     }
                 })
         },
-    }
+    },
 }
 </script>

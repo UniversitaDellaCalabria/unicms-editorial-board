@@ -37,11 +37,11 @@
                                 :sort-desc.sync="sortDesc">
 
                                 <template #cell(presentation_image)="data">
-                                    <b-img :src="data.item.presentation_image.file" fluid alt="Responsive image"></b-img>
+                                    <b-img :src="data.value.file" fluid alt="Responsive image"></b-img>
                                 </template>
 
                                 <template #cell(category)="data">
-                                    <div v-for="cat in data.item.category">
+                                    <div v-for="cat in data.value">
                                         {{ cat.name }}
                                     </div>
                                 </template>
@@ -49,7 +49,7 @@
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon icon="dash-circle-fill"

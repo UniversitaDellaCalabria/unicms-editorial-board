@@ -41,8 +41,8 @@
 
                                 <template #cell(block.image)="data">
                                     <b-img
-                                        v-if="data.item.block.image"
-                                        :src="data.item.block.image"
+                                        v-if="data.value"
+                                        :src="data.value"
                                         fluid alt="Responsive image"
                                         style="max-width: 150px">
                                     </b-img>
@@ -52,7 +52,7 @@
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon icon="dash-circle-fill"

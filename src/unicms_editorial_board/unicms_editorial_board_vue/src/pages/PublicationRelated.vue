@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Publication localizations">
+                    <b-card title="Publication related publications">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
@@ -38,7 +38,7 @@
                                 :sort-desc.sync="sortDesc">
 
                                 <template #cell(related.category)="data">
-                                    <div v-for="cat in data.item.related.category">
+                                    <div v-for="cat in data.value">
                                         {{ cat.name }}
                                     </div>
                                 </template>
@@ -47,7 +47,7 @@
                                     <b-icon
                                         icon="check-circle-fill"
                                         variant="success"
-                                        v-if="data.item.is_active"
+                                        v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
                                     <b-icon
@@ -59,6 +59,13 @@
                                 </template>
 
                                 <template #cell(actions)="data">
+                                    <router-link :to="{ name: 'PublicationEdit',
+                                                    params: { publication_id: data.item.related.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="arrow-right-circle"
+                                            variant="secondary"></b-icon>
+                                        Go to publication
+                                    </router-link>
                                     <router-link :to="{ name: 'PublicationRelatedEdit',
                                                     params: { publication_id: publication_id,
                                                               related_id: data.item.id}}"

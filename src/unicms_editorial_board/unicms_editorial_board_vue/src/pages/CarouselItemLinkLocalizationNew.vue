@@ -29,7 +29,7 @@ export default {
             carousel_id: this.$route.params.carousel_id,
             carousel_item_id: this.$route.params.carousel_item_id,
             carousel_item_link_id: this.$route.params.carousel_item_link_id,
-            form: {},
+            form: {'carousel_item_link': this.$route.params.carousel_item_link_id},
             form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/'+this.$route.params.carousel_item_id+'/links/'+this.$route.params.carousel_item_link_id+'/localizations/form/',
         }
     },

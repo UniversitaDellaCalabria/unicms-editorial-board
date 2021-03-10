@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Publication link">
+                    <b-card title="Page link">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
@@ -121,30 +121,6 @@ export default {
                     this.next = response.data.next;
                 })
                 .then(this.isBusy = false)
-        },
-        changeStatus(id) {
-            let item = this.items.find(item => item.id === id);
-            this.axios
-                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/links/'+item.id+'/',
-                       {is_active: !item.is_active},
-                       {headers: {"X-CSRFToken": this.$csrftoken }}
-                       )
-                .then(response => {
-                    console.log(response.data);
-                    item.is_active = response.data.is_active;
-                    this.alerts.push(
-                        { variant: 'success',
-                          message: 'page link status changed successfully',
-                          dismissable: true }
-                    )}
-                )
-                .catch(error => {
-                    this.alerts.push(
-                        { variant: 'danger',
-                          message: error.response.data.detail,
-                          dismissable: true }
-                    )
-                })
         },
         remove(id) {
             this.axios
