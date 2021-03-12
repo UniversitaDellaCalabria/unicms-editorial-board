@@ -21,10 +21,20 @@
 
                             <b-form-input
                                 v-model="search"
-                                v-on:input="callApi()"
+                                v-on:input="callApi(null, 1)"
                                 placeholder="Search..."
+                                type="search"
                                 class="my-3">
                             </b-form-input>
+
+                            <b-pagination
+                                v-model="currentPage"
+                                :total-rows="total_rows"
+                                :per-page="per_page"
+                                first-number
+                                last-number
+                                align="right">
+                            </b-pagination>
 
                             <b-table
                                 ref="table"
@@ -35,6 +45,16 @@
                                 :items="items"
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
+
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
 
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
@@ -90,20 +110,15 @@
 
                             </b-table>
 
-                            <b-button
-                                variant="outline-secondary"
-                                v-if="prev"
-                                @click="callApi(prev)"
-                                class="float-left">
-                                Previous page
-                            </b-button>
-                            <b-button
-                                variant="outline-secondary"
-                                v-if="next"
-                                @click="callApi(next)"
-                                class="float-right">
-                                Next page
-                            </b-button>
+                            <b-pagination
+                                v-model="currentPage"
+                                :total-rows="total_rows"
+                                :per-page="per_page"
+                                first-number
+                                last-number
+                                align="right">
+                            </b-pagination>
+
                         </b-card-text>
                     </b-card>
                 </div>
@@ -126,8 +141,11 @@ export default {
             ],
             isBusy: true,
             items: [],
-            next: '',
             page: 1,
+            per_page: 0,
+            total_rows: 0,
+            currentPage: 1,
+            next: '',
             prev: '',
             search: '',
             site_id: this.$route.params.site_id,
@@ -135,20 +153,21 @@ export default {
         }
     },
     methods: {
-        toggleBusy() {
-            this.isBusy = !this.isBusy
-        },
-        callApi(url) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/?page=' + this.page + '&search=' + this.search;
+        callApi(url, page=null) {
+            let target_page = page || this.page;
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/?page=' + target_page + '&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
                 .then(response => {
                     this.items = response.data.results;
+                    this.page = response.data.page;
+                    this.per_page = response.data.per_page;
                     this.prev = response.data.previous;
                     this.next = response.data.next;
+                    this.total_rows = response.data.count;
+                    this.isBusy = false
                 })
-                .then(this.isBusy = false)
         },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
@@ -212,6 +231,12 @@ export default {
     },
     mounted() {
         this.callApi();
+    },
+    watch: {
+        'currentPage': function(){
+            this.isBusy = true;
+            this.callApi(null, this.currentPage)
+        }
     }
   }
 </script>

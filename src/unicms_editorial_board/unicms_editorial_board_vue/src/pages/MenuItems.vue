@@ -134,9 +134,6 @@ export default {
         }
     },
     methods: {
-        toggleBusy() {
-            this.isBusy = !this.isBusy
-        },
         get_childs(menu_item){
             menu_item.name = '– '.repeat(menu_item.level) + menu_item.name
             if (menu_item.level > 1)
@@ -153,7 +150,7 @@ export default {
                 .then(response => {
                     response.data.childs.forEach(item => this.get_childs(item));
                     this.page_title = response.data.name + ' items';
-                    this.toggleBusy();
+                    this.isBusy = false
                 })
         },
         changeStatus(id) {
