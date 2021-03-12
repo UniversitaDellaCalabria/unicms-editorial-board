@@ -47,7 +47,9 @@ export default {
                           message: 'publication localization added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'PublicationLocalizations',
+                                       params: {publication_id: this.publication_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

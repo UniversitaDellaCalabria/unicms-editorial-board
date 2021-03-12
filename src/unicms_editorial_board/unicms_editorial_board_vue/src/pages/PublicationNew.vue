@@ -60,7 +60,8 @@ export default {
                           message: 'publication addedd successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'Publications',
+                                       params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

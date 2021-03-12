@@ -47,7 +47,8 @@ export default {
                           message: 'item added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'MediaCollections',
+                                       params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

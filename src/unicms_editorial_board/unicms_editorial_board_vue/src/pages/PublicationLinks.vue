@@ -37,10 +37,20 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
+
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'PublicationLinkEdit',
                                                     params: { publication_id: publication_id,
-                                                              item_id: data.item.id}}"
+                                                              link_id: data.item.id}}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -84,7 +94,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             publication_id: this.$route.params.publication_id,
             fields: [
                 {key: 'name', sortable: true},
@@ -113,8 +123,8 @@ export default {
                     this.items = response.data.results;
                     this.prev = response.data.previous;
                     this.next = response.data.next;
+                    this.toggleBusy();
                 })
-                .then(this.isBusy = false)
         },
         remove(id) {
             this.axios

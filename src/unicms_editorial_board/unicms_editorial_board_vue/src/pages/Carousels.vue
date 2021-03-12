@@ -36,6 +36,26 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
+
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
+
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
@@ -105,7 +125,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             fields: [
                 {key: 'name', sortable: true},
                 'description',
@@ -135,8 +155,8 @@ export default {
                     this.items = response.data.results;
                     this.prev = response.data.previous;
                     this.next = response.data.next;
+                    this.toggleBusy();
                 })
-                .then(this.isBusy = false)
         },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);

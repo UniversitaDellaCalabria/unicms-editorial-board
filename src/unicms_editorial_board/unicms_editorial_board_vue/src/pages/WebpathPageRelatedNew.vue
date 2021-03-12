@@ -47,7 +47,11 @@ export default {
                           message: 'page related added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'WebpathPageRelated',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

@@ -57,7 +57,11 @@ export default {
                           message: 'page block added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'WebpathPageBlocks',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

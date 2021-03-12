@@ -7,12 +7,13 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Publications">
+                    <b-card>
+                        <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'PublicationAttachmentNew',
-                                                    params: { publication_id: publication_id }}"
+                                <router-link :to="{ name: 'MenuItemNew',
+                                                    params: { menu_id: menu_id }}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -21,8 +22,9 @@
                             </div>
 
                             <b-form-input
-                                v-model="search"
-                                v-on:input="callApi()"
+                                id="filter-input"
+                                v-model="filter"
+                                type="search"
                                 placeholder="Search..."
                                 class="my-3">
                             </b-form-input>
@@ -33,6 +35,8 @@
                                 striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
+                                :filter="filter"
+                                :filter-included-fields="filterOn"
                                 :items="items"
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
@@ -47,24 +51,17 @@
                                     </div>
                                 </template>
 
-                                <template #cell(file)="data">
-                                    <a :href="data.value">
-                                        <b-icon
-                                            icon="file-text"
-                                            style="cursor: pointer">
-                                        </b-icon>
-                                    </a>
+                                <template #cell(parent_name)="data">
+                                    {{ data.value || '-' }}
                                 </template>
 
                                 <template #cell(is_active)="data">
-                                    <b-icon
-                                        icon="check-circle-fill"
+                                    <b-icon icon="check-circle-fill"
                                         variant="success"
                                         v-if="data.value"
                                         v-on:click="changeStatus(data.item.id)"
                                         style="cursor: pointer"></b-icon>
-                                    <b-icon
-                                        icon="dash-circle-fill"
+                                    <b-icon icon="dash-circle-fill"
                                         variant="danger"
                                         style="cursor: pointer"
                                         v-on:click="changeStatus(data.item.id)"
@@ -72,16 +69,16 @@
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'PublicationAttachmentEdit',
-                                                    params: { publication_id: publication_id,
-                                                              attachment_id: data.item.id}}"
-                                        class="btn btn-block btn-sm btn-info">
+                                    <router-link :to="{ name: 'MenuItemEdit',
+                                                        params: { menu_id: menu_id,
+                                                                  menu_item_id: data.item.id }}"
+                                        class="btn mr-1 btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
                                         Edit
                                     </router-link>
                                     <b-button
-                                        class="btn-block"
+                                        class=""
                                         size="sm"
                                         @click="deleteModal(data.item)"
                                         variant="danger">
@@ -119,22 +116,19 @@ export default {
     data () {
         return {
             alerts: this.$route.params.alerts || [],
-            publication_id: this.$route.params.publication_id,
+            menu_id: this.$route.params.menu_id,
             fields: [
-                {key: 'name', sortable: true},
-                'file',
-                {key: 'file_type', sortable: true},
-                {key: 'file_size', sortable: true},
-                {key: 'description', sortable: true},
+                {key: 'name'},
+                {key: 'parent_name', label: 'Parent', sortable: true},
                 {key: 'order', sortable: true},
-                { key: 'is_active', label: 'Active'},
+                {key: 'is_active', label: 'Active'},
                 'actions'
             ],
+            filter: null,
+            filterOn: ['name', 'parent_name'],
             isBusy: true,
             items: [],
-            next: '',
-            page: 1,
-            prev: '',
+            page_title: '',
             search: '',
             sortDesc: true,
         }
@@ -143,27 +137,33 @@ export default {
         toggleBusy() {
             this.isBusy = !this.isBusy
         },
+        get_childs(menu_item){
+            menu_item.name = '– '.repeat(menu_item.level) + menu_item.name
+            if (menu_item.level > 1)
+                menu_item.name = '┊  ' + menu_item.name
+            this.items.push(menu_item);
+            if (menu_item.childs)
+               menu_item.childs.forEach(item => this.get_childs(item));
+        },
         callApi(url) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/?page=' + this.page + '&search=' + this.search;
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/?&search=' + this.search;
             if (url) source = url;
             this.axios
                 .get(source)
                 .then(response => {
-                    this.items = response.data.results;
-                    this.prev = response.data.previous;
-                    this.next = response.data.next;
+                    response.data.childs.forEach(item => this.get_childs(item));
+                    this.page_title = response.data.name + ' items';
                     this.toggleBusy();
                 })
         },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/publications/'+this.publication_id+'/attachments/'+item.id+'/',
+                .patch('/api/editorial-board/menus/'+this.menu_id+'/items/'+item.id+'/',
                        {is_active: !item.is_active},
                        {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
-                    console.log(response.data);
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
@@ -181,14 +181,14 @@ export default {
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/attachments/'+id+'/',
+                .delete('/api/editorial-board/menus/'+this.menu_id+'/items/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication removed successfully',
+                          message: 'menu item removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -201,7 +201,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete attachment?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete menu item?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

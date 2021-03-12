@@ -4,7 +4,7 @@
             <b-alert
                 v-for="alert in alerts" :key="alert.message"
                 :dismissible="alert.dismissable ? true : false"
-                :show="5"
+                :show="10"
                 :variant="alert.variant">
                 {{ alert.message }}
             </b-alert>

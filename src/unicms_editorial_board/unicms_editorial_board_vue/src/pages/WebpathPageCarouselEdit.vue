@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -44,6 +44,7 @@ export default {
             carousel_id: this.$route.params.carousel_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/carousels/form/',
+            page_title: ''
         }
     },
     methods: {
@@ -57,6 +58,7 @@ export default {
                             this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
+                    this.page_title = response.data.carousel.title
                 })
         },
         onSubmit(event) {
@@ -95,7 +97,13 @@ export default {
                         { variant: 'success',
                           message: 'page carousel removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'WebpathPageCarousels',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

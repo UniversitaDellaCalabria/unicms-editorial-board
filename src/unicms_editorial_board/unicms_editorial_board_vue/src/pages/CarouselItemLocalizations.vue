@@ -38,6 +38,16 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
+
                                 <template #cell(is_active)="data">
                                     <b-icon icon="check-circle-fill"
                                         variant="success"
@@ -55,7 +65,7 @@
                                     <router-link :to="{ name: 'CarouselItemLocalizationEdit',
                                                     params: { carousel_id: carousel_id,
                                                               carousel_item_id: carousel_item_id,
-                                                              item_id: data.item.id}}"
+                                                              carousel_item_localization_id: data.item.id}}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -99,7 +109,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             carousel_id: this.$route.params.carousel_id,
             carousel_item_id: this.$route.params.carousel_item_id,
             fields: [
@@ -133,8 +143,8 @@ export default {
                     this.items = response.data.results;
                     this.prev = response.data.previous;
                     this.next = response.data.next;
+                    this.toggleBusy();
                 })
-                .then(this.isBusy = false)
         },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);

@@ -24,8 +24,7 @@
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :files="files" />
+                                :form_source="form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -39,42 +38,37 @@ export default {
     data() {
         return {
             alerts: [],
-            publication_id: this.$route.params.publication_id,
-            attachment_id: this.$route.params.attachment_id,
+            menu_id: this.$route.params.menu_id,
+            menu_item_id: this.$route.params.menu_item_id,
             form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/attachments/form/',
+            form_source: '/api/editorial-board/menus/'+this.$route.params.menu_id+'/items/form/',
             files: {},
             page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/'+this.menu_item_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.$set(this.files, 'file', response.data.file);
                     this.page_title = response.data.name
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/'+this.menu_item_id+'/';
             event.preventDefault();
-            const formData = new FormData();
-            for ( var key in this.form ) {
-                formData.append(key, this.form[key]);
-            };
             this.axios
-                .patch(source, formData,
+                .patch(source, this.form,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication attachment edited successfully',
+                          message: 'menu item edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -92,19 +86,18 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/',
+                .delete('/api/editorial-board/menus/'+this.menu_id+'/items/'+this.menu_item_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication attachment removed successfully',
+                          message: 'menu item removed successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'PublicationAttachments',
-                                       params: {publication_id: this.publication_id,
-                                                alerts: this.alerts}})
-                    }
+                    this.$router.push({name: 'MenuItems',
+                                       params: {menu_id: this.menu_id,
+                                       alerts: this.alerts}})}
                 )
                 .catch(error => {
                     this.alerts.push(
@@ -115,7 +108,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete publication attachment?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete menu item?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
@@ -132,6 +125,6 @@ export default {
     },
     mounted() {
         this.getItem()
-    },
+    }
 }
 </script>

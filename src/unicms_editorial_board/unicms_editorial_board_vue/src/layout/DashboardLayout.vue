@@ -2,37 +2,37 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/admin/dashboard">
+      <sidebar-link to="/dashboard">
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/websites">
+      <sidebar-link to="/websites">
         <i class="nc-icon nc-layers-3"></i>
         <p>Websites</p>
       </sidebar-link>
 
-      <sidebar-link to="#">
+      <sidebar-link to="/menus">
         <i class="nc-icon nc-bullet-list-67"></i>
         <p>Menus</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/medias">
+      <sidebar-link to="/medias">
         <i class="nc-icon nc-album-2"></i>
         <p>Medias</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/media-collections">
+      <sidebar-link to="/media-collections">
         <i class="nc-icon nc-grid-45"></i>
         <p>Media collections</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/carousels">
+      <sidebar-link to="/carousels">
         <i class="nc-icon nc-button-play"></i>
         <p>Carousels</p>
       </sidebar-link>
 
-      <sidebar-link to="/admin/publications">
+      <sidebar-link to="/publications">
         <i class="nc-icon nc-single-copy-04"></i>
         <p>Publications</p>
       </sidebar-link>

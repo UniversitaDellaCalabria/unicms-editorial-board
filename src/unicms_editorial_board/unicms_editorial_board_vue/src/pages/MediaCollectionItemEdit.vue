@@ -17,7 +17,7 @@
                                 variant="danger"></b-icon>
                             Delete
                         </b-button>
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
                             <django-form
                                 :fields="fields"
@@ -39,15 +39,16 @@ export default {
         return {
             alerts: [],
             collection_id: this.$route.params.collection_id,
-            item_id: this.$route.params.item_id,
+            collection_item_id: this.$route.params.collection_item_id,
             form: {},
             form_source: '/api/editorial-board/media-collections/'+this.$route.params.collection_id+'/items/form/',
-            files: {}
+            files: {},
+            page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.item_id+'/';
+            let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.collection_item_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -56,6 +57,7 @@ export default {
                     }
                     this.form.media = response.data.media.id;
                     this.$set(this.files, 'media', response.data.media.file);
+                    this.page_title = response.data.media.title
                 })
         },
         updateMedia(val) {
@@ -67,7 +69,7 @@ export default {
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.item_id+'/';
+            let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.collection_item_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -94,7 +96,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.item_id+'/',
+                .delete('/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.collection_item_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
@@ -102,7 +104,11 @@ export default {
                         { variant: 'success',
                           message: 'media collection item removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'MediaCollectionItems',
+                                       params: {collection_id: this.collection_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

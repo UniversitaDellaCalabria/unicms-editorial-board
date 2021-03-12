@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Publication galleries">
+                    <b-card title="Webpath publications">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
@@ -38,20 +38,30 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
+
                                 <template #cell(date_start)="data">
-                                    {{ $date_formatter(data.value) }}
+                                    {{ $date_formatter(data.value) || '-' }}
                                 </template>
 
                                 <template #cell(date_end)="data">
-                                    {{ $date_formatter(data.value) }}
+                                    {{ $date_formatter(data.value) || '-' }}
                                 </template>
 
                                 <template #cell(in_evidence_start)="data">
-                                    {{ $date_formatter(data.value) }}
+                                    {{ $date_formatter(data.value) || '-' }}
                                 </template>
 
                                 <template #cell(in_evidence_end)="data">
-                                    {{ $date_formatter(data.value) }}
+                                    {{ $date_formatter(data.value) || '-' }}
                                 </template>
 
                                 <template #cell(is_active)="data">
@@ -124,7 +134,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
             fields: [
@@ -159,8 +169,8 @@ export default {
                     this.items = response.data.results;
                     this.prev = response.data.previous;
                     this.next = response.data.next;
+                    this.toggleBusy();
                 })
-                .then(this.isBusy = false)
         },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);

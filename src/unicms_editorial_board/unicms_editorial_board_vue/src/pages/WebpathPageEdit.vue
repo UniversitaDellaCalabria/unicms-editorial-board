@@ -54,7 +54,7 @@
                                 variant="secondary"></b-icon>
                             Medias
                         </router-link>
-                        <router-link :to="{ name: 'WebpathPageMedias',
+                        <router-link :to="{ name: 'WebpathPageMenus',
                                         params: { site_id: site_id,
                                                   webpath_id: webpath_id,
                                                   page_id: page_id }}"
@@ -62,15 +62,6 @@
                             <b-icon icon="menu-button-wide-fill"
                                 variant="secondary"></b-icon>
                             Menu
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageRelated',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="share"
-                                variant="secondary"></b-icon>
-                            Related pages
                         </router-link>
                         <router-link :to="{ name: 'WebpathPagePublications',
                                             params: { site_id: site_id,
@@ -80,6 +71,15 @@
                             <b-icon icon="file-text"
                                 variant="secondary"></b-icon>
                             Publications
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPageRelated',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-1">
+                            <b-icon icon="share"
+                                variant="secondary"></b-icon>
+                            Related pages
                         </router-link>
 
                         <b-button
@@ -91,7 +91,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -119,6 +119,7 @@ export default {
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/form/',
             tag_fields: ['tags'],
+            page_title: ''
         }
     },
     methods: {
@@ -132,6 +133,7 @@ export default {
                             this.$set(this.form, key, value.id)
                         }
                         else this.$set(this.form, key, value)
+                        this.page_title = response.data.name
                     }
                 })
         },

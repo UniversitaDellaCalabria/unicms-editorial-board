@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -39,24 +39,26 @@ export default {
         return {
             alerts: [],
             publication_id: this.$route.params.publication_id,
-            item_id: this.$route.params.item_id,
+            link_id: this.$route.params.link_id,
             form: {},
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/form/',
+            page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/'+this.item_id+'/';
+            let source = '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/'+this.link_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
+                    this.page_title = data.response.name
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/'+this.item_id+'/';
+            let source = '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/'+this.link_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -68,7 +70,9 @@ export default {
                           message: 'publication link edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'PublicationLinks',
+                                       params: {publication_id: this.publication_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
@@ -83,7 +87,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/links/'+this.item_id+'/',
+                .delete('/api/editorial-board/publications/'+this.publication_id+'/links/'+this.link_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {

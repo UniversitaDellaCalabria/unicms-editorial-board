@@ -95,9 +95,12 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'webpath removed successfully',
+                          message: 'media removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'Medias',
+                                       params: {alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

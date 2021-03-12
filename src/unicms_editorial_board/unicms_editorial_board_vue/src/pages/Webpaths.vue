@@ -115,7 +115,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             fields: [
                 'id',
                 {key: 'name', sortable: true},

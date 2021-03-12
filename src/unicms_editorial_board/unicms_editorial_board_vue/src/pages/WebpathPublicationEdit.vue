@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -43,6 +43,7 @@ export default {
             publication_id: this.$route.params.publication_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/publication-contexts/form/',
+            page_title: ''
         }
     },
     methods: {
@@ -57,6 +58,7 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                     }
+                    this.page_title = response.data.publication.title
                 })
         },
         onSubmit(event) {
@@ -95,7 +97,12 @@ export default {
                         { variant: 'success',
                           message: 'webpath publication removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'WebpathPublications',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

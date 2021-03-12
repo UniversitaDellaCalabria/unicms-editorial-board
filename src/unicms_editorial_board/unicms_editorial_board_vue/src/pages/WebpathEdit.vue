@@ -8,15 +8,32 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
+                        <router-link :to="{ name: 'WebpathPages',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="display"
+                                variant="secondary"></b-icon>
+                            Pages
+                        </router-link>
+                        <router-link :to="{ name: 'WebpathPublications',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="file-text"
+                                variant="secondary"></b-icon>
+                            Publications
+                        </router-link>
                         <b-button
                             @click="deleteModal()"
+                            class="mx-1"
                             variant="outline-danger">
                             <b-icon icon="trash"
                                 variant="danger"></b-icon>
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -38,24 +55,26 @@ export default {
         return {
             alerts: [],
             site_id: this.$route.params.site_id,
-            item_id: this.$route.params.webpath_id,
+            webpath_id: this.$route.params.webpath_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/form/'
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/form/',
+            page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.item_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
+                    this.page_title = response.data.name
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.item_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/';
             event.preventDefault();
             this.axios
                 .put(source, this.form,
@@ -64,7 +83,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: response.data.name,
+                          message: response.data.name + ' edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -82,7 +101,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.item_id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
@@ -90,7 +109,11 @@ export default {
                         { variant: 'success',
                           message: 'webpath removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'Webpaths',
+                                       params: {site_id: this.site_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

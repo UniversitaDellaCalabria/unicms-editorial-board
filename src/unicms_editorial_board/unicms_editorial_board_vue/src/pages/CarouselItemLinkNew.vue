@@ -46,7 +46,10 @@ export default {
                           message: 'carousel item link added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'CarouselItemLinks',
+                                       params: {carousel_id: this.carousel_id,
+                                                carousel_item_id: this.carousel_item_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

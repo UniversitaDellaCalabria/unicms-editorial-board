@@ -51,7 +51,9 @@ export default {
                           message: 'publication attachment added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'PublicationAttachments',
+                                       params: {publication_id: this.publication_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

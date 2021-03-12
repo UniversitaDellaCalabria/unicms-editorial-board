@@ -61,7 +61,7 @@ const router = new VueRouter({
 })
 
 function date_formatter(data) {
-    if (!data) return "-";
+    if (!data) return null;
     let date = new Date(data);
     let options = { year: 'numeric',
                     month: '2-digit',

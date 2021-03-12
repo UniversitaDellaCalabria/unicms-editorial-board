@@ -24,7 +24,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ form.name }}</b-card-title>
                         <b-card-text>
                             <django-form
                                 :fields="fields"
@@ -59,7 +59,7 @@ export default {
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
-                    }
+                    };
                 })
         },
         onSubmit(event) {
@@ -74,9 +74,7 @@ export default {
                         { variant: 'success',
                           message: 'media collection edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -98,7 +96,10 @@ export default {
                         { variant: 'success',
                           message: 'media collection removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'MediaCollections',
+                                       params: {alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(
@@ -126,6 +127,8 @@ export default {
     },
     mounted() {
         this.getItem();
-    }
+        this.$route.params.collection_name = "ciao"
+        console.log(this.$route)
+    },
 }
 </script>

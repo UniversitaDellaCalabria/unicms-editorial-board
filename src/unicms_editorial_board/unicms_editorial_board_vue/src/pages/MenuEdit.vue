@@ -8,6 +8,13 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
+                        <router-link :to="{ name: 'MenuItems',
+                                            params: { menu_id: item_id }}"
+                            class="btn btn-outline-secondary">
+                            <b-icon icon="list-ul"
+                                variant="secondary"></b-icon>
+                            Items
+                        </router-link>
                         <b-button
                             @click="deleteModal()"
                             variant="outline-danger"
@@ -18,14 +25,12 @@
                         </b-button>
 
                         <b-card-title>{{ page_title }}</b-card-title>
-
                         <b-card-text>
                             <django-form
-                                :fields="fields"
-                                :form="form"
+                                :fields="this.fields"
+                                :form="this.form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :files="files" />
+                                :form_source="this.form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -39,42 +44,35 @@ export default {
     data() {
         return {
             alerts: [],
-            publication_id: this.$route.params.publication_id,
-            attachment_id: this.$route.params.attachment_id,
+            item_id: this.$route.params.menu_id,
             form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/attachments/form/',
-            files: {},
+            form_source: '/api/editorial-board/menus/form/',
             page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
+            let source = '/api/editorial-board/menus/'+this.item_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.$set(this.files, 'file', response.data.file);
                     this.page_title = response.data.name
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
+            let source = '/api/editorial-board/menus/'+this.item_id+'/';
             event.preventDefault();
-            const formData = new FormData();
-            for ( var key in this.form ) {
-                formData.append(key, this.form[key]);
-            };
             this.axios
-                .patch(source, formData,
+                .patch(source, this.form,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication attachment edited successfully',
+                          message: 'menu edited successfully',
                           dismissable: true }
                     );
                     //this.$router.push({name: 'Webpaths'})
@@ -92,18 +90,17 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/',
+                .delete('/api/editorial-board/menus/'+this.item_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication attachment removed successfully',
+                          message: 'menu removed successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'PublicationAttachments',
-                                       params: {publication_id: this.publication_id,
-                                                alerts: this.alerts}})
+                    this.$router.push({name: 'Menus',
+                                       params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
@@ -115,7 +112,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete publication attachment?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete menu?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
@@ -131,7 +128,7 @@ export default {
         }
     },
     mounted() {
-        this.getItem()
-    },
+        this.getItem();
+    }
 }
 </script>

@@ -45,7 +45,8 @@ export default {
                           message: 'carousel added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'Carousels',
+                                       params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

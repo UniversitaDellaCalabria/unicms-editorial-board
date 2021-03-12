@@ -26,15 +26,14 @@ export default {
     data() {
         return {
             alerts: [],
-            site_id: this.$route.params.site_id,
-            webpath_id: this.$route.params.webpath_id,
-            form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/publication-contexts/form/',
+            menu_id: this.$route.params.menu_id,
+            form: {'menu': this.$route.params.menu_id},
+            form_source: '/api/editorial-board/menus/'+this.$route.params.menu_id+'/items/form/'
         }
     },
     methods: {
         onSubmit(event) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/';
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/';
             event.preventDefault();
             this.axios
                 .post(source, this.form,
@@ -43,13 +42,12 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'webpath publication added successfully',
+                          message: 'menu item added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'WebpathPublications',
-                                       params: {site_id: this.site_id,
-                                                webpath_id: this.webpath_id,
-                                                alerts: this.alerts}})
+                    this.$router.push({name: 'MenuItems',
+                                       params: {menu_id: this.menu_id,
+                                       alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
@@ -62,6 +60,6 @@ export default {
                     }
                 })
         },
-    },
+    }
 }
 </script>

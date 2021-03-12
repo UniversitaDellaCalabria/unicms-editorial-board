@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -41,7 +41,8 @@ export default {
             publication_id: this.$route.params.publication_id,
             related_id: this.$route.params.related_id,
             form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/related/form/'
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/related/form/',
+            page_title: ''
         }
     },
     methods: {
@@ -56,6 +57,7 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                     }
+                    this.page_title = response.data.related.title
                 })
         },
         onSubmit(event) {
@@ -94,7 +96,11 @@ export default {
                         { variant: 'success',
                           message: 'related publication removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'PublicationRelated',
+                                       params: {publication_id: this.publication_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

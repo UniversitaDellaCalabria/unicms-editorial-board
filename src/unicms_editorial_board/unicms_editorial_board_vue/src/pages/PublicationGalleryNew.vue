@@ -45,7 +45,9 @@ export default {
                           message: 'publication gallery added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'PublicationGalleries',
+                                       params: {publication_id: this.publication_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

@@ -9,6 +9,42 @@
                 <div class="col-12">
                     <b-card>
 
+                        <router-link :to="{ name: 'PublicationAttachments',
+                                            params: { publication_id: publication_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="file-text"
+                                variant="secondary"></b-icon>
+                            Attachments
+                        </router-link>
+                        <router-link :to="{ name: 'PublicationGalleries',
+                                            params: { publication_id: publication_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="card-image"
+                                variant="secondary"></b-icon>
+                            Galleries
+                        </router-link>
+                        <router-link :to="{ name: 'PublicationLinks',
+                                            params: { publication_id: publication_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="link45deg"
+                                variant="secondary"></b-icon>
+                            Links
+                        </router-link>
+                        <router-link :to="{ name: 'PublicationLocalizations',
+                                            params: { publication_id: publication_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="flag"
+                                variant="secondary"></b-icon>
+                            Localizations
+                        </router-link>
+                        <router-link :to="{ name: 'PublicationRelated',
+                                            params: { publication_id: publication_id }}"
+                            class="btn mx-1 btn-outline-secondary">
+                            <b-icon icon="share"
+                                variant="secondary"></b-icon>
+                            Related publications
+                        </router-link>
+
                         <b-button
                             @click="deleteModal()"
                             variant="outline-danger"
@@ -17,7 +53,7 @@
                                 variant="danger"></b-icon>
                             Delete
                         </b-button>
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
                             <django-form
                                 :fields="fields"
@@ -40,17 +76,18 @@ export default {
     data() {
         return {
             alerts: [],
-            item_id: this.$route.params.publication_id,
+            publication_id: this.$route.params.publication_id,
             form: {},
             form_source: '/api/editorial-board/publications/form/',
             files: {},
             rich_text_fields: ['content'],
-            tag_fields: ['tags']
+            tag_fields: ['tags'],
+            page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.item_id+'/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -65,6 +102,7 @@ export default {
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'presentation_image', response.data.presentation_image.file);
+                    this.page_title = response.data.title
                 })
         },
         updateMedia(val) {
@@ -76,7 +114,7 @@ export default {
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.item_id+'/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -111,7 +149,10 @@ export default {
                         { variant: 'success',
                           message: 'publication removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'Publications',
+                                       params: {alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

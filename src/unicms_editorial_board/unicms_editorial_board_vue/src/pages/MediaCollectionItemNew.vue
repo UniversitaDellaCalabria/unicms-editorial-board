@@ -55,7 +55,9 @@ export default {
                           message: 'media collection item added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'MediaCollectionItems',
+                                       params: {collection_id: this.collection_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -44,6 +44,7 @@ export default {
             link_id: this.$route.params.link_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/links/form/',
+            page_title: ''
         }
     },
     methods: {
@@ -55,6 +56,7 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
+                    this.page_title = response.data.name
                 })
         },
         onSubmit(event) {
@@ -93,7 +95,13 @@ export default {
                         { variant: 'success',
                           message: 'page link removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'WebpathPageLinks',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

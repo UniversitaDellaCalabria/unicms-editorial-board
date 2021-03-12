@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -46,6 +46,7 @@ export default {
             form: {},
             files: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/blocks/form/',
+            page_title: ''
         }
     },
     methods: {
@@ -60,6 +61,7 @@ export default {
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'block', response.data.block.image);
+                    this.page_title = response.data.block.name
                 })
         },
         updateMedia(val) {
@@ -106,7 +108,13 @@ export default {
                         { variant: 'success',
                           message: 'page block removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'WebpathPageBlocks',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

@@ -46,7 +46,9 @@ export default {
                           message: response.data.name,
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'Webpaths',
+                                       params: {site_id: this.site_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

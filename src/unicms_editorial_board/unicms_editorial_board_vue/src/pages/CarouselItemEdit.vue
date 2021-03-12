@@ -11,7 +11,7 @@
 
                         <router-link :to="{ name: 'CarouselItemLinks',
                                             params: { carousel_id: carousel_id,
-                                                      carousel_item_id: item_id}}"
+                                                      carousel_item_id: carousel_item_id}}"
                             class="btn btn-outline-secondary mx-1">
                             <b-icon icon="link45deg"
                                 variant="secondary"></b-icon>
@@ -19,7 +19,7 @@
                         </router-link>
                         <router-link :to="{ name: 'CarouselItemLocalizations',
                                             params: { carousel_id: carousel_id,
-                                                      carousel_item_id: item_id}}"
+                                                      carousel_item_id: carousel_item_id}}"
                             class="btn btn-outline-secondary mx-1">
                             <b-icon icon="flag"
                                 variant="secondary"></b-icon>
@@ -34,7 +34,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -57,15 +57,16 @@ export default {
         return {
             alerts: [],
             carousel_id: this.$route.params.carousel_id,
-            item_id: this.$route.params.item_id,
+            carousel_item_id: this.$route.params.carousel_item_id,
             form: {},
             form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/form/',
-            files: {}
+            files: {},
+            page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.item_id+'/';
+            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -74,6 +75,7 @@ export default {
                     }
                     this.form.image = response.data.image.id;
                     this.$set(this.files, 'image', response.data.image.file);
+                    this.page_title = response.data.image.title
                 })
         },
         updateMedia(val) {
@@ -85,7 +87,7 @@ export default {
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.item_id+'/';
+            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -112,7 +114,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.item_id+'/',
+                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
@@ -120,7 +122,11 @@ export default {
                         { variant: 'success',
                           message: 'carousel item removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'CarouselItems',
+                                       params: {carousel_id: this.carousel_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

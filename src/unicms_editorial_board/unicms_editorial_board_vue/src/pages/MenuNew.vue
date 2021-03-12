@@ -7,9 +7,10 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="New">
+                    <b-card title="New carousel">
                         <b-card-text>
                             <django-form
+                                :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -26,30 +27,26 @@ export default {
     data() {
         return {
             alerts: [],
-            site_id: this.$route.params.site_id,
-            webpath_id: this.$route.params.webpath_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/publication-contexts/form/',
+            form_source: '/api/editorial-board/menus/form/'
         }
     },
     methods: {
         onSubmit(event) {
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/';
+            let source = '/api/editorial-board/menus/';
             event.preventDefault();
             this.axios
                 .post(source, this.form,
-                      {headers: {"X-CSRFToken": this.$csrftoken }}
+                      {headers: {'X-CSRFToken': this.$csrftoken}}
                 )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'webpath publication added successfully',
+                          message: 'menu added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'WebpathPublications',
-                                       params: {site_id: this.site_id,
-                                                webpath_id: this.webpath_id,
-                                                alerts: this.alerts}})
+                    this.$router.push({name: 'Menus',
+                                       params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

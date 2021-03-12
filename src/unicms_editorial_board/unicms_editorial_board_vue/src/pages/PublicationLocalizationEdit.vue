@@ -17,7 +17,7 @@
                             Delete
                         </b-button>
 
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -43,7 +43,8 @@ export default {
             localization_id: this.$route.params.localization_id,
             form: {},
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/localizations/form/',
-            rich_text_fields: ['content']
+            rich_text_fields: ['content'],
+            page_title: ''
         }
     },
     methods: {
@@ -53,11 +54,9 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='collection') {
-                            this.$set(this.form, key, value.id)
-                        }
-                        else this.$set(this.form, key, value)
+                        this.$set(this.form, key, value)
                     }
+                    this.page_title = response.data.title
                 })
         },
         onSubmit(event) {
@@ -96,7 +95,11 @@ export default {
                         { variant: 'success',
                           message: 'publication localization removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'PublicationLocalizations',
+                                       params: {publication_id: this.publication_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

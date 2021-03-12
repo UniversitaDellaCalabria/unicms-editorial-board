@@ -37,6 +37,16 @@
                                 :sort-by.sync="sortBy"
                                 :sort-desc.sync="sortDesc">
 
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
+                                    </div>
+                                </template>
+
                                 <template #cell(image)="data">
                                     <b-img :src="data.value.file" fluid alt="Responsive image"></b-img>
                                 </template>
@@ -76,7 +86,7 @@
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'CarouselItemEdit',
                                                     params: { carousel_id: carousel_id,
-                                                              item_id: data.item.id}}"
+                                                              carousel_item_id: data.item.id}}"
                                         class="btn btn-block btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
@@ -120,7 +130,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             carousel_id: this.$route.params.carousel_id,
             fields: [
                 {key: 'image', sortable: true, thClass: 'w-25'},
@@ -153,8 +163,8 @@ export default {
                     this.items = response.data.results;
                     this.prev = response.data.previous;
                     this.next = response.data.next;
+                    this.toggleBusy();
                 })
-                .then(this.isBusy = false)
         },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
