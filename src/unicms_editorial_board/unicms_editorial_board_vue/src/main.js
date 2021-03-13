@@ -17,6 +17,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import vSelect from "vue-select";
 import VueBreadcrumbs from 'vue-2-breadcrumbs';
 import VueRouter from 'vue-router'
 import App from './App.vue'
@@ -46,6 +47,9 @@ Vue.use(IconsPlugin)
 
 // ?
 Vue.use(LightBootstrap)
+
+Vue.component('v-select', vSelect)
+import 'vue-select/dist/vue-select.css';
 
 // configure router
 const router = new VueRouter({

@@ -27,7 +27,7 @@ export default {
         return {
             alerts: [],
             menu_id: this.$route.params.menu_id,
-            form: {'menu': this.$route.params.menu_id},
+            form: {'menu': parseInt(this.$route.params.menu_id)},
             form_source: '/api/editorial-board/menus/'+this.$route.params.menu_id+'/items/form/'
         }
     },

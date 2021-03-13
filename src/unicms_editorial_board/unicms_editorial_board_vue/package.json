@@ -23,6 +23,7 @@
     "vue-2-breadcrumbs": "^0.7.12",
     "vue-axios": "^3.2.2",
     "vue-router": "^3.0.2",
+    "vue-select": "^3.11.2",
     "webpack-cli": "^3.3.11"
   },
   "devDependencies": {

@@ -28,7 +28,7 @@ export default {
     data() {
         return {
             alerts: [],
-            form: {'publication': this.$route.params.publication_id},
+            form: {'publication': parseInt(this.$route.params.publication_id)},
             publication_id: this.$route.params.publication_id,
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/links/form/',
         }

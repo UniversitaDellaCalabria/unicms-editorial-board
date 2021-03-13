@@ -126,7 +126,6 @@ export default {
                           message: 'publication edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
                     }
                 )
                 .catch(error => {

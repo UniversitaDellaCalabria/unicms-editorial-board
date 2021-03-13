@@ -28,7 +28,7 @@ export default {
         return {
             alerts: [],
             collection_id: this.$route.params.collection_id,
-            form: {'collection': this.$route.params.collection_id},
+            form: {'collection': parseInt(this.$route.params.collection_id)},
             form_source: '/api/editorial-board/media-collections/'+this.$route.params.collection_id+'/items/form/',
             files: {}
         }

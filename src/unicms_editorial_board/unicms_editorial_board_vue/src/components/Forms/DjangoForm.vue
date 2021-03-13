@@ -1,5 +1,6 @@
 <template>
     <b-form @submit="submit">
+
         <b-form-group
             v-for="field in this.fields" :key="field.id"
             :id="'input-group-' + field.id"
@@ -16,20 +17,17 @@
             </b-form-checkbox>
 
             <div v-else-if="field.type == 'select'">
-                <b-form-select
+
+                <v-select
                     v-model="form[field.id]"
-                    :multiple="field.multiple ? true : false"
+                    label="text"
+                    :reduce="value => value.value"
+                    :options="field.options"
                     :id="field.id"
+                    :multiple="field.multiple ? true : false"
                     :required="field.required ? true : false">
-                    <b-form-select-option value="" v-if="field.required === 0">
-                        -
-                    </b-form-select-option>
-                    <b-form-select-option
-                        v-for="option in field.options"
-                        :value="option.value">
-                        {{ option.text }}
-                    </b-form-select-option>
-                </b-form-select>
+                </v-select>
+
                 <div class="mt-3" v-if="field.id in files && files[field.id]">
                     <p>Selected</p>
                     <b-img

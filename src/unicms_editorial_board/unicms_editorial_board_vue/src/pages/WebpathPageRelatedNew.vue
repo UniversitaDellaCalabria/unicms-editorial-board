@@ -29,7 +29,7 @@ export default {
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
-            form: {'page': this.$route.params.page_id},
+            form: {'page': parseInt(this.$route.params.page_id)},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/related/form/',
         }
     },
