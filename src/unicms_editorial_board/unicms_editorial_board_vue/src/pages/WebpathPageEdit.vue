@@ -117,7 +117,7 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/form/',
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/pages/form/',
             tag_fields: ['tags'],
             page_title: ''
         }
@@ -150,7 +150,12 @@ export default {
                           message: 'page edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.webpath_id = response.data.webpath;
+                    this.$router.push({name: 'WebpathPageEdit',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

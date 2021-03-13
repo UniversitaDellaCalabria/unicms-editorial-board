@@ -28,7 +28,7 @@ export default {
             alerts: [],
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
-            form: {},
+            form: {'webpath': parseInt(this.$route.params.webpath_id)},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/publication-contexts/form/',
         }
     },

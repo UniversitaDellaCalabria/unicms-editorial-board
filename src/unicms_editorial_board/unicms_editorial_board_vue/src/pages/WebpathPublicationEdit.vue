@@ -42,7 +42,7 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/publication-contexts/form/',
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/publication-contexts/form/',
             page_title: ''
         }
     },
@@ -74,7 +74,12 @@ export default {
                           message: 'webpath publication edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.webpath_id = response.data.webpath;
+                    this.$router.push({name: 'WebpathPublicationEdit',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                publication_id: this.publication_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

@@ -59,7 +59,7 @@ export default {
             carousel_id: this.$route.params.carousel_id,
             carousel_item_id: this.$route.params.carousel_item_id,
             form: {},
-            form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/form/',
+            form_source: '/api/editorial-board/carousels/items/form/',
             files: {},
             page_title: ''
         }
