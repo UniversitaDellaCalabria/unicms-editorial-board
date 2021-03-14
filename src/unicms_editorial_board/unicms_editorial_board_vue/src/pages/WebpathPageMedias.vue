@@ -174,7 +174,6 @@ export default {
                        {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
-                    console.log(response.data);
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',

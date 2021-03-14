@@ -27,10 +27,10 @@
                         </router-link>
                         <b-button
                             @click="deleteModal()"
-                            variant="outline-danger"
+                            variant="danger"
                             class="mx-1">
                             <b-icon icon="trash"
-                                variant="danger"></b-icon>
+                                variant="white"></b-icon>
                             Delete
                         </b-button>
 

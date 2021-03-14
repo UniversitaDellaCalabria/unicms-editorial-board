@@ -11,6 +11,7 @@
                         <b-card-text>
                             <django-form
                                 :form="form"
+                                :files="files"
                                 :submit="onSubmit"
                                 :form_source="form_source"
                                 :tag_fields="tag_fields" />
@@ -29,7 +30,8 @@ export default {
             alerts: [],
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
-            form: {},
+            form: {'webpath': parseInt(this.$route.params.webpath_id)},
+            files: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/form/',
             tag_fields: ['tags'],
         }
@@ -48,7 +50,10 @@ export default {
                           message: 'page added successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
+                    this.$router.push({name: 'WebpathPages',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
@@ -61,6 +66,19 @@ export default {
                     }
                 })
         },
+        updateMedia(val) {
+            let source = '/api/editorial-board/page-templates/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.$set(this.files, 'base_template', response.data.image);
+                })
+        },
     },
+    watch: {
+        'form.base_template': function(newVal, oldVal){
+            this.updateMedia(newVal)
+        }
+    }
 }
 </script>

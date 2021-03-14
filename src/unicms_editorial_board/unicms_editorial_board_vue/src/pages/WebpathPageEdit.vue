@@ -83,11 +83,20 @@
                         </router-link>
 
                         <b-button
-                            @click="deleteModal()"
-                            variant="outline-danger"
+                            @click="copyAsDraftModal()"
+                            variant="outline-warning"
                             class="mx-1">
                             <b-icon icon="trash"
-                                variant="danger"></b-icon>
+                                variant="warning"></b-icon>
+                            Copy as draft
+                        </b-button>
+
+                        <b-button
+                            @click="deleteModal()"
+                            variant="danger"
+                            class="mx-1">
+                            <b-icon icon="trash"
+                                variant="white"></b-icon>
                             Delete
                         </b-button>
 
@@ -97,6 +106,7 @@
                             <django-form
                                 :fields="fields"
                                 :form="form"
+                                :files="files"
                                 :submit="onSubmit"
                                 :form_source="form_source"
                                 :tag_fields="tag_fields" />
@@ -117,6 +127,7 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
             form: {},
+            files: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/pages/form/',
             tag_fields: ['tags'],
             page_title: ''
@@ -133,6 +144,7 @@ export default {
                             this.$set(this.form, key, value.id)
                         }
                         else this.$set(this.form, key, value)
+                        this.$set(this.files, 'base_template', response.data.base_template.image);
                         this.page_title = response.data.name
                     }
                 })
@@ -168,6 +180,29 @@ export default {
                     }
                 })
         },
+        copyAsDraft(){
+            this.axios
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/copy-as-draft/')
+                .then(response => {
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'webpath page copied as draft successfully',
+                          dismissable: true }
+                    );
+                    this.$router.push({name: 'WebpathPages',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                alerts: this.alerts}})
+                    }
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
         remove() {
             this.axios
                 .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/',
@@ -188,6 +223,21 @@ export default {
                     )
                 })
         },
+        copyAsDraftModal() {
+            this.$bvModal.msgBoxConfirm('Do you want really copy webpath page as draft?', {
+            title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'warning',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                }
+            ).then(value => {
+                if (value) this.copyAsDraft();
+            })
+        },
         deleteModal() {
             this.$bvModal.msgBoxConfirm('Do you want really delete page?', {
             title: 'Please Confirm',
@@ -202,10 +252,24 @@ export default {
             ).then(value => {
                 if (value) this.remove();
             })
-        }
+        },
+        updateMedia(val) {
+            let source = '/api/editorial-board/page-templates/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.files.base_template = response.data.image
+                })
+        },
     },
     mounted() {
         this.getItem()
     },
+    watch: {
+        'form.base_template': function(newVal, oldVal){
+            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
+            if (!newVal) this.files.base_template = '';
+        }
+    }
 }
 </script>

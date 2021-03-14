@@ -187,10 +187,17 @@
                                     <b-button
                                         href="https://ticket.unical.it"
                                         target="_blank"
-                                        class="btn btn-block btn-sm btn-warning text-white">
+                                        class="btn btn-block btn-sm btn-secondary text-white">
                                         <b-icon icon="eye"
                                             variant="white"></b-icon>
                                         Preview
+                                    </b-button>
+                                    <b-button
+                                        @click="copyAsDraftModal(data.item)"
+                                        class="btn btn-block btn-sm btn-warning text-white">
+                                        <b-icon icon="files"
+                                            variant="white"></b-icon>
+                                        Copy as draft
                                     </b-button>
                                     <router-link :to="{ name: 'WebpathPageEdit',
                                                     params: { site_id: site_id,
@@ -233,7 +240,7 @@
 export default {
     data () {
         return {
-            alerts: [],
+            alerts: this.$route.params.alerts || [],
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
             fields: [
@@ -277,15 +284,33 @@ export default {
                     this.isBusy = false
                 })
         },
+        copyAsDraft(id){
+            this.axios
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+id+'/copy-as-draft/')
+                .then(response => {
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'webpath page copied as draft successfully',
+                          dismissable: true }
+                    );
+                    this.callApi();
+                    }
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-status/',
-                       {is_active: !item.is_active},
-                       {headers: {"X-CSRFToken": this.$csrftoken }}
-                       )
+                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-status/',
+                       {},
+                       {headers: {"X-CSRFToken": this.$csrftoken }})
                 .then(response => {
-                    console.log(response.data);
                     item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
@@ -303,14 +328,15 @@ export default {
         },
         publishUnpublish(id) {
             let item = this.items.find(item => item.id === id);
+            let published = this.items.find(published => published.id === item.draft_of);
             this.axios
-                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-publication-status/',
-                       {state: !item.state},
-                       {headers: {"X-CSRFToken": this.$csrftoken }}
-                       )
+                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-publication-status/',
+                       {},
+                       {headers: {"X-CSRFToken": this.$csrftoken }})
                 .then(response => {
-                    console.log(response.data);
                     item.state = response.data.state;
+                    if (published)
+                        published.is_active = false
                     this.alerts.push(
                         { variant: 'success',
                           message: 'webpath page status changed successfully',
@@ -359,6 +385,21 @@ export default {
                 }
             ).then(value => {
                 if (value) this.remove(item.id);
+            })
+        },
+        copyAsDraftModal(item) {
+            this.$bvModal.msgBoxConfirm('Do you want really copy webpath page as draft?', {
+            title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'warning',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                }
+            ).then(value => {
+                if (value) this.copyAsDraft(item.id);
             })
         }
     },
