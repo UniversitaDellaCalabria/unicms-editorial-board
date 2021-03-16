@@ -346,7 +346,12 @@ export default {
                         { variant: 'success',
                           message: 'page removed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    this.$router.push({name: 'WebpathPages',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                alerts: this.alerts}})
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(

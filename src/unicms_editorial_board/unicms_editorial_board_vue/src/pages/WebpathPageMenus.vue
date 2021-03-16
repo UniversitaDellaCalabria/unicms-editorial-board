@@ -73,6 +73,13 @@
                                 </template>
 
                                 <template #cell(actions)="data">
+                                    <router-link :to="{ name: 'MenuEdit',
+                                                        params: { menu_id: data.item.menu.id }}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="arrow-right-circle"
+                                            variant="secondary"></b-icon>
+                                        Go to menu
+                                    </router-link>
                                     <router-link :to="{ name: 'WebpathPageMenuEdit',
                                                         params: { site_id: site_id,
                                                                   webpath_id: webpath_id,
