@@ -185,7 +185,7 @@
 
                                 <template #cell(actions)="data">
                                     <b-button
-                                        href="https://ticket.unical.it"
+                                        :href="data.item.preview_url"
                                         target="_blank"
                                         class="btn btn-block btn-sm btn-secondary text-white">
                                         <b-icon icon="eye"
@@ -307,9 +307,7 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-status/',
-                       {},
-                       {headers: {"X-CSRFToken": this.$csrftoken }})
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-status/')
                 .then(response => {
                     item.is_active = response.data.is_active;
                     this.alerts.push(
@@ -330,9 +328,7 @@ export default {
             let item = this.items.find(item => item.id === id);
             let published = this.items.find(published => published.id === item.draft_of);
             this.axios
-                .patch('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-publication-status/',
-                       {},
-                       {headers: {"X-CSRFToken": this.$csrftoken }})
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-publication-status/')
                 .then(response => {
                     item.state = response.data.state;
                     if (published)

@@ -8,53 +8,95 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
+                        <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'PublicationAttachments',
+                                                    params: { publication_id: publication_id }}"
+                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="file-text"
+                                        variant="secondary"></b-icon>
+                                    Attachments
+                                </router-link>
+                                <router-link :to="{ name: 'PublicationGalleries',
+                                                    params: { publication_id: publication_id }}"
+                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="card-image"
+                                        variant="secondary"></b-icon>
+                                    Galleries
+                                </router-link>
+                                <router-link :to="{ name: 'PublicationLinks',
+                                                    params: { publication_id: publication_id }}"
+                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="link45deg"
+                                        variant="secondary"></b-icon>
+                                    Links
+                                </router-link>
+                                <router-link :to="{ name: 'PublicationLocalizations',
+                                                    params: { publication_id: publication_id }}"
+                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="flag"
+                                        variant="secondary"></b-icon>
+                                    Localizations
+                                </router-link>
+                                <router-link :to="{ name: 'PublicationRelated',
+                                                    params: { publication_id: publication_id }}"
+                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="share"
+                                        variant="secondary"></b-icon>
+                                    Related publications
+                                </router-link>
+                            </div>
 
-                        <router-link :to="{ name: 'PublicationAttachments',
-                                            params: { publication_id: publication_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="file-text"
-                                variant="secondary"></b-icon>
-                            Attachments
-                        </router-link>
-                        <router-link :to="{ name: 'PublicationGalleries',
-                                            params: { publication_id: publication_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="card-image"
-                                variant="secondary"></b-icon>
-                            Galleries
-                        </router-link>
-                        <router-link :to="{ name: 'PublicationLinks',
-                                            params: { publication_id: publication_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="link45deg"
-                                variant="secondary"></b-icon>
-                            Links
-                        </router-link>
-                        <router-link :to="{ name: 'PublicationLocalizations',
-                                            params: { publication_id: publication_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="flag"
-                                variant="secondary"></b-icon>
-                            Localizations
-                        </router-link>
-                        <router-link :to="{ name: 'PublicationRelated',
-                                            params: { publication_id: publication_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="share"
-                                variant="secondary"></b-icon>
-                            Related publications
-                        </router-link>
-
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
+                            <div class="pull-right">
+                                <b-button
+                                    v-if="is_active"
+                                    @click="toggleIsActiveModal()"
+                                    variant="danger"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="x-circle"></b-icon>
+                                    Deactivate
+                                </b-button>
+                                <b-button
+                                    v-else
+                                    @click="toggleIsActiveModal()"
+                                    variant="success"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="check-circle"></b-icon>
+                                    Activate
+                                </b-button>
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
+                        </div>
                         <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
+                            <p>
+                                <b>Activation status: </b>
+                                <b-icon
+                                    icon="circle-fill"
+                                    animation="throb"
+                                    font-scale="0.8"
+                                    variant="success"
+                                    v-if="is_active">
+                                </b-icon>
+                                <b-icon
+                                    icon="circle-fill"
+                                    animation="throb"
+                                    font-scale="0.8"
+                                    variant="danger"
+                                    v-else>
+                                </b-icon>
+                            </p>
+                            <hr />
                             <django-form
                                 :fields="fields"
                                 :form="form"
@@ -82,7 +124,8 @@ export default {
             files: {},
             rich_text_fields: ['content'],
             tag_fields: ['tags'],
-            page_title: ''
+            page_title: '',
+            is_active: false,
         }
     },
     methods: {
@@ -102,7 +145,8 @@ export default {
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'presentation_image', response.data.presentation_image.file);
-                    this.page_title = response.data.title
+                    this.page_title = response.data.title;
+                    this.is_active = response.data.is_active
                 })
         },
         updateMedia(val) {
@@ -160,6 +204,41 @@ export default {
                           dismissable: true }
                     )
                 })
+        },
+        toggleIsActive() {
+            this.axios
+                .get('/api/editorial-board/publications/'+this.publication_id+'/change-status/')
+                .then(response => {
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'status updated successfully',
+                          dismissable: true }
+                    );
+                    this.is_active = response.data.is_active;
+                    }
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
+        toggleIsActiveModal() {
+            this.$bvModal.msgBoxConfirm('Do you want really change activation status?', {
+            title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'success',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                }
+            ).then(value => {
+                if (value) this.toggleIsActive();
+            })
         },
         deleteModal() {
             this.$bvModal.msgBoxConfirm('Do you want really delete publication?', {

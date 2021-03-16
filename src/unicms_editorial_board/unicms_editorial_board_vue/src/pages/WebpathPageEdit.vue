@@ -8,101 +8,188 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
+                        <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'WebpathPageBlocks',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id,
+                                                          page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="box-seam"
+                                        variant="secondary"></b-icon>
+                                    Blocks
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPageCarousels',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="collection-play"
+                                        variant="secondary"></b-icon>
+                                    Carousels
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPageLinks',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="link45deg"
+                                        variant="secondary"></b-icon>
+                                    Links
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPageLocalizations',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id,
+                                                          page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="flag"
+                                        variant="secondary"></b-icon>
+                                    Localizations
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPageMedias',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id,
+                                                          page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="card-image"
+                                        variant="secondary"></b-icon>
+                                    Medias
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPageMenus',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id,
+                                                          page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="menu-button-wide-fill"
+                                        variant="secondary"></b-icon>
+                                    Menu
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPagePublications',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="file-text"
+                                        variant="secondary"></b-icon>
+                                    Publications
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPageRelated',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id,
+                                                              page_id: page_id }}"
+                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    <b-icon icon="share"
+                                        variant="secondary"></b-icon>
+                                    Related pages
+                                </router-link>
+                            </div>
 
-                        <router-link :to="{ name: 'WebpathPageBlocks',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="box-seam"
-                                variant="secondary"></b-icon>
-                            Blocks
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageCarousels',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="collection-play"
-                                variant="secondary"></b-icon>
-                            Carousels
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageLinks',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="link45deg"
-                                variant="secondary"></b-icon>
-                            Links
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageLocalizations',
-                                        params: { site_id: site_id,
-                                                  webpath_id: webpath_id,
-                                                  page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="flag"
-                                variant="secondary"></b-icon>
-                            Localizations
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageMedias',
-                                        params: { site_id: site_id,
-                                                  webpath_id: webpath_id,
-                                                  page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="card-image"
-                                variant="secondary"></b-icon>
-                            Medias
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageMenus',
-                                        params: { site_id: site_id,
-                                                  webpath_id: webpath_id,
-                                                  page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="menu-button-wide-fill"
-                                variant="secondary"></b-icon>
-                            Menu
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPagePublications',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="file-text"
-                                variant="secondary"></b-icon>
-                            Publications
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPageRelated',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="share"
-                                variant="secondary"></b-icon>
-                            Related pages
-                        </router-link>
+                            <div class="pull-right">
+                                <b-button
+                                    v-if="is_active"
+                                    @click="toggleIsActiveModal()"
+                                    variant="danger"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="x-circle"></b-icon>
+                                    Deactivate
+                                </b-button>
+                                <b-button
+                                    v-else
+                                    @click="toggleIsActiveModal()"
+                                    variant="success"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="check-circle"></b-icon>
+                                    Activate
+                                </b-button>
+                                <b-button
+                                    v-if="published === 'draft'"
+                                    @click="togglePublishModal()"
+                                    variant="success"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="check-circle"></b-icon>
+                                    Publish
+                                </b-button>
+                                <b-button
+                                    v-else-if="published === 'published'"
+                                    @click="togglePublishModal()"
+                                    variant="info"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="x-circle"></b-icon>
+                                    Make it draft
+                                </b-button>
+                                <b-button
+                                    :href="preview_url"
+                                    target="_blank"
+                                    variant="secondary"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="eye"></b-icon>
+                                    Preview
+                                </b-button>
+                                <b-button
+                                    @click="copyAsDraftModal()"
+                                    variant="warning text-white"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon
+                                        icon="files"
+                                        variant="white">
+                                    </b-icon>
+                                    Copy as draft
+                                </b-button>
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    size="sm"
+                                    class="mx-1">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
 
-                        <b-button
-                            @click="copyAsDraftModal()"
-                            variant="outline-warning"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="warning"></b-icon>
-                            Copy as draft
-                        </b-button>
-
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
-
+                        </div>
                         <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
+                            <p>
+                                <b>Activation status: </b>
+                                <b-icon
+                                    icon="circle-fill"
+                                    animation="throb"
+                                    font-scale="0.8"
+                                    variant="success"
+                                    v-if="is_active">
+                                </b-icon>
+                                <b-icon
+                                    icon="circle-fill"
+                                    animation="throb"
+                                    font-scale="0.8"
+                                    variant="danger"
+                                    v-else>
+                                </b-icon>
+                                <br>
+                                <b>Publication status: </b>
+                                <b-icon
+                                    icon="circle-fill"
+                                    animation="throb"
+                                    font-scale="0.8"
+                                    variant="success"
+                                    v-if="published === 'published'">
+                                </b-icon>
+                                <b-icon
+                                    icon="circle-fill"
+                                    animation="throb"
+                                    font-scale="0.8"
+                                    variant="warning"
+                                    v-else-if="published === 'draft'">
+                                </b-icon>
+                            </p>
+                            <hr />
                             <django-form
                                 :fields="fields"
                                 :form="form"
@@ -130,7 +217,10 @@ export default {
             files: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/pages/form/',
             tag_fields: ['tags'],
-            page_title: ''
+            page_title: '',
+            preview_url: '',
+            is_active: false,
+            published: ''
         }
     },
     methods: {
@@ -145,7 +235,10 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                         this.$set(this.files, 'base_template', response.data.base_template.image);
-                        this.page_title = response.data.name
+                        this.page_title = response.data.name;
+                        this.preview_url = response.data.preview_url;
+                        this.is_active = response.data.is_active;
+                        this.published = response.data.state;
                     }
                 })
         },
@@ -203,6 +296,46 @@ export default {
                     )
                 })
         },
+        toggleIsActive() {
+            this.axios
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/change-status/')
+                .then(response => {
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'status updated successfully',
+                          dismissable: true }
+                    );
+                    this.is_active = response.data.is_active;
+                    }
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
+        togglePublish() {
+            this.axios
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/change-publication-status/')
+                .then(response => {
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'publication status updated successfully',
+                          dismissable: true }
+                    );
+                    this.published = response.data.state;
+                    }
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
         remove() {
             this.axios
                 .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/',
@@ -236,6 +369,36 @@ export default {
                 }
             ).then(value => {
                 if (value) this.copyAsDraft();
+            })
+        },
+        toggleIsActiveModal() {
+            this.$bvModal.msgBoxConfirm('Do you want really change activation status?', {
+            title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'success',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                }
+            ).then(value => {
+                if (value) this.toggleIsActive();
+            })
+        },
+        togglePublishModal() {
+            this.$bvModal.msgBoxConfirm('Do you want really change publication status?', {
+            title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'success',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                }
+            ).then(value => {
+                if (value) this.togglePublish();
             })
         },
         deleteModal() {

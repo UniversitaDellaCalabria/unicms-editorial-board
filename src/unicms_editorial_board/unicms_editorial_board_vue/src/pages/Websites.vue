@@ -8,9 +8,9 @@
             <b-card-text>
             <div class="all-icons">
               <div class="row">
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6" v-for="item in items">
+                <div class="font-icon-list col-lg-3 col-md-3 col-sm-4 col-6" v-for="item in items">
                   <div class="font-icon-detail">
-                    <i class="nc-icon nc-layers-3"></i>
+                    <b-icon icon="globe"></b-icon>
                     <h4>{{ item.name }}</h4>
                     <p>{{ item.domain }}</p>
                     <router-link :to="{ name: 'Webpaths',

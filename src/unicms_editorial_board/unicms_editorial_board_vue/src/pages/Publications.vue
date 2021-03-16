@@ -200,9 +200,7 @@ export default {
         changeStatus(id) {
             let item = this.items.find(item => item.id === id);
             this.axios
-                .patch('/api/editorial-board/publications/'+item.id+'/change-status/',
-                       {},
-                       {headers: {"X-CSRFToken": this.$csrftoken }})
+                .get('/api/editorial-board/publications/'+item.id+'/change-status/')
                 .then(response => {
                     item.is_active = response.data.is_active;
                     this.alerts.push(
