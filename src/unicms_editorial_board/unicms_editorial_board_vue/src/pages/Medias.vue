@@ -76,12 +76,20 @@
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'MediaEdit',
                                                     params: { media_id: data.item.id }}"
-                                        class="mr-3 btn btn-sm btn-info">
+                                        class="btn-block btn btn-sm btn-info">
                                         <b-icon icon="pencil-square"
                                             variant="white"></b-icon>
                                         Edit
                                     </router-link>
+                                    <router-link :to="{ name: 'MediaLocks',
+                                                        params: { media_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-secondary">
+                                        <b-icon icon="lock"
+                                            variant="white"></b-icon>
+                                        Allow users
+                                    </router-link>
                                     <b-button
+                                        class="btn-block"
                                         size="sm"
                                         @click="deleteModal(data.item)"
                                         variant="danger">

@@ -83,14 +83,12 @@
                                 <b>Activation status: </b>
                                 <b-icon
                                     icon="circle-fill"
-                                    animation="throb"
                                     font-scale="0.8"
                                     variant="success"
                                     v-if="is_active">
                                 </b-icon>
                                 <b-icon
                                     icon="circle-fill"
-                                    animation="throb"
                                     font-scale="0.8"
                                     variant="danger"
                                     v-else>

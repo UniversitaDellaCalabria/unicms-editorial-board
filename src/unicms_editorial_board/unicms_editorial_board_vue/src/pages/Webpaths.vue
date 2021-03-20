@@ -97,6 +97,14 @@
                                             variant="white"></b-icon>
                                         Edit
                                     </router-link>
+                                    <router-link :to="{ name: 'WebpathLocks',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-secondary">
+                                        <b-icon icon="lock"
+                                            variant="white"></b-icon>
+                                        Allow users
+                                    </router-link>
                                     <b-button
                                         size="sm"
                                         class="btn-block"

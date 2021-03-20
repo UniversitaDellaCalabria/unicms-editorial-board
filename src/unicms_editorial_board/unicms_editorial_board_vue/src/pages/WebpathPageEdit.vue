@@ -160,14 +160,12 @@
                                 <b>Activation status: </b>
                                 <b-icon
                                     icon="circle-fill"
-                                    animation="throb"
                                     font-scale="0.8"
                                     variant="success"
                                     v-if="is_active">
                                 </b-icon>
                                 <b-icon
                                     icon="circle-fill"
-                                    animation="throb"
                                     font-scale="0.8"
                                     variant="danger"
                                     v-else>
@@ -176,14 +174,12 @@
                                 <b>Publication status: </b>
                                 <b-icon
                                     icon="circle-fill"
-                                    animation="throb"
                                     font-scale="0.8"
                                     variant="success"
                                     v-if="published === 'published'">
                                 </b-icon>
                                 <b-icon
                                     icon="circle-fill"
-                                    animation="throb"
                                     font-scale="0.8"
                                     variant="warning"
                                     v-else-if="published === 'draft'">
@@ -255,7 +251,7 @@ export default {
                           message: 'page edited successfully',
                           dismissable: true }
                     );
-                    this.webpath_id = response.data.webpath;
+                    this.webpath_id = response.data.webpath.id;
                     this.$router.push({name: 'WebpathPageEdit',
                                        params: {site_id: this.site_id,
                                                 webpath_id: this.webpath_id,

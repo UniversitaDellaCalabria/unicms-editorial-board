@@ -208,6 +208,15 @@
                                             variant="white"></b-icon>
                                         Edit
                                     </router-link>
+                                    <router-link :to="{ name: 'WebpathPageLocks',
+                                                        params: { site_id: site_id,
+                                                                  webpath_id: webpath_id,
+                                                                  page_id: data.item.id }}"
+                                        class="btn btn-block btn-sm btn-secondary">
+                                        <b-icon icon="lock"
+                                            variant="white"></b-icon>
+                                        Allow users
+                                    </router-link>
                                     <b-button
                                         class="btn-block"
                                         size="sm"
@@ -305,16 +314,17 @@ export default {
                 })
         },
         changeStatus(id) {
-            let item = this.items.find(item => item.id === id);
             this.axios
-                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-status/')
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+id+'/change-status/')
                 .then(response => {
-                    item.is_active = response.data.is_active;
                     this.alerts.push(
                         { variant: 'success',
                           message: 'webpath page status changed successfully',
                           dismissable: true }
-                    )}
+                    );
+                    let item = this.items.find(item => item.id === id);
+                    item.is_active = response.data.is_active;
+                    }
                 )
                 .catch(error => {
                     this.alerts.push(
@@ -325,17 +335,18 @@ export default {
                 })
         },
         publishUnpublish(id) {
-            let item = this.items.find(item => item.id === id);
-            let published = this.items.find(published => published.id === item.draft_of);
             this.axios
-                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+item.id+'/change-publication-status/')
+                .get('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+id+'/change-publication-status/')
                 .then(response => {
+                    let item = this.items.find(item => item.id === id);
+                    let published = this.items.find(published => published.id === item.draft_of);
                     item.state = response.data.state;
+                    item.is_active = response.data.is_active;
                     if (published)
                         published.is_active = false
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'webpath page status changed successfully',
+                          message: 'webpath page publication status changed successfully',
                           dismissable: true }
                     )}
                 )

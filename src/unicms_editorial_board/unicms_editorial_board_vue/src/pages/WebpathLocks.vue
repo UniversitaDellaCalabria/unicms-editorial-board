@@ -7,11 +7,13 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Menus">
+                    <b-card title="Webpath locks">
                         <b-card-text>
 
                             <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'MenuNew'}"
+                                <router-link :to="{ name: 'WebpathLockNew',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id}}"
                                     class="btn btn-success">
                                     <b-icon icon="plus-circle"
                                             variant="white"></b-icon>
@@ -56,44 +58,11 @@
                                     </div>
                                 </template>
 
-                                <template #cell(is_active)="data">
-                                    <b-icon icon="check-circle-fill"
-                                        variant="success"
-                                        v-if="data.value"
-                                        v-on:click="changeStatus(data.item.id)"
-                                        style="cursor: pointer"></b-icon>
-                                    <b-icon icon="dash-circle-fill"
-                                        variant="danger"
-                                        style="cursor: pointer"
-                                        v-on:click="changeStatus(data.item.id)"
-                                        v-else></b-icon>
-                                </template>
-
-                                <template #cell(childs)="data">
-                                    <router-link :to="{ name: 'MenuItems',
-                                                        params: { menu_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="list-ul"
-                                            variant="secondary"></b-icon>
-                                        Items
-                                    </router-link>
+                                <template #cell(lock.locked_time)="data">
+                                    {{ $date_formatter(data.value) || '-' }}
                                 </template>
 
                                 <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'MenuEdit',
-                                                        params: { menu_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-info">
-                                        <b-icon icon="pencil-square"
-                                            variant="white"></b-icon>
-                                        Edit
-                                    </router-link>
-                                    <router-link :to="{ name: 'MenuLocks',
-                                                        params: { menu_id: data.item.id }}"
-                                        class="btn btn-block btn-sm btn-secondary">
-                                        <b-icon icon="lock"
-                                            variant="white"></b-icon>
-                                        Allow users
-                                    </router-link>
                                     <b-button
                                         class="btn-block"
                                         size="sm"
@@ -127,17 +96,17 @@ export default {
     data () {
         return {
             alerts: this.$route.params.alerts || [],
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
+            content_type: '',
             fields: [
-                {key: 'name', sortable: true},
-                { key: 'is_active', label: 'Active'},
-                { key: 'childs', label: 'Related'},
+                {key: 'user', sortable: true},
+                {key: 'lock.locked_time', label: 'Lock date', sortable: true},
                 'actions'
             ],
             isBusy: true,
             items: [],
-            next: '',
             page: 1,
-            prev: '',page: 1,
             per_page: 0,
             total_rows: 0,
             currentPage: 1,
@@ -150,53 +119,36 @@ export default {
     methods: {
         callApi(url, page=null) {
             let target_page = page || this.page;
-            let source = '/api/editorial-board/menus/?page=' + target_page + '&search=' + this.search;
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/';
             if (url) source = url;
             this.axios
                 .get(source)
                 .then(response => {
-                    this.items = response.data.results;
-                    this.page = response.data.page;
-                    this.per_page = response.data.per_page;
-                    this.prev = response.data.previous;
-                    this.next = response.data.next;
-                    this.total_rows = response.data.count;
-                    this.isBusy = false
-                })
-        },
-        changeStatus(id) {
-            let item = this.items.find(item => item.id === id);
-            this.axios
-                .patch('/api/editorial-board/menus/'+item.id+'/',
-                       {is_active: !item.is_active},
-                       {headers: {"X-CSRFToken": this.$csrftoken }}
-                       )
-                .then(response => {
-                    item.is_active = response.data.is_active;
-                    this.alerts.push(
-                        { variant: 'success',
-                          message: response.data.name + ' status changed successfully',
-                          dismissable: true }
-                    )}
-                )
-                .catch(error => {
-                    this.alerts.push(
-                        { variant: 'danger',
-                          message: error.response.data.detail,
-                          dismissable: true }
-                    )
+                    this.content_type = response.data.object_content_type;
+                    let source2 = '/api/editorial-board/locks/'+response.data.object_content_type+'/'+this.webpath_id+'/?page=' + target_page + '&search=' + this.search;
+                    this.axios
+                        .get(source2)
+                        .then(response2 => {
+                            this.items = response2.data.results;
+                            this.page = response2.data.page;
+                            this.per_page = response2.data.per_page;
+                            this.prev = response2.data.previous;
+                            this.next = response2.data.next;
+                            this.total_rows = response2.data.count;
+                            this.isBusy = false
+                    })
                 })
         },
         remove(id) {
             this.axios
-                .delete('/api/editorial-board/menus/'+id+'/',
+                .delete('/api/editorial-board/locks/'+this.content_type+'/'+this.webpath_id+'/'+id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.items.splice(this.items.findIndex(el => el.id === id), 1);
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'menu removed successfully',
+                          message: 'lock removed successfully',
                           dismissable: true }
                     )}
                 )
@@ -209,7 +161,7 @@ export default {
                 })
         },
         deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete menu ' + item.name + '?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete lock?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',

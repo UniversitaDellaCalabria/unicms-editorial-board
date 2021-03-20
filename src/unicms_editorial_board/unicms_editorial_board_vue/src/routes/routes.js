@@ -19,24 +19,34 @@ import CarouselItemLocalizationEdit from 'src/pages/CarouselItemLocalizationEdit
 import CarouselItemLinkLocalizations from 'src/pages/CarouselItemLinkLocalizations.vue'
 import CarouselItemLinkLocalizationNew from 'src/pages/CarouselItemLinkLocalizationNew.vue'
 import CarouselItemLinkLocalizationEdit from 'src/pages/CarouselItemLinkLocalizationEdit.vue'
+import CarouselLocks from 'src/pages/CarouselLocks.vue'
+import CarouselLockNew from 'src/pages/CarouselLockNew.vue'
 import Medias from 'src/pages/Medias.vue'
 import MediaEdit from 'src/pages/MediaEdit.vue'
 import MediaNew from 'src/pages/MediaNew.vue'
+import MediaLocks from 'src/pages/MediaLocks.vue'
+import MediaLockNew from 'src/pages/MediaLockNew.vue'
 import MediaCollections from 'src/pages/MediaCollections.vue'
 import MediaCollectionNew from 'src/pages/MediaCollectionNew.vue'
 import MediaCollectionEdit from 'src/pages/MediaCollectionEdit.vue'
 import MediaCollectionItems from 'src/pages/MediaCollectionItems.vue'
 import MediaCollectionItemNew from 'src/pages/MediaCollectionItemNew.vue'
 import MediaCollectionItemEdit from 'src/pages/MediaCollectionItemEdit.vue'
+import MediaCollectionLocks from 'src/pages/MediaCollectionLocks.vue'
+import MediaCollectionLockNew from 'src/pages/MediaCollectionLockNew.vue'
 import Menus from 'src/pages/Menus.vue'
 import MenuEdit from 'src/pages/MenuEdit.vue'
 import MenuNew from 'src/pages/MenuNew.vue'
+import MenuLocks from 'src/pages/MenuLocks.vue'
+import MenuLockNew from 'src/pages/MenuLockNew.vue'
 import MenuItems from 'src/pages/MenuItems.vue'
 import MenuItemEdit from 'src/pages/MenuItemEdit.vue'
 import MenuItemNew from 'src/pages/MenuItemNew.vue'
 import Publications from 'src/pages/Publications.vue'
 import PublicationNew from 'src/pages/PublicationNew.vue'
 import PublicationEdit from 'src/pages/PublicationEdit.vue'
+import PublicationLocks from 'src/pages/PublicationLocks.vue'
+import PublicationLockNew from 'src/pages/PublicationLockNew.vue'
 import PublicationAttachments from 'src/pages/PublicationAttachments.vue'
 import PublicationAttachmentNew from 'src/pages/PublicationAttachmentNew.vue'
 import PublicationAttachmentEdit from 'src/pages/PublicationAttachmentEdit.vue'
@@ -56,12 +66,16 @@ import Websites from 'src/pages/Websites.vue'
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
 import WebpathEdit from 'src/pages/WebpathEdit.vue'
+import WebpathLocks from 'src/pages/WebpathLocks.vue'
+import WebpathLockNew from 'src/pages/WebpathLockNew.vue'
 import WebpathPublications from 'src/pages/WebpathPublications.vue'
 import WebpathPublicationNew from 'src/pages/WebpathPublicationNew.vue'
 import WebpathPublicationEdit from 'src/pages/WebpathPublicationEdit.vue'
 import WebpathPages from 'src/pages/WebpathPages.vue'
 import WebpathPageNew from 'src/pages/WebpathPageNew.vue'
 import WebpathPageEdit from 'src/pages/WebpathPageEdit.vue'
+import WebpathPageLocks from 'src/pages/WebpathPageLocks.vue'
+import WebpathPageLockNew from 'src/pages/WebpathPageLockNew.vue'
 import WebpathPageCarousels from 'src/pages/WebpathPageCarousels.vue'
 import WebpathPageCarouselNew from 'src/pages/WebpathPageCarouselNew.vue'
 import WebpathPageCarouselEdit from 'src/pages/WebpathPageCarouselEdit.vue'
@@ -134,8 +148,6 @@ const routes = [
             }
           },
     },
-
-    // webpath new
     {
         path: 'websites/:site_id/webpaths/new',
         name: 'WebpathNew',
@@ -147,8 +159,6 @@ const routes = [
             }
         },
     },
-
-    // webpath edit
     {
         path: 'websites/:site_id/webpaths/:webpath_id/edit',
         name: 'WebpathEdit',
@@ -159,6 +169,30 @@ const routes = [
                   label: this.$route.params.webpath_id.toString(),
                   parent: 'Webpaths'
                 }
+            }
+        },
+    },
+
+    // webpath locks
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/locks',
+        name: 'WebpathLocks',
+        component: WebpathLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'WebpathEdit'
+            }
+        }
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/locks/new',
+        name: 'WebpathLockNew',
+        component: WebpathLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathLocks'
             }
         },
     },
@@ -233,6 +267,30 @@ const routes = [
             breadcrumb: {
                 label: 'New',
                 parent: 'WebpathPages'
+            }
+        },
+    },
+
+    // webpath page locks
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/locks',
+        name: 'WebpathPageLocks',
+        component: WebpathPageLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'WebpathPageEdit'
+            }
+        }
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/locks/new',
+        name: 'WebpathPageLockNew',
+        component: WebpathPageLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathPageLocks'
             }
         },
     },
@@ -561,9 +619,35 @@ const routes = [
         name: 'MediaEdit',
         component: MediaEdit,
         meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.media_id.toString(),
+                  parent: 'Medias'
+                }
+            }
+        },
+    },
+
+    // medias locks
+    {
+        path: 'medias/:media_id/locks',
+        name: 'MediaLocks',
+        component: MediaLocks,
+        meta: {
             breadcrumb: {
-                label: 'Edit',
-                parent: 'Medias'
+                label: 'Locks',
+                parent: 'MediaEdit'
+            }
+        }
+    },
+    {
+        path: 'medias/:media_id/locks/new',
+        name: 'MediaLockNew',
+        component: MediaLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'MediaLocks'
             }
         },
     },
@@ -604,6 +688,31 @@ const routes = [
             }
         },
     },
+
+    // media collections locks
+    {
+        path: 'media-collections/:collection_id/locks',
+        name: 'MediaCollectionLocks',
+        component: MediaCollectionLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'MediaCollectionEdit'
+            }
+        }
+    },
+    {
+        path: 'media-collections/:collection_id/locks/new',
+        name: 'MediaCollectionLockNew',
+        component: MediaCollectionLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'MediaCollectionLocks'
+            }
+        },
+    },
+
 
     // media collection items
     {
@@ -675,6 +784,30 @@ const routes = [
                   label: this.$route.params.menu_id.toString(),
                   parent: 'Menus'
                 }
+            }
+        },
+    },
+
+    // menu locks
+    {
+        path: 'menus/:menu_id/locks',
+        name: 'MenuLocks',
+        component: MenuLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'MenuEdit'
+            }
+        }
+    },
+    {
+        path: 'menus/:menu_id/locks/new',
+        name: 'MenuLockNew',
+        component: MenuLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'MenuLocks'
             }
         },
     },
@@ -901,6 +1034,29 @@ const routes = [
         }
     },
 
+    // carousel locks
+    {
+        path: 'carousels/:carousel_id/locks',
+        name: 'CarouselLocks',
+        component: CarouselLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'CarouselEdit'
+            }
+        }
+    },
+    {
+        path: 'carousels/:carousel_id/locks/new',
+        name: 'CarouselLockNew',
+        component: CarouselLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'CarouselLocks'
+            }
+        },
+    },
     // publications
     {
         path: 'publications',
@@ -934,6 +1090,30 @@ const routes = [
                   label: this.$route.params.publication_id.toString(),
                   parent: 'Publications'
                 }
+            }
+        },
+    },
+
+    // publication locks
+    {
+        path: 'publications/:publication_id/locks',
+        name: 'PublicationLocks',
+        component: PublicationLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'PublicationEdit'
+            }
+        }
+    },
+    {
+        path: 'publications/:publication_id/locks/new',
+        name: 'PublicationLockNew',
+        component: PublicationLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'PublicationLocks'
             }
         },
     },
