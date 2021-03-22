@@ -10,6 +10,37 @@
                     <b-card title="Page blocks">
                         <b-card-text>
 
+                            <p>
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident,
+                                sunt in culpa qui officia deserunt mollit
+                                anim id est laborum."
+                            </p>
+
+                            <div class="accordion" role="tablist">
+                                <b-button block v-b-toggle.accordion-1 variant="info">
+                                    Template default blocks
+                                </b-button>
+                                <b-collapse
+                                    id="accordion-1"
+                                    accordion="blocks-accordion"
+                                    role="tabpanel">
+                                    <b-table
+                                        ref="table"
+                                        id="blocks-table"
+                                        striped hover responsive
+                                        :busy="isBusy"
+                                        :fields="template_blocks_fields"
+                                        :items="template_blocks_items"
+                                        class="mt-1">
+                                </b-collapse>
+                            </div>
+                            <hr class="my-3" />
                             <div class="pull-right mb-3">
                                 <router-link :to="{ name: 'WebpathPageBlockNew',
                                                     params: { site_id: site_id,
@@ -138,8 +169,16 @@ export default {
                 {key: 'is_active', label: 'Active'},
                 'actions'
             ],
+            template_blocks_fields: [
+                {key: 'block.name', label: 'Block'},
+                {key: 'block.image', label: 'Image'},
+                {key: 'section'},
+                {key: 'order'},
+                {key: 'block.description', label: 'Description'}
+            ],
             isBusy: true,
             items: [],
+            template_blocks_items: [],
             page: 1,
             per_page: 0,
             total_rows: 0,
@@ -151,6 +190,20 @@ export default {
         }
     },
     methods: {
+        getTemplateBlocks() {
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    let template_id = response.data.base_template.id;
+                    let source = '/api/editorial-board/templates/'+template_id+'/blocks/';
+                    this.axios
+                        .get(source)
+                        .then(response => {
+                            this.template_blocks_items = response.data;
+                        })
+                })
+        },
         callApi(url, page=null) {
             let target_page = page || this.page;
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/blocks/?page=' + target_page + '&search=' + this.search;
@@ -228,6 +281,7 @@ export default {
         }
     },
     mounted() {
+        this.getTemplateBlocks();
         this.callApi();
     },
     watch: {
