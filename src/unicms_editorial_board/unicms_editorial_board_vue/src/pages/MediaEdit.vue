@@ -8,15 +8,18 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
-
+                        <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    class="mx-1 btn-sm">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
+                        </div>
                         <b-card-title>Edit</b-card-title>
 
                         <b-card-text>

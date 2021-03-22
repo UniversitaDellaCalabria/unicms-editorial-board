@@ -8,22 +8,27 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-                        <router-link :to="{ name: 'MediaCollectionItems',
-                                            params: { collection_id: item_id }}"
-                            class="btn btn-outline-secondary">
-                            <b-icon icon="list-ul"
-                                variant="secondary"></b-icon>
-                            Items
-                        </router-link>
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
-
+                        <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'MediaCollectionItems',
+                                                    params: { collection_id: item_id }}"
+                                    class="btn btn-sm btn-outline-secondary">
+                                    <b-icon icon="list-ul"
+                                        variant="secondary"></b-icon>
+                                    Items
+                                </router-link>
+                            </div>
+                            <div class="pull-right">
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    class="mx-1 btn-sm">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
+                        </div>
                         <b-card-title>{{ form.name }}</b-card-title>
                         <b-card-text>
                             <django-form

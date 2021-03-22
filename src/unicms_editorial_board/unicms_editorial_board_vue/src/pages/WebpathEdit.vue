@@ -8,30 +8,36 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-                        <router-link :to="{ name: 'WebpathPages',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="display"
-                                variant="secondary"></b-icon>
-                            Pages
-                        </router-link>
-                        <router-link :to="{ name: 'WebpathPublications',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id }}"
-                            class="btn mx-1 btn-outline-secondary">
-                            <b-icon icon="file-text"
-                                variant="secondary"></b-icon>
-                            Publications
-                        </router-link>
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
+                        <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'WebpathPages',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id }}"
+                                    class="btn mx-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="display"
+                                        variant="secondary"></b-icon>
+                                    Pages
+                                </router-link>
+                                <router-link :to="{ name: 'WebpathPublications',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id }}"
+                                    class="btn mx-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="file-text"
+                                        variant="secondary"></b-icon>
+                                    Publications
+                                </router-link>
+                            </div>
+                            <div class="pull-right">
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    class="mx-1 btn-sm">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
+                        </div>
 
                         <b-card-title>{{ page_title }}</b-card-title>
 

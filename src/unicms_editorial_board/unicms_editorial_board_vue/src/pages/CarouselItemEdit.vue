@@ -8,31 +8,36 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-
-                        <router-link :to="{ name: 'CarouselItemLinks',
-                                            params: { carousel_id: carousel_id,
-                                                      carousel_item_id: carousel_item_id}}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="link45deg"
-                                variant="secondary"></b-icon>
-                            Links
-                        </router-link>
-                        <router-link :to="{ name: 'CarouselItemLocalizations',
-                                            params: { carousel_id: carousel_id,
-                                                      carousel_item_id: carousel_item_id}}"
-                            class="btn btn-outline-secondary mx-1">
-                            <b-icon icon="flag"
-                                variant="secondary"></b-icon>
-                            Localizations
-                        </router-link>
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
+                        <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'CarouselItemLinks',
+                                                    params: { carousel_id: carousel_id,
+                                                              carousel_item_id: carousel_item_id}}"
+                                    class="btn btn-sm btn-outline-secondary mx-1">
+                                    <b-icon icon="link45deg"
+                                        variant="secondary"></b-icon>
+                                    Links
+                                </router-link>
+                                <router-link :to="{ name: 'CarouselItemLocalizations',
+                                                    params: { carousel_id: carousel_id,
+                                                              carousel_item_id: carousel_item_id}}"
+                                    class="btn btn-sm btn-outline-secondary mx-1">
+                                    <b-icon icon="flag"
+                                        variant="secondary"></b-icon>
+                                    Localizations
+                                </router-link>
+                            </div>
+                            <div class="pull-right">
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    class="mx-1 btn-sm">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
+                        </div>
 
                         <b-card-title>{{ page_title }}</b-card-title>
 

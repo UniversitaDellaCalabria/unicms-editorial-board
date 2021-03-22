@@ -53,7 +53,7 @@
                                     @click="toggleIsActiveModal()"
                                     variant="danger"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-1 btn-sm">
                                     <b-icon icon="x-circle"></b-icon>
                                     Deactivate
                                 </b-button>

@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         updateMedia(val) {
-            let source = '/api/editorial-board/template-blocks/'+val+'/';
+            let source = '/api/editorial-board/templates/blocks/'+val+'/';
             this.axios
                 .get(source)
                 .then(response => {

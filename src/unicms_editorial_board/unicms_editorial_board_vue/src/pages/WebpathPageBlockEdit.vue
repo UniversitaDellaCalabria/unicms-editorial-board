@@ -8,14 +8,18 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-                        <b-button
-                            @click="deleteModal()"
-                            variant="danger"
-                            class="mx-1">
-                            <b-icon icon="trash"
-                                variant="white"></b-icon>
-                            Delete
-                        </b-button>
+                        <div class="clearfix mb-5">
+                            <div class="pull-right">
+                                <b-button
+                                    @click="deleteModal()"
+                                    variant="danger"
+                                    class="mx-1 btn-sm">
+                                    <b-icon icon="trash"
+                                        variant="white"></b-icon>
+                                    Delete
+                                </b-button>
+                            </div>
+                        </div>
 
                         <b-card-title>{{ page_title }}</b-card-title>
 
@@ -65,7 +69,7 @@ export default {
                 })
         },
         updateMedia(val) {
-            let source = '/api/editorial-board/template-blocks/'+val+'/';
+            let source = '/api/editorial-board/templates/blocks/'+val+'/';
             this.axios
                 .get(source)
                 .then(response => {
