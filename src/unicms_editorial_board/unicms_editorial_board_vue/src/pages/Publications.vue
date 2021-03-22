@@ -130,7 +130,7 @@
                                         class="btn btn-block btn-sm btn-secondary">
                                         <b-icon icon="lock"
                                             variant="white"></b-icon>
-                                        Allow users
+                                        Allowed users
                                     </router-link>
                                     <b-button
                                         class="btn-block"
