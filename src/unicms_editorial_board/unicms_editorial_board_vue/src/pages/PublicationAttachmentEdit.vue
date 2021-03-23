@@ -61,7 +61,9 @@ export default {
                         this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'file', response.data.file);
-                    this.page_title = response.data.name
+                    this.page_title = response.data.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.attachment_id)
                 })
         },
         onSubmit(event) {
@@ -80,9 +82,7 @@ export default {
                         { variant: 'success',
                           message: 'publication attachment edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

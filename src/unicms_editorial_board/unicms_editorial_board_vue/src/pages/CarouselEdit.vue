@@ -11,7 +11,7 @@
                         <div class="clearfix mb-5">
                             <div class="pull-left">
                                 <router-link :to="{ name: 'CarouselItems',
-                                            params: { carousel_id: item_id }}"
+                                            params: { carousel_id: carousel_id }}"
                                     class="btn btn-sm btn-outline-secondary">
                                     <b-icon icon="list-ul"
                                         variant="secondary"></b-icon>
@@ -50,26 +50,28 @@ export default {
     data() {
         return {
             alerts: [],
-            item_id: this.$route.params.carousel_id,
+            carousel_id: this.$route.params.carousel_id,
             form: {},
             form_source: '/api/editorial-board/carousels/form/',
-            page_title: ''
+            page_title: '',
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/carousels/'+this.item_id+'/';
+            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.name
+                    this.page_title = response.data.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.carousel_id)
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/carousels/'+this.item_id+'/';
+            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -80,9 +82,7 @@ export default {
                         { variant: 'success',
                           message: 'carousel edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -96,7 +96,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/carousels/'+this.item_id+'/',
+                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
@@ -131,10 +131,10 @@ export default {
             ).then(value => {
                 if (value) this.remove();
             })
-        }
+        },
     },
     mounted() {
-        this.getItem();
+        this.getItem()
     }
 }
 </script>

@@ -144,7 +144,9 @@ export default {
                     }
                     this.$set(this.files, 'presentation_image', response.data.presentation_image.file);
                     this.page_title = response.data.title;
-                    this.is_active = response.data.is_active
+                    this.is_active = response.data.is_active;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.publication_id)
                 })
         },
         updateMedia(val) {

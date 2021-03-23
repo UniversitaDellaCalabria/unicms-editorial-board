@@ -76,7 +76,9 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.name
+                    this.page_title = response.data.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.webpath_id)
                 })
         },
         onSubmit(event) {
@@ -91,9 +93,7 @@ export default {
                         { variant: 'success',
                           message: response.data.name + ' edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

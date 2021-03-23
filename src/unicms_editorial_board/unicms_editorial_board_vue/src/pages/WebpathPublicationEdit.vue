@@ -61,7 +61,9 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.publication.title
+                    this.page_title = response.data.publication.title;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.publication_id)
                 })
         },
         onSubmit(event) {

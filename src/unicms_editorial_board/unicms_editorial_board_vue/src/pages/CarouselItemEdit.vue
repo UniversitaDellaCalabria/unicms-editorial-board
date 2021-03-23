@@ -80,7 +80,9 @@ export default {
                     }
                     this.form.image = response.data.image.id;
                     this.$set(this.files, 'image', response.data.image.file);
-                    this.page_title = response.data.image.title
+                    this.page_title = response.data.image.title;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.carousel_item_id)
                 })
         },
         updateMedia(val) {
@@ -103,9 +105,7 @@ export default {
                         { variant: 'success',
                           message: 'carousel item edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

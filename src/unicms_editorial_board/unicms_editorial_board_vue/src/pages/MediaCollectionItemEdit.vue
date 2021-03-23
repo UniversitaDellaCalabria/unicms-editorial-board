@@ -60,7 +60,9 @@ export default {
                     }
                     this.form.media = response.data.media.id;
                     this.$set(this.files, 'media', response.data.media.file);
-                    this.page_title = response.data.media.title
+                    this.page_title = response.data.media.title;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.collection_item_id)
                 })
         },
         updateMedia(val) {
@@ -83,9 +85,7 @@ export default {
                         { variant: 'success',
                           message: 'media collection item edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

@@ -61,7 +61,9 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.related.title
+                    this.page_title = response.data.related.title;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.related_id)
                 })
         },
         onSubmit(event) {
@@ -76,9 +78,7 @@ export default {
                         { variant: 'success',
                           message: 'related publication edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

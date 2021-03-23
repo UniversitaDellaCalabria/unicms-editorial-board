@@ -61,7 +61,9 @@ export default {
                             this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.carousel.title
+                    this.page_title = response.data.carousel.title;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.carousel_id)
                 })
         },
         onSubmit(event) {
@@ -77,7 +79,6 @@ export default {
                           message: 'page carousel edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
                     }
                 )
                 .catch(error => {

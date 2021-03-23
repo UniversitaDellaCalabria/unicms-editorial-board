@@ -70,7 +70,9 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.title
+                    this.page_title = response.data.title;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.carousel_item_link_id)
                 })
         },
         onSubmit(event) {
@@ -85,9 +87,7 @@ export default {
                         { variant: 'success',
                           message: 'carousel item link edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

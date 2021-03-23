@@ -64,6 +64,7 @@ const router = new VueRouter({
   }
 })
 
+// format a string to date
 function date_formatter(data) {
     if (!data) return null;
     let date = new Date(data);
@@ -76,6 +77,7 @@ function date_formatter(data) {
 }
 Vue.prototype.$date_formatter = date_formatter
 
+// get cookie value
 function get_cookie(name) {
     let nameEQ = name + "=";
     let ca = document.cookie.split(';');
@@ -87,6 +89,23 @@ function get_cookie(name) {
     return null
 }
 Vue.prototype.$csrftoken = get_cookie('csrftoken');
+
+// search for active redis locks for object
+function checkForRedisLocks(content_type_id, object_id) {
+    this.axios
+        .get('/api/editorial-board/redis-lock/'+content_type_id+'/'+object_id+'/')
+        .then(response => {
+            if(Object.entries(response.data).length != 0){
+                this.alerts.push(
+                    { variant: 'warning',
+                      message: response.data.message,
+                      ttl: response.data.lock[1],
+                      dismissable: true }
+                )}
+            }
+        )
+}
+Vue.prototype.$checkForRedisLocks = checkForRedisLocks;
 
 /* eslint-disable no-new */
 new Vue({

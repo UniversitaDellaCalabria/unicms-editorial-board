@@ -58,7 +58,9 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.name
+                    this.page_title = response.data.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.link_id)
                 })
         },
         onSubmit(event) {

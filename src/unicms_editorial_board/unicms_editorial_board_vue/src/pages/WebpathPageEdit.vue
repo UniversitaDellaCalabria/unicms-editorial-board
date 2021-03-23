@@ -235,6 +235,8 @@ export default {
                         this.preview_url = response.data.preview_url;
                         this.is_active = response.data.is_active;
                         this.published = response.data.state;
+                        this.$checkForRedisLocks(response.data.object_content_type,
+                                                 this.page_id)
                     }
                 })
         },

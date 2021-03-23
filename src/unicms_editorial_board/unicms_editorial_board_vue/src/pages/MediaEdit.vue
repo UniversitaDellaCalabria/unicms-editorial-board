@@ -42,7 +42,7 @@ export default {
     data() {
         return {
             alerts: [],
-            item_id: this.$route.params.media_id,
+            media_id: this.$route.params.media_id,
             form: {},
             form_source: '/api/editorial-board/medias/form/',
             files: {}
@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/medias/'+this.item_id+'/';
+            let source = '/api/editorial-board/medias/'+this.media_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -59,10 +59,12 @@ export default {
                     }
                     this.$set(this.files, 'file', this.form.file);
                     this.$delete(this.form, 'file');
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.media_id)
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/medias/'+this.item_id+'/';
+            let source = '/api/editorial-board/medias/'+this.media_id+'/';
             event.preventDefault();
             const formData = new FormData();
             for ( var key in this.form ) {
@@ -77,9 +79,7 @@ export default {
                         { variant: 'success',
                           message: 'media edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -93,7 +93,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/medias/'+this.item_id+'/',
+                .delete('/api/editorial-board/medias/'+this.media_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {

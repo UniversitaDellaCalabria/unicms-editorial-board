@@ -61,7 +61,9 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.collection.name
+                    this.page_title = response.data.collection.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.publication_id)
                 })
         },
         onSubmit(event) {
@@ -77,7 +79,6 @@ export default {
                           message: 'publication gallery edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
                     }
                 )
                 .catch(error => {

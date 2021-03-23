@@ -65,7 +65,9 @@ export default {
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'block', response.data.block.image);
-                    this.page_title = response.data.block.name
+                    this.page_title = response.data.block.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.block_id)
                 })
         },
         updateMedia(val) {
@@ -88,9 +90,7 @@ export default {
                         { variant: 'success',
                           message: 'page block edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

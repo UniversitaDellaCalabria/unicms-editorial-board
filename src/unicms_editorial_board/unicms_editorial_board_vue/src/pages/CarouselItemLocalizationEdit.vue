@@ -59,7 +59,9 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.pre_heading + ' ' + response.data.heading
+                    this.page_title = response.data.pre_heading + ' ' + response.data.heading;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.carousel_item_localization_id)
                 })
         },
         onSubmit(event) {
@@ -75,7 +77,6 @@ export default {
                           message: 'carousel item localization edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
                     }
                 )
                 .catch(error => {

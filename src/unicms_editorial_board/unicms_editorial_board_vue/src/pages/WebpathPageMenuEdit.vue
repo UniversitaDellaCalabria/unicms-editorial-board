@@ -77,9 +77,7 @@ export default {
                         { variant: 'success',
                           message: 'page menu edited successfully',
                           dismissable: true }
-                    );
-                    //this.$router.push({name: 'Webpaths'})
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

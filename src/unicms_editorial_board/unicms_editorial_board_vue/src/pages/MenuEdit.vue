@@ -11,7 +11,7 @@
                         <div class="clearfix">
                             <div class="pull-left">
                                 <router-link :to="{ name: 'MenuItems',
-                                                    params: { menu_id: item_id }}"
+                                                    params: { menu_id: menu_id }}"
                                     class="btn btn-sm btn-outline-secondary">
                                     <b-icon icon="list-ul"
                                         variant="secondary"></b-icon>
@@ -49,7 +49,7 @@ export default {
     data() {
         return {
             alerts: [],
-            item_id: this.$route.params.menu_id,
+            menu_id: this.$route.params.menu_id,
             form: {},
             form_source: '/api/editorial-board/menus/form/',
             page_title: ''
@@ -57,18 +57,20 @@ export default {
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/menus/'+this.item_id+'/';
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.name
+                    this.page_title = response.data.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.menu_id)
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/menus/'+this.item_id+'/';
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -80,7 +82,6 @@ export default {
                           message: 'menu edited successfully',
                           dismissable: true }
                     );
-                    //this.$router.push({name: 'Webpaths'})
                     }
                 )
                 .catch(error => {
@@ -95,7 +96,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/menus/'+this.item_id+'/',
+                .delete('/api/editorial-board/menus/'+this.menu_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
