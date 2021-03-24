@@ -830,3 +830,7 @@
 .card-title {
     margin-top: 0;
 }
+
+.websites-cards .card {
+    height: 100%;
+}

@@ -3,37 +3,65 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
-        <i class="nc-icon nc-chart-pie-35"></i>
+        <b-icon icon="graph-up"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Dashboard</p>
       </sidebar-link>
 
       <sidebar-link to="/websites">
-        <i class="nc-icon nc-layers-3"></i>
+        <b-icon icon="globe"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Websites</p>
       </sidebar-link>
 
       <sidebar-link to="/menus">
-        <i class="nc-icon nc-bullet-list-67"></i>
+        <b-icon icon="menu-button-wide-fill"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Menus</p>
       </sidebar-link>
 
       <sidebar-link to="/medias">
-        <i class="nc-icon nc-album-2"></i>
+        <b-icon icon="image"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Medias</p>
       </sidebar-link>
 
       <sidebar-link to="/media-collections">
-        <i class="nc-icon nc-grid-45"></i>
+        <b-icon icon="images"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Media collections</p>
       </sidebar-link>
 
       <sidebar-link to="/carousels">
-        <i class="nc-icon nc-button-play"></i>
+        <b-icon icon="collection-play"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Carousels</p>
       </sidebar-link>
 
       <sidebar-link to="/publications">
-        <i class="nc-icon nc-single-copy-04"></i>
+        <b-icon icon="file-earmark-text"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
         <p>Publications</p>
       </sidebar-link>
 

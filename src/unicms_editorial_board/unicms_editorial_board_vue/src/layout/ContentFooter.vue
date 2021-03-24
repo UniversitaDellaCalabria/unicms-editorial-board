@@ -9,10 +9,14 @@
         </ul>
       </nav>
       <div class="copyright text-center">
-        &copy; Coded with
-        <i class="fa fa-heart heart"></i> by
-        <a href="https://binarcode.com" target="_blank">BinarCode</a>.
-        Designed by <a href="https://www.creative-tim.com/?ref=pdf-vuejs" target="_blank">Creative Tim</a>.
+        <b-icon icon="github"></b-icon> Contribute to:
+        <a href="https://github.com/UniversitaDellaCalabria/uniCMS" target="_blank">
+            uniCMS project
+        </a>
+        /
+        <a href="https://github.com/UniversitaDellaCalabria/unicms-editorial-board" target="_blank">
+            Editorial Board project
+        </a>
       </div>
     </div>
   </footer>
