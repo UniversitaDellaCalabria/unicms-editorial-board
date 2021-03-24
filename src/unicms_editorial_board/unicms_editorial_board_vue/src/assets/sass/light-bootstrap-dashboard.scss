@@ -36,3 +36,17 @@
 
 // Nucleo Icons
 // @import "lbd/partial-nucleo-icons";
+
+@media (max-width: 767px){
+    .btn {
+        display: block !important;
+        width: 100%;
+        margin: 3px 0;
+    }
+    .clearfix .pull-left {
+        float: None;
+    }
+    .clearfix .pull-right {
+        float: None;
+    }
+}

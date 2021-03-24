@@ -8,7 +8,7 @@
             <b-card-text class="mt-4">
             <div class="all-icons">
               <div class="row websites-cards">
-                <div class="col-lg-3 col-md-3 col-sm-12" v-for="item in items">
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-3" v-for="item in items">
                   <b-card>
                         <b-card-text>
                             <h4 class="mt-2 mb-3">

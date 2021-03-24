@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <b-card>
                         <div class="clearfix mb-5">
-                            <div class="pull-left">
+                            <div class="pull-right">
                                 <b-button
                                     @click="deleteModal()"
                                     variant="danger"

@@ -834,3 +834,7 @@
 .websites-cards .card {
     height: 100%;
 }
+
+.nav-mobile-menu .nav-item .nav-link .no-icon {
+    padding-left: 0;
+}
