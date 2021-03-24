@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-                        <div class="clearfix">
+                        <div class="clearfix mb-5">
                             <div class="pull-left">
                                 <router-link :to="{ name: 'MenuItems',
                                                     params: { menu_id: menu_id }}"

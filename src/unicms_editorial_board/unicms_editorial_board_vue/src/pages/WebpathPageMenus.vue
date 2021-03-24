@@ -128,6 +128,7 @@ export default {
             page_id: this.$route.params.page_id,
             fields: [
                 {key: 'menu.name', label: 'Menu', sortable: true},
+                {key: 'section', sortable: true},
                 {key: 'order', sortable: true},
                 {key: 'is_active', label: 'Active'},
                 'actions'
