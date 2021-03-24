@@ -11,11 +11,11 @@
       <div class="copyright text-center">
         <b-icon icon="github"></b-icon> Contribute to:
         <a href="https://github.com/UniversitaDellaCalabria/uniCMS" target="_blank">
-            uniCMS project
+            uniCMS
         </a>
         /
         <a href="https://github.com/UniversitaDellaCalabria/unicms-editorial-board" target="_blank">
-            Editorial Board project
+            uniCMS editorial board
         </a>
       </div>
     </div>
