@@ -1,246 +1,81 @@
 <template>
-    <div class="content">
-        <div class="container-fluid">
-            <Breadcrumbs/>
+    <CompleteTable
+        :api_source="api_source"
+        :fields="fields"
+        :images="images"
+        :ordering_list="ordering_list"
+        :page_title="page_title">
 
-            <stacked-alerts :alerts="alerts" />
+        <template #add_new>
+            <router-link :to="{ name: 'CarouselItemNew',
+                                params: { carousel_id: carousel_id }}"
+                class="btn btn-success">
+                <b-icon icon="plus-circle"
+                        variant="white"></b-icon>
+                Add new
+            </router-link>
+        </template>
 
-            <div class="row">
-                <div class="col-12">
-                    <b-card title="Carousel items">
-                        <b-card-text>
+        <template #childs="item">
+            <router-link :to="{ name: 'CarouselItemLinks',
+                            params: { carousel_id: carousel_id,
+                                      carousel_item_id: item.item.id}}"
+                class="btn btn-block btn-sm btn-outline-secondary">
+                <b-icon icon="link45deg"
+                    variant="secondary"></b-icon>
+                Links
+            </router-link>
+            <router-link :to="{ name: 'CarouselItemLocalizations',
+                            params: { carousel_id: carousel_id,
+                                      carousel_item_id: item.item.id}}"
+                class="btn btn-block btn-sm btn-outline-secondary">
+                <b-icon icon="flag"
+                    variant="secondary"></b-icon>
+                Localizations
+            </router-link>
+        </template>
 
-                            <div class="pull-right mb-3">
-                                <router-link :to="{ name: 'CarouselItemNew',
-                                                    params: { carousel_id: carousel_id }}"
-                                    class="btn btn-success">
-                                    <b-icon icon="plus-circle"
-                                            variant="white"></b-icon>
-                                    Add new
-                                </router-link>
-                            </div>
+        <template #actions="item">
+            <router-link :to="{ name: 'CarouselItemEdit',
+                            params: { carousel_id: carousel_id,
+                                      carousel_item_id: item.item.id}}"
+                class="btn btn-block btn-sm btn-info">
+                <b-icon icon="pencil-square"
+                    variant="white"></b-icon>
+                Edit
+            </router-link>
+        </template>
 
-                            <b-form-input
-                                v-model="search"
-                                v-on:input="callApi(null, 1)"
-                                placeholder="Search..."
-                                type="search"
-                                class="my-3">
-                            </b-form-input>
-
-                            <b-pagination
-                                v-model="currentPage"
-                                :total-rows="total_rows"
-                                :per-page="per_page"
-                                first-number
-                                last-number
-                                align="right">
-                            </b-pagination>
-
-                            <b-table
-                                ref="table"
-                                id="my-table"
-                                striped hover responsive
-                                :busy="isBusy"
-                                :fields="fields"
-                                :items="items"
-                                :sort-by.sync="sortBy"
-                                :sort-desc.sync="sortDesc">
-
-                                <template #table-busy>
-                                    <div class="text-center text-danger my-2">
-                                        <b-spinner
-                                            small
-                                            class="align-middle mr-3"
-                                            type="grow"></b-spinner>
-                                        <strong>loading data...</strong>
-                                    </div>
-                                </template>
-
-                                <template #cell(image)="data">
-                                    <b-img :src="data.value.file" fluid alt="Responsive image"></b-img>
-                                </template>
-
-                                <template #cell(is_active)="data">
-                                    <b-icon icon="check-circle-fill"
-                                        variant="success"
-                                        v-if="data.value"
-                                        v-on:click="changeStatus(data.item.id)"
-                                        style="cursor: pointer"></b-icon>
-                                    <b-icon icon="dash-circle-fill"
-                                        variant="danger"
-                                        style="cursor: pointer"
-                                        v-on:click="changeStatus(data.item.id)"
-                                        v-else></b-icon>
-                                </template>
-
-                                <template #cell(childs)="data">
-                                    <router-link :to="{ name: 'CarouselItemLinks',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: data.item.id}}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="link45deg"
-                                            variant="secondary"></b-icon>
-                                        Links
-                                    </router-link>
-                                    <router-link :to="{ name: 'CarouselItemLocalizations',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: data.item.id}}"
-                                        class="btn btn-block btn-sm btn-outline-secondary">
-                                        <b-icon icon="flag"
-                                            variant="secondary"></b-icon>
-                                        Localizations
-                                    </router-link>
-                                </template>
-
-                                <template #cell(actions)="data">
-                                    <router-link :to="{ name: 'CarouselItemEdit',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: data.item.id}}"
-                                        class="btn btn-block btn-sm btn-info">
-                                        <b-icon icon="pencil-square"
-                                            variant="white"></b-icon>
-                                        Edit
-                                    </router-link>
-                                    <b-button
-                                        class="btn-block"
-                                        size="sm"
-                                        @click="deleteModal(data.item)"
-                                        variant="danger">
-                                        <b-icon icon="trash"
-                                            variant="white"></b-icon>
-                                        Delete
-                                    </b-button>
-                                </template>
-
-                            </b-table>
-
-                            <b-pagination
-                                v-model="currentPage"
-                                :total-rows="total_rows"
-                                :per-page="per_page"
-                                first-number
-                                last-number
-                                align="right">
-                            </b-pagination>
-                        </b-card-text>
-                    </b-card>
-                </div>
-            </div>
-        </div>
-    </div>
+    </CompleteTable>
 </template>
 <script>
+import CompleteTable from '../layout/CompleteTable.vue'
+
 export default {
+    components: {
+        CompleteTable
+    },
     data () {
         return {
-            alerts: this.$route.params.alerts || [],
+            api_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/',
             carousel_id: this.$route.params.carousel_id,
             fields: [
-                {key: 'image', sortable: true, thClass: 'w-25'},
-                {key: 'pre_heading', sortable: true},
-                {key: 'heading', sortable: true},
-                {key: 'order', sortable: true},
+                'id',
+                {key: 'image', thClass: 'w-25'},
+                'pre_heading',
+                'heading',
+                'order',
                 {key: 'is_active', label: 'Active'},
                 {key: 'childs', label: 'Related'},
                 'actions'
             ],
-            isBusy: true,
-            items: [],
-            page: 1,
-            per_page: 0,
-            total_rows: 0,
-            currentPage: 1,
-            next: '',
-            prev: '',
-            search: '',
-            sortDesc: true,
-        }
-    },
-    methods: {
-        callApi(url, page=null) {
-            let target_page = page || this.page;
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/?page=' + target_page + '&search=' + this.search;
-            if (url) source = url;
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.items = response.data.results;
-                    this.page = response.data.page;
-                    this.per_page = response.data.per_page;
-                    this.prev = response.data.previous;
-                    this.next = response.data.next;
-                    this.total_rows = response.data.count;
-                    this.isBusy = false
-                })
-        },
-        changeStatus(id) {
-            let item = this.items.find(item => item.id === id);
-            this.axios
-                .patch('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+item.id+'/',
-                       {is_active: !item.is_active},
-                       {headers: {"X-CSRFToken": this.$csrftoken }}
-                       )
-                .then(response => {
-                    item.is_active = response.data.is_active;
-                    this.alerts.push(
-                        { variant: 'success',
-                          message: response.data.name + ' status changed successfully',
-                          dismissable: true }
-                    )}
-                )
-                .catch(error => {
-                    this.alerts.push(
-                        { variant: 'danger',
-                          message: error.response.data.detail,
-                          dismissable: true }
-                    )
-                })
-        },
-        remove(id) {
-            this.axios
-                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+id+'/',
-                        {headers: {"X-CSRFToken": this.$csrftoken }}
-                       )
-                .then(response => {
-                    this.items.splice(this.items.findIndex(el => el.id === id), 1);
-                    this.alerts.push(
-                        { variant: 'success',
-                          message: 'carousel item removed successfully',
-                          dismissable: true }
-                    )}
-                )
-                .catch(error => {
-                    this.alerts.push(
-                        { variant: 'danger',
-                          message: error.response.data.detail,
-                          dismissable: true }
-                    )
-                })
-        },
-        deleteModal(item) {
-            this.$bvModal.msgBoxConfirm('Do you want really delete carousel item?', {
-            title: 'Please Confirm',
-                size: 'sm',
-                buttonSize: 'sm',
-                okVariant: 'danger',
-                okTitle: 'YES',
-                cancelTitle: 'NO',
-                footerClass: 'p-2',
-                hideHeaderClose: false,
-                }
-            ).then(value => {
-                if (value) this.remove(item.id);
-            })
-        }
-    },
-    mounted() {
-        this.callApi();
-    },
-    watch: {
-        'currentPage': function(){
-            this.isBusy = true
-            this.callApi(null, this.currentPage)
+            images: ['image'],
+            ordering_list: [{ text: 'Id', value: 'id' },
+                            { text: 'Pre-Heading', value: 'pre_heading' },
+                            { text: 'Heading', value: 'heading' },
+                            { text: 'Order', value: 'order' },
+                            { text: 'State', value: 'is_active'}],
+            page_title: 'Carousel items'
         }
     }
 }

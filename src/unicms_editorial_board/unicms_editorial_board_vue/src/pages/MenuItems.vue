@@ -11,7 +11,7 @@
                         <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
 
-                            <div class="pull-right mb-3">
+                            <div class="text-right mb-3">
                                 <router-link :to="{ name: 'MenuItemNew',
                                                     params: { menu_id: menu_id }}"
                                     class="btn btn-success">
@@ -21,13 +21,28 @@
                                 </router-link>
                             </div>
 
-                            <b-form-input
-                                id="filter-input"
-                                v-model="filter"
-                                type="search"
-                                placeholder="Search..."
-                                class="my-3">
-                            </b-form-input>
+                            <div class="row pt-3">
+                                <div class="col col-12 col-md-8">
+                                    <b-form-input
+                                        v-model="search"
+                                        v-on:input="callApi(null, 1)"
+                                        placeholder="Search..."
+                                        type="search"
+                                        class="mb-3">
+                                    </b-form-input>
+                                </div>
+                                <div class="col col-12 col-md-4">
+                                    <OrderingFilter
+                                        :ordering="ordering"
+                                        @updateOrdering="ordering = $event;"
+                                        :ordering_list="ordering_list"
+                                        :sortDesc="sortDesc"
+                                        @updateSortDesc="sortDesc = $event;"
+                                        :ordering="ordering"
+                                        @callApi="callApi(null, page)"
+                                    />
+                                </div>
+                            </div>
 
                             <b-table
                                 ref="table"
@@ -37,9 +52,7 @@
                                 :fields="fields"
                                 :filter="filter"
                                 :filter-included-fields="filterOn"
-                                :items="items"
-                                :sort-by.sync="sortBy"
-                                :sort-desc.sync="sortDesc">
+                                :items="items">
 
                                 <template #table-busy>
                                     <div class="text-center text-danger my-2">
@@ -112,15 +125,21 @@
     </div>
 </template>
 <script>
+import OrderingFilter from '../components/Tables/OrderingFilter.vue'
+
 export default {
+    components: {
+        OrderingFilter
+    },
     data () {
         return {
             alerts: this.$route.params.alerts || [],
             menu_id: this.$route.params.menu_id,
             fields: [
-                {key: 'name'},
-                {key: 'parent_name', label: 'Parent', sortable: true},
-                {key: 'order', sortable: true},
+                'id',
+                'name',
+                {key: 'parent_name', label: 'Parent'},
+                'order',
                 {key: 'is_active', label: 'Active'},
                 'actions'
             ],
@@ -130,7 +149,13 @@ export default {
             items: [],
             page_title: '',
             search: '',
-            sortDesc: true,
+            sortDesc: '+',
+            ordering: 'id',
+            ordering_list: [{ text: 'Id', value: 'id' },
+                            { text: 'Name', value: 'name' },
+                            { text: 'Parent', value: 'parent_name' },
+                            { text: 'Order', value: 'order' },
+                            { text: 'State', value: 'is_active'}],
         }
     },
     methods: {
@@ -143,7 +168,7 @@ export default {
                menu_item.childs.forEach(item => this.get_childs(item));
         },
         callApi(url) {
-            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/?&search=' + this.search;
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/?&search=' + this.search + '&ordering=' + this.sortDesc + this.ordering;
             if (url) source = url;
             this.axios
                 .get(source)
