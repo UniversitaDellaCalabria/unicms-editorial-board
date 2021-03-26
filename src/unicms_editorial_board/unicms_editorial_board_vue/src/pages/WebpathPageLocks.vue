@@ -16,7 +16,7 @@ export default {
     data () {
         return {
             addNewClass: 'WebpathPageLockNew',
-            object_api: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.webpath_id+'/',
+            object_api: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/',
             object_id: this.$route.params.page_id,
             page_title: 'Page locks'
         }
