@@ -39,5 +39,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 11"
-  ]
+  ],
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "arch": "any"
 }

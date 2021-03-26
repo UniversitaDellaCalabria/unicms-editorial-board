@@ -286,7 +286,7 @@ export default {
     watch: {
         'currentPage': function(){
             this.isBusy = true
-            this.callApi(null, page=this.currentPage)
+            this.callApi(null, this.currentPage)
         }
     }
 }
