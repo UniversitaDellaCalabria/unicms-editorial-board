@@ -2,7 +2,7 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/">
+      <sidebar-link to="/dashboard">
         <b-icon icon="graph-up"
             class="mr-4 ml-1"
             variant="white"

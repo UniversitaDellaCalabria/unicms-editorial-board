@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-md-12">
           <b-card title="404 Not Found">
             <b-card-text class="mt-4">
