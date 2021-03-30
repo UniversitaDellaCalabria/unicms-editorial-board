@@ -103,12 +103,11 @@ import WebpathPageRelatedEdit from 'src/pages/WebpathPageRelatedEdit.vue'
 
 const routes = [
 {
-    path: '/',
+    path: '',
     component: DashboardLayout,
-    redirect: '/dashboard',
     children: [
     {
-        path: 'dashboard',
+        path: '/',
         name: 'Dashboard',
         component: Overview,
         meta: {
