@@ -4,6 +4,7 @@
 
 ```
 pip install unicms-editorial-board
+./manage.py collectstatic
 ```
 
 ### Development
