@@ -1,4 +1,14 @@
-# node.js and npm install
+# unicms-editorial-board
+
+### Use as is in production
+
+```
+pip install unicms-editorial-board
+```
+
+### Development
+
+Install node.js and npm
 
 Purge old installation
 ```
@@ -25,11 +35,14 @@ node -v
 npm -v
 ```
 
-# unicms-editorial-board
-
+Install packages
 ```
-pip install unicms-editorial-board
-python3 manage.py install_board
+cd /unicms-editorial-board/src/unicms_editorial_board/unicms_editorial_board_vue
+npm install
 ```
 
+Edit files and build
+```
+npm run build
+```
 

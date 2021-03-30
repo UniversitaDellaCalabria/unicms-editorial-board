@@ -17,7 +17,7 @@ PKG_NAME = 'unicms_editorial_board'
 
 setup(
     name='unicms-editorial-board',
-    version='0.2.4',
+    version='0.4.0',
 
     packages=[PKG_NAME],
     package_dir={PKG_NAME: f"{SRC_FOLDER}/{PKG_NAME}"},
@@ -47,6 +47,5 @@ setup(
     ],
     install_requires=[
         'django>=2.0,<4.0',
-        'pynpm'
     ],
 )
