@@ -129,6 +129,5 @@ dmypy.json
 .pyre/
 
 *.lock
-src/unicms_editorial_board/static/*
 src/unicms_editorial_board/unicms_editorial_board_vue/node_modules/
 src/unicms_editorial_board/unicms_editorial_board_vue/package-lock.json
