@@ -29,13 +29,13 @@
         <p>Menus</p>
       </sidebar-link>
 
-      <sidebar-link to="/medias">
+      <sidebar-link to="/media">
         <b-icon icon="image"
             class="mr-4 ml-1"
             variant="white"
             scale="1.9">
         </b-icon>
-        <p>Medias</p>
+        <p>Media</p>
       </sidebar-link>
 
       <sidebar-link to="/media-collections">

@@ -13,7 +13,7 @@
                                 <router-link :to="{ name: 'WebpathPages',
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id }}"
-                                    class="btn mx-1 btn-sm btn-outline-secondary">
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
                                     <b-icon icon="display"
                                         variant="secondary"></b-icon>
                                     Pages
@@ -21,7 +21,7 @@
                                 <router-link :to="{ name: 'WebpathPublications',
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id }}"
-                                    class="btn mx-1 btn-sm btn-outline-secondary">
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
                                     <b-icon icon="file-text"
                                         variant="secondary"></b-icon>
                                     Publications
@@ -31,7 +31,7 @@
                                 <b-button
                                     @click="deleteModal()"
                                     variant="danger"
-                                    class="mx-1 btn-sm">
+                                    class="mx-md-1 btn-sm">
                                     <b-icon icon="trash"
                                         variant="white"></b-icon>
                                     Delete

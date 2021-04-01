@@ -7,7 +7,7 @@
         :page_title="page_title">
 
         <template #add_new>
-            <router-link :to="{ name: 'WebpathPageLocalizationNew',
+            <router-link :to="{ name: 'WebpathPageMediaNew',
                                 params: { site_id: site_id,
                                           webpath_id: webpath_id,
                                           page_id: page_id }}"

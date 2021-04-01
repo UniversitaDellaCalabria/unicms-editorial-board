@@ -14,7 +14,7 @@
                                                     params: { carousel_id: carousel_id,
                                                               carousel_item_id: carousel_item_id,
                                                               carousel_item_link_id: carousel_item_link_id }}"
-                                    class="btn btn-sm btn-outline-secondary mx-1">
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
                                     <b-icon icon="flag"
                                         variant="secondary"></b-icon>
                                     Localizations
@@ -24,7 +24,7 @@
                                 <b-button
                                     @click="deleteModal()"
                                     variant="danger"
-                                    class="mx-1 btn-sm">
+                                    class="mx-md-1 btn-sm">
                                     <b-icon icon="trash"
                                         variant="white"></b-icon>
                                     Delete

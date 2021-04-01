@@ -49,7 +49,7 @@ export default {
                           message: 'item added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'Medias',
+                    this.$router.push({name: 'Media',
                                        params: {alerts: this.alerts}})
                     }
                 )

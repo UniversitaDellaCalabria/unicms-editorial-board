@@ -14,7 +14,7 @@
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                class="btn btn-outline-secondary mx-1 btn-sm">
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="box-seam"
                                         variant="secondary"></b-icon>
                                     Blocks
@@ -23,7 +23,7 @@
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id,
                                                               page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="collection-play"
                                         variant="secondary"></b-icon>
                                     Carousels
@@ -32,7 +32,7 @@
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id,
                                                               page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="link45deg"
                                         variant="secondary"></b-icon>
                                     Links
@@ -41,25 +41,25 @@
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="flag"
                                         variant="secondary"></b-icon>
                                     Localizations
                                 </router-link>
-                                <router-link :to="{ name: 'WebpathPageMedias',
+                                <router-link :to="{ name: 'WebpathPageMedia',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="card-image"
                                         variant="secondary"></b-icon>
-                                    Medias
+                                    Media
                                 </router-link>
                                 <router-link :to="{ name: 'WebpathPageMenus',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="menu-button-wide-fill"
                                         variant="secondary"></b-icon>
                                     Menu
@@ -68,7 +68,7 @@
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id,
                                                               page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="file-text"
                                         variant="secondary"></b-icon>
                                     Publications
@@ -77,7 +77,7 @@
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id,
                                                               page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-1 btn-sm">
+                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
                                     <b-icon icon="share"
                                         variant="secondary"></b-icon>
                                     Related pages
@@ -90,7 +90,7 @@
                                     @click="toggleIsActiveModal()"
                                     variant="danger"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="x-circle"></b-icon>
                                     Deactivate
                                 </b-button>
@@ -99,7 +99,7 @@
                                     @click="toggleIsActiveModal()"
                                     variant="success"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="check-circle"></b-icon>
                                     Activate
                                 </b-button>
@@ -108,7 +108,7 @@
                                     @click="togglePublishModal()"
                                     variant="success"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="check-circle"></b-icon>
                                     Publish
                                 </b-button>
@@ -117,7 +117,7 @@
                                     @click="togglePublishModal()"
                                     variant="info"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="x-circle"></b-icon>
                                     Make it draft
                                 </b-button>
@@ -126,7 +126,7 @@
                                     target="_blank"
                                     variant="secondary"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="eye"></b-icon>
                                     Preview
                                 </b-button>
@@ -134,7 +134,7 @@
                                     @click="copyAsDraftModal()"
                                     variant="warning text-white"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon
                                         icon="files"
                                         variant="white">
@@ -145,7 +145,7 @@
                                     @click="deleteModal()"
                                     variant="danger"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="trash"
                                         variant="white"></b-icon>
                                     Delete

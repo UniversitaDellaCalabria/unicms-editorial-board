@@ -12,35 +12,35 @@
                             <div class="pull-left">
                                 <router-link :to="{ name: 'PublicationAttachments',
                                                     params: { publication_id: publication_id }}"
-                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
                                     <b-icon icon="file-text"
                                         variant="secondary"></b-icon>
                                     Attachments
                                 </router-link>
                                 <router-link :to="{ name: 'PublicationGalleries',
                                                     params: { publication_id: publication_id }}"
-                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
                                     <b-icon icon="card-image"
                                         variant="secondary"></b-icon>
                                     Galleries
                                 </router-link>
                                 <router-link :to="{ name: 'PublicationLinks',
                                                     params: { publication_id: publication_id }}"
-                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
                                     <b-icon icon="link45deg"
                                         variant="secondary"></b-icon>
                                     Links
                                 </router-link>
                                 <router-link :to="{ name: 'PublicationLocalizations',
                                                     params: { publication_id: publication_id }}"
-                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
                                     <b-icon icon="flag"
                                         variant="secondary"></b-icon>
                                     Localizations
                                 </router-link>
                                 <router-link :to="{ name: 'PublicationRelated',
                                                     params: { publication_id: publication_id }}"
-                                    class="btn mx-1 btn-outline-secondary btn-sm">
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
                                     <b-icon icon="share"
                                         variant="secondary"></b-icon>
                                     Related publications
@@ -53,7 +53,7 @@
                                     @click="toggleIsActiveModal()"
                                     variant="danger"
                                     size="sm"
-                                    class="mx-1 btn-sm">
+                                    class="mx-md-1 btn-sm">
                                     <b-icon icon="x-circle"></b-icon>
                                     Deactivate
                                 </b-button>
@@ -62,7 +62,7 @@
                                     @click="toggleIsActiveModal()"
                                     variant="success"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="check-circle"></b-icon>
                                     Activate
                                 </b-button>
@@ -70,7 +70,7 @@
                                     @click="deleteModal()"
                                     variant="danger"
                                     size="sm"
-                                    class="mx-1">
+                                    class="mx-md-1">
                                     <b-icon icon="trash"
                                         variant="white"></b-icon>
                                     Delete

@@ -63,7 +63,7 @@ export default {
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'State', value: 'is_active'}],
-            page_title: 'Media'
+            page_title: 'Menus'
         }
     }
 }

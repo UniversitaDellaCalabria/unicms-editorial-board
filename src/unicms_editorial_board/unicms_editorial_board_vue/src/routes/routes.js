@@ -21,7 +21,7 @@ import CarouselItemLinkLocalizationNew from 'src/pages/CarouselItemLinkLocalizat
 import CarouselItemLinkLocalizationEdit from 'src/pages/CarouselItemLinkLocalizationEdit.vue'
 import CarouselLocks from 'src/pages/CarouselLocks.vue'
 import CarouselLockNew from 'src/pages/CarouselLockNew.vue'
-import Medias from 'src/pages/Medias.vue'
+import Media from 'src/pages/Media.vue'
 import MediaEdit from 'src/pages/MediaEdit.vue'
 import MediaNew from 'src/pages/MediaNew.vue'
 import MediaLocks from 'src/pages/MediaLocks.vue'
@@ -88,7 +88,7 @@ import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
 import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
 import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
 import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
-import WebpathPageMedias from 'src/pages/WebpathPageMedias.vue'
+import WebpathPageMedia from 'src/pages/WebpathPageMedia.vue'
 import WebpathPageMediaNew from 'src/pages/WebpathPageMediaNew.vue'
 import WebpathPageMediaEdit from 'src/pages/WebpathPageMediaEdit.vue'
 import WebpathPageMenus from 'src/pages/WebpathPageMenus.vue'
@@ -436,38 +436,38 @@ const routes = [
         },
     },
 
-    // webpath page medias
+    // webpath page media
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/medias',
-        name: 'WebpathPageMedias',
-        component: WebpathPageMedias,
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media',
+        name: 'WebpathPageMedia',
+        component: WebpathPageMedia,
         meta: {
             breadcrumb: {
-                label: 'Medias',
+                label: 'Media',
                 parent: 'WebpathPageEdit'
             }
         },
     },
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/medias/new',
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media/new',
         name: 'WebpathPageMediaNew',
         component: WebpathPageMediaNew,
         meta: {
             breadcrumb: {
                 label: 'New',
-                parent: 'WebpathPageMedias'
+                parent: 'WebpathPageMedia'
             }
         },
     },
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/medias/:media_id/edit',
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media/:media_id/edit',
         name: 'WebpathPageMediaEdit',
         component: WebpathPageMediaEdit,
         meta: {
             breadcrumb() {
                 return {
                   label: this.$route.params.media_id.toString(),
-                  parent: 'WebpathPageMedias'
+                  parent: 'WebpathPageMedia'
                 }
             }
         },
@@ -584,38 +584,38 @@ const routes = [
         },
     },
 
-    // medias
+    // media
     {
-        path: 'medias',
-        name: 'Medias',
-        component: Medias,
+        path: 'media',
+        name: 'Media',
+        component: Media,
         meta: {
             breadcrumb: {
-                label: 'Medias',
+                label: 'Media',
                 parent: 'Dashboard'
             }
         }
     },
     {
-        path: 'medias/new',
+        path: 'media/new',
         name: 'MediaNew',
         component: MediaNew,
         meta: {
             breadcrumb: {
                 label: 'New',
-                parent: 'Medias'
+                parent: 'Media'
             }
         },
     },
     {
-        path: 'medias/:media_id/edit',
+        path: 'media/:media_id/edit',
         name: 'MediaEdit',
         component: MediaEdit,
         meta: {
             breadcrumb() {
                 return {
                   label: this.$route.params.media_id.toString(),
-                  parent: 'Medias'
+                  parent: 'Media'
                 }
             }
         },
@@ -623,7 +623,7 @@ const routes = [
 
     // medias locks
     {
-        path: 'medias/:media_id/locks',
+        path: 'media/:media_id/locks',
         name: 'MediaLocks',
         component: MediaLocks,
         meta: {
@@ -634,7 +634,7 @@ const routes = [
         }
     },
     {
-        path: 'medias/:media_id/locks/new',
+        path: 'media/:media_id/locks/new',
         name: 'MediaLockNew',
         component: MediaLockNew,
         meta: {

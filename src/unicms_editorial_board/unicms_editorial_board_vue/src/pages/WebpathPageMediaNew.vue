@@ -57,7 +57,7 @@ export default {
                           message: 'page media added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'WebpathPageMedias',
+                    this.$router.push({name: 'WebpathPageMedia',
                                        params: {site_id: this.site_id,
                                                 webpath_id: this.webpath_id,
                                                 page_id: this.page_id,

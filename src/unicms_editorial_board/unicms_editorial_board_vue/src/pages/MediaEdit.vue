@@ -13,7 +13,7 @@
                                 <b-button
                                     @click="deleteModal()"
                                     variant="danger"
-                                    class="mx-1 btn-sm">
+                                    class="mx-md-1 btn-sm">
                                     <b-icon icon="trash"
                                         variant="white"></b-icon>
                                     Delete
@@ -102,7 +102,7 @@ export default {
                           message: 'media removed successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'Medias',
+                    this.$router.push({name: 'Media',
                                        params: {alerts: this.alerts}})
                     }
                 )

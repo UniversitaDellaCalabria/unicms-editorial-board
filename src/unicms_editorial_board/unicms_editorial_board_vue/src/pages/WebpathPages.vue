@@ -92,14 +92,14 @@
                     variant="secondary"></b-icon>
                 Localizations
             </router-link>
-            <router-link :to="{ name: 'WebpathPageMedias',
+            <router-link :to="{ name: 'WebpathPageMedia',
                             params: { site_id: site_id,
                                       webpath_id: webpath_id,
                                       page_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-outline-secondary">
                 <b-icon icon="card-image"
                     variant="secondary"></b-icon>
-                Medias
+                Media
             </router-link>
             <router-link :to="{ name: 'WebpathPageMenus',
                             params: { site_id: site_id,

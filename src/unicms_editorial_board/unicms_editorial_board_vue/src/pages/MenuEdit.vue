@@ -12,7 +12,7 @@
                             <div class="pull-left">
                                 <router-link :to="{ name: 'MenuItems',
                                                     params: { menu_id: menu_id }}"
-                                    class="btn btn-sm btn-outline-secondary">
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
                                     <b-icon icon="list-ul"
                                         variant="secondary"></b-icon>
                                     Items
@@ -22,7 +22,7 @@
                                 <b-button
                                     @click="deleteModal()"
                                     variant="danger"
-                                    class="mx-1 btn-sm">
+                                    class="mx-md-1 btn-sm">
                                     <b-icon icon="trash"
                                         variant="white"></b-icon>
                                     Delete
