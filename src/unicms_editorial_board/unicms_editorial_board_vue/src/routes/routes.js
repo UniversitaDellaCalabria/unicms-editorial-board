@@ -658,7 +658,7 @@ const routes = [
         }
     },
     {
-        path: 'media-collections-new',
+        path: 'media-collections/new',
         name: 'MediaCollectionNew',
         component: MediaCollectionNew,
         meta: {

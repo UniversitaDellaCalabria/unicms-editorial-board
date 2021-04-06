@@ -104,26 +104,26 @@
 
                                 <template #cell()="data">
                                     <a :href="data.value"
-                                        v-if="files && isFile(data.field.key)">
+                                        v-if="files && isFile(data.field.key) && data.value">
                                         <b-icon
                                             icon="file-text"
                                             style="cursor: pointer">
                                         </b-icon>
                                     </a>
                                     <b-img
-                                        v-else-if="images && isImage(data.field.key)"
+                                        v-else-if="images && isImage(data.field.key) && data.value"
                                         :src="data.value.file || data.value"
                                         fluid
                                         alt="Responsive image">
                                     </b-img>
                                     <span
-                                        v-else-if="arrays && isArray(data.field.key)">
+                                        v-else-if="arrays && isArray(data.field.key) && data.value">
                                         <div v-for="obj in data.value">
                                             {{ obj[getArrayMap(data.field.key)] }}
                                         </div>
                                     </span>
-                                    <span v-else-if="dates && isDate(data.field.key)">
-                                        {{ $date_formatter(data.value) || '-' }}
+                                    <span v-else-if="dates && isDate(data.field.key) && data.value">
+                                        {{ $date_formatter(data.value)}}
                                     </span>
                                     <span v-else>{{ data.value || '-' }}</span>
                                 </template>
