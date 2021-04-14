@@ -49,6 +49,8 @@ export default {
                 'id',
                 'title',
                 {key: 'file', thClass: 'w-25'},
+                {key: 'file_size', label: 'Size (kb)'},
+                {key: 'file_dimensions', label: 'Dimensions'},
                 'description',
                 {key: 'is_active', label: 'Active'},
                 'actions'

@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "9359d5ebdcb9a9c157a3",
+    "revision": "62ffa2a582f96a77cb7e",
     "url": "/static/unicms_editorial_board_vue/css/app.ff4279f4.css"
   },
   {
-    "revision": "9359d5ebdcb9a9c157a3",
-    "url": "/static/unicms_editorial_board_vue/js/app.7f265af9.js"
+    "revision": "62ffa2a582f96a77cb7e",
+    "url": "/static/unicms_editorial_board_vue/js/app.9bf2f47a.js"
   },
   {
     "revision": "10975f810c997e9e6aa8",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.20e928aa.js"
   },
   {
-    "revision": "722920586474ec8a1b9235c2439a085f",
+    "revision": "b2ad4342ad96542f1f6f937c28d29dce",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -32,12 +32,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
-    "revision": "a9615bac158705203261e8348f574cc8",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
-  },
-  {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
+    "revision": "a9615bac158705203261e8348f574cc8",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
@@ -52,12 +52,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/faces/face-3.jpg"
   },
   {
-    "revision": "4ab22eca4053c14a34e4bdb6390deae9",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-5.jpg"
-  },
-  {
     "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
+  },
+  {
+    "revision": "4ab22eca4053c14a34e4bdb6390deae9",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-5.jpg"
   },
   {
     "revision": "4b87e628f4ef9988718860890b2a682f",
@@ -68,20 +68,20 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/faces/face-7.jpg"
   },
   {
-    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
-    "url": "/static/unicms_editorial_board_vue/img/favicon.png"
-  },
-  {
     "revision": "43b98081492ac3bcb4a1fac6cf709403",
     "url": "/static/unicms_editorial_board_vue/img/faces/tim_vector.jpe"
   },
   {
-    "revision": "d27fbc90c2e644dfdc9765640dc713b9",
-    "url": "/static/unicms_editorial_board_vue/img/mask.png"
+    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
+    "url": "/static/unicms_editorial_board_vue/img/favicon.png"
   },
   {
     "revision": "0a337c37f03c0462996b7b03758fa72b",
     "url": "/static/unicms_editorial_board_vue/img/loading-bubbles.svg"
+  },
+  {
+    "revision": "d27fbc90c2e644dfdc9765640dc713b9",
+    "url": "/static/unicms_editorial_board_vue/img/mask.png"
   },
   {
     "revision": "f575a04ebbb31b5798a4c54783e745a2",
@@ -104,16 +104,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
-    "revision": "9ebea76ee1225f00d882b21547a7b49f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
-  },
-  {
     "revision": "44bf13a71a4db6e15913fe8af9296711",
     "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
     "url": "/static/unicms_editorial_board_vue/img/vue-logo.png"
+  },
+  {
+    "revision": "9ebea76ee1225f00d882b21547a7b49f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
