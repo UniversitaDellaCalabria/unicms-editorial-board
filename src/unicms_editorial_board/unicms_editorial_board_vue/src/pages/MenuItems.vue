@@ -21,29 +21,6 @@
                                 </router-link>
                             </div>
 
-                            <div class="row pt-3">
-                                <div class="col col-12 col-md-8">
-                                    <b-form-input
-                                        v-model="search"
-                                        v-on:input="callApi(null, 1)"
-                                        placeholder="Search..."
-                                        type="search"
-                                        class="mb-3">
-                                    </b-form-input>
-                                </div>
-                                <div class="col col-12 col-md-4">
-                                    <OrderingFilter
-                                        :ordering="ordering"
-                                        @updateOrdering="ordering = $event;"
-                                        :ordering_list="ordering_list"
-                                        :sortDesc="sortDesc"
-                                        @updateSortDesc="sortDesc = $event;"
-                                        :ordering="ordering"
-                                        @callApi="callApi(null, page)"
-                                    />
-                                </div>
-                            </div>
-
                             <b-table
                                 ref="table"
                                 id="my-table"
@@ -168,7 +145,7 @@ export default {
                menu_item.childs.forEach(item => this.get_childs(item));
         },
         callApi(url) {
-            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/?&search=' + this.search + '&ordering=' + this.sortDesc + this.ordering;
+            let source = '/api/editorial-board/menus/'+this.menu_id+'/items/';
             if (url) source = url;
             this.axios
                 .get(source)
