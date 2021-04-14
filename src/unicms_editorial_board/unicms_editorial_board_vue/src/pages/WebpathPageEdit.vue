@@ -216,7 +216,8 @@ export default {
             page_title: '',
             preview_url: '',
             is_active: false,
-            published: ''
+            published: '',
+            date_fields: ['date_start', 'date_end'],
         }
     },
     methods: {
@@ -228,6 +229,10 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         if(key=='base_template' || key=='webpath') {
                             this.$set(this.form, key, value.id)
+                        }
+                        else if(this.date_fields.includes(key) && value) {
+                            this.$set(this.form, key,
+                                      value.substr(0,16).replace("T"," "))
                         }
                         else this.$set(this.form, key, value)
                         this.$set(this.files, 'base_template', response.data.base_template.image);

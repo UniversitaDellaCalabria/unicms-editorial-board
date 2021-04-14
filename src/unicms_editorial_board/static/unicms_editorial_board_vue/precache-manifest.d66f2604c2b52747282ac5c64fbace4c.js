@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ea60f6e73d3f08e03f25",
+    "revision": "dd0ae22cc8e9b2c99c6f",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "ea60f6e73d3f08e03f25",
-    "url": "/static/unicms_editorial_board_vue/js/app.78b4879b.js"
+    "revision": "dd0ae22cc8e9b2c99c6f",
+    "url": "/static/unicms_editorial_board_vue/js/app.0f2efd4c.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "8262294a35d7ae9c903142e5d350b3d9",
+    "revision": "9a09b1c79838b2cd033ffe7a9a5644dc",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
-    "revision": "a9615bac158705203261e8348f574cc8",
-    "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
-  },
-  {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
+    "revision": "a9615bac158705203261e8348f574cc8",
+    "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
     "revision": "a9615bac158705203261e8348f574cc8",
@@ -100,16 +100,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-3.jpg"
   },
   {
-    "revision": "44bf13a71a4db6e15913fe8af9296711",
-    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
-  },
-  {
     "revision": "897b4cf909210560a84398d36da51983",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
-    "revision": "9ebea76ee1225f00d882b21547a7b49f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
+    "revision": "44bf13a71a4db6e15913fe8af9296711",
+    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
@@ -118,5 +114,9 @@ self.__precacheManifest = [
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/static/unicms_editorial_board_vue/robots.txt"
+  },
+  {
+    "revision": "9ebea76ee1225f00d882b21547a7b49f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   }
 ];

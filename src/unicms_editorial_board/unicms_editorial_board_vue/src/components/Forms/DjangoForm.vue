@@ -82,7 +82,7 @@
                 v-else-if="field.type == 'datetime'"
                 class="form-control"
                 firstDayOfWeek="1"
-                format="YYYY-MM-DD H:i:s"
+                format="YYYY-MM-DD H:i"
                 v-model="form[field.id]"
                 :id="field.id"
                 :required="field.required ? true : false">
@@ -171,7 +171,7 @@ export default {
         }
     },
     mounted() {
-        this.getForm()
+        this.getForm();
     }
 }
 </script>

@@ -24,10 +24,10 @@
 
                         <b-card-text>
                             <django-form
-                                :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :date_fields="date_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -46,7 +46,9 @@ export default {
             publication_id: this.$route.params.publication_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/publication-contexts/form/',
-            page_title: ''
+            page_title: '',
+            date_fields: ['date_start', 'date_end',
+                          'in_evidence_start', 'in_evidence_end'],
         }
     },
     methods: {
@@ -58,6 +60,10 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         if(key=='publication') {
                             this.$set(this.form, key, value.id)
+                        }
+                        else if(this.date_fields.includes(key) && value) {
+                            this.$set(this.form, key,
+                                      value.substr(0,16).replace("T"," "))
                         }
                         else this.$set(this.form, key, value)
                     }
