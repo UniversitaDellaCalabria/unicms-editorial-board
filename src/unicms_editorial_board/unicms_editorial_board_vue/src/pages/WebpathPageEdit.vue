@@ -187,7 +187,6 @@
                             </p>
                             <hr />
                             <django-form
-                                :fields="fields"
                                 :form="form"
                                 :files="files"
                                 :submit="onSubmit"

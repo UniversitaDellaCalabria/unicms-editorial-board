@@ -10,7 +10,6 @@
                     <b-card title="New carousel">
                         <b-card-text>
                             <django-form
-                                :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />

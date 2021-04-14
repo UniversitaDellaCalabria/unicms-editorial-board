@@ -23,7 +23,6 @@
                         <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
                             <django-form
-                                :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"

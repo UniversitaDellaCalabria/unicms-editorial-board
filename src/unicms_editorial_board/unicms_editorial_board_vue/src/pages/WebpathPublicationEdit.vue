@@ -26,8 +26,7 @@
                             <django-form
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :date_fields="date_fields" />
+                                :form_source="form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
