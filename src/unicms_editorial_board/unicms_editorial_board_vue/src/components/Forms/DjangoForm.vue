@@ -78,6 +78,16 @@
                 </div>
             </div>
 
+            <datetime
+                v-else-if="field.type == 'datetime'"
+                class="form-control"
+                firstDayOfWeek="1"
+                format="YYYY-MM-DD H:i:s"
+                v-model="form[field.id]"
+                :id="field.id"
+                :required="field.required ? true : false">
+            </datetime>
+
             <div v-else>
                 <b-form-tags
                     v-if="tag_fields.includes(field.id)"
@@ -103,11 +113,13 @@
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue2'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import datetime from 'vuejs-datetimepicker';
 
 export default {
     name: "django-form",
     components: {
-        ckeditor: CKEditor.component
+        ckeditor: CKEditor.component,
+        datetime
     },
     props: {
         form: String,
