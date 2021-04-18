@@ -187,6 +187,7 @@
                             </p>
                             <hr />
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :files="files"
                                 :submit="onSubmit"
@@ -241,6 +242,9 @@ export default {
                         this.published = response.data.state;
                         this.$checkForRedisLocks(response.data.object_content_type,
                                                  this.page_id)
+                        this.$refs.form.getOptionsFromParent('webpath',
+                            [{"text": response.data.webpath.name,
+                              "value": response.data.webpath.id}])
                     }
                 })
         },

@@ -24,6 +24,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -63,6 +64,9 @@ export default {
                     this.page_title = response.data.publication.title;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)
+                    this.$refs.form.getOptionsFromParent('publication',
+                        [{"text": response.data.publication.title,
+                          "value": response.data.publication.id}])
                 })
         },
         onSubmit(event) {
@@ -77,7 +81,10 @@ export default {
                         { variant: 'success',
                           message: 'page publication edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.page_title = response.data.publication.title;
+                    }
+
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

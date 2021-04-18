@@ -10,6 +10,7 @@
                     <b-card title="New">
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -33,6 +34,17 @@ export default {
         }
     },
     methods: {
+        getWebpath(){
+            let api_source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/options/'+this.webpath_id+'/';
+            this.axios
+                .get(api_source)
+                .then(response => {
+                    this.$refs.form.getOptionsFromParent('webpath',
+                        [{"text": response.data.text,
+                          "value": response.data.value}])
+                    }
+                )
+        },
         onSubmit(event) {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/';
             event.preventDefault();
@@ -63,5 +75,8 @@ export default {
                 })
         },
     },
+    mounted() {
+        this.getWebpath()
+    }
 }
 </script>

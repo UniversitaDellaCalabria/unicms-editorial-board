@@ -24,6 +24,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -66,6 +67,9 @@ export default {
                     this.page_title = response.data.media.title;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.media_id)
+                    this.$refs.form.getOptionsFromParent('media',
+                        [{"text": response.data.media.title,
+                          "value": response.data.media.id}])
                 })
         },
         updateMedia(val) {
@@ -88,7 +92,9 @@ export default {
                         { variant: 'success',
                           message: 'page media edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.page_title = response.data.media.title;
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

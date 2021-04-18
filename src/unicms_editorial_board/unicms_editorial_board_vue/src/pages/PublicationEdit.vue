@@ -96,6 +96,7 @@
                             </p>
                             <hr />
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -146,6 +147,10 @@ export default {
                     this.is_active = response.data.is_active;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)
+                    if(response.data.presentation_image)
+                        this.$refs.form.getOptionsFromParent('presentation_image',
+                            [{"text": response.data.presentation_image.title,
+                              "value": response.data.presentation_image.id}])
                 })
         },
         updateMedia(val) {
@@ -168,8 +173,7 @@ export default {
                         { variant: 'success',
                           message: 'publication edited successfully',
                           dismissable: true }
-                    );
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

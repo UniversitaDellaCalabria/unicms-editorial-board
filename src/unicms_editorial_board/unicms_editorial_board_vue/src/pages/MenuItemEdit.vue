@@ -25,6 +25,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -56,11 +57,18 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        this.$set(this.form, key, value)
+                        if(key=='webpath') {
+                            this.$set(this.form, key, value.id)
+                        }
+                        else this.$set(this.form, key, value)
                     }
                     this.page_title = response.data.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.menu_item_id)
+                    if(response.data.webpath)
+                        this.$refs.form.getOptionsFromParent('webpath',
+                            [{"text": response.data.webpath.name,
+                              "value": response.data.webpath.id}])
                 })
         },
         onSubmit(event) {

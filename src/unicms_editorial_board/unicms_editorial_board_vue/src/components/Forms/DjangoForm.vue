@@ -19,6 +19,30 @@
             <div v-else-if="field.type == 'select'">
 
                 <v-select
+                    v-if="field.api_source"
+                    v-model="form[field.id]"
+                    @search="fetchOptions(field.id, field.api_source, $event)"
+                    @option:selected="setSelected(field.id, $event)"
+                    label="text"
+                    :reduce="value => value.value"
+                    :options="options[field.id]"
+                    :filterable="false"
+                    :id="field.id"
+                    :multiple="field.multiple ? true : false"
+                    :required="field.required ? true : false">
+                    <template #no-options="{ search, searching, loading }">
+                        <span v-if="search">No results for <b>{{ search }}</b></span>
+                        <span v-else>This field is actually empty</span>
+                    </template>
+                    <template #list-footer>
+                        <hr>
+                        <li style="text-align: center; opacity: .8">
+                            Type to search...
+                        </li>
+                    </template>
+                </v-select>
+                <v-select
+                    v-else
                     v-model="form[field.id]"
                     label="text"
                     :reduce="value => value.value"
@@ -34,7 +58,8 @@
                         :src="files[field.id]"
                         fluid
                         :alt="field.label"
-                        class="w-25"></b-img>
+                        class="w-25">
+                    </b-img>
                 </div>
             </div>
 
@@ -131,6 +156,9 @@ export default {
     },
     data () {
         return {
+            initial: {},
+            options: {},
+            selected: {},
             editor: ClassicEditor,
             editorConfig: {
                 toolbar: {
@@ -168,10 +196,30 @@ export default {
         },
         is_image(url) {
             return url.match(/\.(jpeg|jpg|gif|png|webp)$/) != null
+        },
+        fetchOptions(id, api_source, search) {
+            if(search!=''){
+                this.axios
+                    .get(api_source + '?search=' + search)
+                    .then(response => {
+                        this.$set(this.options, id, response.data.results);
+                    })
+            } else if(this.selected[id]){
+                this.$set(this.options, id, [this.selected[id]]);
+            } else {
+                this.$set(this.options, id, this.initial[id]);
+            }
+        },
+        setSelected(id, value){
+            this.$set(this.selected, id, value);
+        },
+        getOptionsFromParent(id, value){
+            this.$set(this.initial, id, value);
+            this.$set(this.options, id, value);
         }
     },
     mounted() {
-        this.getForm();
+        this.getForm()
     }
 }
 </script>

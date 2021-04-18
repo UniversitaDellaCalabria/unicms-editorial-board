@@ -24,6 +24,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -60,6 +61,9 @@ export default {
                         if(key=='publication') {
                             this.$set(this.form, key, value.id)
                         }
+                        else if(key=='webpath') {
+                            this.$set(this.form, key, value.id)
+                        }
                         else if(this.date_fields.includes(key) && value) {
                             this.$set(this.form, key,
                                       value.substr(0,16).replace("T"," "))
@@ -69,6 +73,12 @@ export default {
                     this.page_title = response.data.publication.title;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)
+                    this.$refs.form.getOptionsFromParent('webpath',
+                        [{"text": response.data.webpath.name,
+                          "value": response.data.webpath.id}])
+                    this.$refs.form.getOptionsFromParent('publication',
+                        [{"text": response.data.publication.title,
+                          "value": response.data.publication.id}])
                 })
         },
         onSubmit(event) {
@@ -90,6 +100,7 @@ export default {
                                                 webpath_id: this.webpath_id,
                                                 publication_id: this.publication_id,
                                                 alerts: this.alerts}})
+                    this.page_title = response.data.publication.title;
                     }
                 )
                 .catch(error => {

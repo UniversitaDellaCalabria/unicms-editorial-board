@@ -23,6 +23,7 @@
                         <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -62,6 +63,9 @@ export default {
                     this.page_title = response.data.media.title;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.collection_item_id)
+                    this.$refs.form.getOptionsFromParent('media',
+                        [{"text": response.data.media.title,
+                          "value": response.data.media.id}])
                 })
         },
         updateMedia(val) {
@@ -84,7 +88,9 @@ export default {
                         { variant: 'success',
                           message: 'media collection item edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.page_title = response.data.media.title;
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -142,7 +148,7 @@ export default {
     watch: {
         'form.media': function(newVal, oldVal){
             if (newVal && newVal!=oldVal) this.updateMedia(newVal);
-            if (!newVal) this.files.presentation_image = ''
+            if (!newVal) this.files.media = ''
         }
     }
 }

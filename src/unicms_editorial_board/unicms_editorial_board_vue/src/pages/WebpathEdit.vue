@@ -43,6 +43,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -78,6 +79,14 @@ export default {
                     this.page_title = response.data.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.webpath_id)
+                    if(response.data.alias)
+                        this.$refs.form.getOptionsFromParent('alias',
+                            [{"text": response.data.alias.name,
+                              "value": response.data.alias.id}])
+                    if(response.data.parent)
+                        this.$refs.form.getOptionsFromParent('parent',
+                            [{"text": response.data.parent.name,
+                              "value": response.data.parent.id}])
                 })
         },
         onSubmit(event) {
