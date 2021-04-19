@@ -59,7 +59,7 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='media')
+                        if(key=='collection')
                             this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
