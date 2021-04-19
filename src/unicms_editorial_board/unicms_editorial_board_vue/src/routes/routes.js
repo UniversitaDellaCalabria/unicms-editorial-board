@@ -91,6 +91,9 @@ import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.v
 import WebpathPageMedia from 'src/pages/WebpathPageMedia.vue'
 import WebpathPageMediaNew from 'src/pages/WebpathPageMediaNew.vue'
 import WebpathPageMediaEdit from 'src/pages/WebpathPageMediaEdit.vue'
+import WebpathPageMediaCollections from 'src/pages/WebpathPageMediaCollections.vue'
+import WebpathPageMediaCollectionNew from 'src/pages/WebpathPageMediaCollectionNew.vue'
+import WebpathPageMediaCollectionEdit from 'src/pages/WebpathPageMediaCollectionEdit.vue'
 import WebpathPageMenus from 'src/pages/WebpathPageMenus.vue'
 import WebpathPageMenuNew from 'src/pages/WebpathPageMenuNew.vue'
 import WebpathPageMenuEdit from 'src/pages/WebpathPageMenuEdit.vue'
@@ -468,6 +471,43 @@ const routes = [
                 return {
                   label: this.$route.params.media_id.toString(),
                   parent: 'WebpathPageMedia'
+                }
+            }
+        },
+    },
+
+    // webpath page media collections
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media-collections',
+        name: 'WebpathPageMediaCollections',
+        component: WebpathPageMediaCollections,
+        meta: {
+            breadcrumb: {
+                label: 'Media Collections',
+                parent: 'WebpathPageEdit'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media-collections/new',
+        name: 'WebpathPageMediaCollectionNew',
+        component: WebpathPageMediaCollectionNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathPageMediaCollections'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media-collections/:collection_id/edit',
+        name: 'WebpathPageMediaCollectionEdit',
+        component: WebpathPageMediaCollectionEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.collection_id.toString(),
+                  parent: 'WebpathPageMediaCollections'
                 }
             }
         },
