@@ -70,14 +70,14 @@ export default {
                         }
                         else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.publication.title;
+                    this.page_title = response.data.publication.full_name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)
                     this.$refs.form.getOptionsFromParent('webpath',
                         [{"text": response.data.webpath.name,
                           "value": response.data.webpath.id}])
                     this.$refs.form.getOptionsFromParent('publication',
-                        [{"text": response.data.publication.title,
+                        [{"text": response.data.publication.full_name,
                           "value": response.data.publication.id}])
                 })
         },
@@ -100,7 +100,7 @@ export default {
                                                 webpath_id: this.webpath_id,
                                                 publication_id: this.publication_id,
                                                 alerts: this.alerts}})
-                    this.page_title = response.data.publication.title;
+                    this.page_title = response.data.publication.full_name;
                     }
                 )
                 .catch(error => {

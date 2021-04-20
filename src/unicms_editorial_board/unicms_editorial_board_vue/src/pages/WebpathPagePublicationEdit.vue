@@ -61,11 +61,11 @@ export default {
                             this.$set(this.form, key, value.id)
                         else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.publication.title;
+                    this.page_title = response.data.publication.full_name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)
                     this.$refs.form.getOptionsFromParent('publication',
-                        [{"text": response.data.publication.title,
+                        [{"text": response.data.publication.full_name,
                           "value": response.data.publication.id}])
                 })
         },
@@ -82,7 +82,7 @@ export default {
                           message: 'page publication edited successfully',
                           dismissable: true }
                     )
-                    this.page_title = response.data.publication.title;
+                    this.page_title = response.data.publication.full_name;
                     }
 
                 )

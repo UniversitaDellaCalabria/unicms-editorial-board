@@ -52,7 +52,8 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             fields: [
                 'id',
-                {key: 'publication.title', label: 'Publication'},
+                {key: 'publication.name', label: 'Name'},
+                {key: 'publication.title', label: 'Title'},
                 'date_start',
                 'date_end',
                 'in_evidence_start',
@@ -64,6 +65,7 @@ export default {
             dates: ['date_start', 'date_end',
                     'in_evidence_start', 'in_evidence_end'],
             ordering_list: [{ text: 'Id', value: 'id' },
+                            { text: 'Name', value: 'publication__name' },
                             { text: 'Title', value: 'publication__title' },
                             { text: 'Date start', value: 'date_start'},
                             { text: 'Date end', value: 'date_end'},

@@ -51,6 +51,7 @@ export default {
             arrays_map: [{'related.category': 'name'}],
             fields: [
                 'id',
+                {key: 'related.name', label: 'Name'},
                 {key: 'related.title', label: 'Title'},
                 {key: 'related.category', label: 'Category'},
                 {key: 'related.relevance', label: 'Relevance'},
@@ -58,6 +59,7 @@ export default {
                 'actions'
             ],
             ordering_list: [{ text: 'Id', value: 'id' },
+                            { text: 'Name', value: 'related.name' },
                             { text: 'Title', value: 'related.title' },
                             { text: 'Relevance', value: 'related.relevance' },
                             { text: 'State', value: 'is_active'}],

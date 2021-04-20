@@ -143,7 +143,7 @@ export default {
                         else this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'presentation_image', response.data.presentation_image.file);
-                    this.page_title = response.data.title;
+                    this.page_title = response.data.full_name;
                     this.is_active = response.data.is_active;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)

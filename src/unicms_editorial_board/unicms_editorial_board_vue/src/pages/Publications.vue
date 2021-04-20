@@ -100,6 +100,7 @@ export default {
             api_source: '/api/editorial-board/publications/',
             fields: [
                 'id',
+                'name',
                 'title',
                 'category',
                 'relevance',
@@ -111,6 +112,7 @@ export default {
             arrays_map: [{'category': 'name'}],
             images: ['presentation_image'],
             ordering_list: [{ text: 'Id', value: 'id' },
+                            { text: 'Name', value: 'name' },
                             { text: 'Title', value: 'title' },
                             { text: 'Relevance', value: 'relevance' },
                             { text: 'State', value: 'is_active'}],

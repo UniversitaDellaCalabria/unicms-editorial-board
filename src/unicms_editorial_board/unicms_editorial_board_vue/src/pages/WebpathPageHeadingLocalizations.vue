@@ -6,10 +6,11 @@
         :page_title="page_title">
 
         <template #add_new>
-            <router-link :to="{ name: 'WebpathPagePublicationNew',
+            <router-link :to="{ name: 'WebpathPageHeadingLocalizationNew',
                                 params: { site_id: site_id,
                                           webpath_id: webpath_id,
-                                          page_id: page_id }}"
+                                          page_id: page_id,
+                                          heading_id: heading_id }}"
                 class="btn btn-success">
                 <b-icon icon="plus-circle"
                         variant="white"></b-icon>
@@ -18,18 +19,12 @@
         </template>
 
         <template #actions="item">
-            <router-link :to="{ name: 'PublicationEdit',
-                                params: { publication_id: item.item.publication.id }}"
-                class="btn btn-block btn-sm btn-outline-secondary">
-                <b-icon icon="arrow-right-circle"
-                    variant="secondary"></b-icon>
-                Go to publication
-            </router-link>
-            <router-link :to="{ name: 'WebpathPagePublicationEdit',
+            <router-link :to="{ name: 'WebpathPageHeadingLocalizationEdit',
                                 params: { site_id: site_id,
                                           webpath_id: webpath_id,
                                           page_id: page_id,
-                                          publication_id: item.item.id }}"
+                                          heading_id: heading_id,
+                                          localization_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-info">
                 <b-icon icon="pencil-square"
                     variant="white"></b-icon>
@@ -48,24 +43,25 @@ export default {
     },
     data () {
         return {
-            api_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/',
+            api_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/headings/'+this.$route.params.heading_id+'/localizations/',
             site_id: this.$route.params.site_id,
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
+            heading_id: this.$route.params.heading_id,
             fields: [
                 'id',
-                {key: 'publication.name', label: 'Name', sortable: true},
-                {key: 'publication.title', label: 'Title', sortable: true},
-                'order',
-                {key: 'is_active', label: 'Active'},
+                'language',
+                'title',
+                'description',
                 'actions'
             ],
             ordering_list: [{ text: 'Id', value: 'id' },
-                            { text: 'Publication name', value: 'publication__name' },
-                            { text: 'Publication title', value: 'publication__title' },
+                            { text: 'Language', value: 'language' },
+                            { text: 'Title', value: 'title' },
+                            { text: 'Description', value: 'description' },
                             { text: 'Order', value: 'order'},
                             { text: 'State', value: 'is_active'}],
-            page_title: 'Page publications',
+            page_title: 'Page heading localizations',
         }
     }
 }

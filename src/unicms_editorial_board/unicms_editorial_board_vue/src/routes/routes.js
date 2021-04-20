@@ -82,6 +82,12 @@ import WebpathPageCarouselEdit from 'src/pages/WebpathPageCarouselEdit.vue'
 import WebpathPageBlocks from 'src/pages/WebpathPageBlocks.vue'
 import WebpathPageBlockNew from 'src/pages/WebpathPageBlockNew.vue'
 import WebpathPageBlockEdit from 'src/pages/WebpathPageBlockEdit.vue'
+import WebpathPageHeadings from 'src/pages/WebpathPageHeadings.vue'
+import WebpathPageHeadingNew from 'src/pages/WebpathPageHeadingNew.vue'
+import WebpathPageHeadingEdit from 'src/pages/WebpathPageHeadingEdit.vue'
+import WebpathPageHeadingLocalizations from 'src/pages/WebpathPageHeadingLocalizations.vue'
+import WebpathPageHeadingLocalizationNew from 'src/pages/WebpathPageHeadingLocalizationNew.vue'
+import WebpathPageHeadingLocalizationEdit from 'src/pages/WebpathPageHeadingLocalizationEdit.vue'
 import WebpathPageLinks from 'src/pages/WebpathPageLinks.vue'
 import WebpathPageLinkNew from 'src/pages/WebpathPageLinkNew.vue'
 import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
@@ -397,6 +403,80 @@ const routes = [
                 return {
                   label: this.$route.params.localization_id.toString(),
                   parent: 'WebpathPageLocalizations'
+                }
+            }
+        },
+    },
+
+    // webpath page headings
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings',
+        name: 'WebpathPageHeadings',
+        component: WebpathPageHeadings,
+        meta: {
+            breadcrumb: {
+                label: 'Headings',
+                parent: 'WebpathPageEdit'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/new',
+        name: 'WebpathPageHeadingNew',
+        component: WebpathPageHeadingNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathPageHeadings'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/:heading_id/edit',
+        name: 'WebpathPageHeadingEdit',
+        component: WebpathPageHeadingEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.heading_id.toString(),
+                  parent: 'WebpathPageHeadings'
+                }
+            }
+        },
+    },
+
+    // webpath page heading localizations
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/:heading_id/localizations',
+        name: 'WebpathPageHeadingLocalizations',
+        component: WebpathPageHeadingLocalizations,
+        meta: {
+            breadcrumb: {
+                label: 'Localizations',
+                parent: 'WebpathPageHeadingEdit'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/:heading_id/localizations/new',
+        name: 'WebpathPageHeadingLocalizationNew',
+        component: WebpathPageHeadingLocalizationNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathPageHeadingLocalizations'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/:heading_id/localizations/:localization_id/edit',
+        name: 'WebpathPageHeadingLocalizationEdit',
+        component: WebpathPageHeadingLocalizationEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.localization_id.toString(),
+                  parent: 'WebpathPageHeadingLocalizations'
                 }
             }
         },

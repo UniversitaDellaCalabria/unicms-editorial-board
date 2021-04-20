@@ -8,160 +8,167 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
+                        <div class="clearfix mb-3 text-right">
+                            <b-button
+                                v-if="is_active"
+                                @click="toggleIsActiveModal()"
+                                variant="danger"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon icon="x-circle"></b-icon>
+                                Deactivate
+                            </b-button>
+                            <b-button
+                                v-else
+                                @click="toggleIsActiveModal()"
+                                variant="success"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon icon="check-circle"></b-icon>
+                                Activate
+                            </b-button>
+                            <b-button
+                                v-if="published === 'draft'"
+                                @click="togglePublishModal()"
+                                variant="success"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon icon="check-circle"></b-icon>
+                                Publish
+                            </b-button>
+                            <b-button
+                                v-else-if="published === 'published'"
+                                @click="togglePublishModal()"
+                                variant="info"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon icon="x-circle"></b-icon>
+                                Make it draft
+                            </b-button>
+                            <b-button
+                                :href="preview_url"
+                                target="_blank"
+                                variant="secondary"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon icon="eye"></b-icon>
+                                Preview
+                            </b-button>
+                            <b-button
+                                @click="copyAsDraftModal()"
+                                variant="warning text-white"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon
+                                    icon="files"
+                                    variant="white">
+                                </b-icon>
+                                Copy as draft
+                            </b-button>
+                            <b-button
+                                @click="deleteModal()"
+                                variant="danger"
+                                size="sm"
+                                class="mx-md-1">
+                                <b-icon icon="trash"
+                                    variant="white"></b-icon>
+                                Delete
+                            </b-button>
+                        </div>
+                        <hr />
                         <div class="clearfix mb-5">
-                            <div class="pull-left">
-                                <router-link :to="{ name: 'WebpathPageBlocks',
+                            <router-link :to="{ name: 'WebpathPageBlocks',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                            class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="box-seam"
+                                    variant="secondary"></b-icon>
+                                Blocks
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageCarousels',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
                                 class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="box-seam"
-                                        variant="secondary"></b-icon>
-                                    Blocks
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageCarousels',
-                                                    params: { site_id: site_id,
-                                                              webpath_id: webpath_id,
-                                                              page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="collection-play"
-                                        variant="secondary"></b-icon>
-                                    Carousels
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageLinks',
-                                                    params: { site_id: site_id,
-                                                              webpath_id: webpath_id,
-                                                              page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="link45deg"
-                                        variant="secondary"></b-icon>
-                                    Links
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageLocalizations',
+                                <b-icon icon="collection-play"
+                                    variant="secondary"></b-icon>
+                                Carousels
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageMediaCollections',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="images"
+                                    variant="secondary"></b-icon>
+                                Galleries
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageHeadings',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="flag"
-                                        variant="secondary"></b-icon>
-                                    Localizations
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageMedia',
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="card-heading"
+                                    variant="secondary"></b-icon>
+                                Headings
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageLinks',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="card-image"
-                                        variant="secondary"></b-icon>
-                                    Media
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageMediaCollections',
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="link45deg"
+                                    variant="secondary"></b-icon>
+                                Links
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageLocalizations',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="flag"
+                                    variant="secondary"></b-icon>
+                                Localizations
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageMedia',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="card-image"
+                                    variant="secondary"></b-icon>
+                                Media
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageMenus',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="menu-button-wide-fill"
+                                    variant="secondary"></b-icon>
+                                Menu
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPagePublications',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="images"
-                                        variant="secondary"></b-icon>
-                                    Galleries
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageMenus',
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="file-text"
+                                    variant="secondary"></b-icon>
+                                Publications
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageRelated',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
                                                           page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="menu-button-wide-fill"
-                                        variant="secondary"></b-icon>
-                                    Menu
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPagePublications',
-                                                    params: { site_id: site_id,
-                                                              webpath_id: webpath_id,
-                                                              page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="file-text"
-                                        variant="secondary"></b-icon>
-                                    Publications
-                                </router-link>
-                                <router-link :to="{ name: 'WebpathPageRelated',
-                                                    params: { site_id: site_id,
-                                                              webpath_id: webpath_id,
-                                                              page_id: page_id }}"
-                                    class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                    <b-icon icon="share"
-                                        variant="secondary"></b-icon>
-                                    Related pages
-                                </router-link>
-                            </div>
-
-                            <div class="pull-right">
-                                <b-button
-                                    v-if="is_active"
-                                    @click="toggleIsActiveModal()"
-                                    variant="danger"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon icon="x-circle"></b-icon>
-                                    Deactivate
-                                </b-button>
-                                <b-button
-                                    v-else
-                                    @click="toggleIsActiveModal()"
-                                    variant="success"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon icon="check-circle"></b-icon>
-                                    Activate
-                                </b-button>
-                                <b-button
-                                    v-if="published === 'draft'"
-                                    @click="togglePublishModal()"
-                                    variant="success"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon icon="check-circle"></b-icon>
-                                    Publish
-                                </b-button>
-                                <b-button
-                                    v-else-if="published === 'published'"
-                                    @click="togglePublishModal()"
-                                    variant="info"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon icon="x-circle"></b-icon>
-                                    Make it draft
-                                </b-button>
-                                <b-button
-                                    :href="preview_url"
-                                    target="_blank"
-                                    variant="secondary"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon icon="eye"></b-icon>
-                                    Preview
-                                </b-button>
-                                <b-button
-                                    @click="copyAsDraftModal()"
-                                    variant="warning text-white"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon
-                                        icon="files"
-                                        variant="white">
-                                    </b-icon>
-                                    Copy as draft
-                                </b-button>
-                                <b-button
-                                    @click="deleteModal()"
-                                    variant="danger"
-                                    size="sm"
-                                    class="mx-md-1">
-                                    <b-icon icon="trash"
-                                        variant="white"></b-icon>
-                                    Delete
-                                </b-button>
-                            </div>
-
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="share"
+                                    variant="secondary"></b-icon>
+                                Related pages
+                            </router-link>
                         </div>
+
                         <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>

@@ -25,7 +25,6 @@
 
                         <b-card-text>
                             <django-form
-                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -42,35 +41,32 @@ export default {
     data() {
         return {
             alerts: [],
-            publication_id: this.$route.params.publication_id,
-            related_id: this.$route.params.related_id,
+            site_id: this.$route.params.site_id,
+            webpath_id: this.$route.params.webpath_id,
+            page_id: this.$route.params.page_id,
+            heading_id: this.$route.params.heading_id,
+            localization_id: this.$route.params.localization_id,
             form: {},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/related/form/',
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/headings/'+this.$route.params.heading_id+'/localizations/form/',
             page_title: ''
         }
     },
     methods: {
         getItem() {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/related/'+this.related_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/headings/'+this.heading_id+'/localizations/'+this.localization_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='related') {
-                            this.$set(this.form, key, value.id)
-                        }
-                        else this.$set(this.form, key, value)
+                        this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.related.full_name;
+                    this.page_title = response.data.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.related_id)
-                    this.$refs.form.getOptionsFromParent('related',
-                        [{"text": response.data.related.full_name,
-                          "value": response.data.related.id}])
+                                             this.localization_id)
                 })
         },
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/related/'+this.related_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/headings/'+this.heading_id+'/localization/'+this.localization_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -79,11 +75,9 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'related publication edited successfully',
+                          message: 'page heading localization edited successfully',
                           dismissable: true }
-                    )
-                    this.page_title = response.data.related.full_name
-                    }
+                    )}
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -97,17 +91,20 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.publication_id+'/related/'+this.localization_id+'/',
+                .delete('/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/headings/'+this.heading_id+'/localizations/'+this.localization_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'related publication removed successfully',
+                          message: 'page heading localization removed successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'PublicationRelated',
-                                       params: {publication_id: this.publication_id,
+                    this.$router.push({name: 'WebpathPageHeadingLocalizations',
+                                       params: {site_id: this.site_id,
+                                                webpath_id: this.webpath_id,
+                                                page_id: this.page_id,
+                                                heading_id: this.heading_id,
                                                 alerts: this.alerts}})
                     }
                 )
@@ -120,7 +117,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete related publication?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete page heading localization?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
