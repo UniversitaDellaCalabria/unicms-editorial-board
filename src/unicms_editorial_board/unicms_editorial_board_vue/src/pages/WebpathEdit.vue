@@ -74,18 +74,22 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        this.$set(this.form, key, value)
+                        if(key=='parent' || key=='alias') {
+                            if(value)
+                                this.$set(this.form, key, value.id)
+                        }
+                        else this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.name;
+                    this.page_title = response.data.full_name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.webpath_id)
                     if(response.data.alias)
                         this.$refs.form.getOptionsFromParent('alias',
-                            [{"text": response.data.alias.name,
+                            [{"text": response.data.alias.full_name,
                               "value": response.data.alias.id}])
                     if(response.data.parent)
                         this.$refs.form.getOptionsFromParent('parent',
-                            [{"text": response.data.parent.name,
+                            [{"text": response.data.parent.full_name,
                               "value": response.data.parent.id}])
                 })
         },
@@ -101,7 +105,9 @@ export default {
                         { variant: 'success',
                           message: response.data.name + ' edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.page_title = response.data.full_name
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {

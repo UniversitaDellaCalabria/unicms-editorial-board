@@ -76,7 +76,7 @@ export default {
                             { text: 'Name', value: 'name' },
                             { text: 'State', value: 'is_active'}],
             site_id: this.$route.params.site_id,
-            page_title: 'Wesite webpaths'
+            page_title: 'Website webpaths'
         }
     }
   }

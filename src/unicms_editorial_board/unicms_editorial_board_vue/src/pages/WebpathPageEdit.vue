@@ -259,7 +259,7 @@ export default {
                         this.$checkForRedisLocks(response.data.object_content_type,
                                                  this.page_id)
                         this.$refs.form.getOptionsFromParent('webpath',
-                            [{"text": response.data.webpath.name,
+                            [{"text": response.data.webpath.full_name,
                               "value": response.data.webpath.id}])
                     }
                 })
@@ -283,6 +283,7 @@ export default {
                                                 webpath_id: this.webpath_id,
                                                 page_id: this.page_id,
                                                 alerts: this.alerts}})
+                    this.page_title = response.data.name;
                     }
                 )
                 .catch(error => {

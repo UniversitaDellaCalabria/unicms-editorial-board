@@ -35,6 +35,14 @@
                         :fields="template_blocks_fields"
                         :items="template_blocks_items"
                         class="mt-1">
+                        <template #cell(block.image)="data">
+                            <b-img
+                                v-if="data.value"
+                                :src="data.value.file || data.value"
+                                fluid
+                                alt="Responsive image">
+                            </b-img>
+                        </template>
                 </b-collapse>
             </div>
             <hr class="my-3" />

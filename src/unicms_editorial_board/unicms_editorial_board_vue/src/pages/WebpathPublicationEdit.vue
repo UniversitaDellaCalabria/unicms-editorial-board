@@ -74,7 +74,7 @@ export default {
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.publication_id)
                     this.$refs.form.getOptionsFromParent('webpath',
-                        [{"text": response.data.webpath.name,
+                        [{"text": response.data.webpath.full_name,
                           "value": response.data.webpath.id}])
                     this.$refs.form.getOptionsFromParent('publication',
                         [{"text": response.data.publication.full_name,
