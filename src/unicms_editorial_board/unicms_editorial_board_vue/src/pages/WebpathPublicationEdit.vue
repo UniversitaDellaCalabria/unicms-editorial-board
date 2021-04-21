@@ -65,6 +65,7 @@ export default {
                             this.$set(this.form, key, value.id)
                         }
                         else if(this.date_fields.includes(key) && value) {
+                            console.log(value)
                             this.$set(this.form, key,
                                       value.substr(0,16).replace("T"," "))
                         }
@@ -94,12 +95,13 @@ export default {
                           message: 'webpath publication edited successfully',
                           dismissable: true }
                     );
-                    this.webpath_id = response.data.webpath;
+                    this.webpath_id = response.data.webpath.id;
                     this.$router.push({name: 'WebpathPublicationEdit',
                                        params: {site_id: this.site_id,
                                                 webpath_id: this.webpath_id,
                                                 publication_id: this.publication_id,
                                                 alerts: this.alerts}})
+                                .catch(() => {})
                     this.page_title = response.data.publication.full_name;
                     }
                 )

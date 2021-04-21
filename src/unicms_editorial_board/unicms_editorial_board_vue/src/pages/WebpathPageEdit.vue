@@ -283,6 +283,7 @@ export default {
                                                 webpath_id: this.webpath_id,
                                                 page_id: this.page_id,
                                                 alerts: this.alerts}})
+                                .catch(() => {})
                     this.page_title = response.data.name;
                     }
                 )
