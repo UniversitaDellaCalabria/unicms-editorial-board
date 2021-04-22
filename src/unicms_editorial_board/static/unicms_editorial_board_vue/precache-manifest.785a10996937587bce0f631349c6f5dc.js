@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "70122fa78083fbd031ad",
+    "revision": "7394fa42c8fb9b229433",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "70122fa78083fbd031ad",
-    "url": "/static/unicms_editorial_board_vue/js/app.7e9b774a.js"
+    "revision": "7394fa42c8fb9b229433",
+    "url": "/static/unicms_editorial_board_vue/js/app.9afeec16.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "6b0160a380b6ea8494d52f8bbee96815",
+    "revision": "6f7309b8011088f48c4b3da218c64d93",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -32,12 +32,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
-    "revision": "a9615bac158705203261e8348f574cc8",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
-  },
-  {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
+    "revision": "a9615bac158705203261e8348f574cc8",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
@@ -76,10 +76,6 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/favicon.png"
   },
   {
-    "revision": "0a337c37f03c0462996b7b03758fa72b",
-    "url": "/static/unicms_editorial_board_vue/img/loading-bubbles.svg"
-  },
-  {
     "revision": "d27fbc90c2e644dfdc9765640dc713b9",
     "url": "/static/unicms_editorial_board_vue/img/mask.png"
   },
@@ -92,16 +88,20 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
   },
   {
+    "revision": "0a337c37f03c0462996b7b03758fa72b",
+    "url": "/static/unicms_editorial_board_vue/img/loading-bubbles.svg"
+  },
+  {
     "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
   },
   {
-    "revision": "cd253e23ed052deeb80b42d2ed772183",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-3.jpg"
-  },
-  {
     "revision": "897b4cf909210560a84398d36da51983",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
+  },
+  {
+    "revision": "cd253e23ed052deeb80b42d2ed772183",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-3.jpg"
   },
   {
     "revision": "9ebea76ee1225f00d882b21547a7b49f",

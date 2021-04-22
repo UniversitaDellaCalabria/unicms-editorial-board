@@ -17,17 +17,16 @@ export default {
     data () {
         return {
             api_source: '/api/editorial-board/templates/blocks/',
-            fields: [
-                'name',
-                'type',
-                'image',
-                'description',
+            fields: ['name',
+                     {key: 'type_friendly', label: 'type_friendly'},
+                     'image',
+                     'description',
             ],
             images: ['image'],
             ordering_list: [{ text: 'Name', value: 'name' },
-                            { text: 'Type', value: 'type' },
+                            { text: 'Type', value: 'type_friendly' },
                             { text: 'Description', value: 'description' }],
-            page_title: 'Template blocks',
+            page_title: 'Template blocks'
         }
     }
 }
