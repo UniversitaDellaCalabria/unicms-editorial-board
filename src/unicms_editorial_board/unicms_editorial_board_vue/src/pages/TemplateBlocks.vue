@@ -18,7 +18,7 @@ export default {
         return {
             api_source: '/api/editorial-board/templates/blocks/',
             fields: ['name',
-                     {key: 'type_friendly', label: 'type_friendly'},
+                     {key: 'type_friendly', label: 'Type'},
                      'image',
                      'description',
             ],
