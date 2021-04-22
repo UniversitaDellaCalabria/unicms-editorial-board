@@ -65,6 +65,15 @@
         <p>Publications</p>
       </sidebar-link>
 
+      <sidebar-link to="/blocks">
+        <b-icon icon="bricks"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Blocks</p>
+      </sidebar-link>
+
 
     </side-bar>
     <div class="main-panel">

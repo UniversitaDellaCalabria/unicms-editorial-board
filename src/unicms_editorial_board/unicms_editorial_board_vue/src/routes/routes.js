@@ -109,6 +109,7 @@ import WebpathPagePublicationEdit from 'src/pages/WebpathPagePublicationEdit.vue
 import WebpathPageRelated from 'src/pages/WebpathPageRelated.vue'
 import WebpathPageRelatedNew from 'src/pages/WebpathPageRelatedNew.vue'
 import WebpathPageRelatedEdit from 'src/pages/WebpathPageRelatedEdit.vue'
+import TemplateBlocks from 'src/pages/TemplateBlocks.vue'
 
 const routes = [
 {
@@ -1412,6 +1413,19 @@ const routes = [
                   label: this.$route.params.related_id.toString(),
                   parent: 'PublicationRelated'
                 }
+            }
+        }
+    },
+
+    // template blocks
+    {
+        path: 'blocks',
+        name: 'TemplateBlocks',
+        component: TemplateBlocks,
+        meta: {
+            breadcrumb: {
+                label: 'Blocks',
+                parent: 'Dashboard'
             }
         }
     },
