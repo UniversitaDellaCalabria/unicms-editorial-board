@@ -9,6 +9,16 @@
                 <div class="col-12">
                     <b-card>
                         <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'PublicationAttachmentLogs',
+                                                    params: { publication_id: publication_id,
+                                                              attachment_id: attachment_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
+                            </div>
                             <div class="pull-right">
                                 <b-button
                                     @click="deleteModal()"
@@ -60,6 +70,7 @@ export default {
                         this.$set(this.form, key, value)
                     }
                     this.$set(this.files, 'file', response.data.file);
+                    this.$delete(this.form, 'file');
                     this.page_title = response.data.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.attachment_id)

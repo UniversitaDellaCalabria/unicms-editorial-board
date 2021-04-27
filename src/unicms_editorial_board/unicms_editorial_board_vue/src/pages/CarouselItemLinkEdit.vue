@@ -10,6 +10,15 @@
                     <b-card>
                         <div class="clearfix mb-5">
                             <div class="pull-left">
+                                <router-link :to="{ name: 'CarouselItemLinkLogs',
+                                            params: { carousel_id: carousel_id,
+                                                      carousel_item_id: carousel_item_id,
+                                                      carousel_item_link_id: carousel_item_link_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
                                 <router-link :to="{ name: 'CarouselItemLinkLocalizations',
                                                     params: { carousel_id: carousel_id,
                                                               carousel_item_id: carousel_item_id,

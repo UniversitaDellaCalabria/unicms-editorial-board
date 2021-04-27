@@ -7,108 +7,138 @@ import Overview from 'src/pages/Overview.vue'
 import Carousels from 'src/pages/Carousels.vue'
 import CarouselNew from 'src/pages/CarouselNew.vue'
 import CarouselEdit from 'src/pages/CarouselEdit.vue'
+import CarouselLogs from 'src/pages/CarouselLogs.vue'
 import CarouselItems from 'src/pages/CarouselItems.vue'
 import CarouselItemNew from 'src/pages/CarouselItemNew.vue'
 import CarouselItemEdit from 'src/pages/CarouselItemEdit.vue'
+import CarouselItemLogs from 'src/pages/CarouselItemLogs.vue'
 import CarouselItemLinks from 'src/pages/CarouselItemLinks.vue'
 import CarouselItemLinkNew from 'src/pages/CarouselItemLinkNew.vue'
 import CarouselItemLinkEdit from 'src/pages/CarouselItemLinkEdit.vue'
+import CarouselItemLinkLogs from 'src/pages/CarouselItemLinkLogs.vue'
 import CarouselItemLocalizations from 'src/pages/CarouselItemLocalizations.vue'
 import CarouselItemLocalizationNew from 'src/pages/CarouselItemLocalizationNew.vue'
 import CarouselItemLocalizationEdit from 'src/pages/CarouselItemLocalizationEdit.vue'
+import CarouselItemLocalizationLogs from 'src/pages/CarouselItemLocalizationLogs.vue'
 import CarouselItemLinkLocalizations from 'src/pages/CarouselItemLinkLocalizations.vue'
 import CarouselItemLinkLocalizationNew from 'src/pages/CarouselItemLinkLocalizationNew.vue'
 import CarouselItemLinkLocalizationEdit from 'src/pages/CarouselItemLinkLocalizationEdit.vue'
+import CarouselItemLinkLocalizationLogs from 'src/pages/CarouselItemLinkLocalizationLogs.vue'
 import CarouselLocks from 'src/pages/CarouselLocks.vue'
 import CarouselLockNew from 'src/pages/CarouselLockNew.vue'
 import Media from 'src/pages/Media.vue'
 import MediaEdit from 'src/pages/MediaEdit.vue'
 import MediaNew from 'src/pages/MediaNew.vue'
+import MediaLogs from 'src/pages/MediaLogs.vue'
 import MediaLocks from 'src/pages/MediaLocks.vue'
 import MediaLockNew from 'src/pages/MediaLockNew.vue'
 import MediaCollections from 'src/pages/MediaCollections.vue'
 import MediaCollectionNew from 'src/pages/MediaCollectionNew.vue'
 import MediaCollectionEdit from 'src/pages/MediaCollectionEdit.vue'
+import MediaCollectionLogs from 'src/pages/MediaCollectionLogs.vue'
 import MediaCollectionItems from 'src/pages/MediaCollectionItems.vue'
 import MediaCollectionItemNew from 'src/pages/MediaCollectionItemNew.vue'
 import MediaCollectionItemEdit from 'src/pages/MediaCollectionItemEdit.vue'
+import MediaCollectionItemLogs from 'src/pages/MediaCollectionItemLogs.vue'
 import MediaCollectionLocks from 'src/pages/MediaCollectionLocks.vue'
 import MediaCollectionLockNew from 'src/pages/MediaCollectionLockNew.vue'
 import Menus from 'src/pages/Menus.vue'
 import MenuEdit from 'src/pages/MenuEdit.vue'
 import MenuNew from 'src/pages/MenuNew.vue'
+import MenuLogs from 'src/pages/MenuLogs.vue'
 import MenuLocks from 'src/pages/MenuLocks.vue'
 import MenuLockNew from 'src/pages/MenuLockNew.vue'
 import MenuItems from 'src/pages/MenuItems.vue'
 import MenuItemEdit from 'src/pages/MenuItemEdit.vue'
 import MenuItemNew from 'src/pages/MenuItemNew.vue'
+import MenuItemLogs from 'src/pages/MenuItemLogs.vue'
 import Publications from 'src/pages/Publications.vue'
 import PublicationNew from 'src/pages/PublicationNew.vue'
 import PublicationEdit from 'src/pages/PublicationEdit.vue'
+import PublicationLogs from 'src/pages/PublicationLogs.vue'
 import PublicationLocks from 'src/pages/PublicationLocks.vue'
 import PublicationLockNew from 'src/pages/PublicationLockNew.vue'
 import PublicationAttachments from 'src/pages/PublicationAttachments.vue'
 import PublicationAttachmentNew from 'src/pages/PublicationAttachmentNew.vue'
 import PublicationAttachmentEdit from 'src/pages/PublicationAttachmentEdit.vue'
+import PublicationAttachmentLogs from 'src/pages/PublicationAttachmentLogs.vue'
 import PublicationGalleries from 'src/pages/PublicationGalleries.vue'
 import PublicationGalleryNew from 'src/pages/PublicationGalleryNew.vue'
 import PublicationGalleryEdit from 'src/pages/PublicationGalleryEdit.vue'
+import PublicationGalleryLogs from 'src/pages/PublicationGalleryLogs.vue'
 import PublicationLinks from 'src/pages/PublicationLinks.vue'
 import PublicationLinkNew from 'src/pages/PublicationLinkNew.vue'
 import PublicationLinkEdit from 'src/pages/PublicationLinkEdit.vue'
+import PublicationLinkLogs from 'src/pages/PublicationLinkLogs.vue'
 import PublicationLocalizations from 'src/pages/PublicationLocalizations.vue'
 import PublicationLocalizationNew from 'src/pages/PublicationLocalizationNew.vue'
 import PublicationLocalizationEdit from 'src/pages/PublicationLocalizationEdit.vue'
+import PublicationLocalizationLogs from 'src/pages/PublicationLocalizationLogs.vue'
 import PublicationRelated from 'src/pages/PublicationRelated.vue'
 import PublicationRelatedNew from 'src/pages/PublicationRelatedNew.vue'
 import PublicationRelatedEdit from 'src/pages/PublicationRelatedEdit.vue'
+import PublicationRelatedLogs from 'src/pages/PublicationRelatedLogs.vue'
 import Websites from 'src/pages/Websites.vue'
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
 import WebpathEdit from 'src/pages/WebpathEdit.vue'
+import WebpathLogs from 'src/pages/WebpathLogs.vue'
 import WebpathLocks from 'src/pages/WebpathLocks.vue'
 import WebpathLockNew from 'src/pages/WebpathLockNew.vue'
 import WebpathPublications from 'src/pages/WebpathPublications.vue'
 import WebpathPublicationNew from 'src/pages/WebpathPublicationNew.vue'
 import WebpathPublicationEdit from 'src/pages/WebpathPublicationEdit.vue'
+import WebpathPublicationLogs from 'src/pages/WebpathPublicationLogs.vue'
 import WebpathPages from 'src/pages/WebpathPages.vue'
 import WebpathPageNew from 'src/pages/WebpathPageNew.vue'
 import WebpathPageEdit from 'src/pages/WebpathPageEdit.vue'
+import WebpathPageLogs from 'src/pages/WebpathPageLogs.vue'
 import WebpathPageLocks from 'src/pages/WebpathPageLocks.vue'
 import WebpathPageLockNew from 'src/pages/WebpathPageLockNew.vue'
 import WebpathPageCarousels from 'src/pages/WebpathPageCarousels.vue'
 import WebpathPageCarouselNew from 'src/pages/WebpathPageCarouselNew.vue'
 import WebpathPageCarouselEdit from 'src/pages/WebpathPageCarouselEdit.vue'
+import WebpathPageCarouselLogs from 'src/pages/WebpathPageCarouselLogs.vue'
 import WebpathPageBlocks from 'src/pages/WebpathPageBlocks.vue'
 import WebpathPageBlockNew from 'src/pages/WebpathPageBlockNew.vue'
 import WebpathPageBlockEdit from 'src/pages/WebpathPageBlockEdit.vue'
+import WebpathPageBlockLogs from 'src/pages/WebpathPageBlockLogs.vue'
 import WebpathPageHeadings from 'src/pages/WebpathPageHeadings.vue'
 import WebpathPageHeadingNew from 'src/pages/WebpathPageHeadingNew.vue'
 import WebpathPageHeadingEdit from 'src/pages/WebpathPageHeadingEdit.vue'
+import WebpathPageHeadingLogs from 'src/pages/WebpathPageHeadingLogs.vue'
 import WebpathPageHeadingLocalizations from 'src/pages/WebpathPageHeadingLocalizations.vue'
 import WebpathPageHeadingLocalizationNew from 'src/pages/WebpathPageHeadingLocalizationNew.vue'
 import WebpathPageHeadingLocalizationEdit from 'src/pages/WebpathPageHeadingLocalizationEdit.vue'
+import WebpathPageHeadingLocalizationLogs from 'src/pages/WebpathPageHeadingLocalizationLogs.vue'
 import WebpathPageLinks from 'src/pages/WebpathPageLinks.vue'
 import WebpathPageLinkNew from 'src/pages/WebpathPageLinkNew.vue'
 import WebpathPageLinkEdit from 'src/pages/WebpathPageLinkEdit.vue'
+import WebpathPageLinkLogs from 'src/pages/WebpathPageLinkLogs.vue'
 import WebpathPageLocalizations from 'src/pages/WebpathPageLocalizations.vue'
 import WebpathPageLocalizationNew from 'src/pages/WebpathPageLocalizationNew.vue'
 import WebpathPageLocalizationEdit from 'src/pages/WebpathPageLocalizationEdit.vue'
+import WebpathPageLocalizationLogs from 'src/pages/WebpathPageLocalizationLogs.vue'
 import WebpathPageMedia from 'src/pages/WebpathPageMedia.vue'
 import WebpathPageMediaNew from 'src/pages/WebpathPageMediaNew.vue'
 import WebpathPageMediaEdit from 'src/pages/WebpathPageMediaEdit.vue'
+import WebpathPageMediaLogs from 'src/pages/WebpathPageMediaLogs.vue'
 import WebpathPageMediaCollections from 'src/pages/WebpathPageMediaCollections.vue'
 import WebpathPageMediaCollectionNew from 'src/pages/WebpathPageMediaCollectionNew.vue'
 import WebpathPageMediaCollectionEdit from 'src/pages/WebpathPageMediaCollectionEdit.vue'
+import WebpathPageMediaCollectionLogs from 'src/pages/WebpathPageMediaCollectionLogs.vue'
 import WebpathPageMenus from 'src/pages/WebpathPageMenus.vue'
 import WebpathPageMenuNew from 'src/pages/WebpathPageMenuNew.vue'
 import WebpathPageMenuEdit from 'src/pages/WebpathPageMenuEdit.vue'
+import WebpathPageMenuLogs from 'src/pages/WebpathPageMenuLogs.vue'
 import WebpathPagePublications from 'src/pages/WebpathPagePublications.vue'
 import WebpathPagePublicationNew from 'src/pages/WebpathPagePublicationNew.vue'
 import WebpathPagePublicationEdit from 'src/pages/WebpathPagePublicationEdit.vue'
+import WebpathPagePublicationLogs from 'src/pages/WebpathPagePublicationLogs.vue'
 import WebpathPageRelated from 'src/pages/WebpathPageRelated.vue'
 import WebpathPageRelatedNew from 'src/pages/WebpathPageRelatedNew.vue'
 import WebpathPageRelatedEdit from 'src/pages/WebpathPageRelatedEdit.vue'
+import WebpathPageRelatedLogs from 'src/pages/WebpathPageRelatedLogs.vue'
 import TemplateBlocks from 'src/pages/TemplateBlocks.vue'
 
 const routes = [
@@ -176,6 +206,19 @@ const routes = [
         },
     },
 
+    // webpath logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/logs',
+        name: 'WebpathLogs',
+        component: WebpathLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathEdit'
+            }
+        }
+    },
+
     // webpath locks
     {
         path: 'websites/:site_id/webpaths/:webpath_id/locks',
@@ -237,6 +280,19 @@ const routes = [
         },
     },
 
+    // webpath publication logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/publications/:publication_id/logs',
+        name: 'WebpathPublicationLogs',
+        component: WebpathPublicationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPublicationEdit'
+            }
+        }
+    },
+
     // webpath pages
     {
         path: 'websites/:site_id/webpaths/:webpath_id/pages',
@@ -272,6 +328,19 @@ const routes = [
                 parent: 'WebpathPages'
             }
         },
+    },
+
+    // webpath page logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/logs',
+        name: 'WebpathPageLogs',
+        component: WebpathPageLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageEdit'
+            }
+        }
     },
 
     // webpath page locks
@@ -335,6 +404,19 @@ const routes = [
         },
     },
 
+    // webpath page block logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/blocks/:block_id/logs',
+        name: 'WebpathPageBlockLogs',
+        component: WebpathPageBlockLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageBlockEdit'
+            }
+        }
+    },
+
     // webpath page carousels
     {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels',
@@ -370,6 +452,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // webpath page carousel logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels/:carousel_id/logs',
+        name: 'WebpathPageCarouselLogs',
+        component: WebpathPageCarouselLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageCarouselEdit'
+            }
+        }
     },
 
     // webpath page localizations
@@ -409,6 +504,19 @@ const routes = [
         },
     },
 
+    // webpath page localization logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/localizations/:localization_id/logs',
+        name: 'WebpathPageLocalizationLogs',
+        component: WebpathPageLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageLocalizationEdit'
+            }
+        }
+    },
+
     // webpath page headings
     {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings',
@@ -444,6 +552,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // webpath page heading logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/:heading_id/logs',
+        name: 'WebpathPageHeadingLogs',
+        component: WebpathPageHeadingLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageHeadingEdit'
+            }
+        }
     },
 
     // webpath page heading localizations
@@ -483,6 +604,19 @@ const routes = [
         },
     },
 
+    // webpath page heading localization logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/headings/:heading_id/localizations/:localization_id/logs',
+        name: 'WebpathPageHeadingLocalizationLogs',
+        component: WebpathPageHeadingLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageHeadingLocalizationEdit'
+            }
+        }
+    },
+
     // webpath page links
     {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/links',
@@ -518,6 +652,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // webpath page link logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/links/:link_id/logs',
+        name: 'WebpathPageLinkLogs',
+        component: WebpathPageLinkLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageLinkEdit'
+            }
+        }
     },
 
     // webpath page media
@@ -557,6 +704,19 @@ const routes = [
         },
     },
 
+    // webpath page media logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media/:media_id/logs',
+        name: 'WebpathPageMediaLogs',
+        component: WebpathPageMediaLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageMediaEdit'
+            }
+        }
+    },
+
     // webpath page media collections
     {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media-collections',
@@ -592,6 +752,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // webpath page media collection logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/media-collecitons/:collection_id/logs',
+        name: 'WebpathPageMediaCollectionLogs',
+        component: WebpathPageMediaCollectionLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageMediaCollectionEdit'
+            }
+        }
     },
 
     // webpath page menus
@@ -631,6 +804,19 @@ const routes = [
         },
     },
 
+    // webpath page menu logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/menus/:menu_id/logs',
+        name: 'WebpathPageMenuLogs',
+        component: WebpathPageMenuLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageMenuEdit'
+            }
+        }
+    },
+
     // webpath page publications
     {
         path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/publications',
@@ -666,6 +852,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // webpath page publication logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/publications/:publication_id/logs',
+        name: 'WebpathPagePublicationLogs',
+        component: WebpathPagePublicationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPagePublicationEdit'
+            }
+        }
     },
 
     // webpath page related
@@ -705,6 +904,19 @@ const routes = [
         },
     },
 
+    // webpath page related logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/related/:related_id/logs',
+        name: 'WebpathPageRelatedLogs',
+        component: WebpathPageRelatedLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathPageRelatedEdit'
+            }
+        }
+    },
+
     // media
     {
         path: 'media',
@@ -740,6 +952,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // media logs
+    {
+        path: 'media/:media_id/logs',
+        name: 'MediaLogs',
+        component: MediaLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'MediaEdit'
+            }
+        }
     },
 
     // medias locks
@@ -801,6 +1026,19 @@ const routes = [
                 };
             }
         },
+    },
+
+    // media collection logs
+    {
+        path: 'media-collections/:collection_id/logs',
+        name: 'MediaCollectionLogs',
+        component: MediaCollectionLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'MediaCollectionEdit'
+            }
+        }
     },
 
     // media collections locks
@@ -865,6 +1103,19 @@ const routes = [
         }
     },
 
+    // media collection item logs
+    {
+        path: 'media-collections/:collection_id/items/:collection_item_id/logs',
+        name: 'MediaCollectionItemLogs',
+        component: MediaCollectionItemLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'MediaCollectionItemEdit'
+            }
+        }
+    },
+
     // menus
     {
         path: 'menus',
@@ -900,6 +1151,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // menu logs
+    {
+        path: 'menus/:menu_id/logs',
+        name: 'MenuLogs',
+        component: MenuLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'MenuEdit'
+            }
+        }
     },
 
     // menu locks
@@ -961,6 +1225,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // menu item logs
+    {
+        path: 'menus/:menu_id/items/:menu_item_id/logs',
+        name: 'MenuItemLogs',
+        component: MenuItemLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'MenuItemEdit'
+            }
+        }
     },
 
     // carousels
@@ -1037,6 +1314,19 @@ const routes = [
         }
     },
 
+    // carousel item logs
+    {
+        path: 'carousels/:carousel_id/items/:carousel_item_id/logs',
+        name: 'CarouselItemLogs',
+        component: CarouselItemLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CarouselItemEdit'
+            }
+        }
+    },
+
     // carousel item links
       {
         path: 'carousels/:carousel_id/items/:carousel_item_id/links',
@@ -1070,6 +1360,19 @@ const routes = [
                   label: this.$route.params.carousel_item_link_id.toString(),
                   parent: 'CarouselItemLinks'
                 }
+            }
+        }
+    },
+
+    // carousel item link logs
+    {
+        path: 'carousels/:carousel_id/items/:carousel_item_id/links/:carousel_item_link_id/logs',
+        name: 'CarouselItemLinkLogs',
+        component: CarouselItemLinkLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CarouselItemLinkEdit'
             }
         }
     },
@@ -1111,6 +1414,19 @@ const routes = [
         }
     },
 
+    // carousel item localization logs
+    {
+        path: 'carousels/:carousel_id/items/:carousel_item_id/localizations/:carousel_item_localization_id/logs',
+        name: 'CarouselItemLocalizationLogs',
+        component: CarouselItemLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CarouselItemLocalizationEdit'
+            }
+        }
+    },
+
     // carousel item link localizations
     {
         path: 'carousels/:carousel_id/items/:carousel_item_id/links/:carousel_item_link_id/localizations',
@@ -1148,6 +1464,32 @@ const routes = [
         }
     },
 
+    // carousel item link localization logs
+    {
+        path: 'carousels/:carousel_id/items/:carousel_item_id/links/:carousel_item_link_id/localizations/:carousel_item_link_localization_id/logs',
+        name: 'CarouselItemLinkLocalizationLogs',
+        component: CarouselItemLinkLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CarouselItemLinkLocalizationEdit'
+            }
+        }
+    },
+
+    // carousel logs
+    {
+        path: 'carousels/:carousel_id/logs',
+        name: 'CarouselLogs',
+        component: CarouselLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CarouselEdit'
+            }
+        }
+    },
+
     // carousel locks
     {
         path: 'carousels/:carousel_id/locks',
@@ -1171,6 +1513,7 @@ const routes = [
             }
         },
     },
+
     // publications
     {
         path: 'publications',
@@ -1206,6 +1549,19 @@ const routes = [
                 }
             }
         },
+    },
+
+    // publication logs
+    {
+        path: 'publications/:publication_id/logs',
+        name: 'PublicationLogs',
+        component: PublicationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'PublicationEdit'
+            }
+        }
     },
 
     // publication locks
@@ -1269,6 +1625,19 @@ const routes = [
         }
     },
 
+    // publication attachment logs
+    {
+        path: 'publications/:publication_id/attachments/:attachment_id/logs',
+        name: 'PublicationAttachmentLogs',
+        component: PublicationAttachmentLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'PublicationAttachmentEdit'
+            }
+        }
+    },
+
     // publication links
     {
         path: 'publications/:publication_id/links',
@@ -1302,6 +1671,19 @@ const routes = [
                   label: this.$route.params.link_id.toString(),
                   parent: 'PublicationLinks'
                 }
+            }
+        }
+    },
+
+    // publication link logs
+    {
+        path: 'publications/:publication_id/links/:link_id/logs',
+        name: 'PublicationLinkLogs',
+        component: PublicationLinkLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'PublicationLinkEdit'
             }
         }
     },
@@ -1343,6 +1725,19 @@ const routes = [
         }
     },
 
+    // publication gallery logs
+    {
+        path: 'publications/:publication_id/galleries/:gallery_id/logs',
+        name: 'PublicationGalleryLogs',
+        component: PublicationGalleryLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'PublicationGalleryEdit'
+            }
+        }
+    },
+
     // publication localizations
     {
         path: 'publications/:publication_id/localizations',
@@ -1380,6 +1775,19 @@ const routes = [
         }
     },
 
+    // publication localization logs
+    {
+        path: 'publications/:publication_id/localizations/:localization_id/logs',
+        name: 'PublicationLocalizationLogs',
+        component: PublicationLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'PublicationLocalizationEdit'
+            }
+        }
+    },
+
     // publication related
     {
         path: 'publications/:publication_id/related',
@@ -1413,6 +1821,19 @@ const routes = [
                   label: this.$route.params.related_id.toString(),
                   parent: 'PublicationRelated'
                 }
+            }
+        }
+    },
+
+    // publication related logs
+    {
+        path: 'publications/:publication_id/related/:related_id/logs',
+        name: 'PublicationRelatedLogs',
+        component: PublicationRelatedLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'PublicationRelatedEdit'
             }
         }
     },

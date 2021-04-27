@@ -10,6 +10,14 @@
                     <b-card>
                         <div class="clearfix mb-5">
                             <div class="pull-left">
+                                <router-link :to="{ name: 'WebpathLogs',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
                                 <router-link :to="{ name: 'WebpathPages',
                                                     params: { site_id: site_id,
                                                               webpath_id: webpath_id }}"

@@ -9,6 +9,16 @@
                 <div class="col-12">
                     <b-card>
                         <div class="clearfix mb-5">
+                            <div class="pull-left">
+                                <router-link :to="{ name: 'PublicationLinkLogs',
+                                                    params: { publication_id: publication_id,
+                                                              link_id: link_id}}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
+                            </div>
                             <div class="pull-right">
                                 <b-button
                                     @click="deleteModal()"

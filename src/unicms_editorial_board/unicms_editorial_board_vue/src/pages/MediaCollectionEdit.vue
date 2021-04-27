@@ -10,6 +10,13 @@
                     <b-card>
                         <div class="clearfix mb-5">
                             <div class="pull-left">
+                                <router-link :to="{ name: 'MediaCollectionLogs',
+                                                    params: { collection_id: collection_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
                                 <router-link :to="{ name: 'MediaCollectionItems',
                                                     params: { collection_id: collection_id }}"
                                     class="btn btn-sm btn-outline-secondary">

@@ -10,9 +10,16 @@
                     <b-card>
                         <div class="clearfix mb-5">
                             <div class="pull-left">
+                                <router-link :to="{ name: 'CarouselLogs',
+                                            params: { carousel_id: carousel_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
                                 <router-link :to="{ name: 'CarouselItems',
                                             params: { carousel_id: carousel_id }}"
-                                    class="btn btn-sm btn-outline-secondary">
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
                                     <b-icon icon="list-ul"
                                         variant="secondary"></b-icon>
                                     Items
@@ -67,6 +74,13 @@ export default {
                     this.page_title = response.data.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.carousel_id)
+                })
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: 'Error: Unable to get data. Contact technical support',
+                          dismissable: true }
+                    )
                 })
         },
         onSubmit(event) {

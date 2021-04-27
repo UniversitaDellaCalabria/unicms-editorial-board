@@ -77,6 +77,15 @@
                         </div>
                         <hr />
                         <div class="clearfix mb-5">
+                            <router-link :to="{ name: 'WebpathPageLogs',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="clock-history"
+                                        variant="secondary"></b-icon>
+                                    History
+                                </router-link>
                             <router-link :to="{ name: 'WebpathPageBlocks',
                                             params: { site_id: site_id,
                                                       webpath_id: webpath_id,
