@@ -8,7 +8,8 @@
         :arrays="arrays"
         :arrays_map="arrays_map"
         :ordering_list="ordering_list"
-        :page_title="page_title">
+        :page_title="page_title"
+        :showCreatedBy="false">
 
         <template #activation="data">
             <b-icon

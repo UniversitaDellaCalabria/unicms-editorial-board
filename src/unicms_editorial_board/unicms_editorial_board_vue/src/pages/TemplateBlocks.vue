@@ -4,7 +4,8 @@
         :fields="fields"
         :images="images"
         :ordering_list="ordering_list"
-        :page_title="page_title">
+        :page_title="page_title"
+        :showCreatedBy="false" >
     </CompleteTable>
 </template>
 <script>
@@ -17,14 +18,16 @@ export default {
     data () {
         return {
             api_source: '/api/editorial-board/templates/blocks/',
-            fields: ['name',
+            fields: ['id',
+                     'name',
                      {key: 'type_friendly', label: 'Type'},
                      'image',
                      'description',
             ],
             images: ['image'],
-            ordering_list: [{ text: 'Name', value: 'name' },
-                            { text: 'Type', value: 'type_friendly' },
+            ordering_list: [{ text: 'Id', value: 'id' },
+                            { text: 'Name', value: 'name' },
+                            { text: 'Type', value: 'type' },
                             { text: 'Description', value: 'description' }],
             page_title: 'Template blocks'
         }

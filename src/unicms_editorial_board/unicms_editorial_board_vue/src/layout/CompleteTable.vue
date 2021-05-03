@@ -17,7 +17,9 @@
                             </div>
 
                             <div class="row pt-3">
-                                <div class="col col-12 col-md-8">
+                                <div
+                                    v-if="showCreatedBy"
+                                    class="col col-12 col-md-5">
                                     <b-form-input
                                         v-model="search"
                                         v-on:input="callApi(null, 1)"
@@ -26,6 +28,27 @@
                                         class="mb-3">
                                     </b-form-input>
                                 </div>
+                                <div
+                                    v-else
+                                    class="col col-12 col-md-8">
+                                    <b-form-input
+                                        v-model="search"
+                                        v-on:input="callApi(null, 1)"
+                                        placeholder="Search..."
+                                        type="search"
+                                        class="mb-3">
+                                    </b-form-input>
+                                </div>
+                                <div
+                                    class="col col-12 col-md-3"
+                                    v-if="showCreatedBy">
+                                    <CreatedByFilter
+                                        :created_by="created_by"
+                                        :created_by_list="created_by_list"
+                                        @updateCreatedBy="created_by = $event;"
+                                        @callApi="callApi(null, page)"
+                                    />
+                                </div>
                                 <div class="col col-12 col-md-4">
                                     <OrderingFilter
                                         :ordering="ordering"
@@ -33,7 +56,6 @@
                                         :ordering_list="ordering_list"
                                         :sortDesc="sortDesc"
                                         @updateSortDesc="sortDesc = $event;"
-                                        :ordering="ordering"
                                         @callApi="callApi(null, page)"
                                     />
                                 </div>
@@ -145,11 +167,13 @@
     </div>
 </template>
 <script>
+import CreatedByFilter from '../components/Tables/CreatedByFilter.vue'
 import OrderingFilter from '../components/Tables/OrderingFilter.vue'
 
 export default {
     name: 'CompleteTable',
     components: {
+        CreatedByFilter,
         OrderingFilter
     },
     props: {
@@ -162,7 +186,11 @@ export default {
         images: { type: Array },
         mainMethod: { type: Function },
         ordering_list: { type: Array },
-        page_title: { type: String }
+        page_title: { type: String },
+        showCreatedBy: {
+            type: String,
+            default: true
+        },
     },
     data () {
         return {
@@ -179,7 +207,12 @@ export default {
             prev: '',
             search: '',
             sortDesc: '+',
-            ordering: 'id'
+            ordering: 'id',
+            created_by: '',
+            created_by_list: [
+                { text: 'Only items created by me', value: ''},
+                { text: 'Show all items', value: ''},
+            ],
         }
     },
     methods: {
@@ -200,13 +233,22 @@ export default {
                 if (this.arrays_map[i][key])
                     return this.arrays_map[i][key]
         },
+        getCurrentUserID(){
+            this.axios
+                .get('/api/editorial-board/users/current/')
+                .then(response => {
+                    this.created_by = response.data[0];
+                    this.$set(this.created_by_list[0], 'value', response.data[0]);
+                    this.callApi();
+                })
+        },
         callApi(url, page=null) {
             if (this.mainMethod) {
                 this.mainMethod(url, page);
             }
             else {
                 let target_page = page || this.page;
-                let source = this.api_source + '?page=' + target_page + '&search=' + this.search + '&ordering=' + this.sortDesc + this.ordering;
+                let source = this.api_source + '?page=' + target_page + '&search=' + this.search + '&ordering=' + this.sortDesc + this.ordering + '&created_by=' + this.created_by;
                 if (url) source = url;
                 this.axios
                     .get(source)
@@ -281,7 +323,9 @@ export default {
         }
     },
     mounted() {
-        this.callApi();
+        console.log(this.ordering)
+        if (this.showCreatedBy) this.getCurrentUserID();
+        else this.callApi();
     },
     watch: {
         'currentPage': function(){
