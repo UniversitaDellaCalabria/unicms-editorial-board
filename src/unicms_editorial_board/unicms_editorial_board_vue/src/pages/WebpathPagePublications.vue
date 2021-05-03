@@ -54,8 +54,8 @@ export default {
             page_id: this.$route.params.page_id,
             fields: [
                 'id',
-                {key: 'publication.name', label: 'Name', sortable: true},
-                {key: 'publication.title', label: 'Title', sortable: true},
+                {key: 'publication.name', label: 'Name'},
+                {key: 'publication.title', label: 'Title'},
                 'order',
                 {key: 'is_active', label: 'Active'},
                 'actions'

@@ -194,7 +194,7 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/publications/'+this.item+'/',
+                .delete('/api/editorial-board/publications/'+this.publication_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {

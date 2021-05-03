@@ -113,8 +113,8 @@
                                     <b-img
                                         v-else-if="images && isImage(data.field.key) && data.value"
                                         :src="data.value.file || data.value"
-                                        fluid
-                                        alt="Responsive image">
+                                        alt="Responsive image"
+                                        style="max-width: 220px">
                                     </b-img>
                                     <span
                                         v-else-if="arrays && isArray(data.field.key) && data.value">

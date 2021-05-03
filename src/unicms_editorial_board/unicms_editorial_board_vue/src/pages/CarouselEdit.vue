@@ -60,6 +60,7 @@ export default {
             form: {},
             form_source: '/api/editorial-board/carousels/form/',
             page_title: '',
+            interval: null
         }
     },
     methods: {
