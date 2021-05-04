@@ -1,5 +1,6 @@
 <template>
   <div class="sidebar"
+       v-if="mode != 'raw'"
        :style="sidebarStyle"
        :data-color="backgroundColor"
        :data-image="backgroundImage">
@@ -41,6 +42,11 @@
   export default {
     components: {
       SidebarLink
+    },
+    data() {
+        return {
+            mode: '',
+        }
     },
     props: {
       title: {
@@ -87,6 +93,9 @@
           backgroundImage: `url(${this.backgroundImage})`
         }
       }
+    },
+    mounted() {
+        this.mode = this.$route.query.mode
     }
   }
 

@@ -1,4 +1,5 @@
 <template>
+
     <b-form @submit="submit">
 
         <b-form-group
@@ -51,6 +52,13 @@
                     :multiple="field.multiple ? true : false"
                     :required="field.required ? true : false">
                 </v-select>
+
+                <a
+                    v-if="field.id in add_modal_fields"
+                    @click="openPopup(field.id)"
+                    class="btn btn-success btn-sm mt-2">
+                    Add new
+                </a>
 
                 <div class="mt-3" v-if="field.id in files && files[field.id]">
                     <p>Selected</p>
@@ -133,7 +141,12 @@
 
         <b-button type="submit" block variant="success">Save</b-button>
 
+        <b-modal id="modal-1" title="BootstrapVue">
+            <router-view :name="MediaNew">
+        </b-modal>
+
     </b-form>
+
 </template>
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue2'
@@ -151,8 +164,9 @@ export default {
         submit: String,
         form_source: String,
         files: { default: {} },
-        rich_text_fields: { default: []},
-        tag_fields: { default: []}
+        add_modal_fields: { default: {} },
+        rich_text_fields: { default: [] },
+        tag_fields: { default: [] }
     },
     data () {
         return {
@@ -216,10 +230,16 @@ export default {
         getOptionsFromParent(id, value){
             this.$set(this.initial, id, value);
             this.$set(this.options, id, value);
+        },
+        openPopup(field_id){
+            window.open(document.location.origin+'/editorial-board/'+this.add_modal_fields[field_id]+'?mode=raw',
+                        field_id,
+                        'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=800,height=600');
+
         }
     },
     mounted() {
-        this.getForm()
+        this.getForm();
     }
 }
 </script>

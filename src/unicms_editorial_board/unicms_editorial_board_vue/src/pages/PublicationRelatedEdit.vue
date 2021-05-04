@@ -38,7 +38,8 @@
                                 ref="form"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -56,6 +57,7 @@ export default {
             related_id: this.$route.params.related_id,
             form: {},
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/related/form/',
+            add_modal_fields: {'related':  this.$router.resolve({name: 'PublicationNew'}).href},
             page_title: ''
         }
     },

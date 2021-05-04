@@ -323,7 +323,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.ordering)
         if (this.showCreatedBy) this.getCurrentUserID();
         else this.callApi();
     },

@@ -76,7 +76,6 @@ export default {
                             this.$set(this.form, key, value.id)
                         }
                         else if(this.date_fields.includes(key) && value) {
-                            console.log(value)
                             this.$set(this.form, key,
                                       value.substr(0,16).replace("T"," "))
                         }

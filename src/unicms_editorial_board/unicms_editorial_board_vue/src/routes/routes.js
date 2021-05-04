@@ -1253,7 +1253,7 @@ const routes = [
         }
     },
     {
-        path: 'carousels/:carousel_id/new',
+        path: 'carousels/new',
         name: 'CarouselNew',
         component: CarouselNew,
         meta: {

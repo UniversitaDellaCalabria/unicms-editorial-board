@@ -7,7 +7,8 @@
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="Edit">
+                    <b-card>
+                        <b-card-title>New carousel item link</b-card-title>
                         <b-card-text>
                             <django-form
                                 :form="form"

@@ -4,7 +4,8 @@
         :fields="fields"
         :ordering_list="ordering_list"
         :page_title="page_title"
-        :dates="dates" >
+        :dates="dates"
+        :showCreatedBy="false">
 
     </CompleteTable>
 </template>

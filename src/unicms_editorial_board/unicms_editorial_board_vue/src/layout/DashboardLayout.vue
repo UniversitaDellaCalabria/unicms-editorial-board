@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <side-bar>
+    <side-bar
+        v-if="mode != 'raw'">
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
         <b-icon icon="graph-up"
@@ -102,13 +103,20 @@
       DashboardContent,
       MobileMenu
     },
+    data() {
+        return {
+            mode: '',
+        }
+    },
     methods: {
       toggleSidebar () {
         if (this.$sidebar.showSidebar) {
           this.$sidebar.displaySidebar(false)
         }
       }
+    },
+    mounted() {
+        this.mode = this.$route.query.mode
     }
   }
-
 </script>

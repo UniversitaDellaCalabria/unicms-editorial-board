@@ -12,7 +12,8 @@
                             <django-form
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -31,6 +32,7 @@ export default {
             page_id: this.$route.params.page_id,
             form: {'page': parseInt(this.$route.params.page_id)},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/form/',
+            add_modal_fields: {'publication':  this.$router.resolve({name: 'PublicationNew'}).href},
         }
     },
     methods: {

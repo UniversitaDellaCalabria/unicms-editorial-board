@@ -1,5 +1,7 @@
 <template>
-  <footer class="footer">
+  <footer
+    v-if="mode != 'raw'"
+    class="footer">
     <div class="container-fluid">
       <nav>
         <ul class="footer-menu">
@@ -22,7 +24,16 @@
   </footer>
 </template>
 <script>
-  export default {}
+  export default {
+    data () {
+      return {
+        mode: ''
+      }
+    },
+    mounted() {
+        this.mode = this.$route.query.mode
+    }
+  }
 
 </script>
 <style>

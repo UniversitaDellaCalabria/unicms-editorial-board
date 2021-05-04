@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <b-card>
-                        <b-card-title>New</b-card-title>
+                        <b-card-title>New publication link</b-card-title>
                         <b-card-text>
                             <django-form
                                 :form="form"

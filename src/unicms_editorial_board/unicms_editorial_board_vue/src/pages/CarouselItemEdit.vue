@@ -55,7 +55,8 @@
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
-                                :files="files" />
+                                :files="files"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -73,6 +74,7 @@ export default {
             carousel_item_id: this.$route.params.carousel_item_id,
             form: {},
             form_source: '/api/editorial-board/carousels/items/form/',
+            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href},
             files: {},
             page_title: ''
         }

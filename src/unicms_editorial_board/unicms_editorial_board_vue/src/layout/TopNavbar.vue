@@ -1,5 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg">
+  <nav
+    v-if="mode != 'raw'"
+    class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Editorial Board</a>
       <button type="button"
@@ -40,7 +42,8 @@
     },
     data () {
       return {
-        activeNotifications: false
+        activeNotifications: false,
+        mode: ''
       }
     },
     methods: {
@@ -59,6 +62,9 @@
       hideSidebar () {
         this.$sidebar.displaySidebar(false)
       }
+    },
+    mounted() {
+        this.mode = this.$route.query.mode
     }
   }
 

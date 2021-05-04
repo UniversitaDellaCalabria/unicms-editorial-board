@@ -38,7 +38,8 @@
                             <django-form
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -58,6 +59,7 @@ export default {
             carousel_id: this.$route.params.carousel_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/carousels/form/',
+            add_modal_fields: {'carousel':  this.$router.resolve({name: 'CarouselNew'}).href},
             page_title: ''
         }
     },

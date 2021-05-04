@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="container-fluid">
-            <Breadcrumbs/>
+            <Breadcrumbs v-if="$route.query.mode != 'raw'"/>
 
             <stacked-alerts :alerts="alerts" />
 
@@ -44,8 +44,9 @@ export default {
                           message: 'carousel added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'Carousels',
-                                       params: {alerts: this.alerts}})
+                    if(this.$route.query.mode != 'raw')
+                        this.$router.push({name: 'Carousels',
+                                           params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {

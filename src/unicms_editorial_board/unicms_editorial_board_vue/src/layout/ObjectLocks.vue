@@ -6,7 +6,8 @@
         :dates="dates"
         :ordering_list="ordering_list"
         :page_title="page_title"
-        :mainMethod="callApi">
+        :mainMethod="callApi"
+        :showCreatedBy="false">
 
         <template #add_new>
             <router-link :to="{ name: addNewClass,

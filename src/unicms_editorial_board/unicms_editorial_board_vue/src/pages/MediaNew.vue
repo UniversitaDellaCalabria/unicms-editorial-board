@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="container-fluid">
-            <Breadcrumbs/>
+            <Breadcrumbs v-if="$route.query.mode != 'raw'"/>
 
             <stacked-alerts :alerts="alerts" />
 
@@ -10,6 +10,7 @@
                     <b-card title="New Media">
                         <b-card-text>
                             <django-form
+
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -27,7 +28,7 @@ export default {
         return {
             alerts: [],
             form: {},
-            form_source: '/api/editorial-board/medias/form/'
+            form_source: '/api/editorial-board/medias/form/',
         }
     },
     methods: {
@@ -48,8 +49,9 @@ export default {
                           message: 'item added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'Media',
-                                       params: {alerts: this.alerts}})
+                    if(this.$route.query.mode != 'raw')
+                        this.$router.push({name: 'Media',
+                                           params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
@@ -62,6 +64,6 @@ export default {
                     }
                 })
         },
-    },
+    }
 }
 </script>

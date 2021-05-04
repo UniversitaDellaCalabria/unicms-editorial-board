@@ -39,7 +39,8 @@
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -59,6 +60,7 @@ export default {
             menu_id: this.$route.params.menu_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/menus/form/',
+            add_modal_fields: {'menu':  this.$router.resolve({name: 'MenuNew'}).href},
             page_title: ''
         }
     },

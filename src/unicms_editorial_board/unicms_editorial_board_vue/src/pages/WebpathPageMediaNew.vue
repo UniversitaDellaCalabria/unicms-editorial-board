@@ -13,6 +13,7 @@
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
+                                :add_modal_fields="add_modal_fields"
                                 :files="files" />
                         </b-card-text>
                     </b-card>
@@ -33,6 +34,7 @@ export default {
             form: {'page': parseInt(this.$route.params.page_id)},
             files: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/medias/form/',
+            add_modal_fields: {'media':  this.$router.resolve({name: 'MediaNew'}).href},
         }
     },
     methods: {

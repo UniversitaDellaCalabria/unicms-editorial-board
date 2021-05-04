@@ -37,7 +37,8 @@
                             <django-form
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -55,6 +56,7 @@ export default {
             gallery_id: this.$route.params.gallery_id,
             form: {},
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/form/',
+            add_modal_fields: {'collection':  this.$router.resolve({name: 'MediaCollectionNew'}).href},
             page_title: ''
         }
     },

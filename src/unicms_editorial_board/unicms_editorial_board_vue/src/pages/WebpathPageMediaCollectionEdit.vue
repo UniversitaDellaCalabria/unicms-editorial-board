@@ -40,7 +40,8 @@
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
-                                :files="files" />
+                                :files="files"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -61,6 +62,7 @@ export default {
             form: {},
             files: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/media-collections/form/',
+            add_modal_fields: {'collection':  this.$router.resolve({name: 'MediaCollectionNew'}).href},
             page_title: ''
         }
     },

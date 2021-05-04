@@ -1,13 +1,13 @@
 <template>
     <div class="content">
         <div class="container-fluid">
-            <Breadcrumbs/>
+            <Breadcrumbs v-if="$route.query.mode != 'raw'"/>
 
             <stacked-alerts :alerts="alerts" />
 
             <div class="row">
                 <div class="col-12">
-                    <b-card title="New carousel">
+                    <b-card title="New menu">
                         <b-card-text>
                             <django-form
                                 :form="form"
@@ -44,8 +44,9 @@ export default {
                           message: 'menu added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'Menus',
-                                       params: {alerts: this.alerts}})
+                    if(this.$route.query.mode != 'raw')
+                        this.$router.push({name: 'Menus',
+                                           params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
