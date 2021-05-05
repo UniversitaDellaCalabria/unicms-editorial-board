@@ -52,6 +52,10 @@ import MenuItems from 'src/pages/MenuItems.vue'
 import MenuItemEdit from 'src/pages/MenuItemEdit.vue'
 import MenuItemNew from 'src/pages/MenuItemNew.vue'
 import MenuItemLogs from 'src/pages/MenuItemLogs.vue'
+import MenuItemLocalizations from 'src/pages/MenuItemLocalizations.vue'
+import MenuItemLocalizationEdit from 'src/pages/MenuItemLocalizationEdit.vue'
+import MenuItemLocalizationNew from 'src/pages/MenuItemLocalizationNew.vue'
+import MenuItemLocalizationLogs from 'src/pages/MenuItemLocalizationLogs.vue'
 import Publications from 'src/pages/Publications.vue'
 import PublicationNew from 'src/pages/PublicationNew.vue'
 import PublicationEdit from 'src/pages/PublicationEdit.vue'
@@ -1236,6 +1240,56 @@ const routes = [
             breadcrumb: {
                 label: 'Logs',
                 parent: 'MenuItemEdit'
+            }
+        }
+    },
+
+    // menu item localizations
+    {
+        path: 'menus/:menu_id/items/:menu_item_id/localizations',
+        name: 'MenuItemLocalizations',
+        component: MenuItemLocalizations,
+        meta: {
+            breadcrumb: {
+                label: 'Localizations',
+                parent: 'MenuItemEdit'
+            }
+        }
+    },
+    {
+        path: 'menus/:menu_id/items/:menu_item_id/localizations/new',
+        name: 'MenuItemLocalizationNew',
+        component: MenuItemLocalizationNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'MenuItemLocalizations'
+            }
+        }
+    },
+    {
+        path: 'menus/:menu_id/items/:menu_item_id/localizations/:menu_item_localization_id/edit',
+        name: 'MenuItemLocalizationEdit',
+        component: MenuItemLocalizationEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.menu_item_localization_id.toString(),
+                  parent: 'MenuItemLocalizations'
+                }
+            }
+        }
+    },
+
+    // carousel item localization logs
+    {
+        path: 'menus/:menu_id/items/:menu_item_id/localizations/:menu_item_localization_id/logs',
+        name: 'MenuItemLocalizationLogs',
+        component: MenuItemLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'MenuItemLocalizationEdit'
             }
         }
     },

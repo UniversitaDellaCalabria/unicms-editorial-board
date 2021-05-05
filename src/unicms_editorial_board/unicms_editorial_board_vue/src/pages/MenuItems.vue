@@ -58,6 +58,18 @@
                                         v-else></b-icon>
                                 </template>
 
+                                <template #cell(related)="item">
+                                    <router-link :to="{ name: 'MenuItemLocalizations',
+                                                    params: { menu_id: menu_id,
+                                                              menu_item_id: item.item.id}}"
+                                        class="btn btn-block btn-sm btn-outline-secondary">
+                                        <b-icon icon="flag"
+                                            variant="secondary"></b-icon>
+                                        Localizations
+                                    </router-link>
+                                </template>
+
+
                                 <template #cell(actions)="data">
                                     <router-link :to="{ name: 'MenuItemEdit',
                                                         params: { menu_id: menu_id,
@@ -118,6 +130,7 @@ export default {
                 {key: 'parent_name', label: 'Parent'},
                 'order',
                 {key: 'is_active', label: 'Active'},
+                {key: 'related', label: 'Related'},
                 'actions'
             ],
             filter: null,
