@@ -89,6 +89,10 @@ export default {
                         this.$refs.form.getOptionsFromParent('webpath',
                             [{"text": response.data.webpath.name,
                               "value": response.data.webpath.id}])
+                    if(response.data.inherited_content)
+                        this.$refs.form.getOptionsFromParent('inherited_content',
+                            [{"text": response.data.inherited_content.full_name,
+                              "value": response.data.inherited_content.id}])
                 })
         },
         onSubmit(event) {
