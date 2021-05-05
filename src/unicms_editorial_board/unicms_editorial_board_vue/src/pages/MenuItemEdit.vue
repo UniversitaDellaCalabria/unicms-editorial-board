@@ -77,7 +77,7 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='webpath') {
+                        if(key=='webpath' || key=='inherited_content') {
                             this.$set(this.form, key, value.id)
                         }
                         else this.$set(this.form, key, value)
