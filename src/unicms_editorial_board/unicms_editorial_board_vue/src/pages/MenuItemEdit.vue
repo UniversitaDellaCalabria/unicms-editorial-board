@@ -67,7 +67,8 @@ export default {
             form_source: '/api/editorial-board/menus/'+this.$route.params.menu_id+'/items/form/',
             files: {},
             page_title: '',
-            add_modal_fields: {'inherited_content': this.$router.resolve({name: 'PublicationNew'}).href},
+            add_modal_fields: {'inherited_content': this.$router.resolve({name: 'PublicationNew'}).href,
+                               'publication': this.$router.resolve({name: 'PublicationNew'}).href},
         }
     },
     methods: {
@@ -77,7 +78,7 @@ export default {
                 .get(source)
                 .then(response => {
                     for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='webpath' || key=='inherited_content') {
+                        if(key=='webpath' || key=='inherited_content' || key=='publication') {
                             this.$set(this.form, key, value.id)
                         }
                         else this.$set(this.form, key, value)
@@ -93,6 +94,10 @@ export default {
                         this.$refs.form.getOptionsFromParent('inherited_content',
                             [{"text": response.data.inherited_content.full_name,
                               "value": response.data.inherited_content.id}])
+                    if(response.data.publication)
+                        this.$refs.form.getOptionsFromParent('publication',
+                            [{"text": response.data.publication.full_name,
+                              "value": response.data.publication.id}])
                 })
         },
         onSubmit(event) {

@@ -30,7 +30,8 @@ export default {
             menu_id: this.$route.params.menu_id,
             form: {'menu': parseInt(this.$route.params.menu_id)},
             form_source: '/api/editorial-board/menus/'+this.$route.params.menu_id+'/items/form/',
-            add_modal_fields: {'inherited_content': this.$router.resolve({name: 'PublicationNew'}).href},
+            add_modal_fields: {'inherited_content': this.$router.resolve({name: 'PublicationNew'}).href,
+                               'publication': this.$router.resolve({name: 'PublicationNew'}).href},
         }
     },
     methods: {
