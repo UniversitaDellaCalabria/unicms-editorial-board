@@ -52,14 +52,12 @@ export default {
                 {key: 'file_size', label: 'Size (kb)'},
                 {key: 'file_dimensions', label: 'Dimensions'},
                 'description',
-                {key: 'is_active', label: 'Active'},
                 'actions'
             ],
             images: ['file'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Title', value: 'title' },
-                            { text: 'Description', value: 'description' },
-                            { text: 'State', value: 'is_active'}],
+                            { text: 'Description', value: 'description' }],
             page_title: 'Media'
         }
     }
