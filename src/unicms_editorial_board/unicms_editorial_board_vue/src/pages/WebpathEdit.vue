@@ -32,7 +32,7 @@
                                     class="btn mx-md-1 btn-sm btn-outline-secondary">
                                     <b-icon icon="file-text"
                                         variant="secondary"></b-icon>
-                                    Publications
+                                    News
                                 </router-link>
                             </div>
                             <div class="pull-right">

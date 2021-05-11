@@ -29,7 +29,7 @@
                 class="btn btn-block btn-sm btn-outline-secondary">
                 <b-icon icon="file-text"
                     variant="secondary"></b-icon>
-                Publications
+                News
             </router-link>
         </template>
 

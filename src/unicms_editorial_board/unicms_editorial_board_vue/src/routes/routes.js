@@ -26,6 +26,7 @@ import CarouselItemLinkLocalizationEdit from 'src/pages/CarouselItemLinkLocaliza
 import CarouselItemLinkLocalizationLogs from 'src/pages/CarouselItemLinkLocalizationLogs.vue'
 import CarouselLocks from 'src/pages/CarouselLocks.vue'
 import CarouselLockNew from 'src/pages/CarouselLockNew.vue'
+import Dashboard from 'src/pages/Dashboard.vue'
 import Media from 'src/pages/Media.vue'
 import MediaEdit from 'src/pages/MediaEdit.vue'
 import MediaNew from 'src/pages/MediaNew.vue'
@@ -154,7 +155,7 @@ const routes = [
     {
         path: 'dashboard',
         name: 'Dashboard',
-        component: Overview,
+        component: Dashboard,
         meta: {
             breadcrumb: 'Dashboard'
         }
@@ -249,7 +250,7 @@ const routes = [
 
     // webpath publications
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/publications',
+        path: 'websites/:site_id/webpaths/:webpath_id/news',
         name: 'WebpathPublications',
         component: WebpathPublications,
         meta: {
@@ -260,7 +261,7 @@ const routes = [
         },
     },
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/publications/new',
+        path: 'websites/:site_id/webpaths/:webpath_id/news/new',
         name: 'WebpathPublicationNew',
         component: WebpathPublicationNew,
         meta: {
@@ -271,7 +272,7 @@ const routes = [
         },
     },
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/publications/:publication_id/edit',
+        path: 'websites/:site_id/webpaths/:webpath_id/news/:publication_id/edit',
         name: 'WebpathPublicationEdit',
         component: WebpathPublicationEdit,
         meta: {
@@ -286,7 +287,7 @@ const routes = [
 
     // webpath publication logs
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/publications/:publication_id/logs',
+        path: 'websites/:site_id/webpaths/:webpath_id/news/:publication_id/logs',
         name: 'WebpathPublicationLogs',
         component: WebpathPublicationLogs,
         meta: {

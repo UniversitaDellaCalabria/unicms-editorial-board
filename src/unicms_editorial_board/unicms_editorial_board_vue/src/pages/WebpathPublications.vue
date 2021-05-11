@@ -74,7 +74,7 @@ export default {
                             { text: 'In evidence end', value: 'in_evidence_end'},
                             { text: 'Order', value: 'order'},
                             { text: 'State', value: 'is_active'}],
-            page_title: 'Webpath publications',
+            page_title: 'Webpath news',
         }
     }
 }
