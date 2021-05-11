@@ -121,6 +121,7 @@
                                         <small>{{ $date_formatter(menu.created)}}</small>
                                     </li>
                                 </ul>
+                                <span v-else>-</span>
                             </p>
                         </b-card-text>
                         <template #footer>
@@ -172,6 +173,7 @@
                                         <small>{{ $date_formatter(page.created)}}</small>
                                     </li>
                                 </ul>
+                                <span v-else>-</span>
                             </p>
                         </b-card-text>
                         <template #footer>
@@ -219,6 +221,7 @@
                                         <small>{{ $date_formatter(publication.created)}}</small>
                                     </li>
                                 </ul>
+                                <span v-else>-</span>
                             </p>
                         </b-card-text>
                         <template #footer>
