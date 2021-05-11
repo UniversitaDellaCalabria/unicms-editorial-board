@@ -66,8 +66,8 @@
                                     <li v-for="m in media.results.slice(0, 5)">
                                         <router-link
                                             :to="{ name: 'MediaEdit',
-                                                   params: { media_id: media.id}}">
-                                            {{ media.title }}
+                                                   params: { media_id: m.id}}">
+                                            {{ m.title }}
                                         </router-link>
                                         <br>
                                         <small>{{ $date_formatter(m.created)}}</small>
