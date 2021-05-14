@@ -25,12 +25,14 @@
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="success"
+                                            title="active"
                                             v-if="carousel.is_active">
                                         </b-icon>
                                         <b-icon
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="danger"
+                                            title="not active"
                                             v-else>
                                         </b-icon>
                                         <br>
@@ -109,12 +111,14 @@
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="success"
+                                            title="active"
                                             v-if="menu.is_active">
                                         </b-icon>
                                         <b-icon
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="danger"
+                                            title="not active"
                                             v-else>
                                         </b-icon>
                                         <br>
@@ -159,12 +163,29 @@
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="success"
+                                            title="active"
                                             v-if="page.is_active">
                                         </b-icon>
                                         <b-icon
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="danger"
+                                            title="not active"
+                                            v-else>
+                                        </b-icon>
+                                        <b-icon
+                                            class="ml-1"
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="success"
+                                            v-if="page.state='published'"
+                                            title="published">
+                                        </b-icon>
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="warning"
+                                            title="draft"
                                             v-else>
                                         </b-icon>
                                         <br>
@@ -209,12 +230,14 @@
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="success"
+                                            title="active"
                                             v-if="publication.is_active">
                                         </b-icon>
                                         <b-icon
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="danger"
+                                            title="not active"
                                             v-else>
                                         </b-icon>
                                         <br>
@@ -255,12 +278,14 @@
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="success"
+                                            title="active"
                                             v-if="webpath.is_active">
                                         </b-icon>
                                         <b-icon
                                             icon="circle-fill"
                                             font-scale="0.6"
                                             variant="danger"
+                                            title="not active"
                                             v-else>
                                         </b-icon>
                                         <br>

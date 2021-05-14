@@ -3,7 +3,8 @@
         :api_source="api_source"
         :fields="fields"
         :ordering_list="ordering_list"
-        :page_title="page_title">
+        :page_title="page_title"
+        :showCreatedBy="false">
 
         <template #add_new>
             <router-link :to="{ name: 'MenuItemLocalizationNew',

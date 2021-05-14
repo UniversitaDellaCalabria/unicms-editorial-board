@@ -8,6 +8,7 @@
         :showCreatedBy="false">
 
         <template #text>
+            <!--
             <p>
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -19,6 +20,7 @@
                 sunt in culpa qui officia deserunt mollit
                 anim id est laborum."
             </p>
+            -->
 
             <div class="accordion" role="tablist">
                 <b-button block v-b-toggle.accordion-1 variant="info">

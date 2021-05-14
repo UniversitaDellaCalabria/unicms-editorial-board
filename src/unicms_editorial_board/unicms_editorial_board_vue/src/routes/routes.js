@@ -255,7 +255,7 @@ const routes = [
         component: WebpathPublications,
         meta: {
             breadcrumb: {
-                label: 'Publications',
+                label: 'News',
                 parent: 'WebpathEdit'
             }
         },
