@@ -1,12 +1,12 @@
 <template>
   <ul class="nav nav-mobile-menu">
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="/">
         <span class="no-icon">Live site</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="/saml2/logout">
         <span class="no-icon">Log out</span>
       </a>
     </li>

@@ -69,7 +69,7 @@ export default {
                     for (const [key, value] of Object.entries(response.data)) {
                         this.$set(this.form, key, value)
                     }
-                    this.page_title = response.data.pre_heading + ' ' + response.data.heading;
+                    this.page_title = response.data.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.carousel_item_localization_id)
                 })
@@ -82,6 +82,7 @@ export default {
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
+                    this.page_title = response.data.name;
                     this.alerts.push(
                         { variant: 'success',
                           message: 'menu item localization edited successfully',

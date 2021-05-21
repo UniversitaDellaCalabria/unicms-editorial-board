@@ -18,12 +18,12 @@
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/" class="nav-link">
               Live site
             </a>
           </li>
           <li class="nav-item">
-            <a href="/admin/logout" class="nav-link">
+            <a href="/saml2/logout" class="nav-link">
               Logout
             </a>
           </li>

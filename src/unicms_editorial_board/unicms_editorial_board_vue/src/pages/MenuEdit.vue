@@ -27,6 +27,15 @@
                             </div>
                             <div class="pull-right">
                                 <b-button
+                                    class="text-white mx-md-1"
+                                    size="sm"
+                                    @click="cloneModal()"
+                                    variant="warning">
+                                    <b-icon icon="files"
+                                        variant="white"></b-icon>
+                                    Clone
+                                </b-button>
+                                <b-button
                                     @click="deleteModal()"
                                     variant="danger"
                                     class="mx-md-1 btn-sm">
@@ -99,6 +108,46 @@ export default {
                         )
                     }
                 })
+        },
+        clone() {
+            this.axios
+                .get('/api/editorial-board/menus/'+this.menu_id+'/clone/')
+                .then(response => {
+                    this.alerts.push(
+                        { variant: 'success',
+                          message: 'menu cloned successfully',
+                          dismissable: true }
+                    );
+                    this.$router.push({name: 'MenuEdit',
+                                       params: { menu_id: response.data.id,
+                                                 alerts: this.alerts}})
+                                .catch(() => {})
+                    this.menu_id = response.data.id;
+                    this.page_title = response.data.name;
+                    }
+                )
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'danger',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
+        },
+        cloneModal() {
+            this.$bvModal.msgBoxConfirm('Do you want really clone item?', {
+            title: 'Please Confirm',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'success',
+                okTitle: 'YES',
+                cancelTitle: 'NO',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                }
+            ).then(value => {
+                if (value) this.clone();
+            })
         },
         remove() {
             this.axios
