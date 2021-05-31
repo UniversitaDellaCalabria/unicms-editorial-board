@@ -57,7 +57,7 @@
                         <b-card-text>
                             <h4 class="mt-2 mb-3">
                                 <b-icon
-                                    icon="image"
+                                    icon="folder"
                                     scale="0.8">
                                 </b-icon>
                                 Media

@@ -104,15 +104,6 @@
                                     variant="secondary"></b-icon>
                                 Carousels
                             </router-link>
-                            <router-link :to="{ name: 'WebpathPageMediaCollections',
-                                            params: { site_id: site_id,
-                                                      webpath_id: webpath_id,
-                                                      page_id: page_id }}"
-                                class="btn btn-outline-secondary mx-md-1 btn-sm">
-                                <b-icon icon="folder-check"
-                                    variant="secondary"></b-icon>
-                                Media collections
-                            </router-link>
                             <router-link :to="{ name: 'WebpathPageHeadings',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
@@ -148,6 +139,15 @@
                                 <b-icon icon="folder"
                                     variant="secondary"></b-icon>
                                 Media
+                            </router-link>
+                            <router-link :to="{ name: 'WebpathPageMediaCollections',
+                                            params: { site_id: site_id,
+                                                      webpath_id: webpath_id,
+                                                      page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="folder-check"
+                                    variant="secondary"></b-icon>
+                                Media collections
                             </router-link>
                             <router-link :to="{ name: 'WebpathPageMenus',
                                             params: { site_id: site_id,
