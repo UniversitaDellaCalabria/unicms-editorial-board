@@ -12,8 +12,8 @@ export default {
     },
     data () {
         return {
-            api_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/'+this.$route.params.gallery_id+'/logs/',
-            page_title: 'Publication gallery logs'
+            api_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/media-collections/'+this.$route.params.collection_id+'/logs/',
+            page_title: 'Publication media-collection logs'
         }
     }
 }

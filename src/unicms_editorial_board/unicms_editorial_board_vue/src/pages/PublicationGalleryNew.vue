@@ -29,13 +29,13 @@ export default {
             alerts: [],
             publication_id: this.$route.params.publication_id,
             form: {'publication': parseInt(this.$route.params.publication_id)},
-            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/form/',
+            form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/media-collections/form/',
             add_modal_fields: {'collection':  this.$router.resolve({name: 'MediaCollectionNew'}).href},
         }
     },
     methods: {
         onSubmit(event) {
-            let source = '/api/editorial-board/publications/'+this.publication_id+'/galleries/';
+            let source = '/api/editorial-board/publications/'+this.publication_id+'/media-collections/';
             event.preventDefault();
             this.axios
                 .post(source, this.form,
@@ -44,10 +44,10 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'publication gallery added successfully',
+                          message: 'publication media-collection added successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'PublicationGalleries',
+                    this.$router.push({name: 'PublicationMediaCollections',
                                        params: {publication_id: this.publication_id,
                                                 alerts: this.alerts}})
                     }

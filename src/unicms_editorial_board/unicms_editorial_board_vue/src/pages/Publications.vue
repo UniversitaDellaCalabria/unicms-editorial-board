@@ -39,7 +39,7 @@
                     variant="secondary"></b-icon>
                 Attachments
             </router-link>
-            <router-link :to="{ name: 'PublicationGalleries',
+            <router-link :to="{ name: 'PublicationMediaCollections',
                                 params: { publication_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-outline-secondary">
                 <b-icon icon="folder-check"

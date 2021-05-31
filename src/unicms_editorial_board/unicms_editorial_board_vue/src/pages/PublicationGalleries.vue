@@ -7,7 +7,7 @@
         :showCreatedBy="false">
 
         <template #add_new>
-            <router-link :to="{ name: 'PublicationGalleryNew',
+            <router-link :to="{ name: 'PublicationMediaCollectionNew',
                                 params: { publication_id: publication_id }}"
                 class="btn btn-success">
                 <b-icon icon="plus-circle"
@@ -24,9 +24,9 @@
                     variant="secondary"></b-icon>
                 Go to media collection
             </router-link>
-            <router-link :to="{ name: 'PublicationGalleryEdit',
+            <router-link :to="{ name: 'PublicationMediaCollectionEdit',
                             params: { publication_id: publication_id,
-                                      gallery_id: item.item.id }}"
+                                      collection_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-info">
                 <b-icon icon="pencil-square"
                     variant="white"></b-icon>
@@ -45,7 +45,7 @@ export default {
     },
     data () {
         return {
-            api_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/',
+            api_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/media-collections/',
             fields: [
                 'id',
                 {key: 'collection.name', label: 'Collection'},

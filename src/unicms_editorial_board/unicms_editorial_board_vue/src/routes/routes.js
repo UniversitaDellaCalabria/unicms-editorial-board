@@ -67,10 +67,10 @@ import PublicationAttachments from 'src/pages/PublicationAttachments.vue'
 import PublicationAttachmentNew from 'src/pages/PublicationAttachmentNew.vue'
 import PublicationAttachmentEdit from 'src/pages/PublicationAttachmentEdit.vue'
 import PublicationAttachmentLogs from 'src/pages/PublicationAttachmentLogs.vue'
-import PublicationGalleries from 'src/pages/PublicationGalleries.vue'
-import PublicationGalleryNew from 'src/pages/PublicationGalleryNew.vue'
-import PublicationGalleryEdit from 'src/pages/PublicationGalleryEdit.vue'
-import PublicationGalleryLogs from 'src/pages/PublicationGalleryLogs.vue'
+import PublicationMediaCollections from 'src/pages/PublicationMediaCollections.vue'
+import PublicationMediaCollectionNew from 'src/pages/PublicationMediaCollectionNew.vue'
+import PublicationMediaCollectionEdit from 'src/pages/PublicationMediaCollectionEdit.vue'
+import PublicationMediaCollectionLogs from 'src/pages/PublicationMediaCollectionLogs.vue'
 import PublicationLinks from 'src/pages/PublicationLinks.vue'
 import PublicationLinkNew from 'src/pages/PublicationLinkNew.vue'
 import PublicationLinkEdit from 'src/pages/PublicationLinkEdit.vue'
@@ -1746,8 +1746,8 @@ const routes = [
     // publication media-collections
     {
         path: 'publications/:publication_id/media-collections',
-        name: 'PublicationGalleries',
-        component: PublicationGalleries,
+        name: 'PublicationMediaCollections',
+        component: PublicationMediaCollections,
         meta: {
             breadcrumb: {
                 label: 'Media collections',
@@ -1757,38 +1757,38 @@ const routes = [
     },
     {
         path: 'publications/:publication_id/media-collections/new',
-        name: 'PublicationGalleryNew',
-        component: PublicationGalleryNew,
+        name: 'PublicationMediaCollectionNew',
+        component: PublicationMediaCollectionNew,
         meta: {
             breadcrumb: {
                 label: 'New',
-                parent: 'PublicationGalleries'
+                parent: 'PublicationMediaCollections'
             }
         }
     },
     {
-        path: 'publications/:publication_id/media-collections/:gallery_id/edit',
-        name: 'PublicationGalleryEdit',
-        component: PublicationGalleryEdit,
+        path: 'publications/:publication_id/media-collections/:collection_id/edit',
+        name: 'PublicationMediaCollectionEdit',
+        component: PublicationMediaCollectionEdit,
         meta: {
             breadcrumb() {
                 return {
-                  label: this.$route.params.gallery_id.toString(),
-                  parent: 'PublicationGalleries'
+                  label: this.$route.params.collection_id.toString(),
+                  parent: 'PublicationMediaCollections'
                 }
             }
         }
     },
 
-    // publication gallery logs
+    // publication media collection logs
     {
-        path: 'publications/:publication_id/media-collections/:gallery_id/logs',
-        name: 'PublicationGalleryLogs',
-        component: PublicationGalleryLogs,
+        path: 'publications/:publication_id/media-collections/:collection_id/logs',
+        name: 'PublicationMediaCollectionLogs',
+        component: PublicationMediaCollectionLogs,
         meta: {
             breadcrumb: {
                 label: 'Logs',
-                parent: 'PublicationGalleryEdit'
+                parent: 'PublicationMediaCollectionEdit'
             }
         }
     },
