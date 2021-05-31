@@ -4,7 +4,7 @@
         :api_source="api_source"
         :dates="dates"
         :fields="fields"
-        :images="images"
+        :files="files"
         :arrays="arrays"
         :arrays_map="arrays_map"
         :ordering_list="ordering_list"
@@ -107,7 +107,7 @@
                                       webpath_id: webpath_id,
                                       page_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-outline-secondary">
-                <b-icon icon="card-image"
+                <b-icon icon="folder"
                     variant="secondary"></b-icon>
                 Media
             </router-link>
@@ -116,9 +116,9 @@
                                       webpath_id: webpath_id,
                                       page_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-outline-secondary">
-                <b-icon icon="images"
+                <b-icon icon="folder-check"
                     variant="secondary"></b-icon>
-                Galleries
+                Media collections
             </router-link>
             <router-link :to="{ name: 'WebpathPageMenus',
                             params: { site_id: site_id,
@@ -214,7 +214,7 @@ export default {
                 'actions'
             ],
             dates: ['date_start', 'date_end'],
-            images: ['base_template.image'],
+            files: ['base_template.image'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'Title', value: 'title' },

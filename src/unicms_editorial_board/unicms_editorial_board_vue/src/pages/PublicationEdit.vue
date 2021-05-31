@@ -27,9 +27,9 @@
                                 <router-link :to="{ name: 'PublicationGalleries',
                                                     params: { publication_id: publication_id }}"
                                     class="btn mx-md-1 btn-outline-secondary btn-sm">
-                                    <b-icon icon="card-image"
+                                    <b-icon icon="folder-check"
                                         variant="secondary"></b-icon>
-                                    Galleries
+                                    Media collections
                                 </router-link>
                                 <router-link :to="{ name: 'PublicationLinks',
                                                     params: { publication_id: publication_id }}"

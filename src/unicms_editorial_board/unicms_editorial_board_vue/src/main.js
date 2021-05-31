@@ -64,6 +64,13 @@ const router = new VueRouter({
   }
 })
 
+// check if file is an image
+function is_image(file) {
+    let url = file.file || file
+    return url.match(/\.(jpeg|jpg|gif|png|webp)$/) != null
+}
+Vue.prototype.$is_image = is_image
+
 // format a string to date
 function date_formatter(data) {
     if (!data) return null;

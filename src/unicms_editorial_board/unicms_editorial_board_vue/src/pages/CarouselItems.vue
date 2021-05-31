@@ -2,7 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
-        :images="images"
+        :files="files"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -70,7 +70,7 @@ export default {
                 {key: 'childs', label: 'Related'},
                 'actions'
             ],
-            images: ['image'],
+            files: ['image'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Pre-Heading', value: 'pre_heading' },
                             { text: 'Heading', value: 'heading' },

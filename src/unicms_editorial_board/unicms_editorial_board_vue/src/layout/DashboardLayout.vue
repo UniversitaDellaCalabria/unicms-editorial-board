@@ -31,7 +31,7 @@
       </sidebar-link>
 
       <sidebar-link to="/media">
-        <b-icon icon="image"
+        <b-icon icon="folder"
             class="mr-4 ml-1"
             variant="white"
             scale="1.9">
@@ -40,7 +40,7 @@
       </sidebar-link>
 
       <sidebar-link to="/media-collections">
-        <b-icon icon="images"
+        <b-icon icon="folder-check"
             class="mr-4 ml-1"
             variant="white"
             scale="1.9">

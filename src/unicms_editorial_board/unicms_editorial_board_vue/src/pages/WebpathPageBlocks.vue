@@ -2,7 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
-        :images="images"
+        :files="files"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -101,7 +101,7 @@ export default {
                 {key: 'is_active', label: 'Active'},
                 'actions'
             ],
-            images: ['block.image'],
+            files: ['block.image'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'block__name' },
                             { text: 'Section', value: 'section' },

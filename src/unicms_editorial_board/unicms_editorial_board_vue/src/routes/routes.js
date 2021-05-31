@@ -1743,20 +1743,20 @@ const routes = [
         }
     },
 
-    // publication galleries
+    // publication media-collections
     {
-        path: 'publications/:publication_id/galleries',
+        path: 'publications/:publication_id/media-collections',
         name: 'PublicationGalleries',
         component: PublicationGalleries,
         meta: {
             breadcrumb: {
-                label: 'Galleries',
+                label: 'Media collections',
                 parent: 'PublicationEdit'
             }
         }
     },
     {
-        path: 'publications/:publication_id/galleries/new',
+        path: 'publications/:publication_id/media-collections/new',
         name: 'PublicationGalleryNew',
         component: PublicationGalleryNew,
         meta: {
@@ -1767,7 +1767,7 @@ const routes = [
         }
     },
     {
-        path: 'publications/:publication_id/galleries/:gallery_id/edit',
+        path: 'publications/:publication_id/media-collections/:gallery_id/edit',
         name: 'PublicationGalleryEdit',
         component: PublicationGalleryEdit,
         meta: {
@@ -1782,7 +1782,7 @@ const routes = [
 
     // publication gallery logs
     {
-        path: 'publications/:publication_id/galleries/:gallery_id/logs',
+        path: 'publications/:publication_id/media-collections/:gallery_id/logs',
         name: 'PublicationGalleryLogs',
         component: PublicationGalleryLogs,
         meta: {

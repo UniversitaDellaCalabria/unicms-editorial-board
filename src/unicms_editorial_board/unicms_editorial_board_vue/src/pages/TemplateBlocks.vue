@@ -2,7 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
-        :images="images"
+        :files="files"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false" >
@@ -24,7 +24,7 @@ export default {
                      'image',
                      'description',
             ],
-            images: ['image'],
+            files: ['image'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'Type', value: 'type' },

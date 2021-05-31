@@ -125,19 +125,24 @@
                                 </template>
 
                                 <template #cell()="data">
-                                    <a :href="data.value"
+                                    <div
                                         v-if="files && isFile(data.field.key) && data.value">
-                                        <b-icon
-                                            icon="file-text"
-                                            style="cursor: pointer">
-                                        </b-icon>
-                                    </a>
-                                    <b-img
-                                        v-else-if="images && isImage(data.field.key) && data.value"
-                                        :src="data.value.file || data.value"
-                                        alt="Responsive image"
-                                        style="max-width: 220px">
-                                    </b-img>
+                                        <b-img
+                                            v-if="$is_image(data.value)"
+                                            :src="data.value.file || data.value"
+                                            alt="Responsive image"
+                                            style="max-width: 220px">
+                                        </b-img>
+                                        <a
+                                            v-else
+                                            :href="data.value.file || data.value"
+                                            :title="data.value.file || data.value">
+                                            <b-icon
+                                                icon="file-text"
+                                                style="cursor: pointer">
+                                            </b-icon>
+                                        </a>
+                                    </div>
                                     <span
                                         v-else-if="arrays && isArray(data.field.key) && data.value">
                                         <div v-for="obj in data.value">
@@ -221,9 +226,6 @@ export default {
         },
         isFile(key){
             return this.files.filter(n=>n===key).length===0?false:true;
-        },
-        isImage(key){
-            return this.images.filter(n=>n===key).length===0?false:true;
         },
         isArray(key){
             return this.arrays.filter(n=>n===key).length===0?false:true;

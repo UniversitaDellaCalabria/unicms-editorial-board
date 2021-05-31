@@ -2,7 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
-        :images="images"
+        :files="files"
         :ordering_list="ordering_list"
         :page_title="page_title">
 
@@ -49,15 +49,19 @@ export default {
                 'id',
                 'title',
                 {key: 'file', thClass: 'w-25'},
+                'description',
+                {key: 'file_type', label: 'Type'},
                 {key: 'file_size', label: 'Size (kb)'},
                 {key: 'file_dimensions', label: 'Dimensions'},
-                'description',
                 'actions'
             ],
-            images: ['file'],
-            ordering_list: [{ text: 'Id', value: 'id' },
-                            { text: 'Title', value: 'title' },
-                            { text: 'Description', value: 'description' }],
+            files: ['file'],
+            ordering_list: [
+                { text: 'Id', value: 'id' },
+                { text: 'Title', value: 'title' },
+                { text: 'Description', value: 'description' },
+                { text: 'File type', value: 'file_type' },
+            ],
             page_title: 'Media'
         }
     }

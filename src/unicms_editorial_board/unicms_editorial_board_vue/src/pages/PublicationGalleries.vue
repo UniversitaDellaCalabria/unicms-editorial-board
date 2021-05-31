@@ -22,7 +22,7 @@
                 class="btn btn-block btn-sm btn-outline-secondary">
                 <b-icon icon="arrow-right-circle"
                     variant="secondary"></b-icon>
-                Go to gallery
+                Go to media collection
             </router-link>
             <router-link :to="{ name: 'PublicationGalleryEdit',
                             params: { publication_id: publication_id,
@@ -48,17 +48,16 @@ export default {
             api_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/galleries/',
             fields: [
                 'id',
-                {key: 'collection.name', label: 'Gallery'},
+                {key: 'collection.name', label: 'Collection'},
                 'order',
                 { key: 'is_active', label: 'Active'},
                 'actions'
             ],
-            images: ['media'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Collection name', value: 'collection.name' },
                             { text: 'Order', value: 'order' },
                             { text: 'State', value: 'is_active'}],
-            page_title: 'Publication galleries',
+            page_title: 'Publication media collections',
             publication_id: this.$route.params.publication_id,
         }
     }

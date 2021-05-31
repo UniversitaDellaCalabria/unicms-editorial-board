@@ -3,7 +3,7 @@
         ref="completeTable"
         :api_source="api_source"
         :fields="fields"
-        :images="images"
+        :files="files"
         :arrays="arrays"
         :arrays_map="arrays_map"
         :ordering_list="ordering_list"
@@ -42,9 +42,9 @@
             <router-link :to="{ name: 'PublicationGalleries',
                                 params: { publication_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-outline-secondary">
-                <b-icon icon="card-image"
+                <b-icon icon="folder-check"
                     variant="secondary"></b-icon>
-                Galleries
+                Media collections
             </router-link>
             <router-link :to="{ name: 'PublicationLinks',
                                 params: { publication_id: item.item.id }}"
@@ -110,7 +110,7 @@ export default {
             ],
             arrays: ['category'],
             arrays_map: [{'category': 'name'}],
-            images: ['presentation_image'],
+            files: ['presentation_image'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'Title', value: 'title' },
