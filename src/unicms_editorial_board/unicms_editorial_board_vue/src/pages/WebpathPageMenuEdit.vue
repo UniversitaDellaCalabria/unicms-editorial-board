@@ -36,6 +36,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
@@ -76,7 +77,12 @@ export default {
                         }
                         else this.$set(this.form, key, value);
                     }
-                    this.page_title = response.data.menu.name
+                    this.page_title = response.data.menu.name;
+                    this.$checkForRedisLocks(response.data.object_content_type,
+                                             this.menu_id)
+                    this.$refs.form.getOptionsFromParent('menu',
+                        [{"text": response.data.menu.name,
+                          "value": response.data.menu.id}])
                 })
         },
         onSubmit(event) {

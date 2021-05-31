@@ -36,6 +36,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -77,6 +78,9 @@ export default {
                     this.page_title = response.data.carousel.title;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.carousel_id)
+                    this.$refs.form.getOptionsFromParent('carousel',
+                        [{"text": response.data.carousel.name,
+                          "value": response.data.carousel.id}])
                 })
         },
         onSubmit(event) {

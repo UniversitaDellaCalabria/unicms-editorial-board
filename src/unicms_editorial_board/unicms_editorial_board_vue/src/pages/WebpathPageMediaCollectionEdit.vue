@@ -80,6 +80,9 @@ export default {
                     this.page_title = response.data.collection.name;
                     this.$checkForRedisLocks(response.data.object_content_type,
                                              this.collection_id)
+                    this.$refs.form.getOptionsFromParent('collection',
+                        [{"text": response.data.collection.name,
+                          "value": response.data.collection.id}])
                 })
         },
         onSubmit(event) {
