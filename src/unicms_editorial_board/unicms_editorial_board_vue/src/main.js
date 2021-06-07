@@ -103,16 +103,31 @@ function checkForRedisLocks(content_type_id, object_id) {
         .get('/api/editorial-board/redis-lock/'+content_type_id+'/'+object_id+'/')
         .then(response => {
             if(Object.entries(response.data).length != 0){
-                this.alerts.push(
-                    { variant: 'warning',
-                      message: response.data.message,
-                      ttl: response.data.lock[1],
-                      dismissable: true }
-                )}
+                if (this.redis_alert == null)
+                    this.redis_alert = {
+                        variant: 'warning',
+                        message: response.data.message,
+                        dismissable: false,
+                    }
             }
-        )
+            else this.redis_alert = null
+        }
+    )
 }
 Vue.prototype.$checkForRedisLocks = checkForRedisLocks;
+
+function user_is_active(api_source) {
+    let self = this
+    let call_api = function update_api() {
+        self.axios.get(api_source)
+    }
+    document.addEventListener("keyup", call_api, false)
+    document.addEventListener("mousedown", call_api, false)
+    //document.addEventListener("mousemove", call_api, false)
+}
+Vue.prototype.$user_is_active = user_is_active;
+
+Vue.prototype.$redis_ttl = 1000;
 
 /* eslint-disable no-new */
 new Vue({

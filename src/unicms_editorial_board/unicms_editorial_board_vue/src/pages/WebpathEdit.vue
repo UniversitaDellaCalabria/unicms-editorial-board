@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -72,33 +72,56 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/form/',
-            page_title: ''
+            page_title: '',
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                if(key=='parent' || key=='alias') {
+                    if(value)
+                        this.$set(this.form, key, value.id)
+                }
+                else this.$set(this.form, key, value)
+            }
+            this.page_title = data.full_name;
+            if(data.alias)
+                this.$refs.form.getOptionsFromParent('alias',
+                    [{"text": data.alias.full_name,
+                      "value": data.alias.id}])
+            if(data.parent)
+                this.$refs.form.getOptionsFromParent('parent',
+                    [{"text": data.parent.full_name,
+                      "value": data.parent.id}])
+        },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='parent' || key=='alias') {
-                            if(value)
-                                this.$set(this.form, key, value.id)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.webpath_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.webpath_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
                         }
-                        else this.$set(this.form, key, value)
-                    }
-                    this.page_title = response.data.full_name;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.webpath_id)
-                    if(response.data.alias)
-                        this.$refs.form.getOptionsFromParent('alias',
-                            [{"text": response.data.alias.full_name,
-                              "value": response.data.alias.id}])
-                    if(response.data.parent)
-                        this.$refs.form.getOptionsFromParent('parent',
-                            [{"text": response.data.parent.full_name,
-                              "value": response.data.parent.id}])
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
@@ -115,6 +138,7 @@ export default {
                           dismissable: true }
                     )
                     this.page_title = response.data.full_name
+                    this.form.path = response.data.path
                     }
                 )
                 .catch(error => {
@@ -169,6 +193,9 @@ export default {
     },
     mounted() {
         this.getItem();
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     }
 }
 </script>

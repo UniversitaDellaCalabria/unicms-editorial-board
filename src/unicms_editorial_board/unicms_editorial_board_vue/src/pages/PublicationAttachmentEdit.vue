@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -57,23 +57,46 @@ export default {
             form: {},
             form_source: '/api/editorial-board/publications/'+this.$route.params.publication_id+'/attachments/form/',
             files: {},
-            page_title: ''
+            page_title: '',
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                this.$set(this.form, key, value)
+            }
+            this.$set(this.files, 'file', data.file);
+            this.$delete(this.form, 'file');
+            this.page_title = data.name;
+        },
         getItem() {
             let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/'+this.attachment_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        this.$set(this.form, key, value)
-                    }
-                    this.$set(this.files, 'file', response.data.file);
-                    this.$delete(this.form, 'file');
-                    this.page_title = response.data.name;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.attachment_id)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.attachment_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.attachment_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
+                        }
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
@@ -88,6 +111,7 @@ export default {
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
+                    this.page_title = response.data.name;
                     this.alerts.push(
                         { variant: 'success',
                           message: 'publication attachment edited successfully',
@@ -147,5 +171,8 @@ export default {
     mounted() {
         this.getItem()
     },
+    beforeDestroy() {
+        clearInterval(this.interval)
+    }
 }
 </script>

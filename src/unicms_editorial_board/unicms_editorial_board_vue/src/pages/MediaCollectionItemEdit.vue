@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -58,26 +58,49 @@ export default {
             form_source: '/api/editorial-board/media-collections/'+this.$route.params.collection_id+'/items/form/',
             add_modal_fields: {'media':  this.$router.resolve({name: 'MediaNew'}).href},
             files: {},
-            page_title: ''
+            page_title: '',
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                this.$set(this.form, key, value)
+            }
+            this.form.media = data.media.id;
+            this.$set(this.files, 'media', data.media.file);
+            this.page_title = data.media.title;
+            this.$refs.form.getOptionsFromParent('media',
+                [{"text": data.media.title,
+                  "value": data.media.id}])
+        },
         getItem() {
             let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.collection_item_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        this.$set(this.form, key, value)
-                    }
-                    this.form.media = response.data.media.id;
-                    this.$set(this.files, 'media', response.data.media.file);
-                    this.page_title = response.data.media.title;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.collection_item_id)
-                    this.$refs.form.getOptionsFromParent('media',
-                        [{"text": response.data.media.title,
-                          "value": response.data.media.id}])
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.collection_item_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.collection_item_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
+                        }
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         updateMedia(val) {
@@ -156,6 +179,9 @@ export default {
     },
     mounted() {
         this.getItem()
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     },
     watch: {
         'form.media': function(newVal, oldVal){

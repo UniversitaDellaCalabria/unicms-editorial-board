@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -133,33 +133,56 @@ export default {
             tag_fields: ['tags'],
             page_title: '',
             is_active: false,
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                if(key=='category') {
+                    let categories = [];
+                    value.forEach(v => {categories.push(v.id)});
+                    this.$set(this.form, key, categories)
+                }
+                else if(key=='presentation_image')
+                    this.$set(this.form, key, value.id)
+                else this.$set(this.form, key, value)
+            }
+            this.$set(this.files, 'presentation_image', data.presentation_image.file);
+            this.page_title = data.full_name;
+            this.is_active = data.is_active;
+            if(data.presentation_image)
+                this.$refs.form.getOptionsFromParent('presentation_image',
+                    [{"text": data.presentation_image.title,
+                      "value": data.presentation_image.id}])
+        },
         getItem() {
             let source = '/api/editorial-board/publications/'+this.publication_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='category') {
-                            let categories = [];
-                            value.forEach(v => {categories.push(v.id)});
-                            this.$set(this.form, key, categories)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.publication_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.publication_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
                         }
-                        else if(key=='presentation_image')
-                            this.$set(this.form, key, value.id)
-                        else this.$set(this.form, key, value)
-                    }
-                    this.$set(this.files, 'presentation_image', response.data.presentation_image.file);
-                    this.page_title = response.data.full_name;
-                    this.is_active = response.data.is_active;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.publication_id)
-                    if(response.data.presentation_image)
-                        this.$refs.form.getOptionsFromParent('presentation_image',
-                            [{"text": response.data.presentation_image.title,
-                              "value": response.data.presentation_image.id}])
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         updateMedia(val) {
@@ -178,6 +201,7 @@ export default {
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
+                    this.page_title = response.data.full_name;
                     this.alerts.push(
                         { variant: 'success',
                           message: 'publication edited successfully',
@@ -270,6 +294,9 @@ export default {
     },
     mounted() {
         this.getItem()
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     },
     watch: {
         'form.presentation_image': function(newVal, oldVal){

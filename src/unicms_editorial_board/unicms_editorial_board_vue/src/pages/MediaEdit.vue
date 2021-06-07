@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -29,7 +29,7 @@
                                 </b-button>
                             </div>
                         </div>
-                        <b-card-title>Edit</b-card-title>
+                        <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -53,22 +53,47 @@ export default {
             media_id: this.$route.params.media_id,
             form: {},
             form_source: '/api/editorial-board/medias/form/',
-            files: {}
+            files: {},
+            page_title: '',
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                this.$set(this.form, key, value)
+            }
+            this.page_title = data.title
+            this.$set(this.files, 'file', this.form.file);
+            this.$delete(this.form, 'file');
+        },
         getItem() {
             let source = '/api/editorial-board/medias/'+this.media_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        this.$set(this.form, key, value)
-                    }
-                    this.$set(this.files, 'file', this.form.file);
-                    this.$delete(this.form, 'file');
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.media_id)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.media_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.media_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
+                        }
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
@@ -83,6 +108,7 @@ export default {
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
+                    this.page_title = response.data.title
                     this.alerts.push(
                         { variant: 'success',
                           message: 'media edited successfully',
@@ -140,6 +166,9 @@ export default {
     },
     mounted() {
         this.getItem();
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     }
 }
 </script>

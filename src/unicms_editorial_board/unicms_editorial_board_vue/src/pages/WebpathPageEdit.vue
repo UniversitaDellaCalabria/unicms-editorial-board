@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -243,34 +243,57 @@ export default {
             is_active: false,
             published: '',
             date_fields: ['date_start', 'date_end'],
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                if(key=='base_template' || key=='webpath') {
+                    this.$set(this.form, key, value.id)
+                }
+                else if(this.date_fields.includes(key) && value) {
+                    this.$set(this.form, key,
+                              value.substr(0,16).replace("T"," "))
+                }
+                else this.$set(this.form, key, value)
+                this.$set(this.files, 'base_template', data.base_template.image);
+                this.page_title = data.name;
+                this.preview_url = data.preview_url;
+                this.is_active = data.is_active;
+                this.published = data.state;
+                this.$refs.form.getOptionsFromParent('webpath',
+                    [{"text": data.webpath.full_name,
+                      "value": data.webpath.id}])
+            }
+        },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='base_template' || key=='webpath') {
-                            this.$set(this.form, key, value.id)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.page_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.page_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
                         }
-                        else if(this.date_fields.includes(key) && value) {
-                            this.$set(this.form, key,
-                                      value.substr(0,16).replace("T"," "))
-                        }
-                        else this.$set(this.form, key, value)
-                        this.$set(this.files, 'base_template', response.data.base_template.image);
-                        this.page_title = response.data.name;
-                        this.preview_url = response.data.preview_url;
-                        this.is_active = response.data.is_active;
-                        this.published = response.data.state;
-                        this.$checkForRedisLocks(response.data.object_content_type,
-                                                 this.page_id)
-                        this.$refs.form.getOptionsFromParent('webpath',
-                            [{"text": response.data.webpath.full_name,
-                              "value": response.data.webpath.id}])
-                    }
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
@@ -465,6 +488,9 @@ export default {
     },
     mounted() {
         this.getItem()
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     },
     watch: {
         'form.base_template': function(newVal, oldVal){

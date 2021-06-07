@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -69,35 +69,58 @@ export default {
             page_title: '',
             add_modal_fields: {'inherited_content': this.$router.resolve({name: 'PublicationNew'}).href,
                                'publication': this.$router.resolve({name: 'PublicationNew'}).href},
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                if(key=='webpath' || key=='inherited_content' || key=='publication') {
+                    this.$set(this.form, key, value.id)
+                }
+                else this.$set(this.form, key, value)
+            }
+            this.page_title = data.name;
+            if(data.webpath)
+                this.$refs.form.getOptionsFromParent('webpath',
+                    [{"text": data.webpath.name,
+                      "value": data.webpath.id}])
+            if(data.inherited_content)
+                this.$refs.form.getOptionsFromParent('inherited_content',
+                    [{"text": data.inherited_content.full_name,
+                      "value": data.inherited_content.id}])
+            if(data.publication)
+                this.$refs.form.getOptionsFromParent('publication',
+                    [{"text": data.publication.full_name,
+                      "value": data.publication.id}])
+        },
         getItem() {
             let source = '/api/editorial-board/menus/'+this.menu_id+'/items/'+this.menu_item_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='webpath' || key=='inherited_content' || key=='publication') {
-                            this.$set(this.form, key, value.id)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.menu_item_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.menu_item_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
                         }
-                        else this.$set(this.form, key, value)
-                    }
-                    this.page_title = response.data.name;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.menu_item_id)
-                    if(response.data.webpath)
-                        this.$refs.form.getOptionsFromParent('webpath',
-                            [{"text": response.data.webpath.name,
-                              "value": response.data.webpath.id}])
-                    if(response.data.inherited_content)
-                        this.$refs.form.getOptionsFromParent('inherited_content',
-                            [{"text": response.data.inherited_content.full_name,
-                              "value": response.data.inherited_content.id}])
-                    if(response.data.publication)
-                        this.$refs.form.getOptionsFromParent('publication',
-                            [{"text": response.data.publication.full_name,
-                              "value": response.data.publication.id}])
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
@@ -108,6 +131,7 @@ export default {
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
+                    this.page_title = response.data.name;
                     this.alerts.push(
                         { variant: 'success',
                           message: 'menu item edited successfully',
@@ -165,6 +189,9 @@ export default {
     },
     mounted() {
         this.getItem()
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     }
 }
 </script>

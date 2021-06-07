@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <Breadcrumbs/>
 
-            <stacked-alerts :alerts="alerts" />
+            <stacked-alerts :alerts="alerts" :redis_alert="redis_alert" />
 
             <div class="row">
                 <div class="col-12">
@@ -61,26 +61,49 @@ export default {
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/form/',
             add_modal_fields: {'publication':  this.$router.resolve({name: 'PublicationNew'}).href},
-            page_title: ''
+            page_title: '',
+            redis_alert: null,
+            interval: null,
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                if(key=='publication')
+                    this.$set(this.form, key, value.id)
+                else this.$set(this.form, key, value)
+            }
+            this.page_title = data.publication.full_name;
+            this.$refs.form.getOptionsFromParent('publication',
+                [{"text": data.publication.full_name,
+                  "value": data.publication.id}])
+        },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+this.publication_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='publication')
-                            this.$set(this.form, key, value.id)
-                        else this.$set(this.form, key, value)
-                    }
-                    this.page_title = response.data.publication.full_name;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.publication_id)
-                    this.$refs.form.getOptionsFromParent('publication',
-                        [{"text": response.data.publication.full_name,
-                          "value": response.data.publication.id}])
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.publication_id+'/set/';
+                    this.axios.get(api_lock_src);
+                    this.$user_is_active(api_lock_src);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.publication_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
+                        }
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
@@ -155,5 +178,8 @@ export default {
     mounted() {
         this.getItem()
     },
+    beforeDestroy() {
+        clearInterval(this.interval)
+    }
 }
 </script>
