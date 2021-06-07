@@ -127,7 +127,7 @@ function user_is_active(api_source) {
 }
 Vue.prototype.$user_is_active = user_is_active;
 
-Vue.prototype.$redis_ttl = 1000;
+Vue.prototype.$redis_ttl = 5000;
 
 /* eslint-disable no-new */
 new Vue({
