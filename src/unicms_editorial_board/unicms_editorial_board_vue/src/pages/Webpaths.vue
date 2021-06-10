@@ -37,10 +37,18 @@
             <router-link :to="{ name: 'WebpathEdit',
                             params: { site_id: site_id,
                                       webpath_id: item.item.id}}"
-                class="mr-3 btn btn-block btn-sm btn-info">
+                class="btn btn-block btn-sm btn-info">
                 <b-icon icon="pencil-square"
                     variant="white"></b-icon>
                 Edit
+            </router-link>
+            <router-link :to="{ name: 'WebpathClone',
+                            params: { site_id: site_id,
+                                      webpath_id: item.item.id}}"
+                class="btn btn-block btn-sm btn-warning text-white">
+                <b-icon icon="files"
+                    variant="white"></b-icon>
+                Clone
             </router-link>
             <router-link :to="{ name: 'WebpathLocks',
                                 params: { site_id: site_id,

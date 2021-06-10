@@ -87,6 +87,7 @@ import Websites from 'src/pages/Websites.vue'
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
 import WebpathEdit from 'src/pages/WebpathEdit.vue'
+import WebpathClone from 'src/pages/WebpathClone.vue'
 import WebpathLogs from 'src/pages/WebpathLogs.vue'
 import WebpathLocks from 'src/pages/WebpathLocks.vue'
 import WebpathLockNew from 'src/pages/WebpathLockNew.vue'
@@ -206,6 +207,19 @@ const routes = [
                 return {
                   label: this.$route.params.webpath_id.toString(),
                   parent: 'Webpaths'
+                }
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/edit/clone',
+        name: 'WebpathClone',
+        component: WebpathClone,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: 'Clone',
+                  parent: 'WebpathEdit'
                 }
             }
         },

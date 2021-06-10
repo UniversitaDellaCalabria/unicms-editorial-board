@@ -36,6 +36,14 @@
                                 </router-link>
                             </div>
                             <div class="pull-right">
+                                <router-link :to="{ name: 'WebpathClone',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id}}"
+                                    class="mx-md-1 btn btn-sm btn-warning text-white">
+                                    <b-icon icon="files"
+                                        variant="white"></b-icon>
+                                    Clone
+                                </router-link>
                                 <b-button
                                     @click="deleteModal()"
                                     variant="danger"
