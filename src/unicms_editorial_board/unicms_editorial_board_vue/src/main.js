@@ -116,10 +116,11 @@ function checkForRedisLocks(content_type_id, object_id) {
 }
 Vue.prototype.$checkForRedisLocks = checkForRedisLocks;
 
-function user_is_active(api_source) {
+function user_is_active(api_source, params) {
     let self = this
     let call_api = function update_api() {
-        self.axios.get(api_source)
+        self.axios.post(api_source, params,
+                        {headers: {"X-CSRFToken": self.$csrftoken }});
     }
     document.addEventListener("keyup", call_api, false)
     document.addEventListener("mousedown", call_api, false)

@@ -85,9 +85,12 @@ export default {
 
                     // concurrency management
                     let obj_content_type = response.data.object_content_type;
-                    let api_lock_src = '/api/editorial-board/redis-lock/'+obj_content_type+'/'+this.collection_id+'/set/';
-                    this.axios.get(api_lock_src);
-                    this.$user_is_active(api_lock_src);
+                    let api_lock_src = '/api/editorial-board/redis-lock/set/';
+                    let params = {'content_type_id': obj_content_type,
+                                  'object_id': this.collection_id}
+                    this.axios.post(api_lock_src, params,
+                                     {headers: {"X-CSRFToken": this.$csrftoken }});
+                    this.$user_is_active(api_lock_src, params);
                     this.interval = setInterval(() => {
                         this.$checkForRedisLocks(obj_content_type,
                                                  this.collection_id);

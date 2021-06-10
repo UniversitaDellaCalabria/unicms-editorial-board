@@ -62,23 +62,47 @@ export default {
         }
     },
     methods: {
+        setData(data) {
+            for (const [key, value] of Object.entries(data)) {
+                if(key=='related') {
+                    this.$set(this.form, key, value.id)
+                }
+                else this.$set(this.form, key, value)
+            }
+            this.page_title = data.related.full_name;
+            this.$refs.form.getOptionsFromParent('related',
+                [{"text": data.related.full_name,
+                  "value": data.related.id}])
+        },
         getItem() {
             let source = '/api/editorial-board/publications/'+this.publication_id+'/related/'+this.related_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
-                    for (const [key, value] of Object.entries(response.data)) {
-                        if(key=='related') {
-                            this.$set(this.form, key, value.id)
+                    this.setData(response.data)
+
+                    // concurrency management
+                    let obj_content_type = response.data.object_content_type;
+                    let api_lock_src = '/api/editorial-board/redis-lock/set/';
+                    let params = {'content_type_id': obj_content_type,
+                                  'object_id': this.related_id}
+                    this.axios.post(api_lock_src, params,
+                                     {headers: {"X-CSRFToken": this.$csrftoken }});
+                    this.$user_is_active(api_lock_src, params);
+                    this.interval = setInterval(() => {
+                        this.$checkForRedisLocks(obj_content_type,
+                                                 this.related_id);
+                        // update concurrent form data
+                        if (this.redis_alert) {
+                            this.axios
+                                .get(source)
+                                .then(new_response => {
+                                    this.setData(new_response.data)
+                                }
+                            )
                         }
-                        else this.$set(this.form, key, value)
-                    }
-                    this.page_title = response.data.related.full_name;
-                    this.$checkForRedisLocks(response.data.object_content_type,
-                                             this.related_id)
-                    this.$refs.form.getOptionsFromParent('related',
-                        [{"text": response.data.related.full_name,
-                          "value": response.data.related.id}])
+                    }, this.$redis_ttl)
+                    // end concurrency management
                 })
         },
         onSubmit(event) {
