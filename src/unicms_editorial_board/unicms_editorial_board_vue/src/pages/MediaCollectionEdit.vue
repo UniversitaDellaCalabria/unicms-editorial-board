@@ -39,6 +39,7 @@
                         <b-card-title>{{ page_title }}</b-card-title>
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -104,6 +105,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/media-collections/'+this.collection_id+'/';
             event.preventDefault();
             this.axios
@@ -116,7 +118,9 @@ export default {
                         { variant: 'success',
                           message: 'media collection edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.$refs.form.loading = false;
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -126,6 +130,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
         remove() {

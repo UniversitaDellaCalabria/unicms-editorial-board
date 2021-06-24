@@ -102,6 +102,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/links/'+this.carousel_item_link_id+'/localizations/'+this.carousel_item_link_localization_id+'/';
             event.preventDefault();
             this.axios

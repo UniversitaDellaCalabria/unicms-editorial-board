@@ -34,6 +34,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -100,6 +101,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/publications/'+this.publication_id+'/localizations/'+this.localization_id+'/';
             event.preventDefault();
             this.axios
@@ -112,7 +114,9 @@ export default {
                         { variant: 'success',
                           message: 'publication localization edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.$refs.form.loading = false
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -122,6 +126,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {

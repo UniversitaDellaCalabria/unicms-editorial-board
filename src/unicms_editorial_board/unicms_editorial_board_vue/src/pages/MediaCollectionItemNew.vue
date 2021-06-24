@@ -10,6 +10,7 @@
                     <b-card title="Edit">
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -45,6 +46,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/';
             event.preventDefault();
             this.axios
@@ -70,6 +72,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
     },

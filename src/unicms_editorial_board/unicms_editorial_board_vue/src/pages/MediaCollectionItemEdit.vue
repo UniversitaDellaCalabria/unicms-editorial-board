@@ -115,6 +115,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/media-collections/'+this.collection_id+'/items/'+this.collection_item_id+'/';
             event.preventDefault();
             this.axios
@@ -128,6 +129,7 @@ export default {
                           dismissable: true }
                     )
                     this.page_title = response.data.media.title;
+                    this.$refs.form.loading = false;
                     }
                 )
                 .catch(error => {
@@ -138,6 +140,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
         remove() {

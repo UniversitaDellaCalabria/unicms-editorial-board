@@ -133,6 +133,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
             event.preventDefault();
             this.axios
@@ -146,6 +147,7 @@ export default {
                           dismissable: true }
                     )
                     this.page_title = response.data.image.title;
+                    this.$refs.form.loading = false;
                     }
                 )
                 .catch(error => {
@@ -156,6 +158,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
         remove() {

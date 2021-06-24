@@ -45,6 +45,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :fields="fields"
                                 :form="form"
                                 :submit="onSubmit"
@@ -111,6 +112,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/'+this.$route.params.carousel_item_id+'/links/'+this.carousel_item_link_id+'/';
             event.preventDefault();
             this.axios
@@ -123,7 +125,9 @@ export default {
                         { variant: 'success',
                           message: 'carousel item link edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.$refs.form.loading = false;
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -133,6 +137,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
         remove() {

@@ -110,6 +110,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+this.publication_id+'/';
             event.preventDefault();
             this.axios
@@ -123,6 +124,7 @@ export default {
                           dismissable: true }
                     )
                     this.page_title = response.data.publication.full_name;
+                    this.$refs.form.loading = false
                     }
 
                 )
@@ -134,6 +136,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {

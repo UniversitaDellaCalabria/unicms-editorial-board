@@ -10,6 +10,7 @@
                     <b-card title="Webpath clone">
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -34,6 +35,7 @@ export default {
     },
     methods: {
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/clone/';
             event.preventDefault();
             this.axios
@@ -46,6 +48,7 @@ export default {
                           message: response.data,
                           dismissable: true }
                         )
+                    this.$refs.form.loading = false
                     }
                 )
                 .catch(error => {
@@ -56,6 +59,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
     },

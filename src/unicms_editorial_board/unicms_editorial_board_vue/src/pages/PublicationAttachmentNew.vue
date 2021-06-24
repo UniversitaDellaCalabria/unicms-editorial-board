@@ -10,6 +10,7 @@
                     <b-card title="New">
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -35,6 +36,7 @@ export default {
     },
     methods: {
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/publications/'+this.publication_id+'/attachments/';
             event.preventDefault();
             const formData = new FormData();
@@ -64,6 +66,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
     },

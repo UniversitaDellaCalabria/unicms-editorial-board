@@ -10,6 +10,7 @@
                     <b-card title="New Media collection">
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -34,6 +35,7 @@ export default {
     },
     methods: {
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/media-collections/';
             event.preventDefault();
             this.axios
@@ -49,6 +51,7 @@ export default {
                     if(this.$route.query.mode != 'raw')
                         this.$router.push({name: 'MediaCollections',
                                            params: {alerts: this.alerts}})
+                    this.$refs.form.loading = false;
                     }
                 )
                 .catch(error => {
@@ -59,6 +62,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
     },

@@ -11,6 +11,7 @@
                         <b-card-title>New publication</b-card-title>
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -49,6 +50,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/publications/';
             event.preventDefault();
             this.axios
@@ -64,6 +66,7 @@ export default {
                     if(this.$route.query.mode != 'raw')
                         this.$router.push({name: 'Publications',
                                            params: {alerts: this.alerts}})
+                    this.$refs.form.loading = false
                     }
                 )
                 .catch(error => {
@@ -74,6 +77,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         }
     },

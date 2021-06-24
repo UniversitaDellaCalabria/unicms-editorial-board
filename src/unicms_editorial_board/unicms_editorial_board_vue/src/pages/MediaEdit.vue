@@ -33,6 +33,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
@@ -100,6 +101,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/medias/'+this.media_id+'/';
             event.preventDefault();
             const formData = new FormData();
@@ -116,7 +118,9 @@ export default {
                         { variant: 'success',
                           message: 'media edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.$refs.form.loading = false;
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -126,6 +130,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
         remove() {

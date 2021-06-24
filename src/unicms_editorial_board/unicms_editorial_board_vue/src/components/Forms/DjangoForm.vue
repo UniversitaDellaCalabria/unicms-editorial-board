@@ -1,6 +1,11 @@
 <template>
+    <b-alert variant="info" show v-if="loading">
+        <b-spinner class="mr-3" small type="grow" label="Loading..." variant="info">
+        </b-spinner>
+        saving your data... please wait
+    </b-alert>
 
-    <b-form @submit="submit">
+    <b-form @submit="submit" v-else>
 
         <b-form-group
             v-for="field in this.fields" :key="field.id"
@@ -176,6 +181,7 @@ export default {
     },
     data () {
         return {
+            loading: false,
             initial: {},
             options: {},
             selected: {},

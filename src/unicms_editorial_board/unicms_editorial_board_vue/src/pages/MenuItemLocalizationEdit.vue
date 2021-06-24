@@ -36,6 +36,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -101,6 +102,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/menus/'+this.$route.params.menu_id+'/items/'+this.$route.params.menu_item_id+'/localizations/'+this.menu_item_localization_id+'/';
             event.preventDefault();
             this.axios
@@ -114,6 +116,7 @@ export default {
                           message: 'menu item localization edited successfully',
                           dismissable: true }
                     );
+                    this.$refs.form.loading = false
                     }
                 )
                 .catch(error => {
@@ -124,6 +127,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {

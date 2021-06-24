@@ -127,6 +127,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/menus/'+this.menu_id+'/items/'+this.menu_item_id+'/';
             event.preventDefault();
             this.axios
@@ -139,7 +140,9 @@ export default {
                         { variant: 'success',
                           message: 'menu item edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.$refs.form.loading = false
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -149,6 +152,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {

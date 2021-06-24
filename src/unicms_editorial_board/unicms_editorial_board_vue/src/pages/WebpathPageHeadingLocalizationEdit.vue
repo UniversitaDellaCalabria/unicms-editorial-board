@@ -38,6 +38,7 @@
 
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -105,6 +106,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/headings/'+this.heading_id+'/localization/'+this.localization_id+'/';
             event.preventDefault();
             this.axios
@@ -117,7 +119,9 @@ export default {
                         { variant: 'success',
                           message: 'page heading localization edited successfully',
                           dismissable: true }
-                    )}
+                    )
+                    this.$refs.form.loading = false
+                    }
                 )
                 .catch(error => {
                     for (var key in error.response.data) {
@@ -127,6 +131,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {

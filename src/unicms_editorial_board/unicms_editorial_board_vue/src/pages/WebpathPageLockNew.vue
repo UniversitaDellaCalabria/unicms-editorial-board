@@ -10,6 +10,7 @@
                     <b-card title="New">
                         <b-card-text>
                             <django-form
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -52,6 +53,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/locks/'+this.content_type+'/'+this.page_id+'/';
             event.preventDefault();
             this.axios
@@ -79,6 +81,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
     },

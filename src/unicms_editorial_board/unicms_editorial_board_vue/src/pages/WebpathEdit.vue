@@ -136,6 +136,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/';
             event.preventDefault();
             this.axios
@@ -150,6 +151,7 @@ export default {
                     )
                     this.page_title = response.data.full_name
                     this.form.path = response.data.path
+                    this.$refs.form.loading = false
                     }
                 )
                 .catch(error => {
@@ -160,6 +162,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {

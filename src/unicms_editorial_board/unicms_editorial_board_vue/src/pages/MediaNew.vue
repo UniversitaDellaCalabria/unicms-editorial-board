@@ -10,7 +10,7 @@
                     <b-card title="New Media">
                         <b-card-text>
                             <django-form
-
+                                ref="form"
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source" />
@@ -33,6 +33,7 @@ export default {
     },
     methods: {
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/medias/';
             event.preventDefault();
             const formData = new FormData();
@@ -52,6 +53,7 @@ export default {
                     if(this.$route.query.mode != 'raw')
                         this.$router.push({name: 'Media',
                                            params: {alerts: this.alerts}})
+                    this.$refs.form.loading = false;
                     }
                 )
                 .catch(error => {
@@ -62,6 +64,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false;
                 })
         },
     }

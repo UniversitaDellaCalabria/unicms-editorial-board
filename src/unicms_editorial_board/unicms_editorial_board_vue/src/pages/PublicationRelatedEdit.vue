@@ -106,6 +106,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/publications/'+this.publication_id+'/related/'+this.related_id+'/';
             event.preventDefault();
             this.axios
@@ -118,7 +119,8 @@ export default {
                           message: 'related publication edited successfully',
                           dismissable: true }
                     )
-                    this.page_title = response.data.related.full_name
+                    this.page_title = response.data.related.full_name;
+                    this.$refs.form.loading = false
                     }
                 )
                 .catch(error => {
@@ -129,6 +131,7 @@ export default {
                               dismissable: true }
                         )
                     }
+                    this.$refs.form.loading = false
                 })
         },
         remove() {
