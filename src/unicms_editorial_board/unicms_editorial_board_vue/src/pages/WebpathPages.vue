@@ -7,6 +7,7 @@
         :files="files"
         :arrays="arrays"
         :arrays_map="arrays_map"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">

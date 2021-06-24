@@ -6,6 +6,7 @@
         :files="files"
         :arrays="arrays"
         :arrays_map="arrays_map"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title">
 
@@ -111,6 +112,7 @@ export default {
             arrays: ['category'],
             arrays_map: [{'category': 'name'}],
             files: ['presentation_image'],
+            ordering: 'name',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'Title', value: 'title' },

@@ -2,6 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">

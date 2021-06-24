@@ -3,6 +3,7 @@
         :api_source="api_source"
         :fields="fields"
         :files="files"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -102,6 +103,7 @@ export default {
                 'actions'
             ],
             files: ['block.image'],
+            ordering: 'section',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'block__name' },
                             { text: 'Section', value: 'section' },

@@ -3,6 +3,7 @@
         :api_source="api_source"
         :fields="fields"
         :files="files"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -71,6 +72,7 @@ export default {
                 'actions'
             ],
             files: ['image'],
+            ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Pre-Heading', value: 'pre_heading' },
                             { text: 'Heading', value: 'heading' },

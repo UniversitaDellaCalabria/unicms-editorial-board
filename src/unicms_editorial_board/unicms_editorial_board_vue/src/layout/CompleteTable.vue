@@ -190,6 +190,10 @@ export default {
         files: { type: Array },
         images: { type: Array },
         mainMethod: { type: Function },
+        ordering: {
+            type: String,
+            default: 'id'
+        },
         ordering_list: { type: Array },
         page_title: { type: String },
         showCreatedBy: {
@@ -212,7 +216,6 @@ export default {
             prev: '',
             search: '',
             sortDesc: '+',
-            ordering: 'id',
             created_by: '',
             created_by_list: [
                 { text: 'Only items created by me', value: ''},

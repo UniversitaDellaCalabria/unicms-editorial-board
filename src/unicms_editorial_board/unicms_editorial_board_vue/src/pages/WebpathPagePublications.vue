@@ -2,6 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -61,6 +62,7 @@ export default {
                 {key: 'is_active', label: 'Active'},
                 'actions'
             ],
+            ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Publication name', value: 'publication__name' },
                             { text: 'Publication title', value: 'publication__title' },

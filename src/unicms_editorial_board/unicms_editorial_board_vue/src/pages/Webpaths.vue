@@ -2,6 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title">
 
@@ -80,8 +81,10 @@ export default {
                 { key: 'childs', label: 'Related'},
                 'actions'
             ],
+            ordering: 'fullpath',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
+                            { text: 'Path', value: 'fullpath' },
                             { text: 'State', value: 'is_active'}],
             site_id: this.$route.params.site_id,
             page_title: 'Website webpaths'

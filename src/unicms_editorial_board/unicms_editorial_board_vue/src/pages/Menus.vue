@@ -3,6 +3,7 @@
         ref="completeTable"
         :api_source="api_source"
         :fields="fields"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title">
 
@@ -70,6 +71,7 @@ export default {
                 { key: 'childs', label: 'Related'},
                 'actions'
             ],
+            ordering: 'name',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'State', value: 'is_active'}],

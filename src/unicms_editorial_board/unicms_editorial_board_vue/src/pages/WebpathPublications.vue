@@ -3,6 +3,7 @@
         :api_source="api_source"
         :fields="fields"
         :dates="dates"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -65,6 +66,7 @@ export default {
             ],
             dates: ['date_start', 'date_end',
                     'in_evidence_start', 'in_evidence_end'],
+            ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'publication__name' },
                             { text: 'Title', value: 'publication__title' },

@@ -4,6 +4,7 @@
         :fields="fields"
         :arrays="arrays"
         :arrays_map="arrays_map"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false">
@@ -59,6 +60,7 @@ export default {
                 {key: 'is_active', sortable: true},
                 'actions'
             ],
+            ordering: 'name',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'related.name' },
                             { text: 'Title', value: 'related.title' },

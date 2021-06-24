@@ -3,6 +3,7 @@
         :api_source="api_source"
         :fields="fields"
         :files="files"
+        :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
         :showCreatedBy="false" >
@@ -25,6 +26,7 @@ export default {
                      'description',
             ],
             files: ['image'],
+            ordering: 'type',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },
                             { text: 'Type', value: 'type' },
