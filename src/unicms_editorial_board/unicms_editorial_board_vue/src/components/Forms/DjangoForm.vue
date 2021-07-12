@@ -251,6 +251,9 @@ export default {
     },
     mounted() {
         this.getForm();
-    }
+    },
+    deactivated() {
+        this.$parent.$destroy();
+    },
 }
 </script>
