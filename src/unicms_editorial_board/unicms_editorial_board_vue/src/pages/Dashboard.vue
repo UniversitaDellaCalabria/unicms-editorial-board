@@ -398,6 +398,9 @@ export default {
     },
     mounted() {
         this.getCurrentUserID()
-    }
+    },
+    deactivated() {
+        this.$destroy();
+    },
 }
 </script>
