@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "6b69591a5f732d1d64f2",
+    "revision": "92c37915401a1e503c1e",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "6b69591a5f732d1d64f2",
-    "url": "/static/unicms_editorial_board_vue/js/app.469be083.js"
+    "revision": "92c37915401a1e503c1e",
+    "url": "/static/unicms_editorial_board_vue/js/app.5b5d3c19.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,16 +16,8 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "3fe6455f1cbd325802e439065a6fdbe7",
+    "revision": "5c1e4f111ed5065404dd121017926b8b",
     "url": "/static/unicms_editorial_board_vue/index.html"
-  },
-  {
-    "revision": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "/static/unicms_editorial_board_vue/.gitkeep"
-  },
-  {
-    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
-    "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
     "revision": "a9615bac158705203261e8348f574cc8",
@@ -38,6 +30,14 @@ self.__precacheManifest = [
   {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
+    "revision": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "/static/unicms_editorial_board_vue/.gitkeep"
+  },
+  {
+    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
+    "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",

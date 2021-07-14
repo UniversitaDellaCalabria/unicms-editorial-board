@@ -216,7 +216,7 @@ export default {
             per_page: 1,
             total_rows: 99999999,
             next: '',
-            parent_name: this.$parent.page_title,
+            parent_name: this.$parent.api_source,
             prev: '',
             search: '',
             sortDesc: '+',
