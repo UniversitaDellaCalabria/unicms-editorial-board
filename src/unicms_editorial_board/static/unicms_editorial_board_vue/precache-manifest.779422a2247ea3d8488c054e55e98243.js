@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "92c37915401a1e503c1e",
+    "revision": "4bba4aaa0e298d75e200",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "92c37915401a1e503c1e",
-    "url": "/static/unicms_editorial_board_vue/js/app.5b5d3c19.js"
+    "revision": "4bba4aaa0e298d75e200",
+    "url": "/static/unicms_editorial_board_vue/js/app.9224dce4.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "5c1e4f111ed5065404dd121017926b8b",
+    "revision": "10e6d1ea4f2f326b0c11ceac65bb9e20",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
-    "revision": "a9615bac158705203261e8348f574cc8",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
+    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
+    "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
@@ -36,28 +36,28 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/.gitkeep"
   },
   {
-    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
-    "url": "/static/unicms_editorial_board_vue/favicon.png"
+    "revision": "a9615bac158705203261e8348f574cc8",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-1.jpg"
   },
   {
-    "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-2.jpg"
-  },
-  {
     "revision": "ce7a6b79aa55041f7ae36f6ce22231fe",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-3.jpg"
   },
   {
-    "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
+    "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-2.jpg"
   },
   {
     "revision": "4ab22eca4053c14a34e4bdb6390deae9",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-5.jpg"
+  },
+  {
+    "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
   },
   {
     "revision": "4b87e628f4ef9988718860890b2a682f",

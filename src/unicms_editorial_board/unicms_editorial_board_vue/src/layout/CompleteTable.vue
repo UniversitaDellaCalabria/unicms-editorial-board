@@ -246,7 +246,7 @@ export default {
             this.axios
                 .get('/api/editorial-board/users/current/')
                 .then(response => {
-                    if (!localStorage.getItem(this.parent_name)) this.created_by = response.data[0];
+                    if (!sessionStorage.getItem(this.parent_name)) this.created_by = response.data[0];
                     this.$set(this.created_by_list[0], 'value', response.data[0]);
                     if (callApi) this.callApi(null);
                 })
@@ -278,7 +278,7 @@ export default {
                 'sortDesc': this.sortDesc,
                 'created_by': this.created_by,
             }
-            localStorage.setItem(this.parent_name, JSON.stringify(params))
+            sessionStorage.setItem(this.parent_name, JSON.stringify(params))
         },
         changeStatus(item) {
             this.axios
@@ -345,8 +345,8 @@ export default {
         },
     },
     mounted() {
-        if(localStorage.getItem(this.parent_name)){
-            let init = JSON.parse(localStorage.getItem(this.parent_name))
+        if(sessionStorage.getItem(this.parent_name)){
+            let init = JSON.parse(sessionStorage.getItem(this.parent_name))
             this.page = init['page']
             this.search = init['search']
             this.ordering = init['ordering']
