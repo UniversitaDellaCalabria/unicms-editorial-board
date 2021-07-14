@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "5de5a347c04e476db807",
+    "revision": "6b69591a5f732d1d64f2",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "5de5a347c04e476db807",
-    "url": "/static/unicms_editorial_board_vue/js/app.cd8fe0ef.js"
+    "revision": "6b69591a5f732d1d64f2",
+    "url": "/static/unicms_editorial_board_vue/js/app.469be083.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,16 +16,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "3ae2e64fd6d443c1ce3dcec57dc8e22d",
+    "revision": "3fe6455f1cbd325802e439065a6fdbe7",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "/static/unicms_editorial_board_vue/.gitkeep"
-  },
-  {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "996d8248f580f8e26e6c45c67da9b5a6",
@@ -38,6 +34,10 @@ self.__precacheManifest = [
   {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
+  },
+  {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/new_logo.png"
   },
   {
-    "revision": "6be21e8a1b7d63048728851c6003e189",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
-  },
-  {
     "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
+  },
+  {
+    "revision": "6be21e8a1b7d63048728851c6003e189",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
   },
   {
     "revision": "cd253e23ed052deeb80b42d2ed772183",

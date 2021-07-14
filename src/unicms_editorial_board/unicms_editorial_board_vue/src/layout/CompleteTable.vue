@@ -1,12 +1,14 @@
 <template>
     <div class="content">
         <div class="container-fluid">
+
             <Breadcrumbs/>
 
             <stacked-alerts :alerts="alerts" />
 
             <div class="row">
                 <div class="col-12">
+
                     <b-card :title="page_title">
                         <b-card-text>
 
@@ -46,7 +48,7 @@
                                         :created_by="created_by"
                                         :created_by_list="created_by_list"
                                         @updateCreatedBy="created_by = $event;"
-                                        @callApi="callApi(null, page)"
+                                        @callApi="callApi(null, 1)"
                                     />
                                 </div>
                                 <div class="col col-12 col-md-4">
@@ -62,12 +64,14 @@
                             </div>
 
                             <b-pagination
-                                v-model="currentPage"
+                                @change="changePage"
+                                v-model="page"
                                 :total-rows="total_rows"
                                 :per-page="per_page"
                                 first-number
                                 last-number
-                                align="right">
+                                align="right"
+                                aria-controls="my-table">
                             </b-pagination>
 
                             <b-table
@@ -76,7 +80,8 @@
                                 striped hover responsive
                                 :busy="isBusy"
                                 :fields="fields"
-                                :items="items">
+                                :items="items"
+                                :current-page="page">
 
                                 <template #table-busy>
                                     <div class="text-center text-danger my-2">
@@ -157,7 +162,8 @@
                             </b-table>
 
                             <b-pagination
-                                v-model="currentPage"
+                                @change="changePage"
+                                v-model="page"
                                 :total-rows="total_rows"
                                 :per-page="per_page"
                                 first-number
@@ -197,22 +203,20 @@ export default {
         ordering_list: { type: Array },
         page_title: { type: String },
         showCreatedBy: {
-            type: String,
+            type: Boolean,
             default: true
         },
     },
     data () {
         return {
             alerts: this.$route.params.alerts || [],
-            carousel_id: this.$route.params.carousel_id,
-            carousel_item_id: this.$route.params.carousel_item_id,
             isBusy: true,
             items: [],
             page: 1,
-            per_page: 0,
-            total_rows: 0,
-            currentPage: 1,
+            per_page: 1,
+            total_rows: 99999999,
             next: '',
+            parent_name: this.$parent.page_title,
             prev: '',
             search: '',
             sortDesc: '+',
@@ -238,16 +242,16 @@ export default {
                 if (this.arrays_map[i][key])
                     return this.arrays_map[i][key]
         },
-        getCurrentUserID(){
+        getCurrentUserID(callApi=true){
             this.axios
                 .get('/api/editorial-board/users/current/')
                 .then(response => {
-                    this.created_by = response.data[0];
+                    if (!localStorage.getItem(this.parent_name)) this.created_by = response.data[0];
                     this.$set(this.created_by_list[0], 'value', response.data[0]);
-                    this.callApi();
+                    if (callApi) this.callApi(null);
                 })
         },
-        callApi(url, page=null) {
+        callApi(url=null, page=null) {
             if (this.mainMethod) {
                 this.mainMethod(url, page);
             }
@@ -267,6 +271,14 @@ export default {
                         this.isBusy = false
                     })
             }
+            let params = {
+                'page': this.page,
+                'search': this.search,
+                'ordering': this.ordering,
+                'sortDesc': this.sortDesc,
+                'created_by': this.created_by,
+            }
+            localStorage.setItem(this.parent_name, JSON.stringify(params))
         },
         changeStatus(item) {
             this.axios
@@ -325,17 +337,25 @@ export default {
             ).then(value => {
                 if (value) this.remove(item.id);
             })
-        }
+        },
+        changePage(page){
+            this.page = page
+            this.isBusy = true
+            this.callApi(null)
+        },
     },
     mounted() {
-        if (this.showCreatedBy) this.getCurrentUserID();
-        else this.callApi();
-    },
-    watch: {
-        'currentPage': function(){
-            this.isBusy = true
-            this.callApi(null, this.currentPage)
+        if(localStorage.getItem(this.parent_name)){
+            let init = JSON.parse(localStorage.getItem(this.parent_name))
+            this.page = init['page']
+            this.search = init['search']
+            this.ordering = init['ordering']
+            this.created_by = init['created_by']
+            this.sortDesc = init['sortDesc']
         }
-    }
+
+        if (this.showCreatedBy) this.getCurrentUserID();
+        else this.callApi(null);
+    },
 }
 </script>
