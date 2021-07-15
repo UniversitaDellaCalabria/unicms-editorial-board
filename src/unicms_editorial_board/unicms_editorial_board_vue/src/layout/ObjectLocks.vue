@@ -72,6 +72,15 @@ export default {
                             this.$refs.completeTable.next = response2.data.next;
                             this.$refs.completeTable.total_rows = response2.data.count;
                             this.$refs.completeTable.isBusy = false
+
+                            let params = {
+                                'page': this.$refs.completeTable.page,
+                                'search': this.$refs.completeTable.search,
+                                'ordering': this.$refs.completeTable.ordering,
+                                'sortDesc': this.$refs.completeTable.sortDesc,
+                                'created_by': this.$refs.completeTable.created_by,
+                            }
+                            sessionStorage.setItem(this.$refs.completeTable.parent_name, JSON.stringify(params))
                     })
                 })
         },

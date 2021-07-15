@@ -269,16 +269,18 @@ export default {
                         this.next = response.data.next;
                         this.total_rows = response.data.count;
                         this.isBusy = false
+
+                        let params = {
+                            'page': this.page,
+                            'search': this.search,
+                            'ordering': this.ordering,
+                            'sortDesc': this.sortDesc,
+                            'created_by': this.created_by,
+                        }
+                        sessionStorage.setItem(this.parent_name, JSON.stringify(params))
                     })
             }
-            let params = {
-                'page': this.page,
-                'search': this.search,
-                'ordering': this.ordering,
-                'sortDesc': this.sortDesc,
-                'created_by': this.created_by,
-            }
-            sessionStorage.setItem(this.parent_name, JSON.stringify(params))
+
         },
         changeStatus(item) {
             this.axios
