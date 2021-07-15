@@ -64,6 +64,7 @@
                             </div>
 
                             <b-pagination
+                                v-if="!isBusy"
                                 @change="changePage"
                                 v-model="page"
                                 :total-rows="total_rows"
@@ -162,6 +163,7 @@
                             </b-table>
 
                             <b-pagination
+                                v-if="!isBusy"
                                 @change="changePage"
                                 v-model="page"
                                 :total-rows="total_rows"
