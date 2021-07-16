@@ -66,11 +66,11 @@ export default {
                         .get(source2)
                         .then(response2 => {
                             this.$refs.completeTable.items = response2.data.results;
-                            this.$refs.completeTable.page = response2.data.page;
                             this.$refs.completeTable.per_page = response2.data.per_page;
                             this.$refs.completeTable.prev = response2.data.previous;
                             this.$refs.completeTable.next = response2.data.next;
                             this.$refs.completeTable.total_rows = response2.data.count;
+                            this.$refs.completeTable.page = response2.data.page;
                             this.$refs.completeTable.isBusy = false
 
                             let params = {

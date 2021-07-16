@@ -215,8 +215,8 @@ export default {
             isBusy: true,
             items: [],
             page: 1,
-            per_page: 1,
-            total_rows: 99999999,
+            per_page: 0,
+            total_rows: 0,
             next: '',
             parent_name: this.$parent.api_source,
             prev: '',
@@ -265,11 +265,11 @@ export default {
                     .get(source)
                     .then(response => {
                         this.items = response.data.results;
-                        this.page = response.data.page;
                         this.per_page = response.data.per_page;
                         this.prev = response.data.previous;
                         this.next = response.data.next;
                         this.total_rows = response.data.count;
+                        this.page = response.data.page;
                         this.isBusy = false
 
                         let params = {
