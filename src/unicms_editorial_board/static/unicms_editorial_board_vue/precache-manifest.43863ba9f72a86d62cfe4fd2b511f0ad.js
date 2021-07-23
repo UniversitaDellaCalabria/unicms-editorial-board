@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ae7e6a03afbd031847a2",
+    "revision": "612a99c10e9fdfb628e6",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "ae7e6a03afbd031847a2",
-    "url": "/static/unicms_editorial_board_vue/js/app.1cbff214.js"
+    "revision": "612a99c10e9fdfb628e6",
+    "url": "/static/unicms_editorial_board_vue/js/app.fe682ef6.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "6400f2e814dafad453a731bff879ae56",
+    "revision": "bf27c386d768278a2e32eb16873f824d",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/new_logo.png"
   },
   {
-    "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
-  },
-  {
     "revision": "6be21e8a1b7d63048728851c6003e189",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
+  },
+  {
+    "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
   },
   {
     "revision": "cd253e23ed052deeb80b42d2ed772183",
@@ -104,12 +104,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
-    "revision": "44bf13a71a4db6e15913fe8af9296711",
-    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
-  },
-  {
     "revision": "9ebea76ee1225f00d882b21547a7b49f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
+  },
+  {
+    "revision": "44bf13a71a4db6e15913fe8af9296711",
+    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",

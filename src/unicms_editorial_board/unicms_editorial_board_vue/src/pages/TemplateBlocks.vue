@@ -6,7 +6,8 @@
         :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
-        :showCreatedBy="false" >
+        :showCreatedBy="false"
+        :showIsActive="false" >
     </CompleteTable>
 </template>
 <script>
