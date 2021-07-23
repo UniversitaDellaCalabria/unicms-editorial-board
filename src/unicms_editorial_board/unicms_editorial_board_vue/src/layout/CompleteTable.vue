@@ -20,8 +20,7 @@
 
                             <div class="row pt-3">
                                 <div
-                                    v-if="showCreatedBy"
-                                    class="col col-12 col-md-5">
+                                    class="col col-12 col-sm">
                                     <b-form-input
                                         v-model="search"
                                         v-on:input="callApi(null, 1)"
@@ -31,18 +30,16 @@
                                     </b-form-input>
                                 </div>
                                 <div
-                                    v-else
-                                    class="col col-12 col-md-8">
-                                    <b-form-input
-                                        v-model="search"
-                                        v-on:input="callApi(null, 1)"
-                                        placeholder="Search..."
-                                        type="search"
-                                        class="mb-3">
-                                    </b-form-input>
+                                    class="col col-12 col-sm"
+                                    v-if="showIsActive">
+                                    <IsActiveFilter
+                                        :is_active="is_active"
+                                        @updateIsActive="is_active = $event;"
+                                        @callApi="callApi(null, 1)"
+                                    />
                                 </div>
                                 <div
-                                    class="col col-12 col-md-3"
+                                    class="col col-12 col-sm"
                                     v-if="showCreatedBy">
                                     <CreatedByFilter
                                         :created_by="created_by"
@@ -181,12 +178,14 @@
 </template>
 <script>
 import CreatedByFilter from '../components/Tables/CreatedByFilter.vue'
+import IsActiveFilter from '../components/Tables/IsActiveFilter.vue'
 import OrderingFilter from '../components/Tables/OrderingFilter.vue'
 
 export default {
     name: 'CompleteTable',
     components: {
         CreatedByFilter,
+        IsActiveFilter,
         OrderingFilter
     },
     props: {
@@ -208,6 +207,10 @@ export default {
             type: Boolean,
             default: true
         },
+        showIsActive: {
+            type: Boolean,
+            default: true
+        },
     },
     data () {
         return {
@@ -222,6 +225,7 @@ export default {
             prev: '',
             search: '',
             sortDesc: '+',
+            is_active: '',
             created_by: '',
             created_by_list: [
                 { text: 'Only items created by me', value: ''},
@@ -259,7 +263,12 @@ export default {
             }
             else {
                 let target_page = page || this.page;
-                let source = this.api_source + '?page=' + target_page + '&search=' + this.search + '&ordering=' + this.sortDesc + this.ordering + '&created_by=' + this.created_by;
+                let source = this.api_source +
+                             '?page=' + target_page +
+                             '&search=' + this.search +
+                             '&ordering=' + this.sortDesc + this.ordering +
+                             '&created_by=' + this.created_by +
+                             '&is_active=' + this.is_active;
                 if (url) source = url;
                 this.axios
                     .get(source)
@@ -274,6 +283,7 @@ export default {
 
                         let params = {
                             'page': this.page,
+                            'is_active': this.is_active,
                             'search': this.search,
                             'ordering': this.ordering,
                             'sortDesc': this.sortDesc,
@@ -351,6 +361,7 @@ export default {
     mounted() {
         if(sessionStorage.getItem(this.parent_name)){
             let init = JSON.parse(sessionStorage.getItem(this.parent_name))
+            this.is_active = init['is_active']
             this.page = init['page']
             this.search = init['search']
             this.ordering = init['ordering']

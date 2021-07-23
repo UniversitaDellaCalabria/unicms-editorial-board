@@ -5,7 +5,8 @@
         :files="files"
         :ordering="ordering"
         :ordering_list="ordering_list"
-        :page_title="page_title">
+        :page_title="page_title"
+        :showIsActive="false" >
 
         <template #add_new>
             <router-link :to="{ name: 'MediaNew'}"

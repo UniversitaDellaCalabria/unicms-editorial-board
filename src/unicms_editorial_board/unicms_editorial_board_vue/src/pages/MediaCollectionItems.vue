@@ -44,12 +44,13 @@ export default {
             collection_id: this.$route.params.collection_id,
             fields: [
                 'id',
-                {key: 'media', thClass: 'w-25'},
+                {key: 'media.title', label: 'Media'},
+                {key: 'media.file', label: 'File', thClass: 'w-25'},
                 'order',
                 { key: 'is_active', label: 'Active'},
                 'actions'
             ],
-            files: ['media'],
+            files: ['media.file'],
             ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Order', value: 'order' },

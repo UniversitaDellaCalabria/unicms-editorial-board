@@ -5,7 +5,8 @@
         :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
-        :showCreatedBy="false">
+        :showCreatedBy="false"
+        :showIsActive="false" >
 
         <template #add_new>
             <router-link :to="{ name: 'PublicationLinkNew',

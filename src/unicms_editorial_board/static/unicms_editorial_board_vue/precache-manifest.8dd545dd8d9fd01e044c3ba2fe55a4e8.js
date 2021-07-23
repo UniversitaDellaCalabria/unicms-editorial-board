@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "30a7fd64b2f34b438bf4",
+    "revision": "ae7e6a03afbd031847a2",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "30a7fd64b2f34b438bf4",
-    "url": "/static/unicms_editorial_board_vue/js/app.fbbce4fc.js"
+    "revision": "ae7e6a03afbd031847a2",
+    "url": "/static/unicms_editorial_board_vue/js/app.1cbff214.js"
   },
   {
     "revision": "9c41a8a956028c357565",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.b3ebd97f.js"
   },
   {
-    "revision": "3940c3702d16a1e3f42a23603526a14f",
+    "revision": "6400f2e814dafad453a731bff879ae56",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -32,16 +32,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-1.jpg"
-  },
-  {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
@@ -108,12 +108,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
-    "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
-    "url": "/static/unicms_editorial_board_vue/img/vue-logo.png"
-  },
-  {
     "revision": "9ebea76ee1225f00d882b21547a7b49f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
+  },
+  {
+    "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
+    "url": "/static/unicms_editorial_board_vue/img/vue-logo.png"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",

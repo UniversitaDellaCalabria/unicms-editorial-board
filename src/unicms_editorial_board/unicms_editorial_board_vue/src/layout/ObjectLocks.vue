@@ -7,7 +7,8 @@
         :ordering_list="ordering_list"
         :page_title="page_title"
         :mainMethod="callApi"
-        :showCreatedBy="false">
+        :showCreatedBy="false"
+        :showIsActive="false" >
 
         <template #add_new>
             <router-link :to="{ name: addNewClass,
@@ -74,6 +75,7 @@ export default {
                             this.$refs.completeTable.isBusy = false
 
                             let params = {
+                                'is_active': this.$refs.completeTable.is_active,
                                 'page': this.$refs.completeTable.page,
                                 'search': this.$refs.completeTable.search,
                                 'ordering': this.$refs.completeTable.ordering,
