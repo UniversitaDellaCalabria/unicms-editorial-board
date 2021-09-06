@@ -6,7 +6,8 @@
         :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
-        :showIsActive="false" >
+        :showIsActive="false"
+        ref="completeTable">
 
         <template #add_new>
             <router-link :to="{ name: 'MediaNew'}"
@@ -15,6 +16,28 @@
                         variant="white"></b-icon>
                 Add new
             </router-link>
+        </template>
+
+        <template #custom_filter>
+            <div class="col col-12 col-sm">
+                <b-input-group>
+                    <b-form-select
+                        class="mb-3"
+                        id="media-filetype-select"
+                        v-on:change="updateMediaType($event)"
+                        v-model="file_type"
+                        :aria-describedby="ariaDescribedby">
+                        <b-form-select-option value="">
+                            - All file types -
+                        </b-form-select-option>
+                        <b-form-select-option
+                            v-for="filetype in types_list"
+                            :value="filetype">
+                            {{ filetype }}
+                        </b-form-select-option>
+                    </b-form-select>
+                </b-input-group>
+            </div>
         </template>
 
         <template #actions="item">
@@ -38,6 +61,7 @@
 </template>
 <script>
 import CompleteTable from '../layout/CompleteTable.vue'
+import MediaTypeFilter from '../components/Tables/MediaTypeFilter.vue'
 
 export default {
     components: {
@@ -65,8 +89,28 @@ export default {
                 { text: 'Description', value: 'description' },
                 { text: 'File type', value: 'file_type' },
             ],
+            file_type: '',
+            types_list: [],
             page_title: 'Media'
         }
+    },
+    methods: {
+        callMediaFiltersApi() {
+            let source = '/api/editorial-board/medias/allowed-filetypes/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.types_list = response.data
+                })
+        },
+        updateMediaType(value) {
+            this.$refs.completeTable.custom_filters.file_type = value
+            this.$refs.completeTable.callApi(null, 1)
+        }
+    },
+    mounted() {
+        this.file_type = this.$refs.completeTable.custom_filters.file_type
+        this.callMediaFiltersApi()
     }
 }
 </script>

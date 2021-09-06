@@ -48,6 +48,9 @@
                                         @callApi="callApi(null, 1)"
                                     />
                                 </div>
+
+                                <slot name="custom_filter"></slot>
+
                                 <div class="col col-12 col-md-4">
                                     <OrderingFilter
                                         :ordering="ordering"
@@ -231,6 +234,7 @@ export default {
                 { text: 'Only items created by me', value: ''},
                 { text: 'Show all items', value: ''},
             ],
+            custom_filters: {}
         }
     },
     methods: {
@@ -258,6 +262,7 @@ export default {
                 })
         },
         callApi(url=null, page=null) {
+
             if (this.mainMethod) {
                 this.mainMethod(url, page);
             }
@@ -269,6 +274,12 @@ export default {
                              '&ordering=' + this.sortDesc + this.ordering +
                              '&created_by=' + this.created_by +
                              '&is_active=' + this.is_active;
+
+                for (let [key, value] of Object.entries(this.custom_filters)) {
+                    let filter = '&' + key + '=' + value
+                    source = source.concat(filter);
+                }
+
                 if (url) source = url;
                 this.axios
                     .get(source)
@@ -289,6 +300,11 @@ export default {
                             'sortDesc': this.sortDesc,
                             'created_by': this.created_by,
                         }
+
+                        for (let [key, value] of Object.entries(this.custom_filters)) {
+                            params[key] = value
+                        }
+
                         sessionStorage.setItem(this.parent_name, JSON.stringify(params))
                     })
             }
@@ -362,11 +378,26 @@ export default {
         if(sessionStorage.getItem(this.parent_name)){
             let init = JSON.parse(sessionStorage.getItem(this.parent_name))
             this.is_active = init['is_active']
+            delete init['is_active']
+
             this.page = init['page']
+            delete init['page']
+
             this.search = init['search']
+            delete init['search']
+
             this.ordering = init['ordering']
+            delete init['ordering']
+
             this.created_by = init['created_by']
+            delete init['created_by']
+
             this.sortDesc = init['sortDesc']
+            delete init['sortDesc']
+
+            for (let [key, value] of Object.entries(init)) {
+                this.custom_filters[key] = value
+            }
         }
 
         if (this.showCreatedBy) this.getCurrentUserID();
