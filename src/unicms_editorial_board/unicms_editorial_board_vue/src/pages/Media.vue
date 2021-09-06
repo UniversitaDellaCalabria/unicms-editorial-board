@@ -18,7 +18,7 @@
             </router-link>
         </template>
 
-        <template #custom_filter>
+         <template #custom_filter>
             <div class="col col-12 col-sm">
                 <b-input-group>
                     <b-form-select
@@ -27,7 +27,7 @@
                         v-on:change="updateMediaType($event)"
                         v-model="file_type"
                         :aria-describedby="ariaDescribedby">
-                        <b-form-select-option value="">
+                        <b-form-select-option selected>
                             - All file types -
                         </b-form-select-option>
                         <b-form-select-option
@@ -103,7 +103,7 @@ export default {
                     this.types_list = response.data
                 })
         },
-        updateMediaType(value) {
+        updateMediaType(value='') {
             this.$refs.completeTable.custom_filters.file_type = value
             this.$refs.completeTable.callApi(null, 1)
         }
