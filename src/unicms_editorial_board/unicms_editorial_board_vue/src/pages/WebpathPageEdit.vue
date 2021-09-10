@@ -104,6 +104,15 @@
                                     variant="secondary"></b-icon>
                                 Carousels
                             </router-link>
+                            <router-link :to="{ name: 'WebpathPageContacts',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id,
+                                                          page_id: page_id }}"
+                                class="btn btn-outline-secondary mx-md-1 btn-sm">
+                                <b-icon icon="person-lines-fill"
+                                    variant="secondary"></b-icon>
+                                Contacts
+                            </router-link>
                             <router-link :to="{ name: 'WebpathPageHeadings',
                                                 params: { site_id: site_id,
                                                           webpath_id: webpath_id,
