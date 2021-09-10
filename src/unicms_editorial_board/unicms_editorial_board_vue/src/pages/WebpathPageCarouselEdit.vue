@@ -31,7 +31,7 @@
                                     Delete
                                 </b-button>
                             </div>
-                        </div
+                        </div>
 
                         <b-card-title>{{ page_title }}</b-card-title>
 
