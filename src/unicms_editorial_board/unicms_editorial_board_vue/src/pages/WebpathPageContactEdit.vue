@@ -32,6 +32,7 @@
                                 </b-button>
                             </div>
                         </div
+
                         <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
@@ -75,8 +76,8 @@ export default {
             }
             this.page_title = data.contact.name;
             this.$refs.form.getOptionsFromParent('contact',
-                [{"text": data.carousel.name,
-                  "value": data.carousel.id}])
+                [{"text": data.contact.name,
+                  "value": data.contact.id}])
         },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/contacts/'+this.contact_id+'/';

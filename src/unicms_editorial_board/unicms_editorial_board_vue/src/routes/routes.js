@@ -502,6 +502,19 @@ const routes = [
             }
         },
     },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels/:carousel_id/logs',
+        name: 'WebpathPageCarouselLogs',
+        component: WebpathPageCarouselLogs,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.carousel_id.toString(),
+                  parent: 'WebpathPageCarousels'
+                }
+            }
+        },
+    },
 
     // webpath page contacts
     {

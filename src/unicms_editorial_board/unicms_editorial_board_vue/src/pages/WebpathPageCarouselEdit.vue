@@ -32,6 +32,7 @@
                                 </b-button>
                             </div>
                         </div
+
                         <b-card-title>{{ page_title }}</b-card-title>
 
                         <b-card-text>
@@ -73,7 +74,7 @@ export default {
                     this.$set(this.form, key, value.id)
                 else this.$set(this.form, key, value)
             }
-            this.page_title = data.carousel.title;
+            this.page_title = data.carousel.name;
             this.$refs.form.getOptionsFromParent('carousel',
                 [{"text": data.carousel.name,
                   "value": data.carousel.id}])
@@ -143,7 +144,7 @@ export default {
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
-                    this.page_title = response.data.carousel.title;
+                    this.page_title = response.data.carousel.name;
                     this.alerts.push(
                         { variant: 'success',
                           message: 'page carousel removed successfully',
