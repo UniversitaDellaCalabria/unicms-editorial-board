@@ -4,6 +4,7 @@ import Error404 from '../pages/404.vue'
 
 // Admin pages
 import Overview from 'src/pages/Overview.vue'
+
 import Carousels from 'src/pages/Carousels.vue'
 import CarouselNew from 'src/pages/CarouselNew.vue'
 import CarouselEdit from 'src/pages/CarouselEdit.vue'
@@ -26,13 +27,33 @@ import CarouselItemLinkLocalizationEdit from 'src/pages/CarouselItemLinkLocaliza
 import CarouselItemLinkLocalizationLogs from 'src/pages/CarouselItemLinkLocalizationLogs.vue'
 import CarouselLocks from 'src/pages/CarouselLocks.vue'
 import CarouselLockNew from 'src/pages/CarouselLockNew.vue'
+
+import Contacts from 'src/pages/Contacts.vue'
+import ContactNew from 'src/pages/ContactNew.vue'
+import ContactEdit from 'src/pages/ContactEdit.vue'
+import ContactLogs from 'src/pages/ContactLogs.vue'
+import ContactInfos from 'src/pages/ContactInfos.vue'
+import ContactInfoNew from 'src/pages/ContactInfoNew.vue'
+import ContactInfoEdit from 'src/pages/ContactInfoEdit.vue'
+import ContactInfoLogs from 'src/pages/ContactInfoLogs.vue'
+import ContactLocalizations from 'src/pages/ContactLocalizations.vue'
+import ContactLocalizationNew from 'src/pages/ContactLocalizationNew.vue'
+import ContactLocalizationEdit from 'src/pages/ContactLocalizationEdit.vue'
+import ContactLocalizationLogs from 'src/pages/ContactLocalizationLogs.vue'
+import ContactInfoLocalizations from 'src/pages/ContactInfoLocalizations.vue'
+import ContactInfoLocalizationNew from 'src/pages/ContactInfoLocalizationNew.vue'
+import ContactInfoLocalizationEdit from 'src/pages/ContactInfoLocalizationEdit.vue'
+import ContactInfoLocalizationLogs from 'src/pages/ContactInfoLocalizationLogs.vue'
+
 import Dashboard from 'src/pages/Dashboard.vue'
+
 import Media from 'src/pages/Media.vue'
 import MediaEdit from 'src/pages/MediaEdit.vue'
 import MediaNew from 'src/pages/MediaNew.vue'
 import MediaLogs from 'src/pages/MediaLogs.vue'
 import MediaLocks from 'src/pages/MediaLocks.vue'
 import MediaLockNew from 'src/pages/MediaLockNew.vue'
+
 import MediaCollections from 'src/pages/MediaCollections.vue'
 import MediaCollectionNew from 'src/pages/MediaCollectionNew.vue'
 import MediaCollectionEdit from 'src/pages/MediaCollectionEdit.vue'
@@ -43,6 +64,7 @@ import MediaCollectionItemEdit from 'src/pages/MediaCollectionItemEdit.vue'
 import MediaCollectionItemLogs from 'src/pages/MediaCollectionItemLogs.vue'
 import MediaCollectionLocks from 'src/pages/MediaCollectionLocks.vue'
 import MediaCollectionLockNew from 'src/pages/MediaCollectionLockNew.vue'
+
 import Menus from 'src/pages/Menus.vue'
 import MenuEdit from 'src/pages/MenuEdit.vue'
 import MenuNew from 'src/pages/MenuNew.vue'
@@ -57,6 +79,7 @@ import MenuItemLocalizations from 'src/pages/MenuItemLocalizations.vue'
 import MenuItemLocalizationEdit from 'src/pages/MenuItemLocalizationEdit.vue'
 import MenuItemLocalizationNew from 'src/pages/MenuItemLocalizationNew.vue'
 import MenuItemLocalizationLogs from 'src/pages/MenuItemLocalizationLogs.vue'
+
 import Publications from 'src/pages/Publications.vue'
 import PublicationNew from 'src/pages/PublicationNew.vue'
 import PublicationEdit from 'src/pages/PublicationEdit.vue'
@@ -83,7 +106,9 @@ import PublicationRelated from 'src/pages/PublicationRelated.vue'
 import PublicationRelatedNew from 'src/pages/PublicationRelatedNew.vue'
 import PublicationRelatedEdit from 'src/pages/PublicationRelatedEdit.vue'
 import PublicationRelatedLogs from 'src/pages/PublicationRelatedLogs.vue'
+
 import Websites from 'src/pages/Websites.vue'
+
 import Webpaths from 'src/pages/Webpaths.vue'
 import WebpathNew from 'src/pages/WebpathNew.vue'
 import WebpathEdit from 'src/pages/WebpathEdit.vue'
@@ -105,6 +130,10 @@ import WebpathPageCarousels from 'src/pages/WebpathPageCarousels.vue'
 import WebpathPageCarouselNew from 'src/pages/WebpathPageCarouselNew.vue'
 import WebpathPageCarouselEdit from 'src/pages/WebpathPageCarouselEdit.vue'
 import WebpathPageCarouselLogs from 'src/pages/WebpathPageCarouselLogs.vue'
+import WebpathPageContacts from 'src/pages/WebpathPageContacts.vue'
+import WebpathPageContactNew from 'src/pages/WebpathPageContactNew.vue'
+import WebpathPageContactEdit from 'src/pages/WebpathPageContactEdit.vue'
+import WebpathPageContactLogs from 'src/pages/WebpathPageContactLogs.vue'
 import WebpathPageBlocks from 'src/pages/WebpathPageBlocks.vue'
 import WebpathPageBlockNew from 'src/pages/WebpathPageBlockNew.vue'
 import WebpathPageBlockEdit from 'src/pages/WebpathPageBlockEdit.vue'
@@ -145,6 +174,7 @@ import WebpathPageRelated from 'src/pages/WebpathPageRelated.vue'
 import WebpathPageRelatedNew from 'src/pages/WebpathPageRelatedNew.vue'
 import WebpathPageRelatedEdit from 'src/pages/WebpathPageRelatedEdit.vue'
 import WebpathPageRelatedLogs from 'src/pages/WebpathPageRelatedLogs.vue'
+
 import TemplateBlocks from 'src/pages/TemplateBlocks.vue'
 
 const routes = [
@@ -473,15 +503,50 @@ const routes = [
         },
     },
 
-    // webpath page carousel logs
+    // webpath page contacts
     {
-        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/carousels/:carousel_id/logs',
-        name: 'WebpathPageCarouselLogs',
-        component: WebpathPageCarouselLogs,
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/contacts',
+        name: 'WebpathPageContacts',
+        component: WebpathPageContacts,
+        meta: {
+            breadcrumb: {
+                label: 'Contacts',
+                parent: 'WebpathPageEdit'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/contacts/new',
+        name: 'WebpathPageContactNew',
+        component: WebpathPageContactNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathPageContacts'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/contacts/:contact_id/edit',
+        name: 'WebpathPageContactEdit',
+        component: WebpathPageContactEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.contact_id.toString(),
+                  parent: 'WebpathPageContacts'
+                }
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/pages/:page_id/contacts/:contact_id/logs',
+        name: 'WebpathPageContactLogs',
+        component: WebpathPageContactLogs,
         meta: {
             breadcrumb: {
                 label: 'Logs',
-                parent: 'WebpathPageCarouselEdit'
+                parent: 'WebpathPageContactEdit'
             }
         }
     },
@@ -1916,6 +1981,193 @@ const routes = [
             breadcrumb: {
                 label: 'Blocks',
                 parent: 'Dashboard'
+            }
+        }
+    },
+
+
+    // contacts
+    {
+        path: 'contacts',
+        name: 'Contacts',
+        component: Contacts,
+        meta: {
+            breadcrumb: {
+                label: 'Contacts',
+                parent: 'Dashboard'
+            }
+        }
+    },
+    {
+        path: 'contacts/new',
+        name: 'ContactNew',
+        component: ContactNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'Contacts'
+            }
+          },
+    },
+    {
+        path: 'contacts/:contact_id/edit',
+        name: 'ContactEdit',
+        component: ContactEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.contact_id.toString(),
+                  parent: 'Contacts'
+                }
+            }
+        },
+    },
+    {
+        path: 'contacts/:contact_id/logs',
+        name: 'ContactLogs',
+        component: ContactLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'ContactEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/infos',
+        name: 'ContactInfos',
+        component: ContactInfos,
+        meta: {
+            breadcrumb: {
+                label: 'Contact Informations',
+                parent: 'ContactEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/infos/new',
+        name: 'ContactInfoNew',
+        component: ContactInfoNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'ContactInfos'
+            }
+          },
+    },
+    {
+        path: 'contacts/:contact_id/infos/:contact_info_id/edit',
+        name: 'ContactInfoEdit',
+        component: ContactInfoEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.contact_info_id.toString(),
+                  parent: 'ContactInfos'
+                }
+            }
+        },
+    },
+    {
+        path: 'contacts/:contact_id/infos/:contact_info_id/logs',
+        name: 'ContactInfoLogs',
+        component: ContactInfoLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'ContactInfoEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/localizations',
+        name: 'ContactLocalizations',
+        component: ContactLocalizations,
+        meta: {
+            breadcrumb: {
+                label: 'Contact Localizations',
+                parent: 'ContactEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/localizations/new',
+        name: 'ContactLocalizationNew',
+        component: ContactLocalizationNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'ContactLocalizations'
+            }
+          },
+    },
+    {
+        path: 'contacts/:contact_id/localization/:localization_id/edit',
+        name: 'ContactLocalizationEdit',
+        component: ContactLocalizationEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.localization_id.toString(),
+                  parent: 'ContactLocalizations'
+                }
+            }
+        },
+    },
+    {
+        path: 'contacts/:contact_id/localizations/:localization_id/logs',
+        name: 'ContactLocalizationLogs',
+        component: ContactLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'ContactLocalizationEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/infos/:contact_info_id/localizations',
+        name: 'ContactInfoLocalizations',
+        component: ContactInfoLocalizations,
+        meta: {
+            breadcrumb: {
+                label: 'Contact Localizations',
+                parent: 'ContactInfoEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/infos/:contact_info_id/localizations/new',
+        name: 'ContactInfoLocalizationNew',
+        component: ContactInfoLocalizationNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'ContactInfoLocalizations'
+            }
+          },
+    },
+    {
+        path: 'contacts/:contact_id/infos/:contact_info_id/localization/:localization_id/edit',
+        name: 'ContactInfoLocalizationEdit',
+        component: ContactInfoLocalizationEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.localization_id.toString(),
+                  parent: 'ContactInfoLocalizations'
+                }
+            }
+        },
+    },
+    {
+        path: 'contacts/:contact_id/infos/:contact_info_id/localizations/:localization_id/logs',
+        name: 'ContactInfoLocalizationLogs',
+        component: ContactInfoLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'ContactInfoLocalizationEdit'
             }
         }
     },

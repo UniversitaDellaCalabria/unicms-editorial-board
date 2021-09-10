@@ -12,13 +12,49 @@
         <p>Dashboard</p>
       </sidebar-link>
 
-      <sidebar-link to="/websites">
-        <b-icon icon="globe"
+        <sidebar-link to="/blocks">
+        <b-icon icon="bricks"
             class="mr-4 ml-1"
             variant="white"
             scale="1.9">
         </b-icon>
-        <p>Websites</p>
+        <p>Blocks</p>
+      </sidebar-link>
+
+        <sidebar-link to="/carousels">
+        <b-icon icon="collection-play"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Carousels</p>
+      </sidebar-link>
+
+        <sidebar-link to="/contacts">
+        <b-icon icon="person-lines-fill"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Contacts</p>
+      </sidebar-link>
+
+        <sidebar-link to="/media">
+        <b-icon icon="folder"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Media</p>
+      </sidebar-link>
+
+        <sidebar-link to="/media-collections">
+        <b-icon icon="folder-check"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Media collections</p>
       </sidebar-link>
 
       <sidebar-link to="/menus">
@@ -30,33 +66,6 @@
         <p>Menus</p>
       </sidebar-link>
 
-      <sidebar-link to="/media">
-        <b-icon icon="folder"
-            class="mr-4 ml-1"
-            variant="white"
-            scale="1.9">
-        </b-icon>
-        <p>Media</p>
-      </sidebar-link>
-
-      <sidebar-link to="/media-collections">
-        <b-icon icon="folder-check"
-            class="mr-4 ml-1"
-            variant="white"
-            scale="1.9">
-        </b-icon>
-        <p>Media collections</p>
-      </sidebar-link>
-
-      <sidebar-link to="/carousels">
-        <b-icon icon="collection-play"
-            class="mr-4 ml-1"
-            variant="white"
-            scale="1.9">
-        </b-icon>
-        <p>Carousels</p>
-      </sidebar-link>
-
       <sidebar-link to="/publications">
         <b-icon icon="file-earmark-text"
             class="mr-4 ml-1"
@@ -66,15 +75,14 @@
         <p>Publications</p>
       </sidebar-link>
 
-      <sidebar-link to="/blocks">
-        <b-icon icon="bricks"
+        <sidebar-link to="/websites">
+        <b-icon icon="globe"
             class="mr-4 ml-1"
             variant="white"
             scale="1.9">
         </b-icon>
-        <p>Blocks</p>
+        <p>Websites</p>
       </sidebar-link>
-
 
     </side-bar>
     <div class="main-panel">

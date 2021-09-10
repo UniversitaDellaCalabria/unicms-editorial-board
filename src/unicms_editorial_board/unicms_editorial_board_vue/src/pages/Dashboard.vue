@@ -7,6 +7,56 @@
                         <b-card-text>
                             <h4 class="mt-2 mb-3">
                                 <b-icon
+                                    icon="person-lines-fill"
+                                    scale="0.8">
+                                </b-icon>
+                                Contacts
+                            </h4>
+                            <hr>
+                            <p class="mt-3">
+                                <ul v-if="contacts.count">
+                                    <li v-for="contact in contacts.results.slice(0, 5)">
+                                        <router-link
+                                            :to="{ name: 'ContactEdit',
+                                                   params: { contact_id: contact.id}}">
+                                            {{ contact.name }}
+                                        </router-link
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="success"
+                                            title="active"
+                                            v-if="contact.is_active">
+                                        </b-icon>
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="danger"
+                                            title="not active"
+                                            v-else>
+                                        </b-icon>
+                                        <br>
+                                        <small>{{ $date_formatter(contact.created)}}</small>
+                                    </li>
+                                </ul>
+                                <span v-else>-</span>
+                            </p>
+                        </b-card-text>
+                        <template #footer>
+                            <router-link
+                                :to="{ name: 'CarouselNew'}"
+                                class="btn btn-success">
+                                Add new carousel now
+                            </router-link>
+                        </template>
+                    </b-card>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3"">
+                    <b-card>
+                        <b-card-text>
+                            <h4 class="mt-2 mb-3">
+                                <b-icon
                                     icon="collection-play"
                                     scale="0.8">
                                 </b-icon>
@@ -314,6 +364,7 @@ export default {
         return {
             current_user: '',
             carousels: [],
+            contacts: [],
             media: [],
             menus: [],
             pages: [],
@@ -321,6 +372,7 @@ export default {
             webpaths: [],
 
             api_carousel: '/api/editorial-board/carousels/',
+            api_contact: '/api/editorial-board/contacts/',
             api_media: '/api/editorial-board/medias/',
             api_menu: '/api/editorial-board/menus/',
             api_page: '/api/editorial-board/pages/',
@@ -343,6 +395,14 @@ export default {
                 .get(this.api_carousel + filter)
                 .then(response => {
                     this.carousels = response.data;
+                })
+
+        },
+        callContactApi(filter=''){
+            this.axios
+                .get(this.api_contact + filter)
+                .then(response => {
+                    this.contacts = response.data;
                 })
 
         },
@@ -389,6 +449,7 @@ export default {
         callApis(){
             let filter = '?created_by=' + this.current_user + '&ordering=-created'
             this.callCarouselApi(filter)
+            this.callContactApi(filter)
             this.callMediaApi(filter)
             this.callMenuApi(filter)
             this.callPageApi(filter)
