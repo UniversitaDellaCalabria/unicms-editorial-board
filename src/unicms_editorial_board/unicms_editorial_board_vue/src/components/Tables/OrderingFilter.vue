@@ -13,7 +13,7 @@
             v-on:change="updateOrderedBy()"
             :aria-describedby="ariaDescribedby"
             class="w-25">
-            <option value="+">Asc</option>
+            <option value="">Asc</option>
             <option value="-">Desc</option>
         </b-form-select>
     </b-input-group>

@@ -139,7 +139,7 @@ export default {
             items: [],
             page_title: '',
             search: '',
-            sortDesc: '+',
+            sortDesc: '',
             ordering: 'id',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Name', value: 'name' },

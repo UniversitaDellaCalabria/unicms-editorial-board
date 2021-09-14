@@ -227,7 +227,7 @@ export default {
             parent_name: this.$parent.api_source,
             prev: '',
             search: '',
-            sortDesc: '+',
+            sortDesc: '',
             is_active: '',
             created_by: '',
             created_by_list: [

@@ -17,7 +17,7 @@ PKG_NAME = 'unicms_editorial_board'
 
 setup(
     name='unicms-editorial-board',
-    version='0.23.2',
+    version='0.23.3',
 
     packages=[PKG_NAME],
     package_dir={PKG_NAME: f"{SRC_FOLDER}/{PKG_NAME}"},
