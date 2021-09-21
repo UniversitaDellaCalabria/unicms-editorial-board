@@ -59,6 +59,7 @@ export default {
                 {key: 'info_type', label: 'Type'},
                 'order',
                 {key: 'is_active', label: 'Active'},
+                {key: 'childs', label: 'Related'},
                 'actions'
             ],
             ordering: 'order',

@@ -65,9 +65,9 @@ export default {
                 'id',
                 'name',
                 'description',
-                { key: 'contact_type', label: 'Type'},
-                { key: 'is_active', label: 'Active'},
-                { key: 'childs', label: 'Related'},
+                {key: 'contact_type', label: 'Type'},
+                {key: 'is_active', label: 'Active'},
+                {key: 'childs', label: 'Related'},
                 'actions'
             ],
             ordering: 'name',
