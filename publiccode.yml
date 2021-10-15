@@ -48,7 +48,6 @@ description:
 
       The entire code is open source and therefore licensed
       under the Apache 2.0.
-    screenshots:
     shortDescription: >-
       Reactive administration panel for uniCMS
 developmentStatus: stable
