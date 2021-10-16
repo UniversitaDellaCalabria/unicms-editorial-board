@@ -92,7 +92,7 @@ maintenance:
     - email: giuseppe.demarco@unical.it
       name: Giuseppe De Marco
   type: internal
-name: uniCMS Editorial Board
+name: uniCMS - Editorial Board
 platforms:
   - linux
   - web
