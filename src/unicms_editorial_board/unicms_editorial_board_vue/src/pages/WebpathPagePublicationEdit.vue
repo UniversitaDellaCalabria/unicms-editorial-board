@@ -59,7 +59,7 @@ export default {
             page_id: this.$route.params.page_id,
             publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/form/',
+            form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/edit-form/',
             add_modal_fields: {'publication':  this.$router.resolve({name: 'PublicationNew'}).href},
             page_title: '',
             redis_alert: null,

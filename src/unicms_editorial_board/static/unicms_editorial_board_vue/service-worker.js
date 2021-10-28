@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/static/unicms_editorial_board_vue/precache-manifest.d090f5efb2a12083b7a8202993e3d3e7.js"
+  "/static/unicms_editorial_board_vue/precache-manifest.09bd4fe9076ffad36a0c60f588990d5b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue-light-bootstrap-dashboard"});

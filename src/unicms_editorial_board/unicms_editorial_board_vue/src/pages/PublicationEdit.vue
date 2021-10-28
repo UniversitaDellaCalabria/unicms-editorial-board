@@ -126,7 +126,7 @@ export default {
             alerts: [],
             publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/publications/form/',
+            form_source: '/api/editorial-board/publications/edit-form/',
             files: {},
             add_modal_fields: {'presentation_image':  this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content'],
@@ -140,7 +140,7 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='category') {
+                if(key=='categories_data') {
                     let categories = [];
                     value.forEach(v => {categories.push(v.id)});
                     this.$set(this.form, key, categories)

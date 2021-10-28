@@ -96,10 +96,10 @@ name: uniCMS Editorial Board
 platforms:
   - linux
   - web
-releaseDate: '2021-09-14'
+releaseDate: '2021-10-28'
 roadmap: 'https://github.com/UniversitaDellaCalabria/unicms-editorial-board/issues'
 softwareType: standalone/web
-softwareVersion: v0.23.3
+softwareVersion: v0.23.4
 url: 'https://github.com/UniversitaDellaCalabria/unicms-editorial-board'
 usedBy:
   - Università della Calabria - https://www.unical.it
