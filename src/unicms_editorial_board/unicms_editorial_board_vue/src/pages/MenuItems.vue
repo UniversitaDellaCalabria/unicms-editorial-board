@@ -21,6 +21,19 @@
                                 </router-link>
                             </div>
 
+                            <div class="row pt-3">
+                                <div
+                                    class="col col-12 col-sm">
+                                    <b-form-input
+                                        v-model="search"
+                                        v-on:input="filterTable()"
+                                        placeholder="Search..."
+                                        type="search"
+                                        class="mb-3">
+                                    </b-form-input>
+                                </div>
+                            </div>
+
                             <b-table
                                 ref="table"
                                 id="my-table"
@@ -226,6 +239,20 @@ export default {
             ).then(value => {
                 if (value) this.remove(item.id);
             })
+        },
+        filterTable() {
+            let table = document.getElementById("my-table");
+            for (let i = 0, row; row = table.rows[i]; i++) {
+                if(this.search=="")
+                    row.hidden = false
+                else {
+                    let search_lower = this.search.toLowerCase()
+                    let content = row.cells[1].textContent.toLowerCase()
+                    if(!content.includes(search_lower))
+                        row.hidden = true
+                    else row.hidden = false
+                }
+            }
         }
     },
     mounted() {
