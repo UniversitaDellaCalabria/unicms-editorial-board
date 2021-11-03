@@ -35,7 +35,8 @@ export default {
             form: {},
             form_source: '/api/editorial-board/publications/form/',
             files: {},
-            add_modal_fields: {'presentation_image': this.$router.resolve({name: 'MediaNew'}).href},
+            add_modal_fields: {'presentation_image': this.$router.resolve({name: 'MediaNew'}).href,
+                               'preview_image': this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content'],
             tag_fields: ['tags'],
         }
@@ -47,6 +48,14 @@ export default {
                 .get(source)
                 .then(response => {
                     this.$set(this.files, 'presentation_image', response.data.file)
+                })
+        },
+        updateMediaPreview(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.$set(this.files, 'preview_image', response.data.file)
                 })
         },
         onSubmit(event) {
@@ -82,6 +91,9 @@ export default {
         }
     },
     watch: {
+        'form.preview_image': function(newVal, oldVal){
+            this.updateMediaPreview(newVal)
+        },
         'form.presentation_image': function(newVal, oldVal){
             this.updateMedia(newVal)
         }

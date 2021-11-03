@@ -128,7 +128,8 @@ export default {
             form: {},
             form_source: '/api/editorial-board/publications/edit-form/',
             files: {},
-            add_modal_fields: {'presentation_image':  this.$router.resolve({name: 'MediaNew'}).href},
+            add_modal_fields: {'presentation_image':  this.$router.resolve({name: 'MediaNew'}).href,
+                               'preview_image':  this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content'],
             tag_fields: ['tags'],
             page_title: '',
@@ -147,15 +148,22 @@ export default {
                 }
                 else if(key=='presentation_image')
                     this.$set(this.form, key, value.id)
+                else if(key=='preview_image')
+                    this.$set(this.form, key, value.id)
                 else this.$set(this.form, key, value)
             }
             this.$set(this.files, 'presentation_image', data.presentation_image.file);
+            this.$set(this.files, 'preview_image', data.preview_image.file);
             this.page_title = data.full_name;
             this.is_active = data.is_active;
             if(data.presentation_image)
                 this.$refs.form.getOptionsFromParent('presentation_image',
                     [{"text": data.presentation_image.title,
                       "value": data.presentation_image.id}])
+            if(data.preview_image)
+                this.$refs.form.getOptionsFromParent('preview_image',
+                    [{"text": data.preview_image.title,
+                      "value": data.preview_image.id}])
         },
         getItem() {
             let source = '/api/editorial-board/publications/'+this.publication_id+'/';
@@ -194,6 +202,14 @@ export default {
                 .get(source)
                 .then(response => {
                     this.files.presentation_image = response.data.file
+                })
+        },
+        updateMediaPreview(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.files.preview_image = response.data.file
                 })
         },
         onSubmit(event) {
@@ -306,6 +322,10 @@ export default {
         clearInterval(this.interval)
     },
     watch: {
+        'form.preview_image': function(newVal, oldVal){
+            if (newVal && newVal!=oldVal) this.updateMediaPreview(newVal);
+            if (!newVal) this.files.preview_image = ''
+        },
         'form.presentation_image': function(newVal, oldVal){
             if (newVal && newVal!=oldVal) this.updateMedia(newVal);
             if (!newVal) this.files.presentation_image = ''

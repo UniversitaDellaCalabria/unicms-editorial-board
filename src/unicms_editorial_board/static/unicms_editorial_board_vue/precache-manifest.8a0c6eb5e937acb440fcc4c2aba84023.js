@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "e55850c080afc06f06b2",
+    "revision": "f05923d8bfcdfc0dcc14",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "e55850c080afc06f06b2",
-    "url": "/static/unicms_editorial_board_vue/js/app.9491a425.js"
+    "revision": "f05923d8bfcdfc0dcc14",
+    "url": "/static/unicms_editorial_board_vue/js/app.962f5c03.js"
   },
   {
     "revision": "43fc4a4cc52bf4236d47",
@@ -16,12 +16,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.af3c99db.js"
   },
   {
-    "revision": "32bdcb5b79bd4c4776f240ae3d1137eb",
+    "revision": "a6da0045c0ac9aaab13d0aa0c68da0fe",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "/static/unicms_editorial_board_vue/.gitkeep"
+  },
+  {
+    "revision": "a9615bac158705203261e8348f574cc8",
+    "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
     "revision": "996d8248f580f8e26e6c45c67da9b5a6",
@@ -36,24 +40,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
-    "revision": "a9615bac158705203261e8348f574cc8",
-    "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
-  },
-  {
-    "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-2.jpg"
-  },
-  {
     "revision": "99e58416b89637502b40ac8350eed85a",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-1.jpg"
   },
   {
-    "revision": "ce7a6b79aa55041f7ae36f6ce22231fe",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-3.jpg"
-  },
-  {
-    "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
+    "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-2.jpg"
   },
   {
     "revision": "4ab22eca4053c14a34e4bdb6390deae9",
@@ -62,6 +54,14 @@ self.__precacheManifest = [
   {
     "revision": "4b87e628f4ef9988718860890b2a682f",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-6.jpg"
+  },
+  {
+    "revision": "ce7a6b79aa55041f7ae36f6ce22231fe",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-3.jpg"
+  },
+  {
+    "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
   },
   {
     "revision": "43b98081492ac3bcb4a1fac6cf709403",
