@@ -74,7 +74,8 @@ export default {
             carousel_item_id: this.$route.params.carousel_item_id,
             form: {},
             form_source: '/api/editorial-board/carousels/items/form/',
-            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href},
+            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
+                               'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
             files: {},
             page_title: '',
             redis_alert: null,
@@ -84,14 +85,22 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                this.$set(this.form, key, value)
+                if(key=='image' || key=='mobile_image')
+                    this.$set(this.form, key, value.id)
+                else this.$set(this.form, key, value)
             }
-            this.form.image = data.image.id;
+
             this.$set(this.files, 'image', data.image.file);
+            this.$set(this.files, 'mobile_image', data.mobile_image.file);
+
             this.page_title = data.image.title;
+
             this.$refs.form.getOptionsFromParent('image',
                 [{"text": data.image.title,
                   "value": data.image.id}])
+            this.$refs.form.getOptionsFromParent('mobile_image',
+                [{"text": data.mobile_image.title,
+                  "value": data.mobile_image.id}])
         },
         getItem() {
             let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
@@ -130,6 +139,14 @@ export default {
                 .get(source)
                 .then(response => {
                     this.files.image = response.data.file
+                })
+        },
+        updateMobileMedia(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.files.mobile_image = response.data.file
                 })
         },
         onSubmit(event) {
@@ -211,6 +228,10 @@ export default {
         'form.image': function(newVal, oldVal){
             if (newVal && newVal!=oldVal) this.updateMedia(newVal);
             if (!newVal) this.files.image = ''
+        },
+        'form.mobile_image': function(newVal, oldVal){
+            if (newVal && newVal!=oldVal) this.updateMobileMedia(newVal);
+            if (!newVal) this.files.mobile_image = ''
         }
     }
 }

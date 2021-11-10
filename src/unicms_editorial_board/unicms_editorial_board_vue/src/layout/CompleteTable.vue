@@ -133,8 +133,12 @@
                                 <template #cell()="data">
                                     <div
                                         v-if="files && isFile(data.field.key) && data.value">
+
+                                        <span v-if="Object.keys(data.value).includes('file') && !data.value.file">
+                                            -
+                                        </span>
                                         <b-img
-                                            v-if="$is_image(data.value)"
+                                            v-else-if="$is_image(data.value)"
                                             :src="data.value.file || data.value"
                                             alt="Responsive image"
                                             style="max-width: 220px">

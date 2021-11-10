@@ -32,7 +32,8 @@ export default {
             carousel_id: this.$route.params.carousel_id,
             form: {'carousel': parseInt(this.$route.params.carousel_id)},
             form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/form/',
-            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href},
+            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
+                               'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
             files: {}
         }
     },
@@ -43,6 +44,14 @@ export default {
                 .get(source)
                 .then(response => {
                     this.$set(this.files, 'image', response.data.file);
+                })
+        },
+        updateMobileMedia(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.$set(this.files, 'mobile_image', response.data.file);
                 })
         },
         onSubmit(event) {
@@ -79,6 +88,9 @@ export default {
     watch: {
         'form.image': function(newVal, oldVal){
             this.updateMedia(newVal)
+        },
+        'form.mobile_image': function(newVal, oldVal){
+            this.updateMobileMedia(newVal)
         }
     }
 }

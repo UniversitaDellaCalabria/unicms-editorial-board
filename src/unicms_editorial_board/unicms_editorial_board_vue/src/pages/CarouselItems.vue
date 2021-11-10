@@ -64,6 +64,7 @@ export default {
             fields: [
                 'id',
                 {key: 'image', thClass: 'w-25'},
+                {key: 'mobile_image', thClass: 'w-25'},
                 'pre_heading',
                 'heading',
                 'order',
@@ -71,7 +72,7 @@ export default {
                 {key: 'childs', label: 'Related'},
                 'actions'
             ],
-            files: ['image'],
+            files: ['image', 'mobile_image'],
             ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Pre-Heading', value: 'pre_heading' },
