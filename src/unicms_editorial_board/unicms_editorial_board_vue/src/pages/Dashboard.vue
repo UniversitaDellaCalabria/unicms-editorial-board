@@ -44,9 +44,9 @@
                         </b-card-text>
                         <template #footer>
                             <router-link
-                                :to="{ name: 'CarouselNew'}"
+                                :to="{ name: 'ContactNew'}"
                                 class="btn btn-success">
-                                Add new carousel now
+                                Add new contact now
                             </router-link>
                         </template>
                     </b-card>
