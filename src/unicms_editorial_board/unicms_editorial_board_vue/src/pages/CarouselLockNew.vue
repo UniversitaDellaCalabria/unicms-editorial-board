@@ -34,7 +34,6 @@ export default {
     },
     methods: {
         retrieveObject() {
-            this.$refs.form.loading = true;
             let source = '/api/editorial-board/carousels/'+this.carousel_id+'/';
             this.axios
                 .get(source)
@@ -52,6 +51,7 @@ export default {
                 })
         },
         onSubmit(event) {
+            this.$refs.form.loading = true;
             let source = '/api/editorial-board/locks/'+this.content_type+'/'+this.carousel_id+'/';
             event.preventDefault();
             this.axios
