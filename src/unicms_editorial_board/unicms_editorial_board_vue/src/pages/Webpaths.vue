@@ -32,6 +32,14 @@
                     variant="secondary"></b-icon>
                 News
             </router-link>
+            <router-link :to="{ name: 'WebpathCalendars',
+                                params: { site_id: site_id,
+                                          webpath_id: item.item.id }}"
+                class="btn btn-block btn-sm btn-outline-secondary">
+                <b-icon icon="calendar2-date"
+                    variant="secondary"></b-icon>
+                Calendars
+            </router-link>
         </template>
 
         <template #actions="item">

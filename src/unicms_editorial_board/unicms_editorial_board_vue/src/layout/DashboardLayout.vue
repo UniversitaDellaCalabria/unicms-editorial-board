@@ -21,6 +21,15 @@
         <p>Blocks</p>
       </sidebar-link>
 
+        <sidebar-link to="/calendars">
+        <b-icon icon="calendar2-date"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Calendars</p>
+      </sidebar-link>
+
         <sidebar-link to="/carousels">
         <b-icon icon="collection-play"
             class="mr-4 ml-1"
@@ -37,6 +46,15 @@
             scale="1.9">
         </b-icon>
         <p>Contacts</p>
+      </sidebar-link>
+
+        <sidebar-link to="/events">
+        <b-icon icon="calendar2-event"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Events</p>
       </sidebar-link>
 
         <sidebar-link to="/media">

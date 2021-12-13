@@ -5,6 +5,27 @@ import Error404 from '../pages/404.vue'
 // Admin pages
 import Overview from 'src/pages/Overview.vue'
 
+import Calendars from 'src/pages/Calendars.vue'
+import CalendarNew from 'src/pages/CalendarNew.vue'
+import CalendarEdit from 'src/pages/CalendarEdit.vue'
+import CalendarLogs from 'src/pages/CalendarLogs.vue'
+import CalendarLocks from 'src/pages/CalendarLocks.vue'
+import CalendarLockNew from 'src/pages/CalendarLockNew.vue'
+import CalendarEvents from 'src/pages/CalendarEvents.vue'
+import CalendarEventNew from 'src/pages/CalendarEventNew.vue'
+import CalendarEventEdit from 'src/pages/CalendarEventEdit.vue'
+import CalendarEventLogs from 'src/pages/CalendarEventLogs.vue'
+import CalendarLocalizations from 'src/pages/CalendarLocalizations.vue'
+import CalendarLocalizationNew from 'src/pages/CalendarLocalizationNew.vue'
+import CalendarLocalizationEdit from 'src/pages/CalendarLocalizationEdit.vue'
+import CalendarLocalizationLogs from 'src/pages/CalendarLocalizationLogs.vue'
+import Events from 'src/pages/Events.vue'
+import EventNew from 'src/pages/EventNew.vue'
+import EventEdit from 'src/pages/EventEdit.vue'
+import EventLogs from 'src/pages/EventLogs.vue'
+import EventLockNew from 'src/pages/EventLockNew.vue'
+import EventLocks from 'src/pages/EventLocks.vue'
+
 import Carousels from 'src/pages/Carousels.vue'
 import CarouselNew from 'src/pages/CarouselNew.vue'
 import CarouselEdit from 'src/pages/CarouselEdit.vue'
@@ -174,6 +195,11 @@ import WebpathPageRelated from 'src/pages/WebpathPageRelated.vue'
 import WebpathPageRelatedNew from 'src/pages/WebpathPageRelatedNew.vue'
 import WebpathPageRelatedEdit from 'src/pages/WebpathPageRelatedEdit.vue'
 import WebpathPageRelatedLogs from 'src/pages/WebpathPageRelatedLogs.vue'
+
+import WebpathCalendars from 'src/pages/WebpathCalendars.vue'
+import WebpathCalendarNew from 'src/pages/WebpathCalendarNew.vue'
+import WebpathCalendarEdit from 'src/pages/WebpathCalendarEdit.vue'
+import WebpathCalendarLogs from 'src/pages/WebpathCalendarLogs.vue'
 
 import TemplateBlocks from 'src/pages/TemplateBlocks.vue'
 
@@ -2184,6 +2210,294 @@ const routes = [
             }
         }
     },
+
+
+
+    // calendars
+    {
+        path: 'calendars',
+        name: 'Calendars',
+        component: Calendars,
+        meta: {
+            breadcrumb: {
+                label: 'Calendars',
+                parent: 'Dashboard'
+            }
+        }
+    },
+    {
+        path: 'calendars/new',
+        name: 'CalendarNew',
+        component: CalendarNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'Calendars'
+            }
+          },
+    },
+    {
+        path: 'calendars/:calendar_id/edit',
+        name: 'CalendarEdit',
+        component: CalendarEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.calendar_id.toString(),
+                  parent: 'Calendars'
+                }
+            }
+        },
+    },
+    {
+        path: 'calendars/:calendar_id/locks',
+        name: 'CalendarLocks',
+        component: CalendarLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'CalendarEdit'
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/locks/new',
+        name: 'CalendarLockNew',
+        component: CalendarLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'CalendarLocks'
+            }
+        },
+    },
+    {
+        path: 'calendars/:calendar_id/logs',
+        name: 'CalendarLogs',
+        component: CalendarLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CalendarEdit'
+            }
+        }
+    },
+
+    // calendar events
+    {
+        path: 'calendars/:calendar_id/events',
+        name: 'CalendarEvents',
+        component: CalendarEvents,
+        meta: {
+            breadcrumb: {
+                label: 'Events',
+                parent: 'CalendarEdit'
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/items/new',
+        name: 'CalendarEventNew',
+        component: CalendarEventNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'CalendarEvents'
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/events/:calendar_event_id/edit',
+        name: 'CalendarEventEdit',
+        component: CalendarEventEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.calendar_event_id.toString(),
+                  parent: 'CalendarEvents'
+                }
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/events/:calendar_event_id/logs',
+        name: 'CalendarEventLogs',
+        component: CalendarEventLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CalendarEventEdit'
+            }
+        }
+    },
+
+    // events
+    {
+        path: 'events',
+        name: 'Events',
+        component: Events,
+        meta: {
+            breadcrumb: {
+                label: 'Events',
+                parent: 'Dashboard'
+            }
+        }
+    },
+    {
+        path: 'events/new',
+        name: 'EventNew',
+        component: EventNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'Events'
+            }
+          },
+    },
+    {
+        path: 'events/:event_id/edit',
+        name: 'EventEdit',
+        component: EventEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.event_id.toString(),
+                  parent: 'Events'
+                }
+            }
+        },
+    },
+    {
+        path: 'events/:event_id/locks',
+        name: 'EventLocks',
+        component: EventLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'EventEdit'
+            }
+        }
+    },
+    {
+        path: 'events/:event_id/locks/new',
+        name: 'EventLockNew',
+        component: EventLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'EventLocks'
+            }
+        },
+    },
+    {
+        path: 'events/:event_id/logs',
+        name: 'EventLogs',
+        component: EventLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'EventEdit'
+            }
+        }
+    },
+
+    // webpath calendars
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/calendars',
+        name: 'WebpathCalendars',
+        component: WebpathCalendars,
+        meta: {
+            breadcrumb: {
+                label: 'Calendars',
+                parent: 'WebpathEdit'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/calendars/new',
+        name: 'WebpathCalendarNew',
+        component: WebpathCalendarNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'WebpathCalendars'
+            }
+        },
+    },
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/calendars/:calendar_id/edit',
+        name: 'WebpathCalendarEdit',
+        component: WebpathCalendarEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.calendar_id.toString(),
+                  parent: 'WebpathCalendars'
+                }
+            }
+        },
+    },
+
+    // webpath calendars logs
+    {
+        path: 'websites/:site_id/webpaths/:webpath_id/calendars/:calendar_id/logs',
+        name: 'WebpathCalendarLogs',
+        component: WebpathCalendarLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'WebpathCalendarEdit'
+            }
+        }
+    },
+    // calendar localizations
+    {
+        path: 'calendars/:calendar_id/localizations',
+        name: 'CalendarLocalizations',
+        component: CalendarLocalizations,
+        meta: {
+            breadcrumb: {
+                label: 'Localizations',
+                parent: 'CalendarEdit'
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/localizations/new',
+        name: 'CalendarLocalizationNew',
+        component: CalendarLocalizationNew,
+        meta: {
+            breadcrumb: {
+              label: 'New',
+              parent: 'CalendarLocalizations'
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/localizations/:calendar_localization_id/edit',
+        name: 'CalendarLocalizationEdit',
+        component: CalendarLocalizationEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.calendar_localization_id.toString(),
+                  parent: 'CalendarLocalizations'
+                }
+            }
+        }
+    },
+    {
+        path: 'calendars/:calendar_id/localizations/:calendar_localization_id/logs',
+        name: 'CalendarLocalizationLogs',
+        component: CalendarLocalizationLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'CalendarLocalizationEdit'
+            }
+        }
+    },
+
     ]
   },
   { path: '*', component: Error404 }
