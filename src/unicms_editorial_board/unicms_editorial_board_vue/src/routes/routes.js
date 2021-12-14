@@ -53,6 +53,8 @@ import Contacts from 'src/pages/Contacts.vue'
 import ContactNew from 'src/pages/ContactNew.vue'
 import ContactEdit from 'src/pages/ContactEdit.vue'
 import ContactLogs from 'src/pages/ContactLogs.vue'
+import ContactLocks from 'src/pages/ContactLocks.vue'
+import ContactLockNew from 'src/pages/ContactLockNew.vue'
 import ContactInfos from 'src/pages/ContactInfos.vue'
 import ContactInfoNew from 'src/pages/ContactInfoNew.vue'
 import ContactInfoEdit from 'src/pages/ContactInfoEdit.vue'
@@ -2069,6 +2071,28 @@ const routes = [
             breadcrumb: {
                 label: 'Logs',
                 parent: 'ContactEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/locks',
+        name: 'ContactLocks',
+        component: ContactLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'ContactEdit'
+            }
+        }
+    },
+    {
+        path: 'contacts/:contact_id/locks/new',
+        name: 'ContactLockNew',
+        component: ContactLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'ContactLocks'
             }
         }
     },
