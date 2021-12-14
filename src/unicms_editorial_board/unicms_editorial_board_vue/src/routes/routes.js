@@ -2080,7 +2080,7 @@ const routes = [
         component: ContactLocks,
         meta: {
             breadcrumb: {
-                label: 'Logs',
+                label: 'Locks',
                 parent: 'ContactEdit'
             }
         }
