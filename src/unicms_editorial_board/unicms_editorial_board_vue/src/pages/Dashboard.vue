@@ -7,6 +7,56 @@
                         <b-card-text>
                             <h4 class="mt-2 mb-3">
                                 <b-icon
+                                    icon="calendar2-date"
+                                    scale="0.8">
+                                </b-icon>
+                                Calendars
+                            </h4>
+                            <hr>
+                            <p class="mt-3">
+                                <ul v-if="calendars.count">
+                                    <li v-for="calendar in calendars.results.slice(0, 5)">
+                                        <router-link
+                                            :to="{ name: 'CalendarEdit',
+                                                   params: { calendar_id: calendar.id}}">
+                                            {{ calendar.name }}
+                                        </router-link
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="success"
+                                            title="active"
+                                            v-if="calendar.is_active">
+                                        </b-icon>
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="danger"
+                                            title="not active"
+                                            v-else>
+                                        </b-icon>
+                                        <br>
+                                        <small>{{ $date_formatter(calendar.created)}}</small>
+                                    </li>
+                                </ul>
+                                <span v-else>-</span>
+                            </p>
+                        </b-card-text>
+                        <template #footer>
+                            <router-link
+                                :to="{ name: 'CalendarNew'}"
+                                class="btn btn-success">
+                                Add new calendar now
+                            </router-link>
+                        </template>
+                    </b-card>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3"">
+                    <b-card>
+                        <b-card-text>
+                            <h4 class="mt-2 mb-3">
+                                <b-icon
                                     icon="person-lines-fill"
                                     scale="0.8">
                                 </b-icon>
@@ -97,6 +147,56 @@
                                 :to="{ name: 'CarouselNew'}"
                                 class="btn btn-success">
                                 Add new carousel now
+                            </router-link>
+                        </template>
+                    </b-card>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3"">
+                    <b-card>
+                        <b-card-text>
+                            <h4 class="mt-2 mb-3">
+                                <b-icon
+                                    icon="calendar2-event"
+                                    scale="0.8">
+                                </b-icon>
+                                Events
+                            </h4>
+                            <hr>
+                            <p class="mt-3">
+                                <ul v-if="events.count">
+                                    <li v-for="event in events.results.slice(0, 5)">
+                                        <router-link
+                                            :to="{ name: 'EventEdit',
+                                                   params: { event_id: event.id}}">
+                                            {{ event.publication_data.title }}
+                                        </router-link
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="success"
+                                            title="active"
+                                            v-if="event.is_active">
+                                        </b-icon>
+                                        <b-icon
+                                            icon="circle-fill"
+                                            font-scale="0.6"
+                                            variant="danger"
+                                            title="not active"
+                                            v-else>
+                                        </b-icon>
+                                        <br>
+                                        <small>{{ $date_formatter(event.created)}}</small>
+                                    </li>
+                                </ul>
+                                <span v-else>-</span>
+                            </p>
+                        </b-card-text>
+                        <template #footer>
+                            <router-link
+                                :to="{ name: 'EventNew'}"
+                                class="btn btn-success">
+                                Add new event now
                             </router-link>
                         </template>
                     </b-card>
@@ -363,16 +463,20 @@ export default {
     data () {
         return {
             current_user: '',
+            calendars: [],
             carousels: [],
             contacts: [],
+            events: [],
             media: [],
             menus: [],
             pages: [],
             publications: [],
             webpaths: [],
 
+            api_calendar: '/api/editorial-board/calendars/',
             api_carousel: '/api/editorial-board/carousels/',
             api_contact: '/api/editorial-board/contacts/',
+            api_event: '/api/editorial-board/events/',
             api_media: '/api/editorial-board/medias/',
             api_menu: '/api/editorial-board/menus/',
             api_page: '/api/editorial-board/pages/',
@@ -390,6 +494,14 @@ export default {
                     this.callApis();
                 })
         },
+        callCalendarApi(filter=''){
+            this.axios
+                .get(this.api_calendar + filter)
+                .then(response => {
+                    this.calendars = response.data;
+                })
+
+        },
         callCarouselApi(filter=''){
             this.axios
                 .get(this.api_carousel + filter)
@@ -403,6 +515,14 @@ export default {
                 .get(this.api_contact + filter)
                 .then(response => {
                     this.contacts = response.data;
+                })
+
+        },
+        callEventApi(filter=''){
+            this.axios
+                .get(this.api_event + filter)
+                .then(response => {
+                    this.events = response.data;
                 })
 
         },
@@ -448,8 +568,10 @@ export default {
         },
         callApis(){
             let filter = '?created_by=' + this.current_user + '&ordering=-created'
+            this.callCalendarApi(filter)
             this.callCarouselApi(filter)
             this.callContactApi(filter)
+            this.callEventApi(filter)
             this.callMediaApi(filter)
             this.callMenuApi(filter)
             this.callPageApi(filter)
