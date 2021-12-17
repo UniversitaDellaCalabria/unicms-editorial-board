@@ -57,13 +57,18 @@ export default {
             page_title: '',
             redis_alert: null,
             interval: null,
+            date_fields: ['date_start', 'date_end'],
             add_modal_fields: {'publication':  this.$router.resolve({name: 'PublicationNew'}).href},
         }
     },
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                this.$set(this.form, key, value)
+                if(this.date_fields.includes(key) && value) {
+                    this.$set(this.form, key,
+                              value.substr(0,16).replace("T"," "))
+                }
+                else this.$set(this.form, key, value)
             }
             this.page_title = data.publication_data.title;
             this.$refs.form.getOptionsFromParent('publication',
