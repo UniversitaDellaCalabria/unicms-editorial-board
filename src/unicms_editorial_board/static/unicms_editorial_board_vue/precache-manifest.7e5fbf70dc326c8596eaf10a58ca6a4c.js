@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "361ab4dad2752c3cd0cc",
+    "revision": "9fd0f2e85ed1b40fe1ad",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "361ab4dad2752c3cd0cc",
-    "url": "/static/unicms_editorial_board_vue/js/app.b3c69fcb.js"
+    "revision": "9fd0f2e85ed1b40fe1ad",
+    "url": "/static/unicms_editorial_board_vue/js/app.ddb63a69.js"
   },
   {
     "revision": "43fc4a4cc52bf4236d47",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.af3c99db.js"
   },
   {
-    "revision": "fdb2e10980a6c2aee45a4712ea2e7ad6",
+    "revision": "d82d7f47a174ee384fde31c05a44b66b",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -28,16 +28,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
-  },
-  {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/new_logo.png"
   },
   {
-    "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
-  },
-  {
     "revision": "6be21e8a1b7d63048728851c6003e189",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
+  },
+  {
+    "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
   },
   {
     "revision": "cd253e23ed052deeb80b42d2ed772183",

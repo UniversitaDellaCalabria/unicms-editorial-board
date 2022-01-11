@@ -85,17 +85,18 @@ function date_formatter(data) {
 Vue.prototype.$date_formatter = date_formatter
 
 // get cookie value
-function get_cookie(name) {
-    let nameEQ = name + "=";
-    let ca = document.cookie.split(';');
-    for(let i=0;i < ca.length;i++) {
-        let c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null
-}
-Vue.prototype.$csrftoken = get_cookie('csrftoken');
+//function get_cookie(name) {
+    //let nameEQ = name + "=";
+    //let ca = document.cookie.split(';');
+    //for(let i=0;i < ca.length;i++) {
+        //let c = ca[i];
+        //while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        //if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    //}
+    //return null
+//}
+//Vue.prototype.$csrftoken = get_cookie('csrftoken');
+Vue.prototype.$csrftoken = csrftoken;
 
 // search for active redis locks for object
 function checkForRedisLocks(content_type_id, object_id) {
