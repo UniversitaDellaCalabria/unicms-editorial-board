@@ -74,7 +74,7 @@ export default {
             this.page_title = data.event.publication_data.title;
 
             this.$refs.form.getOptionsFromParent('event',
-                [{"text": data.event.publication_data.title,
+                [{"text": data.event.publication_data.name + " [" + this.$date_formatter(data.event.date_start) + "  -  " + this.$date_formatter(data.event.date_end) +"]",
                   "value": data.event.id}])
 
         },
