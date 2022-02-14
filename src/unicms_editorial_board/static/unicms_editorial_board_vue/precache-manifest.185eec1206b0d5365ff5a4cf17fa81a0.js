@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ae78c2b01b66dc964463",
+    "revision": "d8373635a055e5de5df5",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "ae78c2b01b66dc964463",
-    "url": "/static/unicms_editorial_board_vue/js/app.d36378af.js"
+    "revision": "d8373635a055e5de5df5",
+    "url": "/static/unicms_editorial_board_vue/js/app.cc400a44.js"
   },
   {
     "revision": "43fc4a4cc52bf4236d47",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.af3c99db.js"
   },
   {
-    "revision": "4a73f808248238e6276b2d7b45f73a4c",
+    "revision": "f887ad6f3f124b09e00979323c4d924e",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -32,16 +32,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-1.jpg"
-  },
-  {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
@@ -108,12 +108,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
-    "revision": "9ebea76ee1225f00d882b21547a7b49f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
-  },
-  {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
     "url": "/static/unicms_editorial_board_vue/img/vue-logo.png"
+  },
+  {
+    "revision": "9ebea76ee1225f00d882b21547a7b49f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",

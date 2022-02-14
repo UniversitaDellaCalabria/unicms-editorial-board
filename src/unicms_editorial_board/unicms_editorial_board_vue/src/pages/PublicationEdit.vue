@@ -228,6 +228,7 @@ export default {
                           dismissable: true }
                     )
                     this.$refs.form.loading = false
+                    this.$set(this.form, 'slug', response.data.slug)
                     }
                 )
                 .catch(error => {
