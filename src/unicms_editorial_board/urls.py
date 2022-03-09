@@ -10,5 +10,5 @@ _board_base = 'editorial-board'
 urlpatterns = []
 
 urlpatterns += [
-    path(f'{_board_base}/', board_base, name='board_base'),
+    re_path(f'{_board_base}/?$', board_base, name='board_base'),
 ]
