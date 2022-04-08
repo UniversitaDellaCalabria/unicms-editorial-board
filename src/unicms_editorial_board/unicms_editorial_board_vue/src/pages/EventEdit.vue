@@ -17,6 +17,13 @@
                                         variant="secondary"></b-icon>
                                     History
                                 </router-link>
+                                <router-link :to="{ name: 'PublicationEdit',
+                                                    params: { publication_id: publication_ref }}"
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="arrow-right-circle"
+                                        variant="secondary"></b-icon>
+                                    Go to publication
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <b-button
@@ -55,6 +62,7 @@ export default {
             form: {},
             form_source: '/api/editorial-board/events/form/',
             page_title: '',
+            publication_ref: '',
             redis_alert: null,
             interval: null,
             date_fields: ['date_start', 'date_end'],
@@ -71,6 +79,7 @@ export default {
                 else this.$set(this.form, key, value)
             }
             this.page_title = data.publication_data.title;
+            this.publication_ref = data.publication_data.id;
             this.$refs.form.getOptionsFromParent('publication',
                 [{"text": data.publication_data.title,
                   "value": data.publication}])
