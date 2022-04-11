@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "dd4d93a5f019404beaee",
+    "revision": "9775fa3b8225e6767523",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "dd4d93a5f019404beaee",
-    "url": "/static/unicms_editorial_board_vue/js/app.e6d89626.js"
+    "revision": "9775fa3b8225e6767523",
+    "url": "/static/unicms_editorial_board_vue/js/app.126af535.js"
   },
   {
     "revision": "43fc4a4cc52bf4236d47",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.af3c99db.js"
   },
   {
-    "revision": "cb143f291111bbc42c4ac4e7c63d7664",
+    "revision": "f87989d3ecda5cae9cb5dbac862008bd",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -88,32 +88,32 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/new_logo.png"
   },
   {
-    "revision": "6be21e8a1b7d63048728851c6003e189",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
-  },
-  {
     "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
   },
   {
-    "revision": "897b4cf909210560a84398d36da51983",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
+    "revision": "6be21e8a1b7d63048728851c6003e189",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
   },
   {
     "revision": "cd253e23ed052deeb80b42d2ed772183",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-3.jpg"
   },
   {
-    "revision": "44bf13a71a4db6e15913fe8af9296711",
-    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
+    "revision": "897b4cf909210560a84398d36da51983",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
+  },
+  {
+    "revision": "9ebea76ee1225f00d882b21547a7b49f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
     "url": "/static/unicms_editorial_board_vue/img/vue-logo.png"
   },
   {
-    "revision": "9ebea76ee1225f00d882b21547a7b49f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
+    "revision": "44bf13a71a4db6e15913fe8af9296711",
+    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",

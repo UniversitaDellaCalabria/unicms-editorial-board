@@ -93,7 +93,7 @@ export default {
                     this.$user_is_active(api_lock_src, params);
                     this.interval = setInterval(() => {
                         this.$checkForRedisLocks(obj_content_type,
-                                                 this.carousel_item_id);
+                                                 this.contact_info_id);
                         // update concurrent form data
                         if (this.redis_alert) {
                             this.axios

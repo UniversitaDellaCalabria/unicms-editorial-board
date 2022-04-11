@@ -49,8 +49,8 @@ export default {
                           dismissable: true }
                     );
                     this.$router.push({name: 'MenuItemLocalizations',
-                                       params: {carousel_id: this.menu_id,
-                                                carousel_item_id: this.menu_item_id,
+                                       params: {menu_id: this.menu_id,
+                                                menu_item_id: this.menu_item_id,
                                                 alerts: this.alerts}})
                     }
                 )
