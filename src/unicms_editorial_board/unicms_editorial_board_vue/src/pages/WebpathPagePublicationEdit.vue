@@ -20,6 +20,13 @@
                                         variant="secondary"></b-icon>
                                     History
                                 </router-link>
+                                <router-link :to="{ name: 'PublicationEdit',
+                                                    params: { publication_id: publication_pub_ref }}"
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="arrow-right-circle"
+                                        variant="secondary"></b-icon>
+                                    Go to publication
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <b-button
@@ -58,6 +65,7 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
             publication_id: this.$route.params.publication_id,
+            publication_pub_ref: '',
             form: {},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/publications/form/',
             add_modal_fields: {'publication':  this.$router.resolve({name: 'PublicationNew'}).href},
@@ -75,6 +83,7 @@ export default {
             }
 
             if(data.publication) {
+                this.publication_pub_ref = data.publication.id;
                 this.page_title = data.publication.full_name;
                 this.$refs.form.getOptionsFromParent('publication',
                     [{"text": data.publication.full_name,
