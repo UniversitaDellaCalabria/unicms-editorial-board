@@ -71,15 +71,19 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='media')
+                if(key=='media' && value) {
                     this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'media', data.media.file)
+                }
                 else this.$set(this.form, key, value)
             }
-            this.$set(this.files, 'media', data.media.file);
-            this.page_title = data.media.title;
-            this.$refs.form.getOptionsFromParent('media',
-                [{"text": data.media.title,
-                  "value": data.media.id}])
+
+            if(data.media) {
+                this.page_title = data.media.title;
+                this.$refs.form.getOptionsFromParent('media',
+                    [{"text": data.media.title,
+                      "value": data.media.id}])
+            }
         },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/medias/'+this.media_id+'/';

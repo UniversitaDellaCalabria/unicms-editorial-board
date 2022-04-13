@@ -69,14 +69,17 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='publication')
+                if(key=='publication' && value)
                     this.$set(this.form, key, value.id)
                 else this.$set(this.form, key, value)
             }
-            this.page_title = data.publication.full_name;
-            this.$refs.form.getOptionsFromParent('publication',
-                [{"text": data.publication.full_name,
-                  "value": data.publication.id}])
+
+            if(data.publication) {
+                this.page_title = data.publication.full_name;
+                this.$refs.form.getOptionsFromParent('publication',
+                    [{"text": data.publication.full_name,
+                      "value": data.publication.id}])
+            }
         },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/publications/'+this.publication_id+'/';

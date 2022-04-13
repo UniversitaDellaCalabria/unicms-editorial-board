@@ -80,14 +80,20 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                this.$set(this.form, key, value)
+
+                if(key=='image' && value) {
+                    this.form.image = data.image.id;
+                    this.$set(this.files, 'image', data.image.file);
+                }
+                else this.$set(this.form, key, value)
             }
-            this.form.image = data.image.id;
-            this.$set(this.files, 'image', data.image.file);
+
             this.page_title = data.name;
-            this.$refs.form.getOptionsFromParent('image',
-                [{"text": data.image.title,
-                  "value": data.image.id}])
+
+            if(data.image)
+                this.$refs.form.getOptionsFromParent('image',
+                    [{"text": data.image.title,
+                      "value": data.image.id}])
         },
         getItem() {
             let source = '/api/editorial-board/contacts/'+this.contact_id+'/';

@@ -66,15 +66,18 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='collection') {
+                if(key=='collection' && value) {
                     this.$set(this.form, key, value.id)
                 }
                 else this.$set(this.form, key, value)
             }
-            this.page_title = data.collection.name;
-            this.$refs.form.getOptionsFromParent('collection',
-                [{"text": data.collection.name,
-                  "value": data.collection.id}])
+
+            if(data.collection) {
+                this.page_title = data.collection.name;
+                this.$refs.form.getOptionsFromParent('collection',
+                    [{"text": data.collection.name,
+                      "value": data.collection.id}])
+            }
         },
         getItem() {
             let source = '/api/editorial-board/publications/'+this.publication_id+'/media-collections/'+this.collection_id+'/';

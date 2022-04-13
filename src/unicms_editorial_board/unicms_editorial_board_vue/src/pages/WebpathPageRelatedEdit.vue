@@ -67,11 +67,12 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='related_page')
+                if(key=='related_page' && value)
                     this.$set(this.form, key, value.id)
                 else this.$set(this.form, key, value)
             }
-            this.page_title = data.related_page.name;
+            if(data.related_page)
+                this.page_title = data.related_page.name;
         },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/related/'+this.related_id+'/';

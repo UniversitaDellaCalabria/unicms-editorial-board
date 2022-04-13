@@ -259,7 +259,11 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='base_template' || key=='webpath') {
+                if(key=='base_template' && value) {
+                    this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'base_template', data.base_template.image);
+                }
+                else if(key=='webpath' && value) {
                     this.$set(this.form, key, value.id)
                 }
                 else if(this.date_fields.includes(key) && value) {
@@ -267,14 +271,16 @@ export default {
                               value.substr(0,16).replace("T"," "))
                 }
                 else this.$set(this.form, key, value)
-                this.$set(this.files, 'base_template', data.base_template.image);
+
                 this.page_title = data.name;
                 this.preview_url = data.preview_url;
                 this.is_active = data.is_active;
                 this.published = data.state;
-                this.$refs.form.getOptionsFromParent('webpath',
-                    [{"text": data.webpath.full_name,
-                      "value": data.webpath.id}])
+
+                if(data.webpath)
+                    this.$refs.form.getOptionsFromParent('webpath',
+                        [{"text": data.webpath.full_name,
+                          "value": data.webpath.id}])
             }
         },
         getItem() {

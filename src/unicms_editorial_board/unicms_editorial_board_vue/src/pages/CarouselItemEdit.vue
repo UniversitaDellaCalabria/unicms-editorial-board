@@ -85,22 +85,27 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='image' || key=='mobile_image')
+                if(key=='image' && value) {
                     this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'image', data.image.file)
+                }
+                else if(key=='mobile_image') {
+                    this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'mobile_image', data.mobile_image.file)
+                }
                 else this.$set(this.form, key, value)
             }
 
-            this.$set(this.files, 'image', data.image.file);
-            this.$set(this.files, 'mobile_image', data.mobile_image.file);
-
-            this.page_title = data.image.title;
-
-            this.$refs.form.getOptionsFromParent('image',
-                [{"text": data.image.title,
-                  "value": data.image.id}])
-            this.$refs.form.getOptionsFromParent('mobile_image',
-                [{"text": data.mobile_image.title,
-                  "value": data.mobile_image.id}])
+            if(data.image) {
+                this.page_title = data.image.title;
+                this.$refs.form.getOptionsFromParent('image',
+                    [{"text": data.image.title,
+                      "value": data.image.id}])
+            }
+            if(data.mobile_image)
+                this.$refs.form.getOptionsFromParent('mobile_image',
+                    [{"text": data.mobile_image.title,
+                      "value": data.mobile_image.id}])
         },
         getItem() {
             let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';

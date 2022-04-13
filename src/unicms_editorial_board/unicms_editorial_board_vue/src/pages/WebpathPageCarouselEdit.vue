@@ -70,14 +70,17 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='carousel')
+                if(key=='carousel' && value)
                     this.$set(this.form, key, value.id)
                 else this.$set(this.form, key, value)
             }
-            this.page_title = data.carousel.name;
-            this.$refs.form.getOptionsFromParent('carousel',
-                [{"text": data.carousel.name,
-                  "value": data.carousel.id}])
+
+            if(data.carousel) {
+                this.page_title = data.carousel.name;
+                this.$refs.form.getOptionsFromParent('carousel',
+                    [{"text": data.carousel.name,
+                      "value": data.carousel.id}])
+            }
         },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/carousels/'+this.carousel_id+'/';

@@ -75,10 +75,10 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='publication') {
+                if(key=='publication' && value) {
                     this.$set(this.form, key, value.id)
                 }
-                else if(key=='webpath') {
+                else if(key=='webpath' && value) {
                     this.$set(this.form, key, value.id)
                 }
                 else if(this.date_fields.includes(key) && value) {
@@ -87,14 +87,20 @@ export default {
                 }
                 else this.$set(this.form, key, value)
             }
-            this.page_title = data.publication.full_name;
-            this.publication_pub_ref = data.publication.id;
-            this.$refs.form.getOptionsFromParent('webpath',
-                [{"text": data.webpath.full_name,
-                  "value": data.webpath.id}])
-            this.$refs.form.getOptionsFromParent('publication',
+
+            if(data.publication) {
+                this.publication_pub_ref = data.publication.id;
+                this.page_title = data.publication.full_name;
+                this.$refs.form.getOptionsFromParent('publication',
                 [{"text": data.publication.full_name,
                   "value": data.publication.id}])
+            }
+
+            if(data.webpath)
+                this.$refs.form.getOptionsFromParent('webpath',
+                    [{"text": data.webpath.full_name,
+                      "value": data.webpath.id}])
+
         },
         getItem() {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/publication-contexts/'+this.publication_id+'/';

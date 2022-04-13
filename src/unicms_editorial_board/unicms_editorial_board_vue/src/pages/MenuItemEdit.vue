@@ -77,7 +77,8 @@ export default {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
                 if(key=='webpath' || key=='inherited_content' || key=='publication') {
-                    this.$set(this.form, key, value.id)
+                    if (value)
+                        this.$set(this.form, key, value.id)
                 }
                 else this.$set(this.form, key, value)
             }

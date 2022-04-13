@@ -146,14 +146,16 @@ export default {
                     value.forEach(v => {categories.push(v.id)});
                     this.$set(this.form, key, categories)
                 }
-                else if(key=='presentation_image')
+                else if(key=='presentation_image' && value){
                     this.$set(this.form, key, value.id)
-                else if(key=='preview_image')
+                    this.$set(this.files, 'presentation_image', data.presentation_image.file)
+                }
+                else if(key=='preview_image' && value) {
                     this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'preview_image', data.preview_image.file)
+                }
                 else this.$set(this.form, key, value)
             }
-            this.$set(this.files, 'presentation_image', data.presentation_image.file);
-            this.$set(this.files, 'preview_image', data.preview_image.file);
             this.page_title = data.full_name;
             this.is_active = data.is_active;
             if(data.presentation_image)
