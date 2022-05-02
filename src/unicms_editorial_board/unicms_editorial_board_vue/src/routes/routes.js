@@ -103,6 +103,44 @@ import MenuItemLocalizationEdit from 'src/pages/MenuItemLocalizationEdit.vue'
 import MenuItemLocalizationNew from 'src/pages/MenuItemLocalizationNew.vue'
 import MenuItemLocalizationLogs from 'src/pages/MenuItemLocalizationLogs.vue'
 
+import Newsletters from 'src/pages/Newsletters.vue'
+import NewsletterEdit from 'src/pages/NewsletterEdit.vue'
+import NewsletterNew from 'src/pages/NewsletterNew.vue'
+import NewsletterLogs from 'src/pages/NewsletterLogs.vue'
+import NewsletterLocks from 'src/pages/NewsletterLocks.vue'
+import NewsletterLockNew from 'src/pages/NewsletterLockNew.vue'
+import NewsletterSubscriptions from 'src/pages/NewsletterSubscriptions.vue'
+import NewsletterSubscriptionEdit from 'src/pages/NewsletterSubscriptionEdit.vue'
+import NewsletterSubscriptionNew from 'src/pages/NewsletterSubscriptionNew.vue'
+import NewsletterTestSubscriptions from 'src/pages/NewsletterTestSubscriptions.vue'
+import NewsletterTestSubscriptionEdit from 'src/pages/NewsletterTestSubscriptionEdit.vue'
+import NewsletterTestSubscriptionNew from 'src/pages/NewsletterTestSubscriptionNew.vue'
+import NewsletterMessages from 'src/pages/NewsletterMessages.vue'
+import NewsletterMessageEdit from 'src/pages/NewsletterMessageEdit.vue'
+import NewsletterMessageNew from 'src/pages/NewsletterMessageNew.vue'
+
+import NewsletterMessageAttachments from 'src/pages/NewsletterMessageAttachments.vue'
+import NewsletterMessageAttachmentEdit from 'src/pages/NewsletterMessageAttachmentEdit.vue'
+import NewsletterMessageAttachmentNew from 'src/pages/NewsletterMessageAttachmentNew.vue'
+
+import NewsletterMessageCategories from 'src/pages/NewsletterMessageCategories.vue'
+import NewsletterMessageCategoryEdit from 'src/pages/NewsletterMessageCategoryEdit.vue'
+import NewsletterMessageCategoryNew from 'src/pages/NewsletterMessageCategoryNew.vue'
+
+import NewsletterMessagePublications from 'src/pages/NewsletterMessagePublications.vue'
+import NewsletterMessagePublicationEdit from 'src/pages/NewsletterMessagePublicationEdit.vue'
+import NewsletterMessagePublicationNew from 'src/pages/NewsletterMessagePublicationNew.vue'
+
+import NewsletterMessagePublicationCtx from 'src/pages/NewsletterMessagePublicationCtx.vue'
+import NewsletterMessagePublicationCtxEdit from 'src/pages/NewsletterMessagePublicationCtxEdit.vue'
+import NewsletterMessagePublicationCtxNew from 'src/pages/NewsletterMessagePublicationCtxNew.vue'
+
+import NewsletterMessageWebpaths from 'src/pages/NewsletterMessageWebpaths.vue'
+import NewsletterMessageWebpathEdit from 'src/pages/NewsletterMessageWebpathEdit.vue'
+import NewsletterMessageWebpathNew from 'src/pages/NewsletterMessageWebpathNew.vue'
+
+import NewsletterMessageSendings from 'src/pages/NewsletterMessageSendings.vue'
+
 import Publications from 'src/pages/Publications.vue'
 import PublicationNew from 'src/pages/PublicationNew.vue'
 import PublicationEdit from 'src/pages/PublicationEdit.vue'
@@ -2522,6 +2560,389 @@ const routes = [
         }
     },
 
+    // newsletter
+
+    {
+        path: 'newsletters',
+        name: 'Newsletters',
+        component: Newsletters,
+        meta: {
+            breadcrumb: {
+                label: 'Newsletters',
+                parent: 'Dashboard'
+            }
+        }
+    },
+    {
+        path: 'newsletters/new',
+        name: 'NewsletterNew',
+        component: NewsletterNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'Newsletters'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/edit',
+        name: 'NewsletterEdit',
+        component: NewsletterEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                  label: this.$route.params.newsletter_id.toString(),
+                  parent: 'Newsletters'
+                }
+            }
+        },
+    },
+
+    // newsletter logs
+    {
+        path: 'newsletters/:newsletter_id/logs',
+        name: 'NewsletterLogs',
+        component: NewsletterLogs,
+        meta: {
+            breadcrumb: {
+                label: 'Logs',
+                parent: 'NewsletterEdit'
+            }
+        }
+    },
+
+    // newsletter locks
+    {
+        path: 'newsletters/:newsletter_id/locks',
+        name: 'NewsletterLocks',
+        component: NewsletterLocks,
+        meta: {
+            breadcrumb: {
+                label: 'Locks',
+                parent: 'NewsletterEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/locks/new',
+        name: 'NewsletterLockNew',
+        component: NewsletterLockNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterLocks'
+            }
+        },
+    },
+
+    // newsletter subscriptions
+    {
+        path: 'newsletters/:newsletter_id/subscriptions',
+        name: 'NewsletterSubscriptions',
+        component: NewsletterSubscriptions,
+        meta: {
+            breadcrumb: {
+                label: 'Subscriptions',
+                parent: 'NewsletterEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/subscriptions/new',
+        name: 'NewsletterSubscriptionNew',
+        component: NewsletterSubscriptionNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterSubscriptions'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/subscriptions/:subscription_id/edit',
+        name: 'NewsletterSubscriptionEdit',
+        component: NewsletterSubscriptionEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.subscription_id.toString(),
+                    parent: 'NewsletterSubscriptions'
+                }
+            }
+        },
+    },
+
+    // newsletter test subscriptions
+    {
+        path: 'newsletters/:newsletter_id/test-subscriptions',
+        name: 'NewsletterTestSubscriptions',
+        component: NewsletterTestSubscriptions,
+        meta: {
+            breadcrumb: {
+                label: 'Test Subscriptions',
+                parent: 'NewsletterEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/test-subscriptions/new',
+        name: 'NewsletterTestSubscriptionNew',
+        component: NewsletterTestSubscriptionNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterTestSubscriptions'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/test-subscriptions/:subscription_id/edit',
+        name: 'NewsletterTestSubscriptionEdit',
+        component: NewsletterTestSubscriptionEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.subscription_id.toString(),
+                    parent: 'NewsletterTestSubscriptions'
+                }
+            }
+        },
+    },
+
+    // newsletter messages
+    {
+        path: 'newsletters/:newsletter_id/messages',
+        name: 'NewsletterMessages',
+        component: NewsletterMessages,
+        meta: {
+            breadcrumb: {
+                label: 'Messages',
+                parent: 'NewsletterEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/new',
+        name: 'NewsletterMessageNew',
+        component: NewsletterMessageNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessages'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/edit',
+        name: 'NewsletterMessageEdit',
+        component: NewsletterMessageEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.message_id.toString(),
+                    parent: 'NewsletterMessages'
+                }
+            }
+        },
+    },
+
+    // newsletter message attachments
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/attachments',
+        name: 'NewsletterMessageAttachments',
+        component: NewsletterMessageAttachments,
+        meta: {
+            breadcrumb: {
+                label: 'Attachments',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/attachments/new',
+        name: 'NewsletterMessageAttachmentNew',
+        component: NewsletterMessageAttachmentNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessageAttachments'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/attachments/:attachment_id/edit',
+        name: 'NewsletterMessageAttachmentEdit',
+        component: NewsletterMessageAttachmentEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.attachment_id.toString(),
+                    parent: 'NewsletterMessageAttachments'
+                }
+            }
+        },
+    },
+
+    // newsletter message categories
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/categories',
+        name: 'NewsletterMessageCategories',
+        component: NewsletterMessageCategories,
+        meta: {
+            breadcrumb: {
+                label: 'Categories',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/categories/new',
+        name: 'NewsletterMessageCategoryNew',
+        component: NewsletterMessageCategoryNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessageCategories'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/categories/:category_id/edit',
+        name: 'NewsletterMessageCategoryEdit',
+        component: NewsletterMessageCategoryEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.category_id.toString(),
+                    parent: 'NewsletterMessageCategories'
+                }
+            }
+        },
+    },
+
+    // newsletter message publications
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/publications',
+        name: 'NewsletterMessagePublications',
+        component: NewsletterMessagePublications,
+        meta: {
+            breadcrumb: {
+                label: 'Publications',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/publications/new',
+        name: 'NewsletterMessagePublicationNew',
+        component: NewsletterMessagePublicationNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessagePublications'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/publications/:publication_id/edit',
+        name: 'NewsletterMessagePublicationEdit',
+        component: NewsletterMessagePublicationEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.publication_id.toString(),
+                    parent: 'NewsletterMessagePublications'
+                }
+            }
+        },
+    },
+
+    // newsletter message publication ctx
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/publication-contexts',
+        name: 'NewsletterMessagePublicationCtx',
+        component: NewsletterMessagePublicationCtx,
+        meta: {
+            breadcrumb: {
+                label: 'News',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/publication-contexts/new',
+        name: 'NewsletterMessagePublicationCtxNew',
+        component: NewsletterMessagePublicationCtxNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessagePublicationCtx'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/publication-contexts/:publication_id/edit',
+        name: 'NewsletterMessagePublicationCtxEdit',
+        component: NewsletterMessagePublicationCtxEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.publication_id.toString(),
+                    parent: 'NewsletterMessagePublicationCtx'
+                }
+            }
+        },
+    },
+
+    // newsletter message webpaths
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/webpaths',
+        name: 'NewsletterMessageWebpaths',
+        component: NewsletterMessageWebpaths,
+        meta: {
+            breadcrumb: {
+                label: 'News',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/webpaths/new',
+        name: 'NewsletterMessageWebpathNew',
+        component: NewsletterMessageWebpathNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessageWebpaths'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/webpaths/:webpath_id/edit',
+        name: 'NewsletterMessageWebpathEdit',
+        component: NewsletterMessageWebpathEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.webpath_id.toString(),
+                    parent: 'NewsletterMessageWebpaths'
+                }
+            }
+        },
+    },
+
+    // newsletter message sendings
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/sendings',
+        name: 'NewsletterMessageSendings',
+        component: NewsletterMessageSendings,
+        meta: {
+            breadcrumb: {
+                label: 'News',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
     ]
   },
   { path: '*', component: Error404 }

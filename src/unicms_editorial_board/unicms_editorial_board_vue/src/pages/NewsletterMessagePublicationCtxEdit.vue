@@ -9,32 +9,6 @@
                 <div class="col-12">
                     <b-card>
                         <div class="clearfix mb-5">
-                            <div class="pull-left">
-                                <router-link :to="{ name: 'CarouselItemLogs',
-                                            params: { carousel_id: carousel_id,
-                                                      carousel_item_id: carousel_item_id }}"
-                                    class="btn btn-sm btn-outline-secondary mx-md-1">
-                                    <b-icon icon="clock-history"
-                                        variant="secondary"></b-icon>
-                                    History
-                                </router-link>
-                                <router-link :to="{ name: 'CarouselItemLinks',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id}}"
-                                    class="btn btn-sm btn-outline-secondary mx-md-1">
-                                    <b-icon icon="link45deg"
-                                        variant="secondary"></b-icon>
-                                    Links
-                                </router-link>
-                                <router-link :to="{ name: 'CarouselItemLocalizations',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id}}"
-                                    class="btn btn-sm btn-outline-secondary mx-md-1">
-                                    <b-icon icon="flag"
-                                        variant="secondary"></b-icon>
-                                    Localizations
-                                </router-link>
-                            </div>
                             <div class="pull-right">
                                 <b-button
                                     @click="deleteModal()"
@@ -55,8 +29,7 @@
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
-                                :files="files"
-                                :add_modal_fields="add_modal_fields" />
+                                :files="files" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -70,12 +43,11 @@ export default {
     data() {
         return {
             alerts: [],
-            carousel_id: this.$route.params.carousel_id,
-            carousel_item_id: this.$route.params.carousel_item_id,
+            newsletter_id: this.$route.params.newsletter_id,
+            message_id: this.$route.params.message_id,
+            publication_id: this.$route.params.publication_id,
             form: {},
-            form_source: '/api/editorial-board/carousels/items/form/',
-            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
-                               'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
+            form_source: '/api/editorial-board/newsletters/'+this.$route.params.newsletter_id+'/messages/'+this.$route.params.message_id+'/publication-contexts/form/',
             files: {},
             page_title: '',
             redis_alert: null,
@@ -85,30 +57,15 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='image' && value) {
-                    this.$set(this.form, key, value.id)
-                    this.$set(this.files, 'image', data.image.file)
-                }
-                else if(key=='mobile_image' && value) {
-                    this.$set(this.form, key, value.id)
-                    this.$set(this.files, 'mobile_image', data.mobile_image.file)
-                }
-                else this.$set(this.form, key, value)
+                this.$set(this.form, key, value)
             }
 
-            if(data.image) {
-                this.page_title = data.image.title;
-                this.$refs.form.getOptionsFromParent('image',
-                    [{"text": data.image.title,
-                      "value": data.image.id}])
-            }
-            if(data.mobile_image)
-                this.$refs.form.getOptionsFromParent('mobile_image',
-                    [{"text": data.mobile_image.title,
-                      "value": data.mobile_image.id}])
+            this.$refs.form.getOptionsFromParent('publication',
+                [{"text": data.publication_data,
+                  "value": data.publication}])
         },
         getItem() {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
+            let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/'+this.message_id+'/publication-contexts/'+this.publication_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -118,13 +75,13 @@ export default {
                     let obj_content_type = response.data.object_content_type;
                     let api_lock_src = '/api/editorial-board/redis-lock/set/';
                     let params = {'content_type_id': obj_content_type,
-                                  'object_id': this.carousel_item_id}
+                                  'object_id': this.publication_id}
                     this.axios.post(api_lock_src, params,
                                      {headers: {"X-CSRFToken": this.$csrftoken }});
                     this.$user_is_active(api_lock_src, params);
                     this.interval = setInterval(() => {
                         this.$checkForRedisLocks(obj_content_type,
-                                                 this.carousel_item_id);
+                                                 this.publication_id);
                         // update concurrent form data
                         if (this.redis_alert) {
                             this.axios
@@ -138,25 +95,9 @@ export default {
                     // end concurrency management
                 })
         },
-        updateMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.files.image = response.data.file
-                })
-        },
-        updateMobileMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.files.mobile_image = response.data.file
-                })
-        },
         onSubmit(event) {
             this.$refs.form.loading = true;
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
+            let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/'+this.message_id+'/publication-contexts/'+this.publication_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
@@ -165,10 +106,10 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item edited successfully',
+                          message: 'news edited successfully',
                           dismissable: true }
                     )
-                    this.page_title = response.data.image.title;
+                    this.page_title = response.data.email;
                     this.$refs.form.loading = false;
                     }
                 )
@@ -185,17 +126,18 @@ export default {
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/',
+                .delete('/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/'+this.message_id+'/publication-contexts/'+this.publication_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item removed successfully',
+                          message: 'news removed successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'CarouselItems',
-                                       params: {carousel_id: this.carousel_id,
+                    this.$router.push({name: 'NewsletterMessagePublicationCtx',
+                                       params: {newsletter_id: this.newsletter_id,
+                                                message_id: this.message_id,
                                                 alerts: this.alerts}})
                     }
                 )
@@ -208,7 +150,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete carousel item?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete news?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
@@ -228,16 +170,6 @@ export default {
     },
     beforeDestroy() {
         clearInterval(this.interval)
-    },
-    watch: {
-        'form.image': function(newVal, oldVal){
-            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
-            if (!newVal) this.files.image = ''
-        },
-        'form.mobile_image': function(newVal, oldVal){
-            if (newVal && newVal!=oldVal) this.updateMobileMedia(newVal);
-            if (!newVal) this.files.mobile_image = ''
-        }
     }
 }
 </script>

@@ -10,29 +10,33 @@
                     <b-card>
                         <div class="clearfix mb-5">
                             <div class="pull-left">
-                                <router-link :to="{ name: 'CarouselItemLogs',
-                                            params: { carousel_id: carousel_id,
-                                                      carousel_item_id: carousel_item_id }}"
+                                <router-link :to="{ name: 'NewsletterLogs',
+                                                    params: { newsletter_id: newsletter_id }}"
                                     class="btn btn-sm btn-outline-secondary mx-md-1">
                                     <b-icon icon="clock-history"
                                         variant="secondary"></b-icon>
                                     History
                                 </router-link>
-                                <router-link :to="{ name: 'CarouselItemLinks',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id}}"
-                                    class="btn btn-sm btn-outline-secondary mx-md-1">
-                                    <b-icon icon="link45deg"
+                                <router-link :to="{ name: 'NewsletterMessages',
+                                                    params: { newsletter_id: newsletter_id }}"
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="chat-left-text"
                                         variant="secondary"></b-icon>
-                                    Links
+                                    Messages
                                 </router-link>
-                                <router-link :to="{ name: 'CarouselItemLocalizations',
-                                                    params: { carousel_id: carousel_id,
-                                                              carousel_item_id: carousel_item_id}}"
-                                    class="btn btn-sm btn-outline-secondary mx-md-1">
-                                    <b-icon icon="flag"
+                                <router-link :to="{ name: 'NewsletterSubscriptions',
+                                                    params: { newsletter_id: newsletter_id }}"
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="person-check"
                                         variant="secondary"></b-icon>
-                                    Localizations
+                                    Subscriptions
+                                </router-link>
+                                <router-link :to="{ name: 'NewsletterTestSubscriptions',
+                                                    params: { newsletter_id: newsletter_id }}"
+                                    class="btn mx-md-1 btn-sm btn-outline-secondary">
+                                    <b-icon icon="person"
+                                        variant="secondary"></b-icon>
+                                    Test Subscriptions
                                 </router-link>
                             </div>
                             <div class="pull-right">
@@ -46,17 +50,13 @@
                                 </b-button>
                             </div>
                         </div>
-
                         <b-card-title>{{ page_title }}</b-card-title>
-
                         <b-card-text>
                             <django-form
                                 ref="form"
-                                :form="form"
+                                :form="this.form"
                                 :submit="onSubmit"
-                                :form_source="form_source"
-                                :files="files"
-                                :add_modal_fields="add_modal_fields" />
+                                :form_source="this.form_source" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -70,13 +70,9 @@ export default {
     data() {
         return {
             alerts: [],
-            carousel_id: this.$route.params.carousel_id,
-            carousel_item_id: this.$route.params.carousel_item_id,
+            newsletter_id: this.$route.params.newsletter_id,
             form: {},
-            form_source: '/api/editorial-board/carousels/items/form/',
-            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
-                               'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
-            files: {},
+            form_source: '/api/editorial-board/newsletters/form/',
             page_title: '',
             redis_alert: null,
             interval: null,
@@ -85,30 +81,12 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='image' && value) {
-                    this.$set(this.form, key, value.id)
-                    this.$set(this.files, 'image', data.image.file)
-                }
-                else if(key=='mobile_image' && value) {
-                    this.$set(this.form, key, value.id)
-                    this.$set(this.files, 'mobile_image', data.mobile_image.file)
-                }
-                else this.$set(this.form, key, value)
+                this.$set(this.form, key, value)
             }
-
-            if(data.image) {
-                this.page_title = data.image.title;
-                this.$refs.form.getOptionsFromParent('image',
-                    [{"text": data.image.title,
-                      "value": data.image.id}])
-            }
-            if(data.mobile_image)
-                this.$refs.form.getOptionsFromParent('mobile_image',
-                    [{"text": data.mobile_image.title,
-                      "value": data.mobile_image.id}])
+            this.page_title = data.name;
         },
         getItem() {
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
+            let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/';
             this.axios
                 .get(source)
                 .then(response => {
@@ -118,13 +96,13 @@ export default {
                     let obj_content_type = response.data.object_content_type;
                     let api_lock_src = '/api/editorial-board/redis-lock/set/';
                     let params = {'content_type_id': obj_content_type,
-                                  'object_id': this.carousel_item_id}
+                                  'object_id': this.newsletter_id}
                     this.axios.post(api_lock_src, params,
                                      {headers: {"X-CSRFToken": this.$csrftoken }});
                     this.$user_is_active(api_lock_src, params);
                     this.interval = setInterval(() => {
                         this.$checkForRedisLocks(obj_content_type,
-                                                 this.carousel_item_id);
+                                                 this.newsletter_id);
                         // update concurrent form data
                         if (this.redis_alert) {
                             this.axios
@@ -138,38 +116,22 @@ export default {
                     // end concurrency management
                 })
         },
-        updateMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.files.image = response.data.file
-                })
-        },
-        updateMobileMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.files.mobile_image = response.data.file
-                })
-        },
         onSubmit(event) {
             this.$refs.form.loading = true;
-            let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
+            let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
+                    this.page_title = response.data.name
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item edited successfully',
+                          message: 'newsletter edited successfully',
                           dismissable: true }
-                    )
-                    this.page_title = response.data.image.title;
-                    this.$refs.form.loading = false;
+                    );
+                    this.$refs.form.loading = false
                     }
                 )
                 .catch(error => {
@@ -180,23 +142,22 @@ export default {
                               dismissable: true }
                         )
                     }
-                    this.$refs.form.loading = false;
+                    this.$refs.form.loading = false
                 })
         },
         remove() {
             this.axios
-                .delete('/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/',
+                .delete('/api/editorial-board/newsletters/'+this.newsletter_id+'/',
                         {headers: {"X-CSRFToken": this.$csrftoken }}
                        )
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: 'carousel item removed successfully',
+                          message: 'newsletter removed successfully',
                           dismissable: true }
                     );
-                    this.$router.push({name: 'CarouselItems',
-                                       params: {carousel_id: this.carousel_id,
-                                                alerts: this.alerts}})
+                    this.$router.push({name: 'Newsletters',
+                                       params: {alerts: this.alerts}})
                     }
                 )
                 .catch(error => {
@@ -208,7 +169,7 @@ export default {
                 })
         },
         deleteModal() {
-            this.$bvModal.msgBoxConfirm('Do you want really delete carousel item?', {
+            this.$bvModal.msgBoxConfirm('Do you want really delete newsletter?', {
             title: 'Please Confirm',
                 size: 'sm',
                 buttonSize: 'sm',
@@ -224,20 +185,10 @@ export default {
         }
     },
     mounted() {
-        this.getItem()
+        this.getItem();
     },
     beforeDestroy() {
         clearInterval(this.interval)
-    },
-    watch: {
-        'form.image': function(newVal, oldVal){
-            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
-            if (!newVal) this.files.image = ''
-        },
-        'form.mobile_image': function(newVal, oldVal){
-            if (newVal && newVal!=oldVal) this.updateMobileMedia(newVal);
-            if (!newVal) this.files.mobile_image = ''
-        }
     }
 }
 </script>

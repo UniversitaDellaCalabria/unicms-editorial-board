@@ -84,6 +84,15 @@
         <p>Menus</p>
       </sidebar-link>
 
+      <sidebar-link to="/newsletters">
+        <b-icon icon="mailbox"
+            class="mr-4 ml-1"
+            variant="white"
+            scale="1.9">
+        </b-icon>
+        <p>Newsletters</p>
+      </sidebar-link>
+
       <sidebar-link to="/publications">
         <b-icon icon="file-earmark-text"
             class="mr-4 ml-1"

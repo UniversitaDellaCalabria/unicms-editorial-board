@@ -98,6 +98,22 @@
                                     <slot name="state" :data="data"></slot>
                                 </template>
 
+                                <template #cell(group_by_categories)="data">
+                                    <slot name="group_by_categories" :data="data"></slot>
+                                </template>
+
+                                <template #cell(attachment)="data">
+                                    <slot name="attachment" :data="data"></slot>
+                                </template>
+
+                                <template #cell(html)="data">
+                                    <slot name="html" :data="data"></slot>
+                                </template>
+
+                                <template #cell(html_file)="data">
+                                    <slot name="html_file" :data="data"></slot>
+                                </template>
+
                                 <template #cell(is_active)="data">
                                     <slot name="activation" :data="data">
                                         <b-icon icon="check-circle-fill"
@@ -217,6 +233,10 @@ export default {
         showIsActive: {
             type: Boolean,
             default: true
+        },
+        sortDesc: {
+            type: String,
+            default: ''
         },
     },
     data () {
