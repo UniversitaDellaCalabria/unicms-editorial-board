@@ -23,6 +23,19 @@
             </b-icon>
         </template>
 
+        <template #sending="data">
+            <b-icon icon="circle-fill"
+                    animation="throb"
+                    variant="success"
+                    v-if="data.data.value">
+            </b-icon>
+            <b-icon
+                icon="x-circle-fill"
+                variant="danger"
+                v-else>
+            </b-icon>
+        </template>
+
         <template #add_new>
             <router-link :to="{ name: 'NewsletterMessageNew',
                                 params: { newsletter_id: newsletter_id }}"
@@ -134,6 +147,7 @@ export default {
                 {key: 'repeat_each', label: 'Repeat each'},
                 'template',
                 {key: 'is_active', label: 'Active'},
+                {key: 'sending', label: 'Sending'},
                 { key: 'childs', label: 'Related'},
                 'actions'
             ],
@@ -145,7 +159,8 @@ export default {
                             { text: 'End', value: 'date_end' },
                             { text: 'Group by categories', value: 'group_by_categories' },
                             { text: 'State', value: 'is_active'}],
-            page_title: 'Newsletter messages'
+            page_title: 'Newsletter messages',
+            check_interval: null
         }
     },
     methods: {
@@ -173,6 +188,13 @@ export default {
                                 .catch(() => {})
                     }
                 )
+                .catch(error => {
+                    this.$refs.completeTable.alerts.push(
+                        { variant: 'warning',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
         },
         sendModal(id, test=1) {
             let message = 'Do you want really send message?'
@@ -197,6 +219,13 @@ export default {
                 if (value) this.send(id, test);
             })
         },
-    }
+    },
+    mounted() {
+        // check for update sending status
+        this.check_interval = setInterval(() => this.$refs.completeTable.callApi(), 3000);
+    },
+    beforeDestroy() {
+        clearInterval(this.check_interval)
+    },
 }
 </script>

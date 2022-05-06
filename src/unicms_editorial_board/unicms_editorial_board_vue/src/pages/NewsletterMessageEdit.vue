@@ -90,7 +90,12 @@
                         </div>
 
 
-                        <b-card-title>{{ page_title }}</b-card-title>
+                        <b-card-title>
+                            {{ page_title }}
+                            <span v-if="sending">
+                                (sending: <b-icon icon="circle-fill" animation="throb" variant="success"></b-icon>)
+                            </span>
+                        </b-card-title>
 
                         <b-card-text>
                             <django-form
@@ -122,9 +127,12 @@ export default {
             page_title: '',
             preview: '',
             redis_alert: null,
+            sending: false,
             interval: null,
+            check_sending: null,
             add_modal_fields: {'banner':  this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content', 'intro_text', 'footer_text'],
+            date_fields: ['date_start', 'date_end'],
         }
     },
     methods: {
@@ -133,6 +141,13 @@ export default {
                 if(key=='banner') {
                     this.$set(this.form, key, value.id)
                     this.$set(this.files, 'banner', data.banner.file)
+                }
+                else if(key=='sending') {
+                    this.sending = data.sending
+                }
+                else if(this.date_fields.includes(key) && value) {
+                    this.$set(this.form, key,
+                              value.substr(0,16).replace("T"," "))
                 }
                 else this.$set(this.form, key, value)
 
@@ -160,10 +175,12 @@ export default {
                     this.axios.post(api_lock_src, params,
                                      {headers: {"X-CSRFToken": this.$csrftoken }});
                     this.$user_is_active(api_lock_src, params);
+
                     this.interval = setInterval(() => {
                         this.$checkForRedisLocks(obj_content_type,
                                                  this.message_id);
                         // update concurrent form data
+
                         if (this.redis_alert) {
                             this.axios
                                 .get(source)
@@ -174,6 +191,15 @@ export default {
                         }
                     }, this.$redis_ttl)
                     // end concurrency management
+
+                    this.check_sending = setInterval(() => {
+                        this.axios
+                            .get(source)
+                            .then(new_response => {
+                                this.sending = new_response.data.sending
+                            }
+                        )
+                    }, 2000)
                 })
         },
         updateMedia(val) {
@@ -275,8 +301,15 @@ export default {
                                        params: {newsletter_id: this.newsletter_id,
                                                 message_id: this.message_id,
                                                 alerts: this.alerts}})
-                    }
-                )
+                                .catch(() => {})
+                })
+                .catch(error => {
+                    this.alerts.push(
+                        { variant: 'warning',
+                          message: error.response.data.detail,
+                          dismissable: true }
+                    )
+                })
         },
         sendModal(id, test=1) {
             let message = 'Do you want really send message?'
@@ -307,6 +340,7 @@ export default {
     },
     beforeDestroy() {
         clearInterval(this.interval)
+        clearInterval(this.check_sending)
     },
     watch: {
         'form.banner': function(newVal, oldVal){

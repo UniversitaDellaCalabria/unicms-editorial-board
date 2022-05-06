@@ -102,6 +102,10 @@
                                     <slot name="group_by_categories" :data="data"></slot>
                                 </template>
 
+                                <template #cell(sending)="data">
+                                    <slot name="sending" :data="data"></slot>
+                                </template>
+
                                 <template #cell(attachment)="data">
                                     <slot name="attachment" :data="data"></slot>
                                 </template>
