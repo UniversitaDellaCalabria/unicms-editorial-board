@@ -11,6 +11,7 @@
             v-for="field in this.fields" :key="field.id"
             :id="'input-group-' + field.id"
             :label="field.required ? field.label + ' *' : field.label"
+            :label-class="field.required ? 'font-weight-bold' : ''"
             :label-for="field.id"
             :description="field.help_text">
 
