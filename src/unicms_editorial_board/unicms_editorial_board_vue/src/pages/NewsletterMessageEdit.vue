@@ -227,7 +227,7 @@ export default {
                           message: 'newsletter message edited successfully',
                           dismissable: true }
                     )
-                    this.page_title = response.data.email;
+                    this.page_title = response.data.name;
                     this.$refs.form.loading = false;
                     }
                 )
