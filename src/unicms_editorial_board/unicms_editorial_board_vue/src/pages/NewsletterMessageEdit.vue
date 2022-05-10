@@ -138,7 +138,7 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='banner') {
+                if(key=='banner' && value) {
                     this.$set(this.form, key, value.id)
                     this.$set(this.files, 'banner', data.banner.file)
                 }
@@ -148,6 +148,9 @@ export default {
                 else if(this.date_fields.includes(key) && value) {
                     this.$set(this.form, key,
                               value.substr(0,16).replace("T"," "))
+                }
+                else if(key=='week_day') {
+                    this.$set(this.form, key, value.split(","))
                 }
                 else this.$set(this.form, key, value)
 
