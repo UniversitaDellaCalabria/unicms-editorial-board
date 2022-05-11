@@ -149,7 +149,7 @@ export default {
                     this.$set(this.form, key,
                               value.substr(0,16).replace("T"," "))
                 }
-                else if(key=='week_day') {
+                else if(key=='week_day' && value) {
                     this.$set(this.form, key, value.split(","))
                 }
                 else this.$set(this.form, key, value)
