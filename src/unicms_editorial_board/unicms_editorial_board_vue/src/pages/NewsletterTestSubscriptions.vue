@@ -18,6 +18,19 @@
             </router-link>
         </template>
 
+        <template #html="data">
+            <b-icon
+                icon="check-circle-fill"
+                variant="success"
+                v-if="data.data.value">
+            </b-icon>
+            <b-icon
+                icon="x-circle-fill"
+                variant="danger"
+                v-else>
+            </b-icon>
+        </template>
+
         <template #actions="item">
             <router-link :to="{ name: 'NewsletterTestSubscriptionEdit',
                             params: { newsletter_id: newsletter_id,

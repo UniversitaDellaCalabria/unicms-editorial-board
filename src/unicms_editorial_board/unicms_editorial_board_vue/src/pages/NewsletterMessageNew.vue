@@ -14,8 +14,6 @@
                                 :form="form"
                                 :submit="onSubmit"
                                 :form_source="form_source"
-                                :files="files"
-                                :add_modal_fields="add_modal_fields"
                                 :rich_text_fields="rich_text_fields" />
                         </b-card-text>
                     </b-card>
@@ -33,27 +31,23 @@ export default {
             newsletter_id: this.$route.params.newsletter_id,
             form: {'newsletter': parseInt(this.$route.params.newsletter_id)},
             form_source: '/api/editorial-board/newsletters/'+this.$route.params.newsletter_id+'/messages/form/',
-            add_modal_fields: {'banner': this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content', 'intro_text', 'footer_text'],
-            files: {}
         }
     },
     methods: {
-        updateMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.$set(this.files, 'banner', response.data.file);
-                })
-        },
         onSubmit(event) {
             this.$refs.form.loading = true;
             let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/';
             event.preventDefault();
+            const formData = new FormData();
+            for ( var key in this.form ) {
+                if(this.form[key]){
+                    formData.append(key, this.form[key]);
+                }
+            };
             this.axios
-                .post(source, this.form,
-                      {headers: {"X-CSRFToken": this.$csrftoken }}
+                .post(source, formData,
+                      {headers: {'X-CSRFToken': this.$csrftoken}}
                 )
                 .then(response => {
                     this.alerts.push(
@@ -78,10 +72,5 @@ export default {
                 })
         },
     },
-    watch: {
-        'form.banner': function(newVal, oldVal){
-            this.updateMedia(newVal)
-        },
-    }
 }
 </script>

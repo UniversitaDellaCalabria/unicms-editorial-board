@@ -104,7 +104,6 @@
                                 :submit="onSubmit"
                                 :form_source="form_source"
                                 :files="files"
-                                :add_modal_fields="add_modal_fields"
                                 :rich_text_fields="rich_text_fields" />
                         </b-card-text>
                     </b-card>
@@ -130,7 +129,6 @@ export default {
             sending: false,
             interval: null,
             check_sending: null,
-            add_modal_fields: {'banner':  this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content', 'intro_text', 'footer_text'],
             date_fields: ['date_start', 'date_end'],
         }
@@ -138,11 +136,7 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                if(key=='banner' && value) {
-                    this.$set(this.form, key, value.id)
-                    this.$set(this.files, 'banner', data.banner.file)
-                }
-                else if(key=='sending') {
+                if(key=='sending') {
                     this.sending = data.sending
                 }
                 else if(this.date_fields.includes(key) && value) {
@@ -154,13 +148,10 @@ export default {
                 }
                 else this.$set(this.form, key, value)
 
-                if(data.banner) {
-                    this.$refs.form.getOptionsFromParent('banner',
-                        [{"text": data.banner.title,
-                          "value": data.banner.id}])
-                }
-                this.preview = data.preview
+                this.preview = data.preview;
                 this.page_title = data.name;
+                this.$set(this.files, 'banner', data.banner);
+                this.$delete(this.form, 'banner');
             }
         },
         getItem() {
@@ -205,20 +196,18 @@ export default {
                     }, 2000)
                 })
         },
-        updateMedia(val) {
-            let source = '/api/editorial-board/medias/'+val+'/';
-            this.axios
-                .get(source)
-                .then(response => {
-                    this.files.banner = response.data.file
-                })
-        },
         onSubmit(event) {
             this.$refs.form.loading = true;
             let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/'+this.message_id+'/';
             event.preventDefault();
+            const formData = new FormData();
+            for ( var key in this.form ) {
+                if(this.form[key]){
+                    formData.append(key, this.form[key]);
+                }
+            };
             this.axios
-                .patch(source, this.form,
+                .patch(source, formData,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
@@ -229,6 +218,7 @@ export default {
                     )
                     this.page_title = response.data.name;
                     this.$refs.form.loading = false;
+                    this.$set(this.files, 'banner', response.data.banner);
                     }
                 )
                 .catch(error => {
@@ -345,11 +335,5 @@ export default {
         clearInterval(this.interval)
         clearInterval(this.check_sending)
     },
-    watch: {
-        'form.banner': function(newVal, oldVal){
-            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
-            if (!newVal) this.files.banner = ''
-        },
-    }
 }
 </script>

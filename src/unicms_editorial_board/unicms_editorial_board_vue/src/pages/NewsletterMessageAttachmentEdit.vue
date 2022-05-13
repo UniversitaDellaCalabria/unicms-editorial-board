@@ -59,6 +59,8 @@ export default {
             for (const [key, value] of Object.entries(data)) {
                 this.$set(this.form, key, value)
             }
+            this.$set(this.files, 'attachment', data.attachment);
+            this.$delete(this.form, 'attachment');
         },
         getItem() {
             let source = '/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/'+this.message_id+'/attachments/'+this.attachment_id+'/';
@@ -97,7 +99,9 @@ export default {
             event.preventDefault();
             const formData = new FormData();
             for ( var key in this.form ) {
-                formData.append(key, this.form[key]);
+                if(this.form[key]){
+                    formData.append(key, this.form[key]);
+                }
             };
             this.axios
                 .patch(source, formData,
@@ -110,6 +114,7 @@ export default {
                           dismissable: true }
                     )
                     this.page_title = response.data.email;
+                    this.$set(this.files, 'attachment', response.data.attachment);
                     this.$refs.form.loading = false;
                     }
                 )

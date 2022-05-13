@@ -109,7 +109,9 @@ export default {
             event.preventDefault();
             const formData = new FormData();
             for ( var key in this.form ) {
-                formData.append(key, this.form[key]);
+                if(this.form[key]){
+                    formData.append(key, this.form[key]);
+                }
             };
             this.axios
                 .patch(source, formData,
@@ -123,6 +125,7 @@ export default {
                           dismissable: true }
                     )
                     this.$refs.form.loading = false
+                    this.$set(this.files, 'file', response.data.file);
                     }
                 )
                 .catch(error => {
