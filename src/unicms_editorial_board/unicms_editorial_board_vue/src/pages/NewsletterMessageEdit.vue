@@ -205,9 +205,13 @@ export default {
                 if(this.form[key]){
                     formData.append(key, this.form[key]);
                 }
+                else if(this.form[key] == false){
+                    formData.append(key, this.form[key]);
+                }
+                else formData.append(key, '');
             };
             this.axios
-                .patch(source, formData,
+                .put(source, formData,
                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
