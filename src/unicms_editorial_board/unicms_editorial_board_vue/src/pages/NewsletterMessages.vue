@@ -23,6 +23,19 @@
             </b-icon>
         </template>
 
+        <template #discard_sent_news="data">
+            <b-icon
+                icon="check-circle-fill"
+                variant="success"
+                v-if="data.data.value">
+            </b-icon>
+            <b-icon
+                icon="x-circle-fill"
+                variant="danger"
+                v-else>
+            </b-icon>
+        </template>
+
         <template #sending="data">
             <b-icon icon="circle-fill"
                     animation="throb"
@@ -144,6 +157,7 @@ export default {
                 {key: 'date_start', label: 'Start'},
                 {key: 'date_end', label: 'End'},
                 {key: 'group_by_categories', label: 'Group by categories'},
+                {key: 'discard_sent_news', label: 'Discard sent news'},
                 {key: 'repeat_each', label: 'Repeat each'},
                 'template',
                 {key: 'is_active', label: 'Active'},

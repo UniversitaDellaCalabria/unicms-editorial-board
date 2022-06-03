@@ -52,12 +52,17 @@ export default {
             page_title: '',
             redis_alert: null,
             interval: null,
+            date_fields: ['news_from', 'news_to'],
         }
     },
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                this.$set(this.form, key, value)
+                if(this.date_fields.includes(key) && value) {
+                    this.$set(this.form, key,
+                              value.substr(0,16).replace("T"," "))
+                }
+                else this.$set(this.form, key, value)
             }
 
             this.$refs.form.getOptionsFromParent('webpath',

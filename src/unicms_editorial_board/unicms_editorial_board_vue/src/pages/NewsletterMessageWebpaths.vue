@@ -1,6 +1,7 @@
 <template>
     <CompleteTable
         :api_source="api_source"
+        :dates="dates"
         :fields="fields"
         :files="files"
         :ordering="ordering"
@@ -48,13 +49,18 @@ export default {
             fields: [
                 'id',
                 {key: 'webpath_data', label: 'Webpath'},
+                {key: 'news_from', label: 'News from'},
+                {key: 'news_to', label: 'News to'},
                 'order',
                 {key: 'is_active', label: 'Active'},
                 'actions'
             ],
+            dates: ['news_from', 'news_to'],
             ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Webpath', value: 'webpath_data' },
+                            { text: 'News from', value: 'news_from' },
+                            { text: 'News to', value: 'news_to' },
                             { text: 'Order', value: 'order' },
                             { text: 'State', value: 'is_active'}],
             page_title: 'Newsletter message webpaths'

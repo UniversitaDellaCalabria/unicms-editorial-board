@@ -102,6 +102,10 @@
                                     <slot name="group_by_categories" :data="data"></slot>
                                 </template>
 
+                                <template #cell(discard_sent_news)="data">
+                                    <slot name="discard_sent_news" :data="data"></slot>
+                                </template>
+
                                 <template #cell(sending)="data">
                                     <slot name="sending" :data="data"></slot>
                                 </template>
