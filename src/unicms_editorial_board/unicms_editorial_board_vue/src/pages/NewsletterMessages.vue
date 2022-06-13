@@ -61,6 +61,31 @@
             </b-icon>
         </template>
 
+        <template #sending_test="data">
+            <b-icon icon="circle-fill"
+                    animation="throb"
+                    variant="success"
+                    v-if="data.data.value">
+            </b-icon>
+            <b-icon
+                icon="x-circle-fill"
+                variant="danger"
+                v-else>
+            </b-icon>
+        </template>
+
+        <template #queued_test="data">
+            <b-icon icon="clock-fill"
+                    variant="warning"
+                    v-if="data.data.value">
+            </b-icon>
+            <b-icon
+                icon="clock-fill"
+                variant="danger"
+                v-else>
+            </b-icon>
+        </template>
+
         <template #add_new>
             <router-link :to="{ name: 'NewsletterMessageNew',
                                 params: { newsletter_id: newsletter_id }}"
@@ -168,13 +193,11 @@ export default {
                 'name',
                 {key: 'date_start', label: 'Start'},
                 {key: 'date_end', label: 'End'},
-                {key: 'group_by_categories', label: 'Group by categories'},
-                {key: 'discard_sent_news', label: 'Discard sent news'},
-                {key: 'repeat_each', label: 'Repeat each'},
-                'template',
                 {key: 'is_active', label: 'Active'},
                 {key: 'queued'},
+                {key: 'queued_test', label: 'Queued TEST'},
                 {key: 'sending'},
+                {key: 'sending_test', label: 'Sending TEST'},
                 { key: 'childs', label: 'Related'},
                 'actions'
             ],
@@ -184,7 +207,6 @@ export default {
                             { text: 'Name', value: 'name' },
                             { text: 'Start', value: 'date_start' },
                             { text: 'End', value: 'date_end' },
-                            { text: 'Group by categories', value: 'group_by_categories' },
                             { text: 'State', value: 'is_active'}],
             page_title: 'Newsletter messages',
             check_interval: null

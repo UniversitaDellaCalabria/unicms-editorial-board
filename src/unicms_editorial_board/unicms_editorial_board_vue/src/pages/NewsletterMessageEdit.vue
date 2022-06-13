@@ -92,9 +92,22 @@
 
                         <b-card-title>
                             {{ page_title }}
-                            <span v-if="sending">
-                                (sending: <b-icon icon="circle-fill" animation="throb" variant="success"></b-icon>)
-                            </span>
+                            <small v-if="queued">
+                                <br>
+                                - queued: <b-icon icon="clock-fill" variant="warning"></b-icon>
+                            </small>
+                            <small v-if="queued_test">
+                                <br>
+                                - test queued: <b-icon icon="clock-fill" variant="warning"></b-icon>
+                            </small>
+                            <small v-if="sending">
+                                <br>
+                                - sending: <b-icon icon="circle-fill" animation="throb" variant="success"></b-icon>
+                            </small>
+                            <small v-if="sending_test">
+                                <br>
+                                - test sending: <b-icon icon="circle-fill" animation="throb" variant="success"></b-icon>
+                            </small>
                         </b-card-title>
 
                         <b-card-text>
@@ -127,8 +140,11 @@ export default {
             preview: '',
             redis_alert: null,
             sending: false,
+            sending_test: false,
+            queued: false,
+            queued_test: false,
             interval: null,
-            check_sending: null,
+            check_status: null,
             rich_text_fields: ['content', 'intro_text', 'footer_text'],
             date_fields: ['date_start', 'date_end'],
         }
@@ -186,14 +202,18 @@ export default {
                     }, this.$redis_ttl)
                     // end concurrency management
 
-                    this.check_sending = setInterval(() => {
+                    this.check_status = setInterval(() => {
                         this.axios
                             .get(source)
                             .then(new_response => {
+                                this.queued = new_response.data.queued
+                                this.queued_test = new_response.data.queued_test
                                 this.sending = new_response.data.sending
+                                this.sending_test = new_response.data.sending_test
                             }
                         )
                     }, 2000)
+
                 })
         },
         onSubmit(event) {
@@ -276,13 +296,6 @@ export default {
             })
         },
         send(id, test=1){
-
-            let message = 'Send completed successfully'
-
-            if(test==1) {
-                message = 'Test send completed successfully'
-            }
-
             this.axios
                 .post('/api/editorial-board/newsletters/'+this.newsletter_id+'/messages/'+this.message_id+'/send/',
                       {"test": test},
@@ -291,7 +304,7 @@ export default {
                 .then(response => {
                     this.alerts.push(
                         { variant: 'success',
-                          message: message,
+                          message: response.data,
                           dismissable: true }
                     );
                     this.$router.push({name: 'NewsletterMessageEdit',
@@ -337,7 +350,7 @@ export default {
     },
     beforeDestroy() {
         clearInterval(this.interval)
-        clearInterval(this.check_sending)
+        clearInterval(this.check_status)
     },
 }
 </script>

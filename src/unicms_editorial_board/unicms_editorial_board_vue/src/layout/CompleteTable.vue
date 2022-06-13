@@ -114,6 +114,14 @@
                                     <slot name="queued" :data="data"></slot>
                                 </template>
 
+                                <template #cell(sending_test)="data">
+                                    <slot name="sending_test" :data="data"></slot>
+                                </template>
+
+                                <template #cell(queued_test)="data">
+                                    <slot name="queued_test" :data="data"></slot>
+                                </template>
+
                                 <template #cell(attachment)="data">
                                     <slot name="attachment" :data="data"></slot>
                                 </template>
