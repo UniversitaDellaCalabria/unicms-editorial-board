@@ -110,6 +110,10 @@
                                     <slot name="sending" :data="data"></slot>
                                 </template>
 
+                                <template #cell(queued)="data">
+                                    <slot name="queued" :data="data"></slot>
+                                </template>
+
                                 <template #cell(attachment)="data">
                                     <slot name="attachment" :data="data"></slot>
                                 </template>

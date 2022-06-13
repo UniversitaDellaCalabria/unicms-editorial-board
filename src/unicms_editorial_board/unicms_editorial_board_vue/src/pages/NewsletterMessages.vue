@@ -49,6 +49,18 @@
             </b-icon>
         </template>
 
+        <template #queued="data">
+            <b-icon icon="clock-fill"
+                    variant="warning"
+                    v-if="data.data.value">
+            </b-icon>
+            <b-icon
+                icon="clock-fill"
+                variant="danger"
+                v-else>
+            </b-icon>
+        </template>
+
         <template #add_new>
             <router-link :to="{ name: 'NewsletterMessageNew',
                                 params: { newsletter_id: newsletter_id }}"
@@ -161,7 +173,8 @@ export default {
                 {key: 'repeat_each', label: 'Repeat each'},
                 'template',
                 {key: 'is_active', label: 'Active'},
-                {key: 'sending', label: 'Sending'},
+                {key: 'queued'},
+                {key: 'sending'},
                 { key: 'childs', label: 'Related'},
                 'actions'
             ],
@@ -179,13 +192,6 @@ export default {
     },
     methods: {
         send(id, test=1){
-
-            let message = 'Send completed successfully'
-
-            if(test==1) {
-                message = 'Test send completed successfully'
-            }
-
             this.axios
                 .post(this.api_source+id+'/send/',
                       {"test": test},
@@ -194,7 +200,7 @@ export default {
                 .then(response => {
                     this.$refs.completeTable.alerts.push(
                         { variant: 'success',
-                          message: message,
+                          message: response.data,
                           dismissable: true }
                     );
                     this.$router.push({name: 'NewsletterMessages',
