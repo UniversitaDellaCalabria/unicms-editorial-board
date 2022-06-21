@@ -41,9 +41,10 @@ export default {
             event.preventDefault();
             const formData = new FormData();
             for ( var key in this.form ) {
-                if(this.form[key]){
+                if(this.form[key] || this.form[key] == false){
                     formData.append(key, this.form[key]);
                 }
+                else formData.append(key, '');
             };
             this.axios
                 .post(source, formData,

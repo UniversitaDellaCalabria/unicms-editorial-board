@@ -140,8 +140,8 @@ export default {
             let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/';
             event.preventDefault();
             this.axios
-                .put(source, this.form,
-                      {headers: {"X-CSRFToken": this.$csrftoken }}
+                .patch(source, this.form,
+                       {headers: {"X-CSRFToken": this.$csrftoken }}
                 )
                 .then(response => {
                     this.alerts.push(
