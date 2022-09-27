@@ -18,7 +18,17 @@
             </router-link>
         </template>
 
-         <template #custom_filter>
+        <template #static_path="data">
+            <a :href="data.data.value"
+                :title="data.data.value">
+                <b-icon
+                    icon="link45deg"
+                    style="cursor: pointer">
+                </b-icon>
+            </a>
+        </template>
+
+        <template #custom_filter>
             <div class="col col-12 col-sm">
                 <b-input-group>
                     <b-form-select
@@ -79,6 +89,7 @@ export default {
                 {key: 'file_type', label: 'Type'},
                 {key: 'file_size', label: 'Size (kb)'},
                 {key: 'file_dimensions', label: 'Dimensions'},
+                {key: 'static_path', label: 'Static path'},
                 'actions'
             ],
             files: ['file'],

@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "9b6889df7259853af14a",
+    "revision": "4d773f4a51903aa39f65",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "9b6889df7259853af14a",
-    "url": "/static/unicms_editorial_board_vue/js/app.13ae0c62.js"
+    "revision": "4d773f4a51903aa39f65",
+    "url": "/static/unicms_editorial_board_vue/js/app.0f3755c4.js"
   },
   {
     "revision": "af86e992e58d501ffb70",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.c5c8c299.js"
   },
   {
-    "revision": "e7a85e6b78a42f7dbeb6b87b0dc3813d",
+    "revision": "7b9d3323a0ba87c6ff5037115e8faeff",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -32,6 +32,10 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
   },
@@ -42,10 +46,6 @@ self.__precacheManifest = [
   {
     "revision": "0e953b1ea6d6e3addd7210e9c7c420a7",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-2.jpg"
-  },
-  {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "ce7a6b79aa55041f7ae36f6ce22231fe",
@@ -104,12 +104,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
-    "revision": "44bf13a71a4db6e15913fe8af9296711",
-    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
-  },
-  {
     "revision": "9ebea76ee1225f00d882b21547a7b49f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
+  },
+  {
+    "revision": "44bf13a71a4db6e15913fe8af9296711",
+    "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",

@@ -134,6 +134,10 @@
                                     <slot name="html_file" :data="data"></slot>
                                 </template>
 
+                                <template #cell(static_path)="data">
+                                    <slot name="static_path" :data="data"></slot>
+                                </template>
+
                                 <template #cell(is_active)="data">
                                     <slot name="activation" :data="data">
                                         <b-icon icon="check-circle-fill"

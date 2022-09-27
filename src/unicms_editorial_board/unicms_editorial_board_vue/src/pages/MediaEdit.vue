@@ -31,6 +31,12 @@
                         </div>
                         <b-card-title>{{ page_title }}</b-card-title>
 
+                        <p>
+                            <a :href="page_subtitle" target="_blank">
+                                {{ page_subtitle }}
+                            </a>
+                        </p>
+
                         <b-card-text>
                             <django-form
                                 ref="form"
@@ -56,6 +62,7 @@ export default {
             form_source: '/api/editorial-board/medias/form/',
             files: {},
             page_title: '',
+            page_subtitle: '',
             redis_alert: null,
             interval: null,
         }
@@ -66,6 +73,7 @@ export default {
                 this.$set(this.form, key, value)
             }
             this.page_title = data.title
+            this.page_subtitle = data.static_path
             this.$set(this.files, 'file', data.file);
             this.$delete(this.form, 'file');
         },
