@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "4d773f4a51903aa39f65",
+    "revision": "74156b4978a2348ec6e7",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "4d773f4a51903aa39f65",
-    "url": "/static/unicms_editorial_board_vue/js/app.0f3755c4.js"
+    "revision": "74156b4978a2348ec6e7",
+    "url": "/static/unicms_editorial_board_vue/js/app.e05be002.js"
   },
   {
     "revision": "af86e992e58d501ffb70",
@@ -16,16 +16,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.c5c8c299.js"
   },
   {
-    "revision": "7b9d3323a0ba87c6ff5037115e8faeff",
+    "revision": "7480a9e7288036826a3d14063ac95532",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "/static/unicms_editorial_board_vue/.gitkeep"
-  },
-  {
-    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
-    "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
     "revision": "a9615bac158705203261e8348f574cc8",
@@ -34,6 +30,10 @@ self.__precacheManifest = [
   {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
+    "revision": "996d8248f580f8e26e6c45c67da9b5a6",
+    "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
     "revision": "a9615bac158705203261e8348f574cc8",
@@ -104,10 +104,6 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
-    "revision": "9ebea76ee1225f00d882b21547a7b49f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
-  },
-  {
     "revision": "44bf13a71a4db6e15913fe8af9296711",
     "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
   },
@@ -118,5 +114,9 @@ self.__precacheManifest = [
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/static/unicms_editorial_board_vue/robots.txt"
+  },
+  {
+    "revision": "9ebea76ee1225f00d882b21547a7b49f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   }
 ];

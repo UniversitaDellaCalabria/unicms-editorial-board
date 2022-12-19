@@ -1,6 +1,7 @@
 <template>
     <CompleteTable
         :api_source="api_source"
+        :dates="dates"
         :fields="fields"
         :files="files"
         :ordering="ordering"
@@ -65,8 +66,9 @@ export default {
                 'id',
                 {key: 'image', thClass: 'w-25'},
                 {key: 'mobile_image', thClass: 'w-25'},
-                'pre_heading',
                 'heading',
+                {key: 'date_start', label: 'Date start'},
+                {key: 'date_end', label: 'Date end'},
                 'order',
                 {key: 'is_active', label: 'Active'},
                 {key: 'childs', label: 'Related'},
@@ -75,10 +77,10 @@ export default {
             files: ['image', 'mobile_image'],
             ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
-                            { text: 'Pre-Heading', value: 'pre_heading' },
                             { text: 'Heading', value: 'heading' },
                             { text: 'Order', value: 'order' },
                             { text: 'State', value: 'is_active'}],
+            dates: ['date_start', 'date_end'],
             page_title: 'Carousel items'
         }
     }

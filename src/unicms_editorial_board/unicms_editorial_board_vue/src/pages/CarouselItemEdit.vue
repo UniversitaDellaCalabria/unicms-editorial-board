@@ -77,6 +77,7 @@ export default {
             add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
                                'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
             files: {},
+            date_fields: ['date_start', 'date_end'],
             page_title: '',
             redis_alert: null,
             interval: null,
