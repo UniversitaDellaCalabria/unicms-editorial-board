@@ -94,6 +94,10 @@ export default {
                     this.$set(this.form, key, value.id)
                     this.$set(this.files, 'mobile_image', data.mobile_image.file)
                 }
+                else if(this.date_fields.includes(key) && value) {
+                    this.$set(this.form, key,
+                              value.substr(0,16).replace("T"," "))
+                }
                 else this.$set(this.form, key, value)
             }
 
