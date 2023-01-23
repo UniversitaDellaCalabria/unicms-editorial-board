@@ -37,6 +37,13 @@
                                             variant="white"></b-icon>
                                        Manage
                                     </router-link>
+                                    <a :href="'//'+data.item.domain"
+                                       target="_blank"
+                                       class="btn mr-1 btn-sm btn-success">
+                                        <b-icon icon="link45deg"
+                                            variant="white"></b-icon>
+                                       Open URL
+                                    </a>
                                 </template>
 
                             </b-table>

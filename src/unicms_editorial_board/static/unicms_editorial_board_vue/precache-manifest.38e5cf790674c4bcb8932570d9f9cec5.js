@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "161efec8610f24facfaf",
+    "revision": "4b7ef19cee2f59221c8d",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "161efec8610f24facfaf",
-    "url": "/static/unicms_editorial_board_vue/js/app.f96155da.js"
+    "revision": "4b7ef19cee2f59221c8d",
+    "url": "/static/unicms_editorial_board_vue/js/app.1e8c0273.js"
   },
   {
     "revision": "af86e992e58d501ffb70",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.c5c8c299.js"
   },
   {
-    "revision": "99a93d9c2b4c1f0ce75d861ea6efe8f0",
+    "revision": "35e4031e1e1fe46b625b6c004e61b8ae",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
@@ -28,12 +28,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/favicon.png"
   },
   {
-    "revision": "a9615bac158705203261e8348f574cc8",
-    "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
-  },
-  {
     "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
     "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
+  },
+  {
+    "revision": "a9615bac158705203261e8348f574cc8",
+    "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
     "revision": "a9615bac158705203261e8348f574cc8",
@@ -100,16 +100,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-3.jpg"
   },
   {
-    "revision": "897b4cf909210560a84398d36da51983",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
-  },
-  {
     "revision": "9ebea76ee1225f00d882b21547a7b49f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   },
   {
     "revision": "44bf13a71a4db6e15913fe8af9296711",
     "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
+  },
+  {
+    "revision": "897b4cf909210560a84398d36da51983",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",
