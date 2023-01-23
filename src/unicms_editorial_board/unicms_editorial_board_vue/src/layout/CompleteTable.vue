@@ -163,7 +163,8 @@
                                         class="btn-block"
                                         size="sm"
                                         @click="deleteModal(data.item)"
-                                        variant="danger">
+                                        variant="danger"
+                                        v-if="allow_delete">
                                         <b-icon icon="trash"
                                             variant="white"></b-icon>
                                         Delete
@@ -236,6 +237,10 @@ export default {
         OrderingFilter
     },
     props: {
+        allow_delete: {
+            type: Boolean,
+            default: true
+        },
         api_source: { type: String },
         arrays: { type: Array },
         arrays_map: { type: Array },

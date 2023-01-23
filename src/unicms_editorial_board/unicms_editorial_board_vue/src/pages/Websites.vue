@@ -2,33 +2,59 @@
     <div class="content">
         <div class="container-fluid">
             <Breadcrumbs/>
+
+            <stacked-alerts :alerts="alerts" />
+
             <div class="row">
-                <div class="col-md-12">
-                    <b-card title="My active WebSites">
-                        <b-card-text class="mt-4">
-                            <div class="all-icons">
-                                <div class="row websites-cards">
-                                    <div class="col-lg-3 col-md-6 col-sm-12 mb-3" v-for="item in items">
-                                        <b-card>
-                                            <b-card-text>
-                                                <h4 class="mt-2 mb-3">
-                                                    <b-icon icon="globe" scale="0.8"></b-icon>
-                                                    {{ item.name }}
-                                                </h4>
-                                                <hr>
-                                                <p class="mt-3">{{ item.domain }}</p>
-                                            </b-card-text>
-                                            <template #footer>
-                                                <router-link :to="{ name: 'Webpaths',
-                                                                    params: { site_id: item.id }}"
-                                                    class="btn btn-info">
-                                                    Manage
-                                                </router-link>
-                                            </template>
-                                        </b-card>
+                <div class="col-12">
+                    <b-card>
+                        <b-card-title>{{ page_title }}</b-card-title>
+                        <b-card-text>
+
+                            <b-table
+                                ref="table"
+                                id="my-table"
+                                striped hover responsive
+                                :busy="isBusy"
+                                :fields="fields"
+                                :items="items">
+
+                                <template #table-busy>
+                                    <div class="text-center text-danger my-2">
+                                        <b-spinner
+                                            small
+                                            class="align-middle mr-3"
+                                            type="grow"></b-spinner>
+                                        <strong>loading data...</strong>
                                     </div>
-                                </div>
-                            </div>
+                                </template>
+
+                                <template #cell(actions)="data">
+                                    <router-link :to="{ name: 'Webpaths',
+                                                        params: { site_id: data.item.id }}"
+                                        class="btn mr-1 btn-sm btn-info">
+                                        <b-icon icon="pencil-square"
+                                            variant="white"></b-icon>
+                                       Manage
+                                    </router-link>
+                                </template>
+
+                            </b-table>
+
+                            <b-button
+                                variant="outline-secondary"
+                                v-if="prev"
+                                @click="callApi(prev)"
+                                class="float-left">
+                                Previous page
+                            </b-button>
+                            <b-button
+                                variant="outline-secondary"
+                                v-if="next"
+                                @click="callApi(next)"
+                                class="float-right">
+                                Next page
+                            </b-button>
                         </b-card-text>
                     </b-card>
                 </div>
@@ -39,16 +65,32 @@
 <script>
 export default {
     data () {
-      return {
-        items: []
-      }
+        return {
+            alerts: this.$route.params.alerts || [],
+            fields: [
+                'id',
+                'name',
+                'domain',
+                'actions'
+            ],
+            filter: null,
+            filterOn: [],
+            isBusy: true,
+            items: [],
+            page_title: 'Websites',
+        }
     },
     methods: {
-        callApi() {
+        callApi(url) {
+            let source = '/api/editorial-board/sites/';
+            if (url) source = url;
             this.axios
-                .get('/api/editorial-board/sites/')
-                .then(response => this.items = response.data.results)
-        }
+                .get(source)
+                .then(response => {
+                    this.isBusy = false
+                    this.items = response.data.results
+                })
+        },
     },
     mounted() {
         this.callApi();
