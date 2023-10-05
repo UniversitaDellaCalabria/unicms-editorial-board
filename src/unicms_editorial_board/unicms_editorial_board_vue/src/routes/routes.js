@@ -139,6 +139,10 @@ import NewsletterMessageWebpaths from 'src/pages/NewsletterMessageWebpaths.vue'
 import NewsletterMessageWebpathEdit from 'src/pages/NewsletterMessageWebpathEdit.vue'
 import NewsletterMessageWebpathNew from 'src/pages/NewsletterMessageWebpathNew.vue'
 
+import NewsletterMessageCalendars from 'src/pages/NewsletterMessageCalendars.vue'
+import NewsletterMessageCalendarEdit from 'src/pages/NewsletterMessageCalendarEdit.vue'
+import NewsletterMessageCalendarNew from 'src/pages/NewsletterMessageCalendarNew.vue'
+
 import NewsletterMessageSendings from 'src/pages/NewsletterMessageSendings.vue'
 
 import Publications from 'src/pages/Publications.vue'
@@ -2926,6 +2930,43 @@ const routes = [
                 return {
                     label: this.$route.params.webpath_id.toString(),
                     parent: 'NewsletterMessageWebpaths'
+                }
+            }
+        },
+    },
+
+    // newsletter message calendars
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/calendars',
+        name: 'NewsletterMessageCalendars',
+        component: NewsletterMessageCalendars,
+        meta: {
+            breadcrumb: {
+                label: 'Calendars',
+                parent: 'NewsletterMessageEdit'
+            }
+        }
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/calendars/new',
+        name: 'NewsletterMessageCalendarNew',
+        component: NewsletterMessageCalendarNew,
+        meta: {
+            breadcrumb: {
+                label: 'New',
+                parent: 'NewsletterMessageCalendars'
+            }
+        },
+    },
+    {
+        path: 'newsletters/:newsletter_id/messages/:message_id/calendars/:calendar_id/edit',
+        name: 'NewsletterMessageCalendarEdit',
+        component: NewsletterMessageCalendarEdit,
+        meta: {
+            breadcrumb() {
+                return {
+                    label: this.$route.params.calendar_id.toString(),
+                    parent: 'NewsletterMessageCalendars'
                 }
             }
         },

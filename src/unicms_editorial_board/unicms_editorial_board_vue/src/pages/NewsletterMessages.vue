@@ -105,6 +105,14 @@
                     variant="secondary"></b-icon>
                 Attachments
             </router-link>
+            <router-link :to="{ name: 'NewsletterMessageCalendars',
+                                params: { newsletter_id: newsletter_id,
+                                          message_id: item.item.id }}"
+                class="btn btn-block btn-sm btn-outline-secondary">
+                <b-icon icon="calendar2-date"
+                    variant="secondary"></b-icon>
+                Calendars
+            </router-link>
             <router-link :to="{ name: 'NewsletterMessageCategories',
                                 params: { newsletter_id: newsletter_id,
                                           message_id: item.item.id }}"
@@ -137,7 +145,7 @@
                     variant="secondary"></b-icon>
                 Sendings
             </router-link>
-             <router-link :to="{ name: 'NewsletterMessageWebpaths',
+            <router-link :to="{ name: 'NewsletterMessageWebpaths',
                                 params: { newsletter_id: newsletter_id,
                                           message_id: item.item.id }}"
                 class="btn btn-block btn-sm btn-outline-secondary">

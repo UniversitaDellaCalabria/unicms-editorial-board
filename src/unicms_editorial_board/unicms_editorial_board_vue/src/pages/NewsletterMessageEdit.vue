@@ -47,6 +47,14 @@
                                     variant="secondary"></b-icon>
                                 Attachments
                             </router-link>
+                            <router-link :to="{ name: 'NewsletterMessageCalendars',
+                                                params: { newsletter_id: newsletter_id,
+                                                          message_id: message_id }}"
+                                                class="btn btn-sm btn-outline-secondary mx-md-1">
+                                <b-icon icon="calendar2-date"
+                                    variant="secondary"></b-icon>
+                                Calendars
+                            </router-link>
                             <router-link :to="{ name: 'NewsletterMessageCategories',
                                                 params: { newsletter_id: newsletter_id,
                                                           message_id: message_id }}"
