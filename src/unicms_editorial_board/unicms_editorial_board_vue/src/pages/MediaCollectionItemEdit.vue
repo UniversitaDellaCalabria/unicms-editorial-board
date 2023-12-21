@@ -67,7 +67,7 @@ export default {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
                 if(key=='media' && value) {
-                    this.form.media = data.media.id;
+                    this.$set(this.form, key, value.id)
                     this.$set(this.files, 'media', data.media.file);
                 }
                 else this.$set(this.form, key, value)

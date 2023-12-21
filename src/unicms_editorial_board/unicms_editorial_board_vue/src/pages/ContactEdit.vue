@@ -82,7 +82,7 @@ export default {
             for (const [key, value] of Object.entries(data)) {
 
                 if(key=='image' && value) {
-                    this.form.image = data.image.id;
+                    this.$set(this.form, key, value.id)
                     this.$set(this.files, 'image', data.image.file);
                 }
                 else this.$set(this.form, key, value)
@@ -131,7 +131,7 @@ export default {
             this.axios
                 .get(source)
                 .then(response => {
-                    this.files.image = response.data.file
+                    this.$set(this.files, 'image', response.data.file);
                 })
         },
         onSubmit(event) {
