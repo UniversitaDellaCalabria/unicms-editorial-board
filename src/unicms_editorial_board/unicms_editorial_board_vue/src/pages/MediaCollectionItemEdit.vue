@@ -116,7 +116,7 @@ export default {
             this.axios
                 .get(source)
                 .then(response => {
-                    this.files.media = response.data.file
+                    this.$set(this.files, 'media', response.data.file);
                 })
         },
         onSubmit(event) {
