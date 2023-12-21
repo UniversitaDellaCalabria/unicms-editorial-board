@@ -34,7 +34,7 @@ export default {
             form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/form/',
             add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
                                'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
-            files: {}
+            files: {'image': '', 'mobile_image': ''}
         }
     },
     methods: {

@@ -34,7 +34,7 @@ export default {
             alerts: [],
             form: {},
             form_source: '/api/editorial-board/publications/form/',
-            files: {},
+            files: {'presentation_image': '', 'preview_image': ''},
             add_modal_fields: {'presentation_image': this.$router.resolve({name: 'MediaNew'}).href,
                                'preview_image': this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content'],

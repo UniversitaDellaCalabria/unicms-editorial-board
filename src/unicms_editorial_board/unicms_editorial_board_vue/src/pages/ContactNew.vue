@@ -29,7 +29,7 @@ export default {
     data() {
         return {
             alerts: [],
-            files: {},
+            files: {'image': ''},
             form: {},
             form_source: '/api/editorial-board/contacts/form/',
             add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href},

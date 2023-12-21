@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "5d021a8497bcc01efb17",
+    "revision": "6e65ffa716fb047a74c3",
     "url": "/static/unicms_editorial_board_vue/css/app.bca404fa.css"
   },
   {
-    "revision": "5d021a8497bcc01efb17",
-    "url": "/static/unicms_editorial_board_vue/js/app.2e3c148c.js"
+    "revision": "6e65ffa716fb047a74c3",
+    "url": "/static/unicms_editorial_board_vue/js/app.a2ba143e.js"
   },
   {
     "revision": "af86e992e58d501ffb70",
@@ -16,16 +16,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/js/chunk-vendors.c5c8c299.js"
   },
   {
-    "revision": "733982f1bb5d66f40bcef305c4d812c1",
+    "revision": "d1189374b714f9641fde8b515139eca2",
     "url": "/static/unicms_editorial_board_vue/index.html"
   },
   {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "/static/unicms_editorial_board_vue/.gitkeep"
-  },
-  {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "996d8248f580f8e26e6c45c67da9b5a6",
@@ -38,6 +34,10 @@ self.__precacheManifest = [
   {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
+  },
+  {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/new_logo.png"
   },
   {
-    "revision": "6be21e8a1b7d63048728851c6003e189",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
-  },
-  {
     "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
+  },
+  {
+    "revision": "6be21e8a1b7d63048728851c6003e189",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
   },
   {
     "revision": "cd253e23ed052deeb80b42d2ed772183",
@@ -104,12 +104,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/sidebar-4.jpg"
   },
   {
-    "revision": "9ebea76ee1225f00d882b21547a7b49f",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
-  },
-  {
     "revision": "44bf13a71a4db6e15913fe8af9296711",
     "url": "/static/unicms_editorial_board_vue/img/tim_80x80.png"
+  },
+  {
+    "revision": "9ebea76ee1225f00d882b21547a7b49f",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-5.jpg"
   },
   {
     "revision": "c2a605fbc0e687b2e1b4b90a7c445cdd",

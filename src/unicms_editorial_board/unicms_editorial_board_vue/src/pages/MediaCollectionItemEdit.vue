@@ -57,7 +57,7 @@ export default {
             form: {},
             form_source: '/api/editorial-board/media-collections/'+this.$route.params.collection_id+'/items/form/',
             add_modal_fields: {'media':  this.$router.resolve({name: 'MediaNew'}).href},
-            files: {},
+            files: {'media': ''},
             page_title: '',
             redis_alert: null,
             interval: null,

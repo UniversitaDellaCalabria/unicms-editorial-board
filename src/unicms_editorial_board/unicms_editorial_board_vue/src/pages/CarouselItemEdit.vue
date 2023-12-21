@@ -76,7 +76,7 @@ export default {
             form_source: '/api/editorial-board/carousels/items/form/',
             add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
                                'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
-            files: {},
+            files: {'image': '', 'mobile_image': ''},
             date_fields: ['date_start', 'date_end'],
             page_title: '',
             redis_alert: null,

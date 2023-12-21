@@ -33,7 +33,7 @@ export default {
             webpath_id: this.$route.params.webpath_id,
             page_id: this.$route.params.page_id,
             form: {'page': parseInt(this.$route.params.page_id)},
-            files: {},
+            files: {'media': ''},
             form_source: '/api/editorial-board/sites/'+this.$route.params.site_id+'/webpaths/'+this.$route.params.webpath_id+'/pages/'+this.$route.params.page_id+'/medias/form/',
             add_modal_fields: {'media':  this.$router.resolve({name: 'MediaNew'}).href},
         }

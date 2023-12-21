@@ -127,7 +127,7 @@ export default {
             publication_id: this.$route.params.publication_id,
             form: {},
             form_source: '/api/editorial-board/publications/edit-form/',
-            files: {},
+            files: {'presentation_image': '', 'preview_image': ''},
             add_modal_fields: {'presentation_image':  this.$router.resolve({name: 'MediaNew'}).href,
                                'preview_image':  this.$router.resolve({name: 'MediaNew'}).href},
             rich_text_fields: ['content'],
