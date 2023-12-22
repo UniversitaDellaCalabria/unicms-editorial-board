@@ -107,7 +107,7 @@ export default {
         },
         onSubmit(event) {
             this.$refs.form.loading = true;
-            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/headings/'+this.heading_id+'/localization/'+this.localization_id+'/';
+            let source = '/api/editorial-board/sites/'+this.site_id+'/webpaths/'+this.webpath_id+'/pages/'+this.page_id+'/headings/'+this.heading_id+'/localizations/'+this.localization_id+'/';
             event.preventDefault();
             this.axios
                 .patch(source, this.form,
