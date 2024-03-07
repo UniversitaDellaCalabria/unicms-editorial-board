@@ -32,12 +32,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/default-avatar.png"
   },
   {
-    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
-    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
-  },
-  {
     "revision": "a9615bac158705203261e8348f574cc8",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-0.jpg"
+  },
+  {
+    "revision": "be74132f42ae1d3502f9a9b9fff68ac1",
+    "url": "/static/unicms_editorial_board_vue/Dashboard.PNG"
   },
   {
     "revision": "99e58416b89637502b40ac8350eed85a",
@@ -52,10 +52,6 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/faces/face-3.jpg"
   },
   {
-    "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
-  },
-  {
     "revision": "4ab22eca4053c14a34e4bdb6390deae9",
     "url": "/static/unicms_editorial_board_vue/img/faces/face-5.jpg"
   },
@@ -64,12 +60,16 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/faces/face-6.jpg"
   },
   {
-    "revision": "bf1684a30a86ba1b222aab3acff16356",
-    "url": "/static/unicms_editorial_board_vue/img/faces/face-7.jpg"
-  },
-  {
     "revision": "43b98081492ac3bcb4a1fac6cf709403",
     "url": "/static/unicms_editorial_board_vue/img/faces/tim_vector.jpe"
+  },
+  {
+    "revision": "0b68eb8f1cde1fc9987a9196df05b96a",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-4.jpg"
+  },
+  {
+    "revision": "bf1684a30a86ba1b222aab3acff16356",
+    "url": "/static/unicms_editorial_board_vue/img/faces/face-7.jpg"
   },
   {
     "revision": "996d8248f580f8e26e6c45c67da9b5a6",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/unicms_editorial_board_vue/img/new_logo.png"
   },
   {
-    "revision": "6be21e8a1b7d63048728851c6003e189",
-    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
-  },
-  {
     "revision": "7a4ce7cc040fc1cb8176cde106e9232f",
     "url": "/static/unicms_editorial_board_vue/img/sidebar-2.jpg"
+  },
+  {
+    "revision": "6be21e8a1b7d63048728851c6003e189",
+    "url": "/static/unicms_editorial_board_vue/img/sidebar-1.jpg"
   },
   {
     "revision": "cd253e23ed052deeb80b42d2ed772183",
