@@ -43,10 +43,10 @@ export default {
             fields: [
                 'id',
                 'user',,
-                {key: 'lock.locked_time', label: 'Lock date'},
+                {key: 'created', label: 'Lock date'},
                 'actions'
             ],
-            dates: ['lock.locked_time'],
+            dates: ['created'],
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'User', value: 'user' }],
             page_title: 'Menu locks'
