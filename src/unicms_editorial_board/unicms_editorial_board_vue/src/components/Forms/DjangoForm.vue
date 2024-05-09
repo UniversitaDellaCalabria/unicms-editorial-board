@@ -162,7 +162,6 @@
 </template>
 <script>
 import CKEditor from '@ckeditor/ckeditor5-vue2'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import datetime from 'vuejs-datetimepicker';
 
 export default {
