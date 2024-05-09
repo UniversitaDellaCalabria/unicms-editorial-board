@@ -26,5 +26,5 @@ def board_base(request):
         if main_domain != current_site:
             raise Http404(_("Access this path from main domain {}".format(main_domain)))
 
-    template = "board_base.html"
+    template = "board.html"
     return render(request, template)

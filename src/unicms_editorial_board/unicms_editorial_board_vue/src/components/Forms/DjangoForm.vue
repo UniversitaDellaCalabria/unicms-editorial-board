@@ -187,7 +187,11 @@ export default {
             options: {},
             selected: {},
             editor: ClassicEditor,
+            alignment: {
+                options: ['left', 'right', 'center', 'justify']
+            },
             editorConfig: {
+                isReadOnly: false,
                 toolbar: {
                     items: [
                         'heading',
@@ -199,6 +203,7 @@ export default {
                         'bulletedList',
                         'numberedList',
                         '|',
+                        'alignment',
                         'indent',
                         'outdent',
                         '|',
