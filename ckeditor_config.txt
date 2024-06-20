@@ -1,0 +1,20 @@
+https://ckeditor.com/ckeditor-5/online-builder/
+
+Heading
+Bold
+Italic
+Link
+List
+List properties
+Alignment
+Indent
+Block quote
+Image
+Image style
+Link image
+Table
+Table column resize
+Table toolbar
+Image toolbar
+Auto image
+Image resize
