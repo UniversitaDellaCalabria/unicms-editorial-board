@@ -39,7 +39,9 @@
                                 ref="form"
                                 :form="form"
                                 :submit="onSubmit"
-                                :form_source="form_source" />
+                                :form_source="form_source"
+                                :files="files"
+                                :add_modal_fields="add_modal_fields" />
                         </b-card-text>
                     </b-card>
                 </div>
@@ -58,6 +60,9 @@ export default {
             carousel_item_localization_id: this.$route.params.carousel_item_localization_id,
             form: {},
             form_source: '/api/editorial-board/carousels/'+this.$route.params.carousel_id+'/items/'+this.$route.params.carousel_item_id+'/localizations/form/',
+            add_modal_fields: {'image': this.$router.resolve({name: 'MediaNew'}).href,
+                               'mobile_image': this.$router.resolve({name: 'MediaNew'}).href},
+            files: {'image': '', 'mobile_image': ''},
             page_title: '',
             redis_alert: null,
             interval: null,
@@ -66,8 +71,27 @@ export default {
     methods: {
         setData(data) {
             for (const [key, value] of Object.entries(data)) {
-                this.$set(this.form, key, value)
+                if(key=='image' && value) {
+                    this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'image', data.image.file)
+                }
+                else if(key=='mobile_image' && value) {
+                    this.$set(this.form, key, value.id)
+                    this.$set(this.files, 'mobile_image', data.mobile_image.file)
+                }
+                else this.$set(this.form, key, value)
             }
+
+            if(data.image) {
+                this.$refs.form.getOptionsFromParent('image',
+                    [{"text": data.image.title,
+                      "value": data.image.id}])
+            }
+            if(data.mobile_image)
+                this.$refs.form.getOptionsFromParent('mobile_image',
+                    [{"text": data.mobile_image.title,
+                      "value": data.mobile_image.id}])
+
             this.page_title = data.pre_heading + ' ' + data.heading;
         },
         getItem() {
@@ -99,6 +123,22 @@ export default {
                         }
                     }, this.$redis_ttl)
                     // end concurrency management
+                })
+        },
+        updateMedia(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.files.image = response.data.file
+                })
+        },
+        updateMobileMedia(val) {
+            let source = '/api/editorial-board/medias/'+val+'/';
+            this.axios
+                .get(source)
+                .then(response => {
+                    this.files.mobile_image = response.data.file
                 })
         },
         onSubmit(event) {
@@ -176,6 +216,16 @@ export default {
     },
     beforeDestroy() {
         clearInterval(this.interval)
+    },
+    watch: {
+        'form.image': function(newVal, oldVal){
+            if (newVal && newVal!=oldVal) this.updateMedia(newVal);
+            if (!newVal) this.files.image = ''
+        },
+        'form.mobile_image': function(newVal, oldVal){
+            if (newVal && newVal!=oldVal) this.updateMobileMedia(newVal);
+            if (!newVal) this.files.mobile_image = ''
+        }
     }
 }
 </script>

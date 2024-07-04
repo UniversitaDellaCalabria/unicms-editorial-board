@@ -102,7 +102,6 @@ export default {
             }
 
             if(data.image) {
-                this.page_title = data.image.title;
                 this.$refs.form.getOptionsFromParent('image',
                     [{"text": data.image.title,
                       "value": data.image.id}])
@@ -111,6 +110,8 @@ export default {
                 this.$refs.form.getOptionsFromParent('mobile_image',
                     [{"text": data.mobile_image.title,
                       "value": data.mobile_image.id}])
+
+            this.page_title = data.pre_heading + ' ' + data.heading;
         },
         getItem() {
             let source = '/api/editorial-board/carousels/'+this.carousel_id+'/items/'+this.carousel_item_id+'/';
@@ -173,7 +174,7 @@ export default {
                           message: 'carousel item edited successfully',
                           dismissable: true }
                     )
-                    this.page_title = response.data.image.title;
+                    this.page_title = response.data.pre_heading + ' ' + response.data.heading;
                     this.$refs.form.loading = false;
                     }
                 )

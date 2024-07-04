@@ -2,6 +2,7 @@
     <CompleteTable
         :api_source="api_source"
         :fields="fields"
+        :files="files"
         :ordering="ordering"
         :ordering_list="ordering_list"
         :page_title="page_title"
@@ -46,6 +47,8 @@ export default {
             carousel_item_id: this.$route.params.carousel_item_id,
             fields: [
                 'id',
+                {key: 'image', thClass: 'w-25'},
+                {key: 'mobile_image', thClass: 'w-25'},
                 'language',
                 'pre_heading',
                 'heading',,
@@ -54,6 +57,7 @@ export default {
                 { key: 'is_active', label: 'Active'},
                 'actions'
             ],
+            files: ['image', 'mobile_image'],
             ordering: 'order',
             ordering_list: [{ text: 'Id', value: 'id' },
                             { text: 'Language', value: 'language' },
