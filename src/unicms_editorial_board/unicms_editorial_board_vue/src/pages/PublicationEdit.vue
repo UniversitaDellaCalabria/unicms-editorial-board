@@ -52,6 +52,13 @@
                                         variant="secondary"></b-icon>
                                     Related publications
                                 </router-link>
+                                <router-link :to="{ name: 'PublicationLocks',
+                                            params: { publication_id: publication_id }}"
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                             </div>
 
                             <div class="pull-right">

@@ -24,6 +24,13 @@
                                         variant="secondary"></b-icon>
                                     Go to publication
                                 </router-link>
+                                <router-link :to="{ name: 'EventLocks',
+                                            params: { event_id: event_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <b-button

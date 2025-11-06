@@ -185,6 +185,15 @@
                                     variant="secondary"></b-icon>
                                 Related pages
                             </router-link>
+                            <router-link :to="{ name: 'WebpathPageLocks',
+                                                params: { site_id: site_id,
+                                                          webpath_id: webpath_id,
+                                                          page_id: page_id }}"
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                         </div>
 
                         <b-card-title>{{ page_title }}</b-card-title>

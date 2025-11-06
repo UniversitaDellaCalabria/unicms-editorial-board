@@ -34,6 +34,14 @@
                                         variant="secondary"></b-icon>
                                     News
                                 </router-link>
+                                <router-link :to="{ name: 'WebpathLocks',
+                                                    params: { site_id: site_id,
+                                                              webpath_id: webpath_id }}"
+                                    class="btn mx-md-1 btn-outline-secondary btn-sm">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <router-link :to="{ name: 'WebpathClone',

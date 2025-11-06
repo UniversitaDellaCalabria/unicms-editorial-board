@@ -24,6 +24,13 @@
                                         variant="secondary"></b-icon>
                                     Items
                                 </router-link>
+                                <router-link :to="{ name: 'CarouselLocks',
+                                            params: { carousel_id: carousel_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <b-button

@@ -25,11 +25,18 @@
                                     Informations
                                 </router-link>
                                 <router-link :to="{ name: 'ContactLocalizations',
-                                                    params: { carousel_id: carousel_id}}"
+                                                    params: { contact_id: contact_id}}"
                                     class="btn btn-sm btn-outline-secondary mx-md-1">
                                     <b-icon icon="flag"
                                         variant="secondary"></b-icon>
                                     Localizations
+                                </router-link>
+                                <router-link :to="{ name: 'ContactLocks',
+                                            params: { contact_id: contact_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
                                 </router-link>
                             </div>
                             <div class="pull-right">

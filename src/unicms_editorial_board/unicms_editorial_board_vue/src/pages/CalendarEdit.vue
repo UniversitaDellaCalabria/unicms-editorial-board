@@ -31,6 +31,13 @@
                                         variant="secondary"></b-icon>
                                     Localizations
                                 </router-link>
+                                <router-link :to="{ name: 'CalendarLocks',
+                                            params: { calendar_id: calendar_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <b-button

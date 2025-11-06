@@ -38,6 +38,13 @@
                                         variant="secondary"></b-icon>
                                     Test Subscriptions
                                 </router-link>
+                                <router-link :to="{ name: 'NewsletterLocks',
+                                            params: { newsletter_id: newsletter_id }}"
+                                    class="btn btn-sm btn-outline-secondary mx-md-1">
+                                    <b-icon icon="lock"
+                                        variant="secondary"></b-icon>
+                                    Allowed users
+                                </router-link>
                             </div>
                             <div class="pull-right">
                                 <b-button
