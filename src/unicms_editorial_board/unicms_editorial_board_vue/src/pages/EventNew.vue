@@ -66,5 +66,11 @@ export default {
                 })
         },
     },
+    watch: {
+        'form.date_start': function(newVal, oldVal){
+            if (newVal && (this.form.hasOwnProperty('date_end') == false || this.form['date_end'] < this.form['date_start']))
+                this.form['date_end'] = newVal
+        }
+    }
 }
 </script>
